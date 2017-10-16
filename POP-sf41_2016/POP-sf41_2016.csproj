@@ -43,6 +43,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="model\Akcija.cs" />
+    <Compile Include="model\DodatnaUsluga.cs" />
+    <Compile Include="model\Korisnik.cs" />
+    <Compile Include="model\Namestaj.cs" />
+    <Compile Include="model\ProdajaNamestaja.cs" />
+    <Compile Include="model\Salon.cs" />
+    <Compile Include="model\TipNamestaja.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

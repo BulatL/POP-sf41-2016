@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace POP_sf41_2016.model
 {
-    class DodatnaUsluga
+    public class DodatnaUsluga
     {
+
+        public int Id { get; set; }
+
+        public bool Obrisan { get; set; }
+
+        public string Naziv { get; set; }
+
+        public double Cena { get; set; }
+
     }
 }
