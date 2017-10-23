@@ -18,7 +18,7 @@ namespace POP_sf41_2016.model
 
         public string Kupac { get; set; }
 
-        public double PDV { get; set; }
+        public const double PDV = 0.02;
 
         public DodatnaUsluga DodatnaUsluga { get; set; }
 
