@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfTipNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TipNamestaja>
-    <Id>2</Id>
+    <Id>1</Id>
     <Obrisano>false</Obrisano>
-    <Naziv>regal</Naziv>
+    <Naziv>reagaal</Naziv>
   </TipNamestaja>
   <TipNamestaja>
-    <Id>1</Id>
+    <Id>2</Id>
     <Obrisano>false</Obrisano>
     <Naziv>Sofa</Naziv>
   </TipNamestaja>
   <TipNamestaja>
-    <Id>1</Id>
+    <Id>3</Id>
     <Obrisano>false</Obrisano>
     <Naziv>kolica</Naziv>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>4</Id>
+    <Obrisano>false</Obrisano>
+    <Naziv>lampa</Naziv>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>5</Id>
+    <Obrisano>true</Obrisano>
+    <Naziv>Lamperija</Naziv>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>6</Id>
+    <Obrisano>false</Obrisano>
+    <Naziv>Kauc</Naziv>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

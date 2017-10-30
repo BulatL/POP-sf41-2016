@@ -55,20 +55,18 @@ namespace POP_sf41_2016
                 KolicinaUMagacinu = 3
             };
             Namestaj.Add(n1);
-
+            /*
             var namestaj = Projekat.Instance.Namestaj;
-            namestaj.Add(new Namestaj() { Id = 28, Naziv = "Krevetdasdas" });
-            namestaj.RemoveAt(namestaj.Count -1);
+            //namestaj.RemoveAt(namestaj.Count -1);
             Projekat.Instance.Namestaj = namestaj;
             foreach(var stavka in namestaj)
             {
                 Console.WriteLine($"{stavka.Naziv}");
             }
+            */
 
-
-            GenericSerializer.Serializer<TipNamestaja>("tipNamestaja.xml", listaTipNamestaja);
+            /*GenericSerializer.Serializer<TipNamestaja>("tipNamestaja.xml", listaTipNamestaja);
             var tipNamestaj = Projekat.Instance.TipNamestaj;
-            tipNamestaj.Add(new TipNamestaja() { Id = 1, Naziv = "kolica" });
             Projekat.Instance.TipNamestaj = tipNamestaj;
             foreach(var stavka in tipNamestaj)
             {
@@ -76,7 +74,7 @@ namespace POP_sf41_2016
             }
 
 
-            
+            */
 
             Console.WriteLine($"Dobro dosli u Salon {s1.Naziv}");
             IspisGlavnogMenija();
@@ -100,6 +98,10 @@ namespace POP_sf41_2016
             {
                 case 1:
                     IspisiMeniNamestaja();
+                    break;
+
+                case 2:
+                    IspisiMeniTipNamestaja();
                     break;
                 case 0:
                     Environment.Exit(0);
@@ -153,20 +155,159 @@ namespace POP_sf41_2016
             }
         }
 
-        private static void IzlistajNamestaj()
+        private static void IspisiMeniTipNamestaja()
         {
-            for (int i = 0; i < Namestaj.Count; i++)
+            int izbor = 0;
+
+            do
             {
-                if (Namestaj[i].Obrisan == false)
+                Console.WriteLine("=== MENI TIP NAMESTAJA ===");
+                Console.WriteLine("1. Izlistaj tipove");
+                Console.WriteLine("2. Dodaj novi tip");
+                Console.WriteLine("3. Izmeni postojeci tip");
+                Console.WriteLine("4. Obrisi postojeci");
+                Console.WriteLine("0. Povratak u glavni meni" + "\n");
+                izbor = int.Parse(Console.ReadLine());
+
+            } while (izbor < 0 || izbor > 4);
+
+            switch (izbor)
+            {
+                case 1:
+                    Console.WriteLine("=== IZLISTAJ TIP NAMESTAJA ===");
+                    IzlistajTipNamestaja();
+                    IspisiMeniTipNamestaja();
+                    break;
+                case 2:
+                    Console.WriteLine("\n" + "=== DODAJ NOVI TIP NAMESTAJA ===");
+                    DodajNoviTipNamestaja();
+                    IspisiMeniTipNamestaja();
+                    break;
+                case 3:
+                    Console.WriteLine("\n" + "=== IZMENI TIP NAMESTAJA ===");
+                    IzmeniTipNamestaja();
+                    break;
+
+                case 4:
+                    ObrisiTipNamestaja();
+                    break;
+
+                case 0:
+                    IspisGlavnogMenija();
+                    break;
+
+                default:
+                    break;
+            }
+
+        }
+
+        private static void IzlistajTipNamestaja()
+        {
+            var lista = Projekat.Instance.TipNamestaj;
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].Obrisano == false)
                 {
-                    Console.WriteLine($"{i + 1}.{Namestaj[i].Naziv}, cena: {Namestaj[i].JedinicnaCena}, tip namestaja: {Namestaj[i].TipNamestaja.Naziv}" + "\n");
+                    Console.WriteLine($"{i + 1}.id: {lista[i].Id},{lista[i].Naziv}" + "\n");
                 }
 
             }
 
         }
 
-        private static void tipNamestaja(Namestaj parametar)
+
+        private static void DodajNoviTipNamestaja()
+        {
+
+            var tipNamestaja = Projekat.Instance.TipNamestaj;
+
+            Console.WriteLine("Unesite naziv");
+            string naziv = Console.ReadLine();
+
+            tipNamestaja.Add(new TipNamestaja() { Naziv = naziv, Id = tipNamestaja.Count + 1 });
+
+            Projekat.Instance.TipNamestaj = tipNamestaja;
+        }
+
+
+        private static void IzmeniTipNamestaja()
+        {
+            var tipNamestaja = Projekat.Instance.TipNamestaj;
+            IzlistajTipNamestaja();
+
+            int id = 0;
+            do
+            {
+                Console.WriteLine("Unesite id tipa namestaja koji zelite da izmenite");
+                id = int.Parse(Console.ReadLine());
+
+            } while ( id > tipNamestaja.Count);
+
+
+            foreach (var tip in tipNamestaja)
+            {
+                if (tip.Id == id)
+                {
+                    Console.WriteLine("Unesite novi naziv: ");
+                    tip.Naziv = Console.ReadLine();
+
+                    Projekat.Instance.TipNamestaj = tipNamestaja;
+
+                }
+
+            }
+
+            IspisiMeniTipNamestaja();
+
+        }
+
+        private static void ObrisiTipNamestaja()
+        {
+
+            var tipNamestaja = Projekat.Instance.TipNamestaj;
+            Console.WriteLine("=== OBRISI TIP NAMESTAJA ===");
+            IzlistajTipNamestaja();
+
+            int id = 0;
+            do
+            {
+                Console.WriteLine("\n" + "Izaberite id tipa namestaja koji zelite da obrisete: ");
+                id = int.Parse(Console.ReadLine());
+            } while (id < 0 || id > tipNamestaja.Count);
+
+
+
+            foreach (var tip in tipNamestaja)
+            {
+                if (tip.Id == id)
+                {
+                    tip.Obrisano = true;
+
+                    Projekat.Instance.TipNamestaj = tipNamestaja;
+
+                }
+
+            }
+            IspisiMeniTipNamestaja();
+        }
+
+        private static void IzlistajNamestaj()
+        {
+            var lista = Projekat.Instance.Namestaj;
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].Obrisan == false)
+                {
+                    var tipNamestaja = lista[i].TipNamestajaId;
+                    Console.WriteLine($"{i + 1}.id: {lista[i].Id},{lista[i].Naziv}, cena: {lista[i].JedinicnaCena}, tip namestaja: {TipNamestaja.NadjiNamestaj(tipNamestaja)}" + "\n");
+                }
+
+            }
+
+        }
+
+        private static string tipNamestaja()
         {
 
             int izbor = 0;
@@ -192,50 +333,77 @@ namespace POP_sf41_2016
 
                     }
                     int redniBrNamestaja = int.Parse(Console.ReadLine());
-                    parametar.TipNamestaja = listaTipNamestaja[redniBrNamestaja - 1];
-                    Namestaj.Add(parametar);
+                    var tipNamestaja = listaTipNamestaja[redniBrNamestaja - 1];
+                    string tipNamestajaId = tipNamestaja.Id.ToString();
+                    
+                    return tipNamestajaId;
 
-                    IspisiMeniNamestaja();
-                    break;
                 case 2:
-                    var noviTipNamestaja = new TipNamestaja();
+                    var noviTipNamestaja = Projekat.Instance.TipNamestaj;
 
                     Console.WriteLine("Unesite naziv: ");
-                    noviTipNamestaja.Naziv = Console.ReadLine();
+                    string Naziv = Console.ReadLine();
 
-                    Console.WriteLine("Unesite id: ");
-                    noviTipNamestaja.Id = int.Parse(Console.ReadLine());
+                    int noviTipNamestajaId = Projekat.Instance.TipNamestaj.Count + 1;
 
-                    parametar.TipNamestaja = noviTipNamestaja;
-                    Namestaj.Add(parametar);
+                    noviTipNamestaja.Add(new TipNamestaja() { Id = noviTipNamestajaId, Naziv = Naziv });
+                    Projekat.Instance.TipNamestaj = noviTipNamestaja;
 
-                    IspisiMeniNamestaja();
-                    break;
+
+                    return noviTipNamestajaId.ToString();
 
             }
+            return null;
         }
 
         private static void DodajNoviNamestaj()
         {
             Console.WriteLine("\n" + "=== DODAJ NOVI NAMESTAJ ===");
 
-            var noviNamestaj = new Namestaj();
-
-            noviNamestaj.Id = Namestaj.Count + 1;
+            var noviNamestaj = Projekat.Instance.Namestaj;
 
             Console.WriteLine("Naziv namestaj: ");
-            noviNamestaj.Naziv = Console.ReadLine();
+            string Naziv = Console.ReadLine();
 
             Console.WriteLine("Sifra namestaja: ");
-            noviNamestaj.Sifra = Console.ReadLine();
+            string Sifra = Console.ReadLine();
 
             Console.WriteLine("Cena namestaja: ");
-            noviNamestaj.JedinicnaCena = double.Parse(Console.ReadLine());
+            double JedinicnaCena = double.Parse(Console.ReadLine());
 
             Console.WriteLine("Kolicina namestaja u magacinu: ");
-            noviNamestaj.KolicinaUMagacinu = int.Parse(Console.ReadLine());
+            int KolicinaUMagacinu = int.Parse(Console.ReadLine());
 
-            tipNamestaja(noviNamestaj);
+            int TipNamestajaId = int.Parse(tipNamestaja());
+
+
+            noviNamestaj.Add(new Namestaj() {Id= Projekat.Instance.Namestaj.Count + 1, Naziv = Naziv, Sifra = Sifra, JedinicnaCena = JedinicnaCena, KolicinaUMagacinu= KolicinaUMagacinu, TipNamestajaId=TipNamestajaId, AkcijaId = null  });
+            Projekat.Instance.Namestaj = noviNamestaj;
+
+            /*
+            int izbor = 0;
+            do
+            {
+                Console.WriteLine("Postojeci tip namestaja 1) " + "\n" +
+                    "Novi tip namestaja 2)" + "\n");
+                izbor = int.Parse(Console.ReadLine());
+
+            } while (izbor < 0 || izbor > 2);
+
+            switch (izbor)
+            {
+                case 1:
+                    IzlistajTipNamestaja();
+                    int id = 0;
+                    do
+                    {
+                        Console.WriteLine("Unesite id: ");
+                        id = int.Parse(Console.ReadLine());
+
+                    } while(id != 
+                    break;
+            }*/
+            IspisiMeniNamestaja();
 
             /*            TipNamestaja trazeniTipNamestaja = null;
                         string nazivTipaNamestaj = "";
@@ -332,7 +500,7 @@ namespace POP_sf41_2016
                     IspisiMeniNamestaja();
                     break;
                 case 6:
-                    tipNamestaja(pripremiNamestajZaMenjanje);
+                    tipNamestaja();
                     break;
                 case 7:
                     pripremiNamestajZaMenjanje = Namestaj[izabraniNamestajaZaMenjanje - 1];
@@ -352,7 +520,7 @@ namespace POP_sf41_2016
                     Console.WriteLine("Unesite novu kolicinu: ");
                     pripremiNamestajZaMenjanje.KolicinaUMagacinu = int.Parse(Console.ReadLine());
 
-                    tipNamestaja(pripremiNamestajZaMenjanje);
+                    tipNamestaja();
 
                     IspisiMeniNamestaja();
                     break;
@@ -398,19 +566,36 @@ namespace POP_sf41_2016
 
         private static void ObrisiNamestaj()
         {
-            var pripremiNamestajZaBrisanje = new Namestaj();
+            var pripremiNamestajZaBrisanje = Projekat.Instance.Namestaj;
             Console.WriteLine("=== OBRISI NAMESTAJ ===");
             IzlistajNamestaj();
 
             int izabraniNamestajaZaBrisanje = 0;
             do
             {
-                Console.WriteLine("\n" + "Izaberite redni broj namestaja koji zelite obrisete: ");
+                Console.WriteLine("\n" + "Izaberite id namestaja koji zelite da obrisete: ");
                 izabraniNamestajaZaBrisanje = int.Parse(Console.ReadLine());
-            } while (izabraniNamestajaZaBrisanje < 0 || izabraniNamestajaZaBrisanje > Namestaj.Count);
+            } while (izabraniNamestajaZaBrisanje < 0 || izabraniNamestajaZaBrisanje > pripremiNamestajZaBrisanje.Count);
 
-            pripremiNamestajZaBrisanje = Namestaj[izabraniNamestajaZaBrisanje - 1];
-            pripremiNamestajZaBrisanje.Obrisan = true;
+
+
+            foreach (var tip in pripremiNamestajZaBrisanje)
+            {
+                if (tip.Id == izabraniNamestajaZaBrisanje)
+                {
+                    tip.KolicinaUMagacinu = 0;
+                    tip.Obrisan = true;
+
+                    Projekat.Instance.Namestaj = pripremiNamestajZaBrisanje;
+
+                }
+
+            }
+            IspisiMeniNamestaja();
+
+
+
+            
         }
     }
 }

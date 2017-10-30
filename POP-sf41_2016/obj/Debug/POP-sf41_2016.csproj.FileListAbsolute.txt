@@ -11,3 +11,10 @@ C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.pdb
 C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.exe
 C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.pdb
 C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.csprojResolveAssemblyReference.cache
+C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.exe.config
+C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.exe
+C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.pdb
+C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.csprojResolveAssemblyReference.cache
+C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.csproj.CoreCompileInputs.cache
+C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.exe
+C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.pdb

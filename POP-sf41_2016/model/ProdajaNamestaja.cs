@@ -20,7 +20,7 @@ namespace POP_sf41_2016.model
 
         public const double PDV = 0.02;
 
-        public DodatnaUsluga DodatnaUsluga { get; set; }
+        public int? DodatnaUslugaId { get; set; }
 
         public double UkupanIznos { get; set; }
 
