@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Namestaj>
+    <Id>1</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>Super sofra</Naziv>
+    <Sifra>Sf sifra za sofe</Sifra>
+    <JedinicnaCena>52</JedinicnaCena>
+    <KolicinaUMagacinu>3</KolicinaUMagacinu>
+    <TipNamestajaId>1</TipNamestajaId>
+  </Namestaj>
+  <Namestaj>
+    <Id>28</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>Krevetdasdas</Naziv>
+    <JedinicnaCena>0</JedinicnaCena>
+    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
+  </Namestaj>
+</ArrayOfNamestaj>

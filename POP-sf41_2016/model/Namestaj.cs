@@ -20,8 +20,9 @@ namespace POP_sf41_2016.model
 
         public int KolicinaUMagacinu{ get; set; }
 
-        public TipNamestaja TipNamestaja { get; set; }
+        public int? TipNamestajaId { get; set; }
 
+        public int? AkcijaId { get; set; }
 
 
     }

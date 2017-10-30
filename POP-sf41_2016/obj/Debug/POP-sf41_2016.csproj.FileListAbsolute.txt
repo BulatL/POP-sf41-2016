@@ -5,3 +5,9 @@ C:\Temp\sf412016\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.pdb
 C:\Temp\sf412016\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.csprojResolveAssemblyReference.cache
 C:\Temp\sf412016\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.exe
 C:\Temp\sf412016\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.pdb
+C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.exe.config
+C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.exe
+C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.pdb
+C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.exe
+C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\bin\Debug\POP-sf41_2016.pdb
+C:\Temp\Projekat\POP-sf41-2016\POP-sf41_2016\obj\Debug\POP-sf41_2016.csprojResolveAssemblyReference.cache

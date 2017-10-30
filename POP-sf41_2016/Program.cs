@@ -1,4 +1,5 @@
 ﻿using POP_sf41_2016.model;
+using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -50,10 +51,32 @@ namespace POP_sf41_2016
                 Naziv = "Super sofra",
                 Sifra = "Sf sifra za sofe",
                 JedinicnaCena = 52,
-                TipNamestaja = tn1,
+                TipNamestajaId = 1,
                 KolicinaUMagacinu = 3
             };
             Namestaj.Add(n1);
+
+            var namestaj = Projekat.Instance.Namestaj;
+            namestaj.Add(new Namestaj() { Id = 28, Naziv = "Krevetdasdas" });
+            namestaj.RemoveAt(namestaj.Count -1);
+            Projekat.Instance.Namestaj = namestaj;
+            foreach(var stavka in namestaj)
+            {
+                Console.WriteLine($"{stavka.Naziv}");
+            }
+
+
+            GenericSerializer.Serializer<TipNamestaja>("tipNamestaja.xml", listaTipNamestaja);
+            var tipNamestaj = Projekat.Instance.TipNamestaj;
+            tipNamestaj.Add(new TipNamestaja() { Id = 1, Naziv = "kolica" });
+            Projekat.Instance.TipNamestaj = tipNamestaj;
+            foreach(var stavka in tipNamestaj)
+            {
+                Console.WriteLine($"{stavka.Naziv}");
+            }
+
+
+            
 
             Console.WriteLine($"Dobro dosli u Salon {s1.Naziv}");
             IspisGlavnogMenija();
@@ -115,6 +138,10 @@ namespace POP_sf41_2016
                     break;
                 case 3:
                     IzmeniNamestaj();
+                    break;
+
+                case 4:
+                    ObrisiNamestaj();
                     break;
 
                 case 0:
@@ -242,7 +269,6 @@ namespace POP_sf41_2016
         private static void IzmeniNamestaj()
         {
             var pripremiNamestajZaMenjanje = new Namestaj();
-            // var pripremiTipNamestajaZaMenjanje = new TipNamestaja();
             Console.WriteLine("=== IZMENI NAMESTAJ ===");
             IzlistajNamestaj();
 
@@ -368,6 +394,23 @@ namespace POP_sf41_2016
                        Console.WriteLine("Unesite novi naziv namestaja: ");
 
                        IspisiMeniNamestaja();*/
+        }
+
+        private static void ObrisiNamestaj()
+        {
+            var pripremiNamestajZaBrisanje = new Namestaj();
+            Console.WriteLine("=== OBRISI NAMESTAJ ===");
+            IzlistajNamestaj();
+
+            int izabraniNamestajaZaBrisanje = 0;
+            do
+            {
+                Console.WriteLine("\n" + "Izaberite redni broj namestaja koji zelite obrisete: ");
+                izabraniNamestajaZaBrisanje = int.Parse(Console.ReadLine());
+            } while (izabraniNamestajaZaBrisanje < 0 || izabraniNamestajaZaBrisanje > Namestaj.Count);
+
+            pripremiNamestajZaBrisanje = Namestaj[izabraniNamestajaZaBrisanje - 1];
+            pripremiNamestajZaBrisanje.Obrisan = true;
         }
     }
 }
