@@ -10,7 +10,7 @@ namespace POP_sf41_2016.model
     {
         public int Id { get; set; }
 
-        public DateTime DatukPocetka { get; set; }
+        public DateTime DatumPocetka { get; set; }
 
         public DateTime DatumZavrsetka { get; set; }
 

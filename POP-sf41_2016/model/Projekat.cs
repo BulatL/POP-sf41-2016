@@ -69,14 +69,14 @@ namespace POP_sf41_2016.model
         {
             get
             {
-                this.korisnik = GenericSerializer.Deserializer<Korisnik>("Korisnik.xml");
+                this.korisnik = GenericSerializer.Deserializer<Korisnik>("korisnici.xml");
                 return this.korisnik;
             }
             set
             {
 
                 this.korisnik = value;
-                GenericSerializer.Serializer<Korisnik>("Korisnik.xml", korisnik);
+                GenericSerializer.Serializer<Korisnik>("korisnici.xml", korisnik);
             }
         }
 
@@ -87,14 +87,14 @@ namespace POP_sf41_2016.model
         {
             get
             {
-                this.dodatnaUsluga = GenericSerializer.Deserializer<DodatnaUsluga>("DodatnaUsluga.xml");
+                this.dodatnaUsluga = GenericSerializer.Deserializer<DodatnaUsluga>("dodatnaUsluga.xml");
                 return this.dodatnaUsluga;
             }
             set
             {
 
                 this.dodatnaUsluga = value;
-                GenericSerializer.Serializer<DodatnaUsluga>("DodatnaUsluga.xml", dodatnaUsluga);
+                GenericSerializer.Serializer<DodatnaUsluga>("dodatnaUsluga.xml", dodatnaUsluga);
             }
         }
     }

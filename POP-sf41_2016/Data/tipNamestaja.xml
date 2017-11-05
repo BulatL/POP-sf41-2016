@@ -3,7 +3,7 @@
   <TipNamestaja>
     <Id>1</Id>
     <Obrisano>false</Obrisano>
-    <Naziv>reagaal</Naziv>
+    <Naziv>Regal</Naziv>
   </TipNamestaja>
   <TipNamestaja>
     <Id>2</Id>
@@ -29,5 +29,10 @@
     <Id>6</Id>
     <Obrisano>false</Obrisano>
     <Naziv>Kauc</Naziv>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>7</Id>
+    <Obrisano>false</Obrisano>
+    <Naziv>Sto</Naziv>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

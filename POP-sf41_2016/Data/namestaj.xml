@@ -3,11 +3,11 @@
   <Namestaj>
     <Id>1</Id>
     <Obrisan>false</Obrisan>
-    <Naziv>Super sofra</Naziv>
+    <Naziv>Super sofa</Naziv>
     <Sifra>Sf sifra za sofe</Sifra>
     <JedinicnaCena>52</JedinicnaCena>
     <KolicinaUMagacinu>3</KolicinaUMagacinu>
-    <TipNamestajaId>1</TipNamestajaId>
+    <TipNamestajaId>2</TipNamestajaId>
     <AkcijaId xsi:nil="true" />
   </Namestaj>
   <Namestaj>
@@ -27,7 +27,7 @@
     <Sifra>s412</Sifra>
     <JedinicnaCena>421</JedinicnaCena>
     <KolicinaUMagacinu>4</KolicinaUMagacinu>
-    <TipNamestajaId>2</TipNamestajaId>
+    <TipNamestajaId>7</TipNamestajaId>
     <AkcijaId xsi:nil="true" />
   </Namestaj>
   <Namestaj>
@@ -37,7 +37,7 @@
     <Sifra>s41235</Sifra>
     <JedinicnaCena>4</JedinicnaCena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <TipNamestajaId>5</TipNamestajaId>
+    <TipNamestajaId>4</TipNamestajaId>
     <AkcijaId xsi:nil="true" />
   </Namestaj>
   <Namestaj>
@@ -47,7 +47,7 @@
     <Sifra>s41235</Sifra>
     <JedinicnaCena>4</JedinicnaCena>
     <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <TipNamestajaId>5</TipNamestajaId>
+    <TipNamestajaId>4</TipNamestajaId>
     <AkcijaId xsi:nil="true" />
   </Namestaj>
   <Namestaj>
@@ -58,6 +58,26 @@
     <JedinicnaCena>4</JedinicnaCena>
     <KolicinaUMagacinu>0</KolicinaUMagacinu>
     <TipNamestajaId>5</TipNamestajaId>
+    <AkcijaId xsi:nil="true" />
+  </Namestaj>
+  <Namestaj>
+    <Id>7</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>Sto</Naziv>
+    <Sifra>s41</Sifra>
+    <JedinicnaCena>541</JedinicnaCena>
+    <KolicinaUMagacinu>3</KolicinaUMagacinu>
+    <TipNamestajaId>7</TipNamestajaId>
+    <AkcijaId xsi:nil="true" />
+  </Namestaj>
+  <Namestaj>
+    <Id>8</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>Kauc</Naziv>
+    <Sifra>k41</Sifra>
+    <JedinicnaCena>512</JedinicnaCena>
+    <KolicinaUMagacinu>5</KolicinaUMagacinu>
+    <TipNamestajaId>1</TipNamestajaId>
     <AkcijaId xsi:nil="true" />
   </Namestaj>
 </ArrayOfNamestaj>
