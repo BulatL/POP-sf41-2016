@@ -17,5 +17,18 @@ namespace POP_sf41_2016.model
 
         public double Cena { get; set; }
 
+        public static DodatnaUsluga NadjiDodatnuUslugu(int? idProsledjen)
+        {
+            foreach (var tip in Projekat.Instance.DodatnaUsluga)
+            {
+                if (tip.Id == idProsledjen)
+                {
+                    return tip;
+                }
+
+            }
+            return null;
+        }
+
     }
 }

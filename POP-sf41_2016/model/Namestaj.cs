@@ -26,13 +26,13 @@ namespace POP_sf41_2016.model
 
 
 
-        public static string NadjiNamestaj(int? idProsledjen)
+        public static Namestaj NadjiNamestaj(int? idProsledjen)
         {
             foreach (var tip in Projekat.Instance.Namestaj)
             {
                 if (tip.Id == idProsledjen)
                 {
-                    return tip.Naziv;
+                    return tip;
                 }
 
             }

@@ -97,5 +97,21 @@ namespace POP_sf41_2016.model
                 GenericSerializer.Serializer<DodatnaUsluga>("dodatnaUsluga.xml", dodatnaUsluga);
             }
         }
+
+        public List<ProdajaNamestaja> prodajaNamestaja;
+
+        public List<ProdajaNamestaja> ProdajaNamestaja
+        {
+            get
+            {
+                this.prodajaNamestaja = GenericSerializer.Deserializer<ProdajaNamestaja>("prodajaNamestaja.xml");
+                return this.prodajaNamestaja;
+            }
+            set
+            {
+                this.prodajaNamestaja = value;
+                GenericSerializer.Serializer<ProdajaNamestaja>("prodajaNamestaja.xml", prodajaNamestaja);
+            }
+        }
     }
 }

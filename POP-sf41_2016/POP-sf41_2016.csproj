@@ -60,9 +60,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="Data\Akcija.xml" />
     <Content Include="Data\dodatnaUsluga.xml" />
     <Content Include="Data\korisnici.xml" />
     <Content Include="Data\namestaj.xml" />
+    <Content Include="Data\prodajaNamestaja.xml" />
     <Content Include="Data\tipNamestaja.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
