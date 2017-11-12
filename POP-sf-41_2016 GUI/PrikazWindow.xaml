@@ -1,0 +1,20 @@
+﻿<Window x:Class="POP_sf_41_2016_GUI.PrikazWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_sf_41_2016_GUI"
+        mc:Ignorable="d"
+        Title="Prikaz" Height="401.538" Width="765" Activated="Window_Activated">
+    <Grid>
+        <ToolBar HorizontalContentAlignment="Stretch" Height="auto" Margin="10,10,0,0" VerticalAlignment="Top" Width="auto" >
+            <Button Content="Nazad" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Nazad_click"/>
+            <Button Content="Dodaj" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Dodajbtn" Click="Dodaj_click"/>
+            <Button Content="Izmeni" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnIzmeni" Click="Izmeni_Click"/>
+            <Button Content="Pretrazi" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5"/>
+            <Button Content="Logout" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Logout_click"/>
+        </ToolBar>
+        <DataGrid AutoGenerateColumns="true" Name="dataGrid" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" SelectionMode="Extended" CanUserSortColumns="True" IsReadOnly="True"/>
+
+    </Grid>
+</Window>
