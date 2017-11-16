@@ -15,20 +15,20 @@ namespace POP_sf41_2016.model
         public string Naziv { get; set; }
 
 
-        public static string NadjiNamestaj(int? idProsledjen)
+        public static TipNamestaja NadjiNamestaj(int? idProsledjen)
         {
             foreach (var tip in Projekat.Instance.TipNamestaj)
             {
                 if(tip.Id == idProsledjen)
                 {
-                    return tip.Naziv;
+                    return tip;
                 }
 
             }
             return null;
         }
 
-        public static int? NadjiTipNamestaja(string naziv)
+        public static int? NadjiTipNamestajaString(string naziv)
         {
             foreach (var tip in Projekat.Instance.TipNamestaj)
             {
@@ -39,6 +39,11 @@ namespace POP_sf41_2016.model
 
             }
             return null;
+        }
+
+        public override string ToString()
+        {
+            return Naziv;
         }
     }
 

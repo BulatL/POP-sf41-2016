@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfSalon xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Salon>
+    <Id>1</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>Super salon</Naziv>
+    <Adresa>Bluevar Oslobodjenja 14</Adresa>
+    <Telefon>021-553-761</Telefon>
+    <Email>supersalon@gmail.com</Email>
+    <AdresaInternetSajta>https://www.superSalon.com</AdresaInternetSajta>
+    <PIB>2138413</PIB>
+    <MaticniBroj>6377</MaticniBroj>
+    <BrojZiroRacuna>7897424</BrojZiroRacuna>
+  </Salon>
+  <Salon>
+    <Id>2</Id>
+    <Obrisan>true</Obrisan>
+    <Naziv>Lep salon</Naziv>
+    <Adresa>Trg Dositeja Obradovica 21</Adresa>
+    <Telefon>021-554-721</Telefon>
+    <Email>lepsalon@gmail.com</Email>
+    <AdresaInternetSajta>https://www.lepSalon.com</AdresaInternetSajta>
+    <PIB>132512</PIB>
+    <MaticniBroj>11324</MaticniBroj>
+    <BrojZiroRacuna>13421</BrojZiroRacuna>
+  </Salon>
+</ArrayOfSalon>

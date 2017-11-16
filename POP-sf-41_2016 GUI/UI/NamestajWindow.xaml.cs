@@ -41,33 +41,34 @@ namespace POP_sf_41_2016_GUI.UI
         {
             this.namestaj = namestaj;
             this.operacija = operacija;
-            try
-            {
-                this.tbNaziv.Text = namestaj.Naziv;
-                this.tbCena.Text = namestaj.JedinicnaCena.ToString("0.00");
-                this.tbKolicina.Text = namestaj.KolicinaUMagacinu.ToString("0");
-                this.tbSifra.Text = namestaj.Sifra;
-            }catch(Exception ex) { }
+            
+            tbNaziv.Text = namestaj.Naziv;
+            tbCena.Text = namestaj.JedinicnaCena.ToString("0.00");
+            tbKolicina.Text = namestaj.KolicinaUMagacinu.ToString("0");
+            tbSifra.Text = namestaj.Sifra;
 
-            ComboBoxItem comboBoxItem = new ComboBoxItem();
-            var lista = new ArrayList();
             foreach (var tipNamestaj in Projekat.Instance.TipNamestaj)
             {
 
-                cbTipNamestaja.Items.Add(tipNamestaj.Naziv);
-                /*
-                comboBoxItem.Text = tipNamestaj.Naziv;
-                comboBoxItem.Value = tipNamestaj.Id;
-
-                cbTipNamestaja.Items.Add(comboBoxItem);*/
+                cbTipNamestaja.Items.Add(tipNamestaj);
             }
 
-            cbTipNamestaja.SelectedItem = TipNamestaja.NadjiNamestaj(namestaj.TipNamestajaId);
+            foreach (TipNamestaja tipNamestaja in cbTipNamestaja.Items)
+            {
+                if(tipNamestaja.Id == namestaj.TipNamestajaId)
+                {
+                    cbTipNamestaja.SelectedItem = tipNamestaja;
+                        break;
+                }
+                else  cbTipNamestaja.SelectedIndex = 0; 
+            }
         }
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             var ListaNamestaja = Projekat.Instance.Namestaj;
+
+            TipNamestaja izabraniTipNamestaja = (TipNamestaja) cbTipNamestaja.SelectedItem;
 
             switch (operacija)
             {
@@ -82,7 +83,7 @@ namespace POP_sf_41_2016_GUI.UI
                         KolicinaUMagacinu = int.Parse(tbKolicina.Text),
                         AkcijaId = null,
                         Naziv = tbNaziv.Text.Trim(),
-                        TipNamestajaId = TipNamestaja.NadjiTipNamestaja(cbTipNamestaja.SelectedItem.ToString()),
+                        TipNamestajaId = izabraniTipNamestaja.Id,
                         Obrisan = false
                         
                     };
@@ -103,7 +104,7 @@ namespace POP_sf_41_2016_GUI.UI
                                 n.JedinicnaCena = double.Parse(tbCena.Text);
                                 n.KolicinaUMagacinu = int.Parse(tbKolicina.Text);
                                 n.AkcijaId = null;
-                                n.TipNamestajaId = TipNamestaja.NadjiTipNamestaja(cbTipNamestaja.SelectedItem.ToString());
+                                n.TipNamestajaId = izabraniTipNamestaja.Id;
 
                             }
 

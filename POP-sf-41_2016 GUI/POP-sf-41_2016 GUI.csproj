@@ -54,7 +54,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -64,8 +63,17 @@
     <Compile Include="UI\AkcijaWindow.xaml.cs">
       <DependentUpon>AkcijaWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\DodatnaUslugaWindow.xaml.cs">
+      <DependentUpon>DodatnaUslugaWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\KorisnikWindow.xaml.cs">
+      <DependentUpon>KorisnikWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\NamestajWindow.xaml.cs">
       <DependentUpon>NamestajWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\SalonWindow.xaml.cs">
+      <DependentUpon>SalonWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\TipNamestajaWindow.xaml.cs">
       <DependentUpon>TipNamestajaWindow.xaml</DependentUpon>
@@ -95,7 +103,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\DodatnaUslugaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\KorisnikWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\NamestajWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\SalonWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,10 +165,36 @@
     <Resource Include="data\tipNamestaja.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="image\salon.png" />
+    <Resource Include="data\dodatnaUsluga.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="data\dodatnaUsluga.xml" />
+    <Resource Include="image\akcija-small.jpg" />
+    <Resource Include="image\home.jpg" />
+    <Resource Include="image\logout.jpg" />
+    <Resource Include="image\namestaj.png" />
+    <Resource Include="image\nazad.jpg" />
+    <Resource Include="image\salon.png" />
+    <Resource Include="image\shop.png" />
+    <Resource Include="image\user3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\add.jpg" />
+    <Resource Include="image\addUser.jpg" />
+    <Resource Include="image\delete.png" />
+    <Resource Include="image\deleteUser.png" />
+    <Resource Include="image\edit.jpg" />
+    <Resource Include="image\editUser.jpg" />
+    <Resource Include="image\search.jpg" />
+    <Resource Include="image\sort.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="data\salon.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="data\akcija.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="image\refresh.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

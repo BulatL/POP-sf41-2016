@@ -25,24 +25,8 @@ namespace POP_sf_41_2016_GUI
 
         public LoginWindow()
         {
+
             InitializeComponent();
-
-            var ak = new Akcija()
-            {
-                Id = 1,
-                DatumPocetka = (DateTime)DateTime.Today.Date,
-                DatumZavrsetka = (DateTime)DateTime.Today.Date,
-
-                NamestajNaPopustuId = 1,
-                Popust = 20,
-                Obrisan = false
-            };
-
-            List<Akcija> lista = new List<Akcija>();
-            lista.Add(ak);
-            GenericSerializer.Serializer<Akcija>("akcija.xml", lista);
-
-           
         }
 
         private void btnZatvori_Click(object sender, RoutedEventArgs e)
@@ -54,24 +38,29 @@ namespace POP_sf_41_2016_GUI
         {
             var listaKorisnika = Projekat.Instance.Korisnik;
            
-                string korisnickoIme = tbKorisnickoIme.Text.Trim();
-                string sifra = pbSifra.Password.ToString().Trim();
+            string korisnickoIme = tbKorisnickoIme.Text.Trim();
+            string sifra = pbSifra.Password.ToString().Trim();
 
-                foreach (var korisnik in listaKorisnika)
+            bool logovaniKorisnik = false;
+            bool praznoPolje = false;
+            if (korisnickoIme.Equals("") || sifra.Equals("")) {
+                praznoPolje = true;
+                MessageBox.Show("Morate popuniti polja", "Neuspesan login", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+
+            foreach (var korisnik in listaKorisnika)
                 {
-                    if (korisnickoIme.ToUpper().Equals(korisnik.KorisnickoIme.ToUpper()) && sifra.ToUpper().Equals(korisnik.Lozinka.ToUpper()))
-                    {
-                        var tipKorisnika = korisnik.TipKorisnika;
-                        var mainWindow = new MainWindow(tipKorisnika.ToString());
-
-                        mainWindow.Show();
-                        this.Close();
-
+                if (korisnickoIme.Equals(korisnik.KorisnickoIme) && sifra.Equals(korisnik.Lozinka))
+                {
+                    var mainWindow = new MainWindow(korisnik);
+                    logovaniKorisnik = true;
+                    mainWindow.Show();
+                    this.Close();
                     break;
-                    }
                 }
-                
-                MessageBox.Show("Pogresno korisnicko ime ili sifra", "Neuspesan login", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            if (logovaniKorisnik == false && praznoPolje == false)
+            MessageBox.Show("Pogresno korisnicko ime ili sifra", "Neuspesan login", MessageBoxButton.OK, MessageBoxImage.Information);
         }
     }
 }

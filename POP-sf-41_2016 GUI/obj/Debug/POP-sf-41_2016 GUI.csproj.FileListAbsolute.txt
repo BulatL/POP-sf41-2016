@@ -23,3 +23,34 @@ C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\worksp
 C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.g.cs
 C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.baml
 C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe.config
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.pdb
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csprojResolveAssemblyReference.cache
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\MainWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\App.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.cache
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.lref
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\MainWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.g.resources
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP_sf_41_2016_GUI.Properties.Resources.resources
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.GenerateResource.Cache
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.CoreCompileInputs.cache
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.exe
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.pdb
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.baml
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.g.cs
+E:\fax\POP-sf41-2016 GUI\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.baml

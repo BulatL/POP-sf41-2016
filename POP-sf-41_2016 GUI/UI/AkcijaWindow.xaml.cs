@@ -45,7 +45,7 @@ namespace POP_sf_41_2016_GUI.UI
             this.dpPocetak.DisplayDateStart = DateTime.Now;
             this.dpKraj.DisplayDateStart = dpPocetak.SelectedDate;
             //this.dpKraj.SelectedDate = DateTime.Now;
-           // this.tbPopust.Text = akcija.Popust.ToString("0.00");
+            this.tbPopust.Text = akcija.Popust.ToString("0.00");
 
             var listaNamestaja = new ArrayList();
             foreach (var namestaj in Projekat.Instance.Namestaj)
@@ -53,42 +53,74 @@ namespace POP_sf_41_2016_GUI.UI
 
                 if (namestaj.Obrisan == false)
                 {
-                    var nadjeniTip = TipNamestaja.NadjiNamestaj(namestaj.TipNamestajaId);
-
-                    
-                    listaNamestaja.Add(namestaj);
+                    lbNamestaj.Items.Add(namestaj);
                 }
             }
-            lbNamestaj.ItemsSource = listaNamestaja;
+            //lbNamestaj.ItemsSource = listaNamestaja;
 
         }
-        /*
+
+        private void Odustani_click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
-            switch (operacija)
+            var listaAkcija = Projekat.Instance.Akcija;
+            int idAkcije = listaAkcija.Count + 1;
+
+            var listaNamestaja = Projekat.Instance.Namestaj;
+            var namestaj = lbNamestaj.SelectedItem as Namestaj;
+
+            if (namestaj != null)
             {
-                case Operacija.DODAVANJE:
-                    var akcija = Projekat.Instance.Akcija;
-                    var listaNamestaja = new List<Namestaj>();
-                    listaNamestaja.Add(cbNamestaj.Items);
-                    var novaAkcija = new Akcija()
+                foreach (var n in listaNamestaja) //u listu namestaja ubacujem id akcije
+                {
+                    if (n.Id == namestaj.Id)
                     {
-                        Id = akcija.Count + 1,
-                        DatumPocetka = (DateTime)dpPocetak.SelectedDate,
-                        DatumZavrsetka = (DateTime)dpKraj.SelectedDate,
-                        Popust = double.Parse(tbPopust.Text),
-                        NamestajNaPopustu = lvNamestaj.Items 
-                    };
-
-                    break;
-
-                case Operacija.IZMENA:
-
-
-
-                    break;
-                
+                        n.AkcijaId = idAkcije;
+                    }
+                }
             }
-        }*/
+
+            switch (operacija)
+           {
+               case Operacija.DODAVANJE:
+                    try { 
+                        var novaAkcija = new Akcija()
+                        {
+                            Id = idAkcije,
+                            DatumPocetka = (DateTime)dpPocetak.SelectedDate,
+                            DatumZavrsetka = (DateTime)dpKraj.SelectedDate,
+                            Popust = double.Parse(tbPopust.Text),
+                            NamestajNaPopustuId = namestaj.Id
+                        };
+                        listaAkcija.Add(novaAkcija);
+                    }
+                    catch (Exception) { }
+                    break;
+
+               case Operacija.IZMENA:
+                    try
+                    {
+                        foreach (var a in listaAkcija)
+                        {
+                            if(a.Id == akcija.Id)
+                            {
+                                a.DatumZavrsetka = (DateTime) dpKraj.SelectedDate;
+                                a.NamestajNaPopustuId = namestaj.Id;
+                                a.Popust = double.Parse(tbPopust.Text);
+                            }
+                        }
+                    }catch (Exception) { }
+
+                    
+                    break;
+           }
+            Projekat.Instance.Akcija = listaAkcija;
+            Projekat.Instance.Namestaj = listaNamestaja;
+            this.Close();
+        }
     }
 }

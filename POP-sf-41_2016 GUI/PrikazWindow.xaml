@@ -5,16 +5,42 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_sf_41_2016_GUI"
         mc:Ignorable="d"
-        Title="Prikaz" Height="401.538" Width="765" Activated="Window_Activated">
+        Title="Prikaz" Height="401.538" Width="765">
     <Grid>
         <ToolBar HorizontalContentAlignment="Stretch" Height="auto" Margin="10,10,0,0" VerticalAlignment="Top" Width="auto" >
-            <Button Content="Nazad" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Nazad_click"/>
-            <Button Content="Dodaj" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Dodajbtn" Click="Dodaj_click"/>
-            <Button Content="Izmeni" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnIzmeni" Click="Izmeni_Click"/>
-            <Button Content="Pretrazi" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5"/>
-            <Button Content="Logout" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Logout_click"/>
+            <Button Name="btNazad"  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Nazad_click">
+                <StackPanel>
+                    <Image Source="image/nazad.jpg" Stretch="Fill" Height="38" Width="38"></Image>
+                </StackPanel>
+            </Button>
+            <Button Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Dodajbtn" Click="Dodaj_click">
+                <StackPanel>
+                    <Image Source="image/add.jpg" Stretch="Fill" Height="35" Width="39"/>
+                </StackPanel>
+            </Button>
+            <Button Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Obrisibtn" Click="Obrisi_click">
+                <StackPanel>
+                    <Image Source="image/delete.png" Stretch="Fill" Height="38" Width="42"/>
+                </StackPanel>
+            </Button>
+            <Button  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnIzmeni" Click="Izmeni_Click">
+                <StackPanel>
+                    <Image Source="image/edit.jpg" Stretch="Fill" Height="35" Width="39"/>
+                </StackPanel>
+            </Button>
+            <Button  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnSort">
+                <StackPanel/>
+            </Button>
+            <Label Content="Pretrazi po" HorizontalAlignment="Center" Margin="0,14,0,5" Width="73"/>
+            <ComboBox Name="cbPretrazi" HorizontalAlignment="Center" Margin="0,5" Width="100" Height="27"></ComboBox>
+            <Button Height="auto" HorizontalAlignment="Right" Width="auto" Margin="5" Click="Logout_click">
+                <StackPanel>
+                    <Image Source="image/logout.jpg" Stretch="Fill" Height="45" Width="45"/>
+                </StackPanel>
+            </Button>
         </ToolBar>
-        <DataGrid AutoGenerateColumns="true" Name="dataGrid" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" SelectionMode="Extended" CanUserSortColumns="True" IsReadOnly="True"/>
+        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" Name="dataGrid" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
 
+        </DataGrid>
     </Grid>
 </Window>

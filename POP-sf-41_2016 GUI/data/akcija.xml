@@ -2,8 +2,16 @@
 <ArrayOfAkcija xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Akcija>
     <Id>1</Id>
-    <DatumPocetka>2017-11-12T00:00:00+01:00</DatumPocetka>
-    <DatumZavrsetka>2017-11-12T00:00:00+01:00</DatumZavrsetka>
+    <DatumPocetka>2017-11-15T00:00:00+01:00</DatumPocetka>
+    <DatumZavrsetka>2017-11-19T00:00:00</DatumZavrsetka>
+    <NamestajNaPopustuId>1</NamestajNaPopustuId>
+    <Obrisan>false</Obrisan>
+    <Popust>20</Popust>
+  </Akcija>
+  <Akcija>
+    <Id>2</Id>
+    <DatumPocetka>2017-11-16T00:00:00</DatumPocetka>
+    <DatumZavrsetka>2017-11-19T00:00:00</DatumZavrsetka>
     <NamestajNaPopustuId>1</NamestajNaPopustuId>
     <Obrisan>false</Obrisan>
     <Popust>20</Popust>

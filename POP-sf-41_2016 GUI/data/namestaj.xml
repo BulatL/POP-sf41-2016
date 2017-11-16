@@ -5,7 +5,7 @@
     <Obrisan>false</Obrisan>
     <Naziv>Super sofa</Naziv>
     <Sifra>sifra za sofe</Sifra>
-    <JedinicnaCena>52</JedinicnaCena>
+    <JedinicnaCena>4735</JedinicnaCena>
     <KolicinaUMagacinu>3</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <AkcijaId xsi:nil="true" />
@@ -56,7 +56,7 @@
     <Naziv>Lamperija</Naziv>
     <Sifra>s41235</Sifra>
     <JedinicnaCena>4</JedinicnaCena>
-    <KolicinaUMagacinu>0</KolicinaUMagacinu>
+    <KolicinaUMagacinu>2</KolicinaUMagacinu>
     <TipNamestajaId>5</TipNamestajaId>
     <AkcijaId xsi:nil="true" />
   </Namestaj>
@@ -85,7 +85,7 @@
     <Obrisan>false</Obrisan>
     <Naziv>Socijalni kauc</Naziv>
     <Sifra>ka4123</Sifra>
-    <JedinicnaCena>43214</JedinicnaCena>
+    <JedinicnaCena>4321</JedinicnaCena>
     <KolicinaUMagacinu>5</KolicinaUMagacinu>
     <TipNamestajaId>6</TipNamestajaId>
     <AkcijaId xsi:nil="true" />

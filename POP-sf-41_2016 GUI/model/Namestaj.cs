@@ -24,7 +24,10 @@ namespace POP_sf41_2016.model
 
         public int? AkcijaId { get; set; }
 
-
+        public override string ToString()
+        {
+            return ($"id:{Id}, naziv: {Naziv}, sifra: {Sifra}, cena: {JedinicnaCena}, kolicina: {KolicinaUMagacinu} , tip namestaja: {TipNamestaja.NadjiNamestaj(TipNamestajaId)} ");
+        }
 
         public static Namestaj NadjiNamestaj(int? idProsledjen)
         {

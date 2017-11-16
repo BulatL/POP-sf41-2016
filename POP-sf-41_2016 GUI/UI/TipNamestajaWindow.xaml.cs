@@ -55,7 +55,7 @@ namespace POP_sf_41_2016_GUI.UI
 
                     var noviTipNamestaja = new TipNamestaja()
                     {
-                        Id = listaTipNamestaj.Count + 1,
+                        Id = listaTipNamestaj.Count,
                         Naziv = tbNaziv.Text.Trim(),
                         Obrisan = false
                     };

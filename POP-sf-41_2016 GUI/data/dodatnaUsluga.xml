@@ -4,6 +4,12 @@
     <Id>1</Id>
     <Obrisan>false</Obrisan>
     <Naziv>Prevoz</Naziv>
-    <Cena>421</Cena>
+    <Cena>4267</Cena>
+  </DodatnaUsluga>
+  <DodatnaUsluga>
+    <Id>2</Id>
+    <Obrisan>false</Obrisan>
+    <Naziv>Prevoz</Naziv>
+    <Cena>4267</Cena>
   </DodatnaUsluga>
 </ArrayOfDodatnaUsluga>
