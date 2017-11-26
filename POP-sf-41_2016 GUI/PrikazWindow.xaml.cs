@@ -23,45 +23,136 @@ namespace POP_sf_41_2016_GUI
     /// </summary>
     public partial class PrikazWindow : Window
     {
+        public Namestaj selektovaniNamestaj { get; set; }
+        public TipNamestaja selektovaniTipNamestaja { get; set; }
+        public Akcija selektovanaAkcija { get; set; }
+        public DodatnaUsluga selektovanaDodatnaUsluga { get; set; }
+        public Korisnik selektovaniKorisnik { get; set; }
+        public Salon selektovaniSalon { get; set; }
+
         Korisnik korisnik;
         int parametar;
 
-        ICollectionView view;
 
         public PrikazWindow(Korisnik korisnik, int parametar)
         {
             InitializeComponent();
 
-            view = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
-
-            this.DataContext = this;
-            dataGrid.AutoGenerateColumns = false;
-            dataGrid.ItemsSource = view;
-            dataGrid.IsReadOnly = true;
-            dataGrid.IsSynchronizedWithCurrentItem = true;
-            dataGrid.ItemsSource = view;
+            dataGridNamestaj.Visibility = Visibility.Hidden;
+            dataGridTipNamestaja.Visibility = Visibility.Hidden;
+            dataGridAkcija.Visibility = Visibility.Hidden;
+            dataGridDodatnaUsluga.Visibility = Visibility.Hidden;
+            dataGridKorisnik.Visibility = Visibility.Hidden;
+            dataGridSalon.Visibility = Visibility.Hidden;
+            dataGridProdaja.Visibility = Visibility.Hidden;
 
             switch (parametar)
             {
                 case 1:
                     Uri namestaj = new Uri(System.IO.Path.GetFullPath($"../../image/namestaj.png"));
-                    this.Icon = BitmapFrame.Create(namestaj);
+                    Icon = BitmapFrame.Create(namestaj);
+                    dataGridNamestaj.AutoGenerateColumns = false;
+                    dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
+                    dataGridNamestaj.DataContext = this;
+                    var listaNamestaja = new ArrayList();
+                    foreach (var n in Projekat.Instance.Namestaj)
+                    {
+                        if (n.Obrisan == false)
+                        {
+                            listaNamestaja.Add(n);
+                        }
+                    }
+                    dataGridNamestaj.ItemsSource = listaNamestaja;
+                    dataGridNamestaj.Visibility = Visibility.Visible;
                     break;
                 case 2:
                     Uri tipNamestaja = new Uri(System.IO.Path.GetFullPath($"../../image/namestaj.png"));
-                    this.Icon = BitmapFrame.Create(tipNamestaja);
+                    Icon = BitmapFrame.Create(tipNamestaja);
+                    dataGridTipNamestaja.AutoGenerateColumns = false;
+                    dataGridTipNamestaja.IsSynchronizedWithCurrentItem = true;
+                    dataGridTipNamestaja.DataContext = this;
+                    var listaTipaNamestaja = new ArrayList();
+                    foreach (var t in Projekat.Instance.TipNamestaja)
+                    {
+                        if (t.Obrisan == false)
+                        {
+                            listaTipaNamestaja.Add(t);
+                        }
+                    }
+                    dataGridTipNamestaja.ItemsSource = listaTipaNamestaja;
+                    dataGridTipNamestaja.Visibility = Visibility.Visible;
                     break;
                 case 3:
                     Uri akcija = new Uri(System.IO.Path.GetFullPath($"../../image/akcija-small.jpg"));
-                    this.Icon = BitmapFrame.Create(akcija);
+                    Icon = BitmapFrame.Create(akcija);
+                    dataGridAkcija.AutoGenerateColumns = false;
+                    dataGridAkcija.IsSynchronizedWithCurrentItem = true;
+                    dataGridAkcija.DataContext = this;
+                    var listaAkcija = new ArrayList();
+                    foreach (var a in Projekat.Instance.Akcija)
+                    {
+                        if(a.DatumZavrsetka < DateTime.Now)
+                        {
+                            a.Obrisan = true;
+                        }
+                        if (a.Obrisan == false)
+                        {
+                            listaAkcija.Add(a);
+                        }
+                    }
+                    dataGridAkcija.ItemsSource = listaAkcija;
+                    dataGridAkcija.Visibility = Visibility.Visible;
                     break;
                 case 4:
                     Uri dodatnaUsluga = new Uri(System.IO.Path.GetFullPath($"../../image/namestaj.png"));
-                    this.Icon = BitmapFrame.Create(dodatnaUsluga);
+                    Icon = BitmapFrame.Create(dodatnaUsluga);
+                    dataGridDodatnaUsluga.AutoGenerateColumns = false;
+                    dataGridDodatnaUsluga.IsSynchronizedWithCurrentItem = true;
+                    dataGridDodatnaUsluga.DataContext = this;
+                    var listaDodatnihUsluga = new ArrayList();
+                    foreach (var du in Projekat.Instance.DodatnaUsluga)
+                    {
+                        if (du.Obrisan == false)
+                        {
+                            listaDodatnihUsluga.Add(du);
+                        }
+                    }
+                    dataGridDodatnaUsluga.ItemsSource = listaDodatnihUsluga;
+                    dataGridDodatnaUsluga.Visibility = Visibility.Visible;
                     break;
                 case 5:
                     Uri korisnici = new Uri(System.IO.Path.GetFullPath($"../../image/user3.jpg"));
-                    this.Icon = BitmapFrame.Create(korisnici);
+                    Icon = BitmapFrame.Create(korisnici);
+                    dataGridKorisnik.AutoGenerateColumns = false;
+                    dataGridKorisnik.IsSynchronizedWithCurrentItem = true;
+                    dataGridKorisnik.DataContext = this;
+                    var listaKorisnika = new ArrayList();
+                    foreach (var k in Projekat.Instance.Korisnik)
+                    {
+                        if (k.Obrisan == false)
+                        {
+                            listaKorisnika.Add(k);
+                        }
+                    }
+                    dataGridKorisnik.ItemsSource = listaKorisnika;
+                    dataGridKorisnik.Visibility = Visibility.Visible;
+                    break;
+                case 6:
+                    Uri salon = new Uri(System.IO.Path.GetFullPath($"../../image/home.jpg"));
+                    Icon = BitmapFrame.Create(salon);
+                    dataGridSalon.AutoGenerateColumns = false;
+                    dataGridSalon.IsSynchronizedWithCurrentItem = true;
+                    dataGridSalon.DataContext = this;
+                    var listaSalona = new ArrayList();
+                    foreach (var s in Projekat.Instance.Salon)
+                    {
+                        if (s.Obrisan == false)
+                        {
+                            listaSalona.Add(s);
+                        }
+                    }
+                    dataGridSalon.ItemsSource = listaSalona;
+                    dataGridSalon.Visibility = Visibility.Visible;
                     break;
             }
 
@@ -75,12 +166,12 @@ namespace POP_sf_41_2016_GUI
                 Obrisibtn.IsEnabled = false;
                 
             }
-            
-            OsveziPrikaz();
+ 
+            //dataGrid.Visibility = Visibility.Hidden;
             
         }
         
-        public void OsveziPrikaz()
+        /*public void OsveziPrikaz()
         {
             dataGrid.Columns.Clear();
             dataGrid.Items.Refresh();
@@ -114,7 +205,7 @@ namespace POP_sf_41_2016_GUI
                     {
                         if (namestaj.Obrisan == false)
                         {
-                            var tipNamestaja = TipNamestaja.NadjiNamestaj(namestaj.TipNamestajaId).Naziv;
+                            var tipNamestaja = TipNamestaja.NadjiTipNamestaj(namestaj.TipNamestajaId).Naziv;
                             listaNamestaja.Add(namestaj);
                             id1.Binding           = new Binding("Id");
                             naziv1.Binding        = new Binding("Naziv");
@@ -135,7 +226,7 @@ namespace POP_sf_41_2016_GUI
                     /*
                     cbPretrazi.Items.Add("Naziv");
                     cbPretrazi.Items.Add("Tip namestaja");
-                    cbPretrazi.Items.Add("Sifra");*/
+                    cbPretrazi.Items.Add("Sifra");
                     break;
 
                 case 2:
@@ -159,7 +250,7 @@ namespace POP_sf_41_2016_GUI
                     }
                     dataGrid.ItemsSource = listaTipNamestaja;
                     /*cbPretrazi.Visibility = Visibility.Hidden;
-                    cbPretrazi.Items.Add("Nazivu");*/
+                    cbPretrazi.Items.Add("Nazivu");
                     break;
 
                 case 3:
@@ -202,7 +293,7 @@ namespace POP_sf_41_2016_GUI
 
                     /*cbPretrazi.Items.Add("Datum pocetka");
                     cbPretrazi.Items.Add("Datum zavrsetka");
-                    cbPretrazi.Items.Add("Namestaj");*/
+                    cbPretrazi.Items.Add("Namestaj");
 
                     break;
 
@@ -276,7 +367,7 @@ namespace POP_sf_41_2016_GUI
 
                     /*cbPretrazi.Items.Add("Imenu");
                     cbPretrazi.Items.Add("Prezimenu");
-                    cbPretrazi.Items.Add("Korisnickom imenu");*/
+                    cbPretrazi.Items.Add("Korisnickom imenu");
 
                     break;
 
@@ -340,7 +431,7 @@ namespace POP_sf_41_2016_GUI
                     break;
             }
 
-        }
+        }*/
 
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
@@ -348,51 +439,51 @@ namespace POP_sf_41_2016_GUI
             switch (parametar)
             {
                 case 1:
-                    var izabraniNamestaj = (Namestaj)dataGrid.SelectedItem;
-                    var namestajWindow = new NamestajWindow(izabraniNamestaj, NamestajWindow.Operacija.IZMENA);
-                    namestajWindow.Show();
-                    OsveziPrikaz();
+                    Namestaj kopija = (Namestaj)selektovaniNamestaj.Clone();
+                    var namestajWindow = new NamestajWindow(kopija, NamestajWindow.Operacija.IZMENA);
+                    namestajWindow.ShowDialog();
+
                     break;
 
                 case 2:
-                    var izabraniTipNamestaj = (TipNamestaja)dataGrid.SelectedItem;
+                    var izabraniTipNamestaj = (TipNamestaja)selektovaniTipNamestaja;
                     var tipNamestajWindow = new TipNamestajaWindow(izabraniTipNamestaj, TipNamestajaWindow.Operacija.IZMENA);
                     tipNamestajWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
                     
 
                 case 3:
-                    var izabranaAkcija = (Akcija)dataGrid.SelectedItem;
+                    var izabranaAkcija = (Akcija)selektovanaAkcija;
                     var akcijaWindow = new AkcijaWindow(izabranaAkcija, AkcijaWindow.Operacija.IZMENA);
                     akcijaWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
                     
 
                 case 4:
-                    var izabranaDodatnaUsluga = (DodatnaUsluga)dataGrid.SelectedItem;
+                    var izabranaDodatnaUsluga = (DodatnaUsluga)selektovanaDodatnaUsluga;
                     var dodatnaUslugaWindow = new DodatnaUslugaWindow(izabranaDodatnaUsluga, DodatnaUslugaWindow.Operacija.IZMENA);
                     dodatnaUslugaWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
                     
 
                 case 5:
-                    var izabraniKorisnik = (Korisnik)dataGrid.SelectedItem;
+                    var izabraniKorisnik = (Korisnik)selektovaniKorisnik;
                     var korisnikWindow = new KorisnikWindow(izabraniKorisnik, KorisnikWindow.Operacija.IZMENA);
                     korisnikWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
 
                 case 6:
-                    var izabraniSalon = (Salon)dataGrid.SelectedItem;
+                    var izabraniSalon = (Salon)selektovaniSalon;
                     var salonWindow = new SalonWindow(izabraniSalon, SalonWindow.Operacija.IZMENA);
                     salonWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
             }
-            OsveziPrikaz();
+            
 
         }
 
@@ -420,14 +511,14 @@ namespace POP_sf_41_2016_GUI
                     var noviNamestaj = new Namestaj();
                     var namestajWindow = new NamestajWindow(noviNamestaj, NamestajWindow.Operacija.DODAVANJE);
                     namestajWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
 
                 case 2:
                     var noviTipNamestaja = new TipNamestaja();
                     var tipNamestajaWindow = new TipNamestajaWindow(noviTipNamestaja, TipNamestajaWindow.Operacija.DODAVANJE);
                     tipNamestajaWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
 
 
@@ -435,7 +526,7 @@ namespace POP_sf_41_2016_GUI
                     var novaAkcija = new Akcija();
                     var akcijaWindow = new AkcijaWindow(novaAkcija, AkcijaWindow.Operacija.DODAVANJE);
                     akcijaWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
 
 
@@ -443,7 +534,7 @@ namespace POP_sf_41_2016_GUI
                     var novaDodatnaUsluga = new DodatnaUsluga();
                     var dodatnaUslugaWindow = new DodatnaUslugaWindow(novaDodatnaUsluga, DodatnaUslugaWindow.Operacija.DODAVANJE);
                     dodatnaUslugaWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
 
 
@@ -451,14 +542,14 @@ namespace POP_sf_41_2016_GUI
                     var noviKorisnik = new Korisnik();
                     var korisnikWindow = new KorisnikWindow(noviKorisnik, KorisnikWindow.Operacija.DODAVANJE);
                     korisnikWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
 
                 case 6:
                     var noviSalon = new Salon();
                     var salonWindow = new SalonWindow(noviSalon, SalonWindow.Operacija.DODAVANJE);
                     salonWindow.Show();
-                    OsveziPrikaz();
+                    
                     break;
             }
         }
@@ -469,7 +560,7 @@ namespace POP_sf_41_2016_GUI
 
             {
                 case 1:
-                    var izabraniNamestaj = (Namestaj)dataGrid.SelectedItem;
+                    var izabraniNamestaj = (Namestaj)selektovaniNamestaj;
                     var listaNamestaja = Projekat.Instance.Namestaj;
                     if(MessageBox.Show("Da li ste sigurni da zelite da obrisete namestaj", "Obrisi namestaj", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
@@ -482,30 +573,30 @@ namespace POP_sf_41_2016_GUI
                         }
                         Projekat.Instance.Namestaj = listaNamestaja;
                     }
-                    OsveziPrikaz();
+                    
                     break;
 
                 case 2:
-                    var izabraniTipNamestaja = (TipNamestaja)dataGrid.SelectedItem;
-                    var listaTipNamestaj = Projekat.Instance.TipNamestaj;
+                    var izabraniTipNamestaja = (TipNamestaja)selektovaniTipNamestaja;
+                    var listaTipNamestaja = Projekat.Instance.TipNamestaja;
                     if (MessageBox.Show("Da li ste sigurni da zelite da obrisete tip namestaja", "Obrisi tip namestaja", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        foreach (var tipNamestaja in listaTipNamestaj)
+                        foreach (var tipNamestaja in listaTipNamestaja)
                         {
                             if(izabraniTipNamestaja.Id == tipNamestaja.Id)
                             {
                                 tipNamestaja.Obrisan = true;
                             }
                         }
-                        Projekat.Instance.TipNamestaj = listaTipNamestaj;
+                        Projekat.Instance.TipNamestaja = listaTipNamestaja;
                         
                     }
-                    OsveziPrikaz();
+                    
                     break;
 
 
                 case 3:
-                    var izabranaAkcija = (Akcija)dataGrid.SelectedItem;
+                    var izabranaAkcija = (Akcija)selektovanaAkcija;
                     var listaAkcija = Projekat.Instance.Akcija;
                     if (MessageBox.Show("Da li ste sigurni da zelite da obrisete akciju", "Obrisi akciju", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
@@ -519,12 +610,12 @@ namespace POP_sf_41_2016_GUI
                         Projekat.Instance.Akcija = listaAkcija;
                         
                     }
-                    OsveziPrikaz();
+                    
                     break;
 
 
                 case 4:
-                    var izabranaDodatnaUsluga = (DodatnaUsluga)dataGrid.SelectedItem;
+                    var izabranaDodatnaUsluga = (DodatnaUsluga)selektovanaDodatnaUsluga;
                     var listaDodatnihUsluga = Projekat.Instance.DodatnaUsluga;
                     if (MessageBox.Show("Da li ste sigurni da zelite da obrisete dodatnu uslug", "Obrisi dodatnu uslug", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
@@ -539,12 +630,12 @@ namespace POP_sf_41_2016_GUI
                         Projekat.Instance.DodatnaUsluga = listaDodatnihUsluga;
                         
                     }
-                    OsveziPrikaz();
+                    
                     break;
 
 
                 case 5:
-                    var izabraniKorisnik = (Korisnik)dataGrid.SelectedItem;
+                    var izabraniKorisnik = (Korisnik)selektovaniKorisnik;
                     var listaKorisnika = Projekat.Instance.Korisnik;
                     if (MessageBox.Show("Da li ste sigurni da zelite da obrisete korisnika", "Obrisi korisnika", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
@@ -552,18 +643,18 @@ namespace POP_sf_41_2016_GUI
                         {
                             if(izabraniKorisnik.Id == korisnik.Id)
                             {
-                                korisnik.obrisan = true;
+                                korisnik.Obrisan = true;
                             }
                         }
                         Projekat.Instance.Korisnik = listaKorisnika;
                         
                     }
-                    OsveziPrikaz();
+                    
                     break;
                     
                     case 6:
-                        var izabraniSalon = (Salon)dataGrid.SelectedItem;
-                        var listaSalona = Projekat.Instance.salon;
+                        var izabraniSalon = (Salon)selektovaniSalon;
+                        var listaSalona = Projekat.Instance.Salon;
                         if (MessageBox.Show("Da li ste sigurni da zelite da obrisete salon", "Obrisi salon", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                         {
                             foreach(var salon in listaSalona)
@@ -575,7 +666,7 @@ namespace POP_sf_41_2016_GUI
                             }
                         Projekat.Instance.Salon = listaSalona;
                         }
-                        OsveziPrikaz();
+                        
                         break;
             }
         }

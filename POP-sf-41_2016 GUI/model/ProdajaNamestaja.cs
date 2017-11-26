@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POP_sf41_2016.model
 {
-    public class ProdajaNamestaja
+    public class ProdajaNamestaja : INotifyPropertyChanged, ICloneable
     {
         public int Id { get; set; }
 
@@ -20,9 +21,16 @@ namespace POP_sf41_2016.model
 
         public const double PDV = 0.02;
 
+
         public int? DodatnaUslugaId { get; set; }
 
         public double UkupanIznos { get; set; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public object Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

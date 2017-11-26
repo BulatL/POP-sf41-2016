@@ -71,18 +71,6 @@ namespace POP_sf_41_2016_GUI.UI
             int idAkcije = listaAkcija.Count + 1;
 
             var listaNamestaja = Projekat.Instance.Namestaj;
-            var namestaj = lbNamestaj.SelectedItem as Namestaj;
-
-            if (namestaj != null)
-            {
-                foreach (var n in listaNamestaja) //u listu namestaja ubacujem id akcije
-                {
-                    if (n.Id == namestaj.Id)
-                    {
-                        n.AkcijaId = idAkcije;
-                    }
-                }
-            }
 
             switch (operacija)
            {
@@ -94,7 +82,6 @@ namespace POP_sf_41_2016_GUI.UI
                             DatumPocetka = (DateTime)dpPocetak.SelectedDate,
                             DatumZavrsetka = (DateTime)dpKraj.SelectedDate,
                             Popust = double.Parse(tbPopust.Text),
-                            NamestajNaPopustuId = namestaj.Id
                         };
                         listaAkcija.Add(novaAkcija);
                     }
@@ -109,7 +96,6 @@ namespace POP_sf_41_2016_GUI.UI
                             if(a.Id == akcija.Id)
                             {
                                 a.DatumZavrsetka = (DateTime) dpKraj.SelectedDate;
-                                a.NamestajNaPopustuId = namestaj.Id;
                                 a.Popust = double.Parse(tbPopust.Text);
                             }
                         }

@@ -39,8 +39,64 @@
                 </StackPanel>
             </Button>
         </ToolBar>
-        <DataGrid CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" Name="dataGrid" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
-
+        <DataGrid Name="dataGridNamestaj" SelectedItem="{Binding Path=selektovaniNamestaj}" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Sifra}" Header="Sifra"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=JedinicnaCena}" Header="Cena"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=KolicinaUMagacinu}" Header="Kolicina"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=TipNamestaja}" Header="Tip namestaja"  Width="*"/>
+            </DataGrid.Columns>
         </DataGrid>
+        <DataGrid Name="dataGridTipNamestaja" SelectedItem="{Binding Path=selektovaniTipNamestaja}" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="dataGridAkcija" SelectedItem="{Binding Path=selektovanaAkcija}" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=DatumPocetka}" Header="Pocetak"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=DatumZavrsetka}" Header="Kraj"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=NamestajNaPopustuId}" Header="Namestaj"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Popust}" Header="Popust"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="dataGridDodatnaUsluga" SelectedItem="{Binding Path=selektovanaDodatnaUsluga}" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Cena}" Header="Cena"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="dataGridKorisnik" SelectedItem="{Binding Path=selektovaniKorisnik}" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Ime}" Header="Ime"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Prezime}" Header="Prezime"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=KorisnickoIme}" Header="Korisnicko ime"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Lozinka}" Header="Lozinka"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=TipKorisnika}" Header="Tip korisnika"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="dataGridSalon" SelectedItem="{Binding Path=selektovaniSalon}" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Adresa}" Header="Adresa"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Telefon}" Header="Telefon"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Email}" Header="Email"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=AdresaInternetSajta}" Header="Sajt"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=PIB}" Header="PIB"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=MaticniBroj}" Header="Maticni broj"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=BrojZiroRacuna}" Header="Ziro racuna"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid Name="dataGridProdaja" SelectedItem="{Binding Path=selektovaniNamestaj}" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" AutoGenerateColumns="true" HorizontalAlignment="Center" Height="auto" Margin="25,38,38,25" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Sifra}" Header="Sifra"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=JedinicnaCena}" Header="Cena"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=KolicinaUMagacinu}" Header="Kolicina"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=TipNamestaja}" Header="Tip namestaja"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
     </Grid>
 </Window>

@@ -47,7 +47,7 @@ namespace POP_sf_41_2016_GUI.UI
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
-            var listaTipNamestaj = Projekat.Instance.TipNamestaj;
+            var listaTipNamestaj = Projekat.Instance.TipNamestaja;
 
             switch (operacija)
             {
@@ -76,7 +76,7 @@ namespace POP_sf_41_2016_GUI.UI
                     break;
             }
 
-            Projekat.Instance.TipNamestaj = listaTipNamestaj;
+            Projekat.Instance.TipNamestaja = listaTipNamestaj;
             this.Close();
         }
     }

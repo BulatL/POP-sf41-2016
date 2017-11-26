@@ -47,7 +47,7 @@ namespace POP_sf_41_2016_GUI.UI
             tbKolicina.Text = namestaj.KolicinaUMagacinu.ToString("0");
             tbSifra.Text = namestaj.Sifra;
 
-            foreach (var tipNamestaj in Projekat.Instance.TipNamestaj)
+            foreach (var tipNamestaj in Projekat.Instance.TipNamestaja)
             {
 
                 cbTipNamestaja.Items.Add(tipNamestaj);
@@ -81,7 +81,6 @@ namespace POP_sf_41_2016_GUI.UI
                         Sifra = tbSifra.Text,
                         JedinicnaCena = double.Parse(tbCena.Text),
                         KolicinaUMagacinu = int.Parse(tbKolicina.Text),
-                        AkcijaId = null,
                         Naziv = tbNaziv.Text.Trim(),
                         TipNamestajaId = izabraniTipNamestaja.Id,
                         Obrisan = false
@@ -103,7 +102,6 @@ namespace POP_sf_41_2016_GUI.UI
                                 n.Sifra = tbSifra.Text;
                                 n.JedinicnaCena = double.Parse(tbCena.Text);
                                 n.KolicinaUMagacinu = int.Parse(tbKolicina.Text);
-                                n.AkcijaId = null;
                                 n.TipNamestajaId = izabraniTipNamestaja.Id;
 
                             }

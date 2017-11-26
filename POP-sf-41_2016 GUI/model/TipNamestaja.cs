@@ -1,25 +1,63 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace POP_sf41_2016.model
 {
-    public class TipNamestaja
+    public class TipNamestaja : INotifyPropertyChanged, ICloneable
     {
-        public int Id { get; set; }
+        private int id;
+        private String naziv;
+        private bool obrisan;
 
-        public bool Obrisan { get; set; }
-
-        public string Naziv { get; set; }
-
-
-        public static TipNamestaja NadjiNamestaj(int? idProsledjen)
+        public int Id
         {
-            foreach (var tip in Projekat.Instance.TipNamestaj)
+            get { return id; }
+            set
             {
-                if(tip.Id == idProsledjen)
+                id = value;
+                OnPropertyChanged("Id");
+            }
+        }
+
+        public string Naziv
+        {
+            get { return naziv; }
+            set
+            {
+                naziv = value;
+                OnPropertyChanged("Naziv");
+            }
+        }
+
+        public bool Obrisan
+        {
+            get { return obrisan; }
+            set
+            {
+                obrisan = value;
+                OnPropertyChanged("Obrisan");
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged(String propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public static TipNamestaja NadjiTipNamestaj(int? idProsledjen)
+        {
+            foreach (var tip in Projekat.Instance.TipNamestaja)
+            {
+                if (tip.Id == idProsledjen)
                 {
                     return tip;
                 }
@@ -30,7 +68,7 @@ namespace POP_sf41_2016.model
 
         public static int? NadjiTipNamestajaString(string naziv)
         {
-            foreach (var tip in Projekat.Instance.TipNamestaj)
+            foreach (var tip in Projekat.Instance.TipNamestaja)
             {
                 if (tip.Naziv.ToUpper().Equals(naziv.ToUpper()))
                 {
@@ -44,6 +82,16 @@ namespace POP_sf41_2016.model
         public override string ToString()
         {
             return Naziv;
+        }
+
+        public object Clone()
+        {
+            return new TipNamestaja()
+            {
+                Id = id,
+                Naziv = naziv,
+                Obrisan = obrisan
+            };
         }
     }
 
