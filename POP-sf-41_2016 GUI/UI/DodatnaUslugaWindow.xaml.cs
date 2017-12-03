@@ -1,4 +1,5 @@
 ﻿using POP_sf41_2016.model;
+using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,21 +27,18 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private DodatnaUsluga dodatnaUsluga;
+        private int index;
         private Operacija operacija;
-        public DodatnaUslugaWindow(DodatnaUsluga dodatnaUsluga, Operacija operacija)
+        public DodatnaUslugaWindow(DodatnaUsluga dodatnaUsluga, int index, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
-            InicijalizujVrednosti(dodatnaUsluga, operacija);
-        }
-
-        private void InicijalizujVrednosti(DodatnaUsluga dodatnaUsluga, Operacija operacija)
-        {
             this.dodatnaUsluga = dodatnaUsluga;
+            this.index = index;
             this.operacija = operacija;
 
-            tbNaziv.Text = dodatnaUsluga.Naziv;
-            tbCena.Text = dodatnaUsluga.Cena.ToString("0.00");
+            tbNaziv.DataContext = dodatnaUsluga;
+            tbCena.DataContext = dodatnaUsluga;
         }
 
         private void Odustani_click(object sender, RoutedEventArgs e)
@@ -50,48 +48,21 @@ namespace POP_sf_41_2016_GUI.UI
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var listaDodatnihUsluga = Projekat.Instance.DodatnaUsluga;
 
-            switch (operacija)
+            if (operacija == Operacija.DODAVANJE)
             {
-                case Operacija.DODAVANJE:
-                    try
-                    {
-                        var novaDodatnaUsluga = new DodatnaUsluga()
-                        {
-                            Id = listaDodatnihUsluga.Count +1,
-                            Naziv = tbNaziv.Text,
-                            Cena = double.Parse(tbCena.Text)
-                        };
-                        listaDodatnihUsluga.Add(novaDodatnaUsluga);
-                    }
-                    catch (Exception)
-                    {
+                dodatnaUsluga.Id = listaDodatnihUsluga.Count + 1;
 
-                        throw;
-                    }
-                    break;
-
-                case Operacija.IZMENA:
-                    try
-                    {
-                        foreach (var du in listaDodatnihUsluga)
-                        {
-                            if(du.Id == dodatnaUsluga.Id)
-                            {
-                                du.Naziv = tbNaziv.Text;
-                                du.Cena = double.Parse(tbCena.Text);
-                            }
-                        }
-                    }
-                    catch (Exception)
-                    {
-
-                        throw;
-                    }
-                    break;
+                listaDodatnihUsluga.Add(dodatnaUsluga);
+            }
+            else if( operacija == Operacija.IZMENA)
+            {
+                listaDodatnihUsluga[index] = dodatnaUsluga;
             }
             Projekat.Instance.DodatnaUsluga = listaDodatnihUsluga;
+            GenericSerializer.Serializer("dodatnaUsluga.xml", listaDodatnihUsluga);
             this.Close();
         }
     }

@@ -2,47 +2,52 @@
 <ArrayOfTipNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <TipNamestaja>
     <Id>0</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Ostalo</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>1</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Regal</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>2</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Sofa</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>3</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>kolica</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>4</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>lampa</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>5</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Lamperija</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>6</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Kauc</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>7</Id>
-    <Obrisan>false</Obrisan>
     <Naziv>Sto</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
   <TipNamestaja>
     <Id>8</Id>
-    <Obrisan>true</Obrisan>
     <Naziv>da</Naziv>
+    <Obrisan>true</Obrisan>
+  </TipNamestaja>
+  <TipNamestaja>
+    <Id>9</Id>
+    <Naziv>Polica</Naziv>
+    <Obrisan>false</Obrisan>
   </TipNamestaja>
 </ArrayOfTipNamestaja>

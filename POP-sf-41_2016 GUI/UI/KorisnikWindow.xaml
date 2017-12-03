@@ -24,11 +24,11 @@
         <Label Content="Korisnicko ime" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Height="26" Width="87"/>
         <Label Content="lozinka" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="3" VerticalAlignment="Top" Height="26" Width="47"/>
         <Label Content="Tip korisnika" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Height="26" Width="76"/>
-        <TextBox Name="tbIme" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="tbPrezime" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <TextBox Name="tbKorisnickoIme" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
-        <PasswordBox Name="pbPassword" Grid.Column="1" HorizontalAlignment="Left" Margin="10,14,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-1.833,0.2" Width="120" Height="20"/>
-        <ComboBox Name="cbTipKorisnika" Grid.Column="1" HorizontalAlignment="Left" Margin="10,14,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120" Height="22"/>
+        <TextBox Text="{Binding Path=Ime}" Name="tbIme" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=Prezime}" Name="tbPrezime" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=KorisnickoIme}" Name="tbKorisnickoIme" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,13,0,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=Lozinka}" Name="tbPassword" Grid.Column="1" HorizontalAlignment="Left" Margin="10,14,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="-1.833,0.2" Width="120" Height="20"/>
+        <ComboBox SelectedItem="{Binding Path=TipKorisnika}" Name="cbTipKorisnika" Grid.Column="1" HorizontalAlignment="Left" Margin="10,14,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120" Height="22"/>
         <Button Name="btnOdustani" Content="Odustani" Grid.Column="1" HorizontalAlignment="Left" Margin="110,16,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Click="Odustani_click" Height="22"/>
         <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="23,16,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Click="Potvrdi_click" Height="22"/>
 

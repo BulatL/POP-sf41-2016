@@ -1,4 +1,5 @@
 ﻿using POP_sf41_2016.model;
+using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,87 +27,46 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private Korisnik korisnik;
+        private int index;
         private Operacija operacija;
-        public KorisnikWindow(Korisnik korisnik, Operacija operacija)
+        public KorisnikWindow(Korisnik korisnik, int index, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
-            InicijalizujVrednosti(korisnik, operacija);
-        }
-
-        private void InicijalizujVrednosti(Korisnik korisnik, Operacija operacija)
-        {
             this.korisnik = korisnik;
+            this.index = index;
             this.operacija = operacija;
 
-            tbIme.Text = korisnik.Ime;
-            tbPrezime.Text = korisnik.Prezime;
-            tbKorisnickoIme.Text = korisnik.KorisnickoIme;
-            pbPassword.Password = korisnik.Lozinka;
-            cbTipKorisnika.Items.Add(TipKorisnika.Administrator);
-            cbTipKorisnika.Items.Add(TipKorisnika.Prodavac);
+            tbIme.DataContext = korisnik;
+            tbPrezime.DataContext = korisnik;
+            tbKorisnickoIme.DataContext = korisnik;
+            tbPassword.DataContext = korisnik;
+            cbTipKorisnika.ItemsSource = Enum.GetValues(typeof(TipKorisnika)).Cast<TipKorisnika>();
+            cbTipKorisnika.DataContext = korisnik;
 
-            cbTipKorisnika.SelectedItem = korisnik.TipKorisnika;
-
-            if(operacija == Operacija.IZMENA)
+            if (operacija == Operacija.IZMENA)
             {
                 tbIme.IsEnabled = false;
                 tbPrezime.IsEnabled = false;
 
             }
-        }
+        }      
         
-
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var listaKorisnika = Projekat.Instance.Korisnik;
 
-            TipKorisnika tipKorisnika =(TipKorisnika) cbTipKorisnika.SelectedItem;
-
-            switch (operacija)
+            if (operacija == Operacija.DODAVANJE)
             {
-                case Operacija.DODAVANJE:
-                    try
-                    {
-                        var noviKorisnik = new Korisnik()
-                        {
-
-                            Id = listaKorisnika.Count + 1,
-                            Ime = tbIme.Text.Trim(),
-                            Prezime = tbPrezime.Text.Trim(),
-                            KorisnickoIme = tbKorisnickoIme.Text.Trim(),
-                            Lozinka = pbPassword.Password.ToString().Trim(),
-                            TipKorisnika = tipKorisnika
-
-                        };
-                        listaKorisnika.Add(noviKorisnik);
-                    }
-                    catch (Exception ex) { }
-                    break;
-
-                case Operacija.IZMENA:
-                    try
-                    {
-                        foreach (var k in listaKorisnika)
-                        {
-                            if (k.Id == korisnik.Id)
-                            {
-                                k.Ime = tbIme.Text.Trim();
-                                k.Prezime = tbPrezime.Text.Trim();
-                                k.KorisnickoIme = tbKorisnickoIme.Text.Trim();
-                                k.Lozinka = pbPassword.Password.ToString().Trim();
-                                k.TipKorisnika = tipKorisnika;
-
-                            }
-
-                        }
-                    }
-                    catch (Exception ex) { }
-
-                    break;
+                korisnik.Id = listaKorisnika.Count + 1;
             }
-
+            else if ( operacija == Operacija.IZMENA)
+            {
+                listaKorisnika[index] = korisnik;
+            }
             Projekat.Instance.Korisnik = listaKorisnika;
+            GenericSerializer.Serializer("korisnici.xml", listaKorisnika);
             this.Close();
         }
 

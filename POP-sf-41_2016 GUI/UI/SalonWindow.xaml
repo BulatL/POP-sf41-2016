@@ -29,14 +29,14 @@
         <Label Content="PIB" HorizontalAlignment="Left" Margin="10,22,0,0" Grid.Row="5" VerticalAlignment="Top" Height="26" Width="27"/>
         <Label Content="Maticni broj" HorizontalAlignment="Left" Margin="10,22,0,0" Grid.Row="6" VerticalAlignment="Top" Height="26" Width="74"/>
         <Label Content="Ziro racun" HorizontalAlignment="Left" Margin="10,21,0,0" Grid.Row="7" VerticalAlignment="Top" Height="26" Width="64"/>
-        <TextBox Name="tbNaziv" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,24,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="tbAdresa" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="tbTelefon" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="tbEmail" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="tbSajt" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="tbPIB" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="tbMaticniBr" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="6" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
-        <TextBox Name="tbZiroRacun" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,24,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=Naziv}" Name="tbNaziv" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,24,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=Adresa}" Name="tbAdresa" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="1" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=Telefon}" Name="tbTelefon" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="2" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=Email}" Name="tbEmail" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="3" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=AdresaInternetSajta}" Name="tbSajt" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="4" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=PIB}" Name="tbPIB" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="5" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=MaticniBroj}" Name="tbMaticniBr" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,25,0,0" Grid.Row="6" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
+        <TextBox Text="{Binding Path=BrojZiroRacuna}" Name="tbZiroRacun" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,24,0,0" Grid.Row="7" TextWrapping="Wrap"  VerticalAlignment="Top" Width="230"/>
         <Button Name="btnOdustani" Content="Odustani" Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="204,80,0,-52" Grid.Row="7" VerticalAlignment="Top" Width="83" Click="Odustani_click" RenderTransformOrigin="0.877,0.536"/>
         <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Height="29" Margin="88,80,0,-52" Grid.Row="7" VerticalAlignment="Top" Width="83" Click="Potvrdi_click"/>
 

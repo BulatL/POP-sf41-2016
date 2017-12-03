@@ -20,6 +20,12 @@ namespace POP_sf41_2016.model
         private int brojZiroRacuna;
         private bool obrisan;
 
+        public Salon()
+        {
+            Email = "@gmail.com";
+            AdresaInternetSajta = "https://www. ";
+        }
+
         public bool Obrisan
         {
             get { return obrisan; }
@@ -143,19 +149,18 @@ namespace POP_sf41_2016.model
 
         public object Clone()
         {
-            return new Salon()
-            {
-                Id = id,
-                Naziv = naziv,
-                Telefon = telefon,
-                Email = email,
-                AdresaInternetSajta = adresaInternetSajta,
-                Adresa = adresa,
-                BrojZiroRacuna = brojZiroRacuna,
-                PIB = pib, 
-                MaticniBroj = maticniBroj,
-                Obrisan = obrisan
-            };
+            Salon kopija = new Salon();
+            kopija.Id = id;
+            kopija.Adresa = adresa;
+            kopija.Telefon = telefon;
+            kopija.AdresaInternetSajta = adresaInternetSajta;
+            kopija.BrojZiroRacuna = brojZiroRacuna;
+            kopija.Email = email;
+            kopija.PIB = pib;
+            kopija.MaticniBroj = maticniBroj;
+            kopija.Obrisan = obrisan;
+
+            return kopija;
         }
     }
 }

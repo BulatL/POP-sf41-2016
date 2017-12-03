@@ -12,12 +12,12 @@
             <RowDefinition Height="328*"/>
         </Grid.RowDefinitions>
         <ToolBar HorizontalContentAlignment="Stretch" Height="auto" Margin="10,10,0,0" VerticalAlignment="Top" Width="auto" >
-            <Button Content="Prodaja" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" />
+            <Button Content="Prodaja" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Prodaja_click" />
             <Button Content="Namestaj" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Namestaj_click"/>
             <Button Content="Tip namestaja" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="TipNamestaja_Click"/>
             <Button Content="Akcije" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Akcija_click" />
             <Button Content="Dodatne usluge" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="DodatneUsluge_click" />
-            <Button Content="Korisnici" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Korisnici_click" />
+            <Button Content="Korisnici" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnKorisnici" Click="Korisnici_click" />
             <Button Content="Salon" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Salon_click" />
             <Button Content="Logout" Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Logout_click"/>
         </ToolBar>

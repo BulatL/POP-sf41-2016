@@ -139,17 +139,17 @@ namespace POP_sf41_2016.model
 
         public object Clone()
         {
-            return new Namestaj()
-            {
-                Id = id,
-                Naziv = naziv,
-                JedinicnaCena = jedinicnaCena,
-                TipNamestaja = tipNamestaja,
-                TipNamestajaId = tipNamestajaId,
-                Obrisan = obrisan,
-                KolicinaUMagacinu = kolicinaUMagacinu,
-                Sifra = sifra
-            };
+            Namestaj kopija = new Namestaj();
+            kopija.Id = id;
+            kopija.Naziv = naziv;
+            kopija.JedinicnaCena = jedinicnaCena;
+            kopija.TipNamestaja = tipNamestaja;
+            kopija.TipNamestajaId = tipNamestajaId;
+            kopija.Obrisan = obrisan;
+            kopija.KolicinaUMagacinu = kolicinaUMagacinu;
+            kopija.Sifra = sifra;
+
+            return kopija;
         }
     }
 }

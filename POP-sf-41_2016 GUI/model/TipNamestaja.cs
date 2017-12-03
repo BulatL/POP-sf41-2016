@@ -86,12 +86,12 @@ namespace POP_sf41_2016.model
 
         public object Clone()
         {
-            return new TipNamestaja()
-            {
-                Id = id,
-                Naziv = naziv,
-                Obrisan = obrisan
-            };
+            TipNamestaja kopija = new TipNamestaja();
+            kopija.Id = id;
+            kopija.Naziv = Naziv;
+            kopija.Obrisan = obrisan;
+
+            return kopija;
         }
     }
 

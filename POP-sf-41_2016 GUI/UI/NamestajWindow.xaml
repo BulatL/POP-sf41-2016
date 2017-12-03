@@ -25,11 +25,11 @@
         <Label Content="Kolicina" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="3" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2" Height="26"/>
         <Label Content="Tip namestaja" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="4" VerticalAlignment="Top" Width="143" Grid.ColumnSpan="2" Height="26"/>
 
-        <TextBox Name="tbNaziv" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <TextBox Name="tbSifra" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <TextBox Name="tbCena" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <TextBox Name="tbKolicina" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <ComboBox Name="cbTipNamestaja" Grid.Column="1" HorizontalAlignment="Left" Margin="103,12,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120"/>
+        <TextBox Text="{Binding Path=Naziv}" Name="tbNaziv" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
+        <TextBox Text="{Binding Path=Sifra}" Name="tbSifra" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
+        <TextBox Text="{Binding Path=JedinicnaCena}" Name="tbCena" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
+        <TextBox Text="{Binding Path=KolicinaUMagacinu}" Name="tbKolicina" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
+        <ComboBox SelectedItem="{Binding Path=TipNamestaja}" Name="cbTipNamestaja" Grid.Column="1" HorizontalAlignment="Left" Margin="103,12,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120"/>
         <Button Content="Odustani" Name="bnOdustani" Grid.Column="1" HorizontalAlignment="Left" Margin="247,46,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Click="Odustani_click"/>
         <Button Content="Potvrdi" Name="btnPotvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="140,46,0,0" Grid.Row="5" VerticalAlignment="Top" Width="74" Click="Potvrdi_click"/>
 

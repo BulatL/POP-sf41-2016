@@ -1,0 +1,43 @@
+﻿<Window x:Class="POP_sf_41_2016_GUI.UI.ProdajaWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
+        mc:Ignorable="d"
+        Title="ProdajaWindow" Height="700" Width="600">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="102*"/>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="226*"/>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="70*"/>
+            <RowDefinition Height="79*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="71*"/>
+            <ColumnDefinition Width="225*"/>
+        </Grid.ColumnDefinitions>
+        <Label HorizontalAlignment="Left" Margin="39,52,0,0" VerticalAlignment="Top" Width="72" Height="40" RenderTransformOrigin="0.444,0.525" Content="Kupac:" FontSize="18"/>
+        <TextBlock TextWrapping="WrapWithOverflow" Text="Namestaj" HorizontalAlignment="Left" Margin="39,27,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="30" FontSize="18"/>
+        <TextBlock TextWrapping="WrapWithOverflow" Text="Kupljeni Namestaj" HorizontalAlignment="Left" Margin="39,99,0,0" Grid.Row="2" VerticalAlignment="Top" Width="83" Height="74" FontSize="18"/>
+        <TextBlock TextWrapping="WrapWithOverflow" Text="Dodatna Usluga" HorizontalAlignment="Left" Margin="39,19,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="0.816,-0.038" Width="83" Height="50" FontSize="18"/>
+        <TextBlock TextWrapping="WrapWithOverflow" Text="Ukupna cena" HorizontalAlignment="Left" Margin="39,21,0,0" Grid.Row="4" VerticalAlignment="Top" Width="83" Height="59" FontSize="18"/>
+        <TextBlock Name="tbUkupanIznos" Text="{Binding Path=UkupanIznos}" Grid.Column="1" HorizontalAlignment="Left" Margin="56,21,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="306" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.49,0.559"/>
+        <TextBox Name="tbKupac" Text="{Binding Path=Kupac}" Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="56,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="306" FontSize="16"/>
+        <Button Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Grid.Column="1" Margin="56,21,0,0" Grid.Row="1" Height="37" FontSize="16" Click="Dodaj_click"/>
+        <Button Name="btnObrisi" Content="Obrisi" VerticalAlignment="Top" Grid.Column="1" Margin="211,21,0,0" Grid.Row="1" Height="36" FontSize="16" HorizontalAlignment="Left" Width="94" Click="Obrisi_click"/>
+        <DataGrid Name="dgNamestaj" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="430" FontSize="16">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Namestaj.Naziv}" Header="Naziv"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Kolicina}" Header="Kolicina"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=UkupnaCena}" Header="Cena"  Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <ComboBox Name="cbDodatnaUsluga" SelectedItem="{Binding Path=DodatnaUsluga}" Grid.Column="1" HorizontalAlignment="Left" Margin="46,25,0,0" Grid.Row="3" VerticalAlignment="Top" Width="144" Height="44" FontSize="16"/>
+        <Button Name="btnOdustani" Content="Odustani" Grid.Column="1" HorizontalAlignment="Left" Margin="327,21,0,0" VerticalAlignment="Top" Width="94" Height="34" Grid.Row="5" FontSize="16" Click="Odustani_click"/>
+        <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="193,21,0,0" VerticalAlignment="Top" Width="94" Height="34" Grid.Row="5" FontSize="16" Click="Potvrdi_click"/>
+
+    </Grid>
+</Window>

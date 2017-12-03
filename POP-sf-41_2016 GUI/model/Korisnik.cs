@@ -111,16 +111,16 @@ namespace POP_sf41_2016.model
 
         public object Clone()
         {
-            return new Korisnik()
-            {
-                Id = id,
-                Ime = ime,
-                Prezime = prezime,
-                KorisnickoIme = korisnickoIme,
-                Lozinka = lozinka,
-                TipKorisnika = tipKorisnika,
-                Obrisan = obrisan
-            };
+            Korisnik kopija = new Korisnik();
+            kopija.Id = id;
+            kopija.Ime = ime;
+            kopija.Prezime = prezime;
+            kopija.KorisnickoIme = korisnickoIme;
+            kopija.Lozinka = lozinka;
+            kopija.TipKorisnika = tipKorisnika;
+            kopija.Obrisan = obrisan;
+
+            return kopija;
         }
     }
 }

@@ -5,29 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
         mc:Ignorable="d"
-        Title="                               Akcija " FontSize="13" ResizeMode="NoResize" Height="508.7" Width="700">
-    <Grid Margin="0,0,-6,-2">
+        Title="                               Akcija " FontSize="13" ResizeMode="NoResize" Height="508.7" Width="488">
+    <Grid Margin="0,0,4,-4">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="36*"/>
-            <ColumnDefinition Width="241*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="409*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="70*"/>
-            <RowDefinition Height="77*"/>
-            <RowDefinition Height="77*"/>
-            <RowDefinition Height="218*"/>
-            <RowDefinition Height="73*"/>
+            <RowDefinition Height="66*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="72*"/>
+            <RowDefinition Height="116*"/>
+            <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
-        <Button Content="Odustani" Name="btOdustani" HorizontalAlignment="Left" Margin="511,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="72" Grid.Column="1" Height="29" Click="Odustani_click"/>
-        <Button Content="Potvrdi" Name="Potvrdi" HorizontalAlignment="Left" Margin="417,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="72" Grid.Column="1" Height="29" Click="Potvrdi_click" />
+        <Button Content="Odustani" Name="btOdustani" HorizontalAlignment="Left" Margin="267,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="72" Grid.Column="1" Height="29" Click="Odustani_click"/>
+        <Button Content="Potvrdi" Name="Potvrdi" HorizontalAlignment="Left" Margin="133,18,0,0" Grid.Row="4" VerticalAlignment="Top" Width="72" Grid.Column="1" Height="29" Click="Potvrdi_click" RenderTransformOrigin="-2.431,0.483" />
         <Label Content="Pocetak" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Height="27" Width="55"/>
         <Label Content="Kraj" HorizontalAlignment="Left" Margin="10,15,0,0" Grid.Row="1" VerticalAlignment="Top" Height="27" Width="32"/>
         <Label Content="Popust" HorizontalAlignment="Left" Margin="10,15,0,0" Grid.Row="2" VerticalAlignment="Top" Height="27" Width="50">
         </Label>
-        <Label Content="Namestaj" HorizontalAlignment="Left" Margin="10,17,0,0" Grid.Row="3" VerticalAlignment="Top" Height="27" Width="64"/>
-        <DatePicker Name="dpPocetak" Grid.Column="1" HorizontalAlignment="Left" Margin="32,15,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
-        <DatePicker Name="dpKraj" Grid.Column="1" HorizontalAlignment="Left" Margin="32,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="25"/>
-        <TextBox Name="tbPopust" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="32,19,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListBox Name="lbNamestaj" Grid.Column="1" HorizontalAlignment="Left" Height="163" Margin="32,17,0,0" Grid.Row="3" VerticalAlignment="Top" Width="523" SelectionMode="Single" />
+        <Label Content="Namestaj" HorizontalAlignment="Left" Margin="10,68,0,0" Grid.Row="3" VerticalAlignment="Top" Height="27" Width="64"/>
+        <DatePicker SelectedDate="{Binding Path=DatumPocetka}"  Name="dpPocetak" Grid.Column="1" HorizontalAlignment="Left" Margin="32,15,0,0" VerticalAlignment="Top" Width="120" Height="25"/>
+        <DatePicker SelectedDate="{Binding Path=DatumZavrsetka}"  Name="dpKraj" Grid.Column="1" HorizontalAlignment="Left" Margin="32,15,0,0" Grid.Row="1" VerticalAlignment="Top" Width="120" Height="25"/>
+        <TextBox Text="{Binding Path=Popust}" Name="tbPopust" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="32,19,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ComboBox SelectedItem="{Binding Path=NamestajNaPopustu}" Name="cbNamestaj" Grid.Column="1" HorizontalAlignment="Left" Margin="32,72,0,0" Grid.Row="3" VerticalAlignment="Top" Width="120" Height="23"/>
     </Grid>
 </Window>

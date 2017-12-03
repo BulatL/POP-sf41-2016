@@ -19,6 +19,11 @@ namespace POP_sf41_2016.model
         private Namestaj namestajNaPopustu;
         private bool obrisan;
 
+        public Akcija()
+        {
+            DatumPocetka = DateTime.Now;
+            DatumZavrsetka = DateTime.Now;
+        }
         public bool Obrisan
         {
             get { return obrisan; }
@@ -99,7 +104,7 @@ namespace POP_sf41_2016.model
             {
                 namestajNaPopustu = value;
                 NamestajNaPopustuId = namestajNaPopustu.Id;
-                OnPropertyChanged("TipNamestaja");
+                OnPropertyChanged("NamestajNaPopustu");
             }
         }
 
@@ -115,14 +120,14 @@ namespace POP_sf41_2016.model
 
         public object Clone()
         {
-            return new Akcija()
-            {
-                Id = id,
-                DatumPocetka = datumPocetka,
-                DatumZavrsetka = datumZavrsetka,
-                Popust = popust,
-                Obrisan = obrisan
-            };
+            Akcija kopija = new Akcija();
+            kopija.Id = id;
+            kopija.DatumPocetka = datumPocetka;
+            kopija.DatumZavrsetka = datumZavrsetka;
+            kopija.Popust = popust;
+            kopija.Obrisan = obrisan;
+
+            return kopija;
         }
     }
 }

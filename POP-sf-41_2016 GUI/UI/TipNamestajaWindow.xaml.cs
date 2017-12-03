@@ -1,4 +1,5 @@
 ﻿using POP_sf41_2016.model;
+using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,57 +27,46 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private TipNamestaja tipNamestaja;
+        private int index;
         private Operacija operacija;
 
-        public TipNamestajaWindow(TipNamestaja tipNamestaja, Operacija operacija)
+        public TipNamestajaWindow(TipNamestaja tipNamestaja, int index, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
-            InicijalizujVrednosti(tipNamestaja, operacija);
-
-        }
-
-        private void InicijalizujVrednosti(TipNamestaja tipNamestaja, Operacija operacija)
-        {
             this.tipNamestaja = tipNamestaja;
+            this.index = index;
             this.operacija = operacija;
 
-            this.tbNaziv.Text = tipNamestaja.Naziv;
+            tbNaziv.DataContext = tipNamestaja;
 
         }
+
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var listaTipNamestaj = Projekat.Instance.TipNamestaja;
 
-            switch (operacija)
+            if (operacija == Operacija.DODAVANJE)
             {
-                case Operacija.DODAVANJE:
+                tipNamestaja.Id = listaTipNamestaj.Count + 1;
 
-                    var noviTipNamestaja = new TipNamestaja()
-                    {
-                        Id = listaTipNamestaj.Count,
-                        Naziv = tbNaziv.Text.Trim(),
-                        Obrisan = false
-                    };
 
-                    listaTipNamestaj.Add(noviTipNamestaja);
-                    break;
-
-                case Operacija.IZMENA:
-
-                    foreach (var tn in listaTipNamestaj)
-                    {
-                        if (tn.Id == tipNamestaja.Id)
-                        {
-                            tn.Naziv = tbNaziv.Text.Trim();
-                        }
-                    }
-
-                    break;
+                listaTipNamestaj.Add(tipNamestaja);
+            }
+            else if (operacija == Operacija.IZMENA)
+            {
+                listaTipNamestaj[index] = tipNamestaja;
             }
 
             Projekat.Instance.TipNamestaja = listaTipNamestaj;
+            GenericSerializer.Serializer("tipNamestaja.xml", listaTipNamestaj);
+            this.Close();
+        }
+
+        private void Nazad_click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

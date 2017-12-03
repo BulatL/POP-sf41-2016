@@ -1,4 +1,5 @@
 ﻿using POP_sf41_2016.model;
+using POP_sf41_2016.util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.ComponentModel;
 
 namespace POP_sf_41_2016_GUI.UI
 {
@@ -27,38 +29,50 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private Akcija akcija;
+        private int index;
         private Operacija operacija;
 
-        public AkcijaWindow(Akcija akcija, Operacija operacija )
+        public AkcijaWindow(Akcija akcija, int index , Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
-            InicijalizujVrednosti(akcija, operacija);
-        }
-
-        private void InicijalizujVrednosti(Akcija akcija, Operacija operacija)
-        {
             this.akcija = akcija;
+            this.index = index;
             this.operacija = operacija;
 
-            this.dpPocetak.SelectedDate = DateTime.Now;
-            this.dpPocetak.DisplayDateStart = DateTime.Now;
-            this.dpKraj.DisplayDateStart = dpPocetak.SelectedDate;
-            //this.dpKraj.SelectedDate = DateTime.Now;
-            this.tbPopust.Text = akcija.Popust.ToString("0.00");
+            dpPocetak.DataContext = akcija;
+            dpKraj.DataContext = akcija;
+            tbPopust.DataContext = akcija;
 
-            var listaNamestaja = new ArrayList();
-            foreach (var namestaj in Projekat.Instance.Namestaj)
+            var listaNamestaja = new List<Namestaj>();
+
+            foreach (var item in Projekat.Instance.Namestaj)
             {
-
-                if (namestaj.Obrisan == false)
+                if (item.Obrisan == false)
                 {
-                    lbNamestaj.Items.Add(namestaj);
+                   listaNamestaja.Add(item);
+
                 }
             }
-            //lbNamestaj.ItemsSource = listaNamestaja;
+
+            cbNamestaj.ItemsSource = listaNamestaja;
+            cbNamestaj.DisplayMemberPath = "Naziv";
+            cbNamestaj.DataContext = akcija;
+
+
+            if (akcija.Id == 0)
+            {
+                dpPocetak.DisplayDateStart = DateTime.Now;
+                dpKraj.DisplayDateStart = dpPocetak.SelectedDate;
+                dpKraj.DisplayDateStart = DateTime.Now;
+            }
 
         }
+        private bool NamestajFilter(object obj)
+        {
+            return !((Namestaj)obj).Obrisan;
+        }
+
 
         private void Odustani_click(object sender, RoutedEventArgs e)
         {
@@ -67,46 +81,37 @@ namespace POP_sf_41_2016_GUI.UI
         
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var listaAkcija = Projekat.Instance.Akcija;
             int idAkcije = listaAkcija.Count + 1;
+            
+            if (operacija == Operacija.DODAVANJE)
+            {
+                if (akcija.DatumPocetka.Date < DateTime.Today)
+                {
+                    MessageBox.Show("Datum pocetka akcije ne moze biti manji od danasnjeg dana", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            if (akcija.DatumZavrsetka.Date < akcija.DatumPocetka.Date)
+            {
+                MessageBox.Show("Datum zavrsetka akcije mora biti veci od datuma pocetka akcije", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else if(akcija.DatumPocetka.Date >= DateTime.Today || akcija.DatumZavrsetka.Date > akcija.DatumPocetka.Date)
+            {
+                if (operacija == Operacija.DODAVANJE)
+                {
+                    akcija.Id = idAkcije;
+                    listaAkcija.Add(akcija);
 
-            var listaNamestaja = Projekat.Instance.Namestaj;
-
-            switch (operacija)
-           {
-               case Operacija.DODAVANJE:
-                    try { 
-                        var novaAkcija = new Akcija()
-                        {
-                            Id = idAkcije,
-                            DatumPocetka = (DateTime)dpPocetak.SelectedDate,
-                            DatumZavrsetka = (DateTime)dpKraj.SelectedDate,
-                            Popust = double.Parse(tbPopust.Text),
-                        };
-                        listaAkcija.Add(novaAkcija);
-                    }
-                    catch (Exception) { }
-                    break;
-
-               case Operacija.IZMENA:
-                    try
-                    {
-                        foreach (var a in listaAkcija)
-                        {
-                            if(a.Id == akcija.Id)
-                            {
-                                a.DatumZavrsetka = (DateTime) dpKraj.SelectedDate;
-                                a.Popust = double.Parse(tbPopust.Text);
-                            }
-                        }
-                    }catch (Exception) { }
-
-                    
-                    break;
-           }
-            Projekat.Instance.Akcija = listaAkcija;
-            Projekat.Instance.Namestaj = listaNamestaja;
-            this.Close();
+                } 
+                else if( operacija == Operacija.IZMENA)
+                {
+                    listaAkcija[index] = akcija;
+                }
+                Projekat.Instance.Akcija = listaAkcija;
+                GenericSerializer.Serializer("akcija.xml", listaAkcija);
+                this.Close();
+            }
         }
     }
 }

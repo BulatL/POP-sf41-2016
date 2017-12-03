@@ -1,30 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfKorisnik xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Korisnik>
-    <Id>1</Id>
-    <obrisan>false</obrisan>
-    <Ime>Marko</Ime>
-    <Prezime>Markovic</Prezime>
+    <Obrisan>false</Obrisan>
+    <TipKorisnika>Administrator</TipKorisnika>
+    <Lozinka>123</Lozinka>
     <KorisnickoIme>marko</KorisnickoIme>
-    <Lozinka>123</Lozinka>
-    <TipKorisnika>Administrator</TipKorisnika>
+    <Prezime>Markovic</Prezime>
+    <Ime>Marko</Ime>
+    <Id>1</Id>
   </Korisnik>
   <Korisnik>
-    <Id>2</Id>
-    <obrisan>false</obrisan>
-    <Ime>Nikola</Ime>
-    <Prezime>Nikolic</Prezime>
-    <KorisnickoIme>nikola</KorisnickoIme>
-    <Lozinka>123</Lozinka>
+    <Obrisan>false</Obrisan>
     <TipKorisnika>Prodavac</TipKorisnika>
+    <Lozinka>123</Lozinka>
+    <KorisnickoIme>nikola</KorisnickoIme>
+    <Prezime>Nikolic</Prezime>
+    <Ime>Nikola</Ime>
+    <Id>2</Id>
   </Korisnik>
   <Korisnik>
-    <Id>3</Id>
-    <obrisan>false</obrisan>
-    <Ime>Milos</Ime>
-    <Prezime>Milosevic</Prezime>
-    <KorisnickoIme>milos</KorisnickoIme>
-    <Lozinka>123</Lozinka>
+    <Obrisan>false</Obrisan>
     <TipKorisnika>Administrator</TipKorisnika>
+    <Lozinka>123</Lozinka>
+    <KorisnickoIme>milos</KorisnickoIme>
+    <Prezime>Milosevic</Prezime>
+    <Ime>Milos</Ime>
+    <Id>3</Id>
+  </Korisnik>
+  <Korisnik>
+    <Obrisan>false</Obrisan>
+    <TipKorisnika>Prodavac</TipKorisnika>
+    <Lozinka>123</Lozinka>
+    <KorisnickoIme>milorad</KorisnickoIme>
+    <Prezime>Jovanovic</Prezime>
+    <Ime>Milorad</Ime>
+    <Id>4</Id>
   </Korisnik>
 </ArrayOfKorisnik>

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\
+C:\Users\Bula\Desktop\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\
 POP_sf_41_2016_GUI
 none
 false
 DEBUG;TRACE
-C:\Users\Bula\Desktop\faks\semestar 3\Platforme za objektno programiranje\workspace\POP-sf41-2016\POP-sf-41_2016 GUI\App.xaml
-91360323450
+C:\Users\Bula\Desktop\POP-sf41-2016\POP-sf-41_2016 GUI\App.xaml
+11-186286923
 
-26-1506937319
+29-128333543
 13781053478
-LoginWindow.xaml;MainWindow.xaml;PrikazWindow.xaml;UI\AkcijaWindow.xaml;UI\DodatnaUslugaWindow.xaml;UI\KorisnikWindow.xaml;UI\NamestajWindow.xaml;UI\SalonWindow.xaml;UI\TipNamestajaWindow.xaml;
+LoginWindow.xaml;MainWindow.xaml;PrikazWindow.xaml;UI\AkcijaWindow.xaml;UI\DodatnaUslugaWindow.xaml;UI\KorisnikWindow.xaml;UI\NamestajWindow.xaml;UI\ProdajaWindow.xaml;UI\SalonWindow.xaml;UI\StavkaWindow.xaml;UI\TipNamestajaWindow.xaml;
 
-False
+True
 

@@ -22,7 +22,7 @@ namespace POP_sf_41_2016_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        
         Korisnik korisnik;
         public MainWindow(Korisnik korisnik)
         {
@@ -32,48 +32,53 @@ namespace POP_sf_41_2016_GUI
             this.Icon = BitmapFrame.Create(home);*/
 
             this.korisnik = korisnik;
+
+            if(korisnik.TipKorisnika == TipKorisnika.Prodavac)
+            {
+                btnKorisnici.Visibility = Visibility.Hidden;
+            }
             
         }
 
 
         private void Namestaj_click(object sender, RoutedEventArgs e)
         {
-            var prikazWindow = new PrikazWindow(korisnik, 1);
+            var prikazWindow = new PrikazWindow(korisnik, PrikazWindow.Parametar.Namestaj);
             prikazWindow.Show();
             this.Close();
         }
         private void TipNamestaja_Click(object sender, RoutedEventArgs e)
         {
 
-            var prikazWindow = new PrikazWindow(korisnik, 2);
+            var prikazWindow = new PrikazWindow(korisnik, PrikazWindow.Parametar.TipNamestaja);
             prikazWindow.Show();
             this.Close();
         }
 
         private void Akcija_click(object sender, RoutedEventArgs e)
         {
-            var prikazWindow = new PrikazWindow(korisnik, 3);
+            var prikazWindow = new PrikazWindow(korisnik, PrikazWindow.Parametar.Akcija);
             prikazWindow.Show();
             this.Close();
         }
 
         private void DodatneUsluge_click(object sender, RoutedEventArgs e)
         {
-            var prikazWindow = new PrikazWindow(korisnik, 4);
+            var prikazWindow = new PrikazWindow(korisnik, PrikazWindow.Parametar.DodatnaUsluga);
             prikazWindow.Show();
             this.Close();
         }
 
         private void Korisnici_click(object sender, RoutedEventArgs e)
         {
-            var prikazWindow = new PrikazWindow(korisnik, 5);
+            var prikazWindow = new PrikazWindow(korisnik, PrikazWindow.Parametar.Korisnik);
             prikazWindow.Show();
             this.Close();
         }
 
         private void Salon_click(object sender, RoutedEventArgs e)
         {
-            var prikazWindow = new PrikazWindow(korisnik, 6);
+            var prikazWindow = new PrikazWindow(korisnik, PrikazWindow.Parametar.Salon);
             prikazWindow.Show();
             this.Close();
         }
@@ -82,6 +87,13 @@ namespace POP_sf_41_2016_GUI
         {
             var login = new LoginWindow();
             login.Show();
+            this.Close();
+        }
+
+        private void Prodaja_click(object sender, RoutedEventArgs e)
+        {
+            var prikazWindow = new PrikazWindow(korisnik, PrikazWindow.Parametar.Prodaja);
+            prikazWindow.Show();
             this.Close();
         }
     }

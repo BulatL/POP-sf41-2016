@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
         mc:Ignorable="d"
-        Title="Tip Namestaja" Height="118.136" Width="296.272">
+        Title="Tip Namestaja" Height="138.136" Width="321.272">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="39*"/>
@@ -15,10 +15,10 @@
             <ColumnDefinition Width="78*"/>
             <ColumnDefinition Width="181*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Naziv" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top" Height="24" Width="51"/>
-        <Button Content="Nazad" Grid.Column="1" HorizontalAlignment="Left" Margin="139,6,0,0" Grid.Row="1" VerticalAlignment="Top" Width="52"/>
-        <Button Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="75,6,0,0" VerticalAlignment="Top" Width="52"  Grid.Row="1" Click="Potvrdi_click"/>
-        <TextBox Grid.Column="1" Name="tbNaziv" HorizontalAlignment="Left" Height="23" Margin="7,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184"/>
+        <Label Content="Naziv" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top" Height="30" Width="60"/>
+        <Button Content="Nazad" Grid.Column="1" HorizontalAlignment="Left" Margin="149,6,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="60" RenderTransformOrigin="0.633,0.5" Click="Nazad_click"/>
+        <Button Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="75,6,0,0" VerticalAlignment="Top" Width="60"  Grid.Row="1" Click="Potvrdi_click" Height="30"/>
+        <TextBox Text="{Binding Path=Naziv}" Grid.Column="1" Name="tbNaziv" HorizontalAlignment="Left" Height="23" Margin="7,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184"/>
 
     </Grid>
 </Window>

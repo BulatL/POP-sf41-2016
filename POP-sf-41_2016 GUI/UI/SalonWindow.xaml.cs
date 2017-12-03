@@ -1,4 +1,5 @@
 ﻿using POP_sf41_2016.model;
+using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,96 +27,44 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private Salon salon;
+        private int index;
         private Operacija operacija;
-        public SalonWindow(Salon salon, Operacija operacija)
+        public SalonWindow(Salon salon, int index, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
-            InicijalizujVrednosti(salon, operacija);
-        }
-
-        private void InicijalizujVrednosti(Salon salon, Operacija operacija)
-        {
             this.salon = salon;
+            this.index = index;
             this.operacija = operacija;
 
-            tbNaziv.Text = salon.Naziv;
-            tbAdresa.Text = salon.Adresa;
-
-            if (operacija == Operacija.DODAVANJE)
-            {
-                tbEmail.Text = "@gmail.com";
-                tbSajt.Text = "https://www. ";
-                tbTelefon.Text = "";
-            }
-            else
-            {
-                tbEmail.Text = salon.Email;
-                tbSajt.Text = salon.AdresaInternetSajta;
-                tbTelefon.Text = salon.Telefon;
-            }
-
-            tbPIB.Text = salon.PIB.ToString();
-            tbZiroRacun.Text = salon.BrojZiroRacuna.ToString();
-            tbMaticniBr.Text = salon.MaticniBroj.ToString();
+            tbNaziv.DataContext = salon;
+            tbAdresa.DataContext = salon;
+            tbEmail.DataContext = salon;
+            tbSajt.DataContext = salon;
+            tbTelefon.DataContext = salon;
+            tbPIB.DataContext = salon;
+            tbZiroRacun.DataContext = salon;
+            tbMaticniBr.DataContext = salon;
 
 
         }
+
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
+            this.DialogResult = true;
             var listaSalona = Projekat.Instance.Salon;
 
-            switch (operacija)
+            if (operacija == Operacija.DODAVANJE)
             {
-                case Operacija.DODAVANJE:
-                    try
-                    {
-                        var noviSalon = new Salon()
-                        {
-
-                            Id = listaSalona.Count + 1,
-                            Naziv = tbNaziv.Text.Trim(),
-                            Adresa = tbAdresa.Text.Trim(),
-                            Email = tbEmail.Text.Trim(),
-                            AdresaInternetSajta = tbSajt.Text.Trim(),
-                            Telefon = tbTelefon.Text.Trim(),
-                            PIB = int.Parse(tbPIB.Text.Trim()),
-                            BrojZiroRacuna = int.Parse(tbZiroRacun.Text.Trim()),
-                            MaticniBroj = int.Parse(tbMaticniBr.Text.Trim()),
-
-                        };
-                        listaSalona.Add(noviSalon);
-                    }
-                    catch (Exception ex) { }
-                    break;
-
-                case Operacija.IZMENA:
-                    try
-                    {
-                        foreach (var s in listaSalona)
-                        {
-                            if (s.Id == salon.Id)
-                            {
-                                s.Naziv = tbNaziv.Text.Trim();
-                                s.Adresa = tbAdresa.Text.Trim();
-                                s.Email = tbEmail.Text.Trim();
-                                s.AdresaInternetSajta = tbSajt.Text.Trim();
-                                s.Telefon = tbTelefon.Text.Trim();
-                                s.PIB = int.Parse(tbPIB.Text.Trim());
-                                s.BrojZiroRacuna = int.Parse(tbZiroRacun.Text.Trim());
-                                s.MaticniBroj = int.Parse(tbMaticniBr.Text.Trim());
-
-                            }
-
-                        }
-                    }
-                    catch (Exception ex) { }
-
-                    break;
+                salon.Id = listaSalona.Count + 1;
             }
-
+            else if ( operacija == Operacija.IZMENA)
+            {
+                listaSalona[index] = salon;
+            }
             Projekat.Instance.Salon = listaSalona;
+            GenericSerializer.Serializer("salon.xml", listaSalona);
             this.Close();
         }
 

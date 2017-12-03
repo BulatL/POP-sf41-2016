@@ -71,13 +71,13 @@ namespace POP_sf41_2016.model
 
         public object Clone()
         {
-            return new DodatnaUsluga()
-            {
-                Id = id,
-                Naziv = naziv,
-                Cena = cena,
-                Obrisan = obrisan
-            };
+            DodatnaUsluga kopija = new DodatnaUsluga();
+            kopija.Id = id;
+            kopija.Naziv = Naziv;
+            kopija.Cena = cena;
+            kopija.Obrisan = obrisan;
+
+            return kopija;
         }
 
         public static DodatnaUsluga NadjiDodatnuUslugu(int? idProsledjen)

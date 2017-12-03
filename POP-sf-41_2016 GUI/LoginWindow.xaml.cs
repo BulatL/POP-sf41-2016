@@ -1,7 +1,9 @@
-﻿using POP_sf41_2016.model;
+﻿using POP_sf_41_2016_GUI.model;
+using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,6 +29,18 @@ namespace POP_sf_41_2016_GUI
         {
 
             InitializeComponent();
+
+            /*StavkaProdaje sp = new StavkaProdaje()
+            {
+                Id = 1,
+                Kolicina = 4,
+                NamestajId = 3,
+                UkupnaCena = 150
+
+            };
+            var lista = new ObservableCollection<StavkaProdaje>();
+            lista.Add(sp);
+            GenericSerializer.Serializer<StavkaProdaje>("stavkaProdaje.xml", lista);*/
         }
 
         private void btnZatvori_Click(object sender, RoutedEventArgs e)

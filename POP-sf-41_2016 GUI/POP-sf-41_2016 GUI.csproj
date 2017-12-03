@@ -57,6 +57,7 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="model\StavkaProdaje.cs" />
     <Compile Include="PrikazWindow.xaml.cs">
       <DependentUpon>PrikazWindow.xaml</DependentUpon>
     </Compile>
@@ -72,8 +73,14 @@
     <Compile Include="UI\NamestajWindow.xaml.cs">
       <DependentUpon>NamestajWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UI\ProdajaWindow.xaml.cs">
+      <DependentUpon>ProdajaWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UI\SalonWindow.xaml.cs">
       <DependentUpon>SalonWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UI\StavkaWindow.xaml.cs">
+      <DependentUpon>StavkaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="UI\TipNamestajaWindow.xaml.cs">
       <DependentUpon>TipNamestajaWindow.xaml</DependentUpon>
@@ -115,7 +122,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UI\ProdajaWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UI\SalonWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UI\StavkaWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,7 +176,6 @@
   <ItemGroup>
     <Resource Include="data\korisnici.xml" />
     <Resource Include="data\namestaj.xml" />
-    <Resource Include="data\prodajaNamestaja.xml" />
     <Resource Include="data\tipNamestaja.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -195,6 +209,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="image\refresh.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="data\stavkaProdaje.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="data\prodajaNamestaja.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

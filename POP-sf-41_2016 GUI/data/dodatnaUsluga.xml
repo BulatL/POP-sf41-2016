@@ -1,15 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfDodatnaUsluga xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DodatnaUsluga>
-    <Id>1</Id>
     <Obrisan>false</Obrisan>
-    <Naziv>Prevoz</Naziv>
     <Cena>4267</Cena>
+    <Naziv>Prevoz</Naziv>
+    <Id>1</Id>
   </DodatnaUsluga>
   <DodatnaUsluga>
-    <Id>2</Id>
     <Obrisan>false</Obrisan>
-    <Naziv>Prevoz</Naziv>
-    <Cena>4267</Cena>
+    <Cena>1523</Cena>
+    <Naziv>Montiranje</Naziv>
+    <Id>2</Id>
+  </DodatnaUsluga>
+  <DodatnaUsluga>
+    <Obrisan>true</Obrisan>
+    <Cena>0</Cena>
+    <Naziv>Pakovanje</Naziv>
+    <Id>3</Id>
+  </DodatnaUsluga>
+  <DodatnaUsluga>
+    <Obrisan>false</Obrisan>
+    <Cena>4310</Cena>
+    <Naziv>Presvlacenje</Naziv>
+    <Id>4</Id>
+  </DodatnaUsluga>
+  <DodatnaUsluga>
+    <Obrisan>false</Obrisan>
+    <Cena>3462</Cena>
+    <Naziv>Transport</Naziv>
+    <Id>5</Id>
+  </DodatnaUsluga>
+  <DodatnaUsluga>
+    <Obrisan>false</Obrisan>
+    <Cena>230</Cena>
+    <Naziv>da</Naziv>
+    <Id>6</Id>
   </DodatnaUsluga>
 </ArrayOfDodatnaUsluga>
