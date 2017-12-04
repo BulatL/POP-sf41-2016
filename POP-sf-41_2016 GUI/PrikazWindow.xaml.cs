@@ -302,7 +302,7 @@ namespace POP_sf_41_2016_GUI
                         {
                             TipNamestaja kopija = (TipNamestaja)izabraniTipNamestaja.Clone();
                             int index = Projekat.Instance.TipNamestaja.IndexOf(izabraniTipNamestaja);
-                            TipNamestajaWindow tipNamestajWindow = new TipNamestajaWindow(izabraniTipNamestaja, index, TipNamestajaWindow.Operacija.IZMENA);
+                            TipNamestajaWindow tipNamestajWindow = new TipNamestajaWindow(kopija, index, TipNamestajaWindow.Operacija.IZMENA);
                             tipNamestajWindow.ShowDialog();
                         }
                     }
@@ -327,7 +327,7 @@ namespace POP_sf_41_2016_GUI
                     {
                         DodatnaUsluga kopija = (DodatnaUsluga)izabranaDodatnaUsluga.Clone();
                         int index = Projekat.Instance.DodatnaUsluga.IndexOf(izabranaDodatnaUsluga);
-                        DodatnaUslugaWindow dodatnaUslugaWindow = new DodatnaUslugaWindow(izabranaDodatnaUsluga, index, DodatnaUslugaWindow.Operacija.IZMENA);
+                        DodatnaUslugaWindow dodatnaUslugaWindow = new DodatnaUslugaWindow(kopija, index, DodatnaUslugaWindow.Operacija.IZMENA);
                         dodatnaUslugaWindow.ShowDialog();
 
                     }
@@ -339,7 +339,7 @@ namespace POP_sf_41_2016_GUI
                     {
                         Korisnik kopija = (Korisnik)izabraniKorisnik.Clone();
                         int index = Projekat.Instance.Korisnik.IndexOf(izabraniKorisnik);
-                        KorisnikWindow korisnikWindow = new KorisnikWindow(izabraniKorisnik, index , KorisnikWindow.Operacija.IZMENA);
+                        KorisnikWindow korisnikWindow = new KorisnikWindow(kopija, index , KorisnikWindow.Operacija.IZMENA);
                         korisnikWindow.ShowDialog();
                     }
                     break;
@@ -350,7 +350,7 @@ namespace POP_sf_41_2016_GUI
                     {
                         Salon kopija = (Salon)izabraniSalon.Clone();
                         int index = Projekat.Instance.Salon.IndexOf(izabraniSalon); 
-                        SalonWindow salonWindow = new SalonWindow(izabraniSalon, index, SalonWindow.Operacija.IZMENA);
+                        SalonWindow salonWindow = new SalonWindow(kopija, index, SalonWindow.Operacija.IZMENA);
                         salonWindow.ShowDialog();
                     }
                     break;
@@ -361,7 +361,7 @@ namespace POP_sf_41_2016_GUI
                          {
                              ProdajaNamestaja kopija = (ProdajaNamestaja)izabranaProdaja.Clone();
                              int index = Projekat.Instance.ProdajaNamestaja.IndexOf(izabranaProdaja);
-                             ProdajaWindow prodajaWindow = new ProdajaWindow(izabranaProdaja, index, ProdajaWindow.Operacija.IZMENA);
+                             ProdajaWindow prodajaWindow = new ProdajaWindow(kopija, index, ProdajaWindow.Operacija.IZMENA);
                              prodajaWindow.ShowDialog();
                          }
                          break;

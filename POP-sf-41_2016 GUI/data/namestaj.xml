@@ -5,7 +5,7 @@
     <Naziv>Super sofa</Naziv>
     <Sifra>sifra za sofe</Sifra>
     <JedinicnaCena>4735</JedinicnaCena>
-    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <KolicinaUMagacinu>5092</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -23,7 +23,7 @@
     <Naziv>Super sto</Naziv>
     <Sifra>s412</Sifra>
     <JedinicnaCena>421</JedinicnaCena>
-    <KolicinaUMagacinu>4</KolicinaUMagacinu>
+    <KolicinaUMagacinu>321</KolicinaUMagacinu>
     <TipNamestajaId>7</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -32,7 +32,7 @@
     <Naziv>Lampa</Naziv>
     <Sifra>s41235</Sifra>
     <JedinicnaCena>213.2</JedinicnaCena>
-    <KolicinaUMagacinu>1</KolicinaUMagacinu>
+    <KolicinaUMagacinu>312138</KolicinaUMagacinu>
     <TipNamestajaId>4</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -41,7 +41,7 @@
     <Naziv>Stolna Lampa</Naziv>
     <Sifra>s41235</Sifra>
     <JedinicnaCena>231</JedinicnaCena>
-    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <KolicinaUMagacinu>198</KolicinaUMagacinu>
     <TipNamestajaId>4</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -59,7 +59,7 @@
     <Naziv>Sto</Naziv>
     <Sifra>s412</Sifra>
     <JedinicnaCena>541</JedinicnaCena>
-    <KolicinaUMagacinu>1</KolicinaUMagacinu>
+    <KolicinaUMagacinu>1383</KolicinaUMagacinu>
     <TipNamestajaId>5</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -68,7 +68,7 @@
     <Naziv>Kauc</Naziv>
     <Sifra>k41</Sifra>
     <JedinicnaCena>512</JedinicnaCena>
-    <KolicinaUMagacinu>5</KolicinaUMagacinu>
+    <KolicinaUMagacinu>511461</KolicinaUMagacinu>
     <TipNamestajaId>0</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -77,7 +77,7 @@
     <Naziv>Socijalni kauc</Naziv>
     <Sifra>ka4123</Sifra>
     <JedinicnaCena>1</JedinicnaCena>
-    <KolicinaUMagacinu>5</KolicinaUMagacinu>
+    <KolicinaUMagacinu>291</KolicinaUMagacinu>
     <TipNamestajaId>6</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
@@ -86,7 +86,7 @@
     <Naziv>Novo</Naziv>
     <Sifra>n41</Sifra>
     <JedinicnaCena>213</JedinicnaCena>
-    <KolicinaUMagacinu>212</KolicinaUMagacinu>
+    <KolicinaUMagacinu>100</KolicinaUMagacinu>
     <TipNamestajaId>3</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>

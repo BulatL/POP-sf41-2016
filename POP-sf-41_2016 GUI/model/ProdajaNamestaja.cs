@@ -1,6 +1,7 @@
 ﻿using POP_sf_41_2016_GUI.model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,7 @@ namespace POP_sf41_2016.model
 
         
         private bool obrisan;
-        private List<int?> listaStavkiProdajeId;
+        private ObservableCollection<int?> listaStavkiProdajeId;
         private int id;
         private DateTime datumProdaje;
         private string brRacuna;
@@ -25,11 +26,11 @@ namespace POP_sf41_2016.model
         private int? dodatnaUslugaId;
         private DodatnaUsluga dodatnaUsluga;
         private const double pdv =0.02;
-        private List<StavkaProdaje> listaStavkiProdaje;
+        private ObservableCollection<StavkaProdaje> listaStavkiProdaje;
 
 
          [XmlIgnore]
-         public List<StavkaProdaje> ListaStavkiProdaje
+         public ObservableCollection<StavkaProdaje> ListaStavkiProdaje
          {
              get
              {
@@ -41,8 +42,18 @@ namespace POP_sf41_2016.model
              set
             {
                 listaStavkiProdaje = value;
-                //ListaStavkiProdajeId = listaStavkiProdaje;
-                OnPropertyChanged("ListaStavkiProdaje");
+
+                var lista = new ObservableCollection<int?>();
+                if(listaStavkiProdaje != null)
+                {
+                    foreach (var item in listaStavkiProdaje)
+                    {
+                        lista.Add(item.Id);
+                    }
+                    ListaStavkiProdajeId = lista;
+                    OnPropertyChanged("ListaStavkiProdaje");
+                }
+                
             }
          }
 
@@ -131,7 +142,7 @@ namespace POP_sf41_2016.model
         }
 
 
-        public List<int?> ListaStavkiProdajeId
+        public ObservableCollection<int?> ListaStavkiProdajeId
         {
             get { return listaStavkiProdajeId; }
             set

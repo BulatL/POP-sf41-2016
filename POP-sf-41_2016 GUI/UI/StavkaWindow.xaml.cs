@@ -25,6 +25,7 @@ namespace POP_sf_41_2016_GUI.UI
     {
 
         public Namestaj namestaj;
+        public StavkaProdaje stavkaProdaje = new StavkaProdaje();
         public int kolicina;
         private ICollectionView viewn;
         public StavkaWindow()
@@ -49,44 +50,50 @@ namespace POP_sf_41_2016_GUI.UI
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             var listaStavki = Projekat.Instance.StavkeProdaje;
-            var izabraniNamestaj = viewn.CurrentItem as Namestaj;
+            namestaj = viewn.CurrentItem as Namestaj;
+            kolicina = int.Parse(tbKolicina.Text);
 
 
-            if (int.Parse(tbKolicina.Text) > izabraniNamestaj.KolicinaUMagacinu)
+            if (kolicina > namestaj.KolicinaUMagacinu)
             {
                 MessageBox.Show("Dostupna kolicina je manja od unete", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else if (int.Parse(tbKolicina.Text) <= izabraniNamestaj.KolicinaUMagacinu)
+            else if (kolicina <= namestaj.KolicinaUMagacinu)
             {
                 this.DialogResult = true;
-                namestaj = viewn.CurrentItem as Namestaj;
-                kolicina = int.Parse(tbKolicina.Text);
+                /*int id = Projekat.Instance.StavkeProdaje.Count + 1;
+                stavkaProdaje.Id = id;
+                stavkaProdaje.Kolicina = int.Parse(tbKolicina.Text);
+                stavkaProdaje.NamestajId = namestaj.Id;*/
+
 
 
                 var listaNamestaja = Projekat.Instance.Namestaj;
                 foreach (var item in listaNamestaja)
                 {
-                    if (item.Id == izabraniNamestaj.Id)
+                    if (item.Id == namestaj.Id)
                     {
                         item.KolicinaUMagacinu -= kolicina;
                     }
                 }
-                var cenaSaAkcijom = 0.0;
-                foreach (var item in Projekat.Instance.Akcija)
-                {
-                    if(item.NamestajNaPopustuId == izabraniNamestaj.Id)
-                    {
-                        cenaSaAkcijom = (izabraniNamestaj.JedinicnaCena * item.Popust) / 100;
-                    }
-                }
+                /* var cenaSaAkcijom = 0.0;
+                 foreach (var item in Projekat.Instance.Akcija)
+                 {
+                     if(item.NamestajNaPopustuId == namestaj.Id)
+                     {
+                         cenaSaAkcijom = (namestaj.JedinicnaCena * item.Popust) / 100;
+                     }
+                 }*/
 
-                StavkaProdaje stavkaProdaje = new StavkaProdaje()
+                StavkaProdaje novaStavkaProdaje = new StavkaProdaje()
                 {
                     Id = listaStavki.Count + 1,
                     Kolicina = kolicina,
-                    NamestajId = izabraniNamestaj.Id,
-                    UkupnaCena = izabraniNamestaj.JedinicnaCena * kolicina,
+                    NamestajId = namestaj.Id,
+                    UkupnaCena = namestaj.JedinicnaCena * kolicina,
                 };
+
+                stavkaProdaje = novaStavkaProdaje;
 
                 listaStavki.Add(stavkaProdaje);
                 Projekat.Instance.StavkeProdaje = listaStavki;

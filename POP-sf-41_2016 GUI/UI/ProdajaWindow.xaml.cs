@@ -3,6 +3,7 @@ using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,10 @@ namespace POP_sf_41_2016_GUI.UI
         private ICollectionView view;
         private Namestaj namestaj;
         private int kolicina;
-        public ProdajaWindow(ProdajaNamestaja prodaja, int index, Operacija operacija = Operacija.DODAVANJE)
+        private StavkaProdaje preuzetaStavkaProdaje = new StavkaProdaje();
+        private ObservableCollection<StavkaProdaje> listaStavki = new ObservableCollection<StavkaProdaje>();
+        private ObservableCollection<int?> listaStavkiProdajeId = new ObservableCollection<int?>();
+        public ProdajaWindow(ProdajaNamestaja prodaja, int index, Operacija operacija)
         {
             InitializeComponent();
 
@@ -43,26 +47,31 @@ namespace POP_sf_41_2016_GUI.UI
             this.index = index;
             this.operacija = operacija;
 
-
+            listaStavkiProdajeId = new ObservableCollection<int?>();
+            prodaja.ListaStavkiProdajeId = listaStavkiProdajeId;
 
             tbKupac.DataContext = prodaja;
             dgNamestaj.AutoGenerateColumns = false;
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
             dgNamestaj.DataContext = prodaja;
-            view = CollectionViewSource.GetDefaultView(PopuniDataGrid(kolicina,namestaj.Id));
+            view = CollectionViewSource.GetDefaultView(prodaja.ListaStavkiProdaje);
             dgNamestaj.ItemsSource = view;
 
-            cbDodatnaUsluga.ItemsSource = Projekat.Instance.DodatnaUsluga;
+            var listaDodatnihUsluga = new List<DodatnaUsluga>();
+
+            foreach (var item in Projekat.Instance.DodatnaUsluga)
+            {
+                if (item.Obrisan == false)
+                {
+                    listaDodatnihUsluga.Add(item);
+
+                }
+            }
+
+            cbDodatnaUsluga.ItemsSource = listaDodatnihUsluga;
             cbDodatnaUsluga.DataContext = prodaja;
             cbDodatnaUsluga.DisplayMemberPath = "Naziv";
 
-            foreach(var item in prodaja.ListaStavkiProdaje)
-            {
-                prodaja.UkupanIznos = item.UkupnaCena + prodaja.DodatnaUsluga.Cena + (prodaja.UkupanIznos * 0.02);
-            }
-
-            tbUkupanIznos.DataContext = prodaja;
-            
         }
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
@@ -70,6 +79,18 @@ namespace POP_sf_41_2016_GUI.UI
             this.DialogResult = true;
             var listaProdaje = Projekat.Instance.ProdajaNamestaja;
             var listaStavkeProdaje = Projekat.Instance.StavkeProdaje;
+            var ukupnaCena = 0.0;
+            prodaja.ListaStavkiProdajeId = listaStavkiProdajeId;
+            var listaStavki = StavkaProdaje.NadjiStavkuProdaje(prodaja.ListaStavkiProdajeId);
+            foreach (var item in prodaja.ListaStavkiProdaje)
+            {
+                if(prodaja.DodatnaUsluga == null)
+                {
+                    ukupnaCena = item.UkupnaCena + (prodaja.UkupanIznos * 0.02);
+                }
+                else 
+                ukupnaCena = item.UkupnaCena + prodaja.DodatnaUsluga.Cena + (prodaja.UkupanIznos * 0.02);
+            }
 
             Random rn = new Random();
 
@@ -78,7 +99,9 @@ namespace POP_sf_41_2016_GUI.UI
                 prodaja.Id = listaProdaje.Count + 1;
                 prodaja.DatumProdaje = DateTime.Now;
                 prodaja.BrRacuna = "R" + rn.Next(1, 600).ToString();
-                
+                prodaja.UkupanIznos = ukupnaCena;
+
+
 
                 listaProdaje.Add(prodaja);
             }
@@ -86,36 +109,16 @@ namespace POP_sf_41_2016_GUI.UI
             if(operacija == Operacija.IZMENA)
             {
                 listaProdaje[index] = prodaja;
+                prodaja.UkupanIznos = ukupnaCena;
             }
 
             Projekat.Instance.ProdajaNamestaja = listaProdaje;
-            GenericSerializer.Serializer<ProdajaNamestaja>("prodajaNamestaja.xml", listaProdaje);
+            GenericSerializer.Serializer("prodajaNamestaja.xml", listaProdaje);
         }
 
         private void Odustani_click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private List<StavkaProdaje> PopuniDataGrid(int kolicina, int namestajId)
-        {
-            var listaStavki = new List<StavkaProdaje>();
-            if (namestajId == 0)
-            {
-                return listaStavki;
-            }
-            else
-                {
-                foreach (var item in listaStavki)
-                {
-                    item.Id = Projekat.Instance.StavkeProdaje.Count + 1;
-                    item.Kolicina = kolicina;
-                    item.NamestajId = namestajId;
-
-                    listaStavki.Add(item);
-                };
-                return listaStavki;
-            }
         }
 
         private void Dodaj_click(object sender, RoutedEventArgs e)
@@ -125,7 +128,11 @@ namespace POP_sf_41_2016_GUI.UI
             {
                 namestaj = stavkaWindow.namestaj;
                 kolicina = stavkaWindow.kolicina;
-                PopuniDataGrid(kolicina, namestaj.Id);
+                preuzetaStavkaProdaje = stavkaWindow.stavkaProdaje;
+                prodaja.ListaStavkiProdajeId.Add(preuzetaStavkaProdaje.Id);
+                listaStavki.Add(preuzetaStavkaProdaje);
+                prodaja.ListaStavkiProdaje.Add(preuzetaStavkaProdaje);
+                //listaStavkiProdajeId.Add(preuzetaStavkaProdaje.Id);
             }
 
         }
@@ -133,16 +140,17 @@ namespace POP_sf_41_2016_GUI.UI
         private void Obrisi_click(object sender, RoutedEventArgs e)
         {
             var izabranaStavka = view.CurrentItem as StavkaProdaje;
-            var listaStavki = Projekat.Instance.StavkeProdaje;
-            foreach (var item in listaStavki)
+            var lista = prodaja.ListaStavkiProdaje;
+            foreach (var item in lista)
             {
                 if(item.Id == izabranaStavka.Id)
                 {
-                    listaStavki.Remove(item);
+                    item.Obrisan = true;
+                    lista.Remove(item);
                     break;
                 }
             }
-            Projekat.Instance.StavkeProdaje = listaStavki;
+            Projekat.Instance.StavkeProdaje = lista;
             GenericSerializer.Serializer("stavkaProdaje.xml", listaStavki);
         }
     }

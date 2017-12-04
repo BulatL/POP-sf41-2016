@@ -12,7 +12,6 @@
             <RowDefinition Height="79*"/>
             <RowDefinition Height="226*"/>
             <RowDefinition Height="79*"/>
-            <RowDefinition Height="70*"/>
             <RowDefinition Height="79*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -23,12 +22,10 @@
         <TextBlock TextWrapping="WrapWithOverflow" Text="Namestaj" HorizontalAlignment="Left" Margin="39,27,0,0" Grid.Row="1" VerticalAlignment="Top" Width="83" Height="30" FontSize="18"/>
         <TextBlock TextWrapping="WrapWithOverflow" Text="Kupljeni Namestaj" HorizontalAlignment="Left" Margin="39,99,0,0" Grid.Row="2" VerticalAlignment="Top" Width="83" Height="74" FontSize="18"/>
         <TextBlock TextWrapping="WrapWithOverflow" Text="Dodatna Usluga" HorizontalAlignment="Left" Margin="39,19,0,0" Grid.Row="3" VerticalAlignment="Top" RenderTransformOrigin="0.816,-0.038" Width="83" Height="50" FontSize="18"/>
-        <TextBlock TextWrapping="WrapWithOverflow" Text="Ukupna cena" HorizontalAlignment="Left" Margin="39,21,0,0" Grid.Row="4" VerticalAlignment="Top" Width="83" Height="59" FontSize="18"/>
-        <TextBlock Name="tbUkupanIznos" Text="{Binding Path=UkupanIznos}" Grid.Column="1" HorizontalAlignment="Left" Margin="56,21,0,0" Grid.Row="4" TextWrapping="Wrap" VerticalAlignment="Top" Height="59" Width="306" FontSize="18" FontWeight="Bold" RenderTransformOrigin="0.49,0.559"/>
         <TextBox Name="tbKupac" Text="{Binding Path=Kupac}" Grid.Column="1" HorizontalAlignment="Left" Height="40" Margin="56,52,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="306" FontSize="16"/>
         <Button Name="btnDodaj" Content="Dodaj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="94" Grid.Column="1" Margin="56,21,0,0" Grid.Row="1" Height="37" FontSize="16" Click="Dodaj_click"/>
         <Button Name="btnObrisi" Content="Obrisi" VerticalAlignment="Top" Grid.Column="1" Margin="211,21,0,0" Grid.Row="1" Height="36" FontSize="16" HorizontalAlignment="Left" Width="94" Click="Obrisi_click"/>
-        <DataGrid Name="dgNamestaj" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="430" FontSize="16">
+        <DataGrid Name="dgNamestaj" Grid.Column="1" HorizontalAlignment="Left" Height="206" Margin="10,10,0,0" Grid.Row="2" VerticalAlignment="Top" Width="430" FontSize="16" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Namestaj.Naziv}" Header="Naziv"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Kolicina}" Header="Kolicina"  Width="*"/>

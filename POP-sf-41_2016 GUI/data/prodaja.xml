@@ -2,15 +2,12 @@
 <ArrayOfProdajaNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProdajaNamestaja>
     <DodatnaUslugaId>1</DodatnaUslugaId>
-    <UkupanIznos>11947</UkupanIznos>
-    <Kupac>igro</Kupac>
-    <BrRacuna>R327</BrRacuna>
-    <DatumProdaje>2017-12-04T02:31:26.532+01:00</DatumProdaje>
+    <UkupanIznos>7648.712816</UkupanIznos>
+    <Kupac>Igor</Kupac>
+    <BrRacuna>R35</BrRacuna>
+    <DatumProdaje>2017-12-04T02:24:18.825+01:00</DatumProdaje>
     <Id>1</Id>
-    <ListaStavkiProdajeId>
-      <int>3</int>
-      <int>4</int>
-    </ListaStavkiProdajeId>
-    <Obrisan>false</Obrisan>
+    <ListaStavkiProdajeId />
+    <Obrisan>true</Obrisan>
   </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>
