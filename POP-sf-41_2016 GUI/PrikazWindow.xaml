@@ -59,7 +59,6 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=DatumPocetka}" Header="Pocetak"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=DatumZavrsetka}" Header="Kraj"  Width="*"/>
-                <DataGridTextColumn Binding="{Binding Path=NamestajNaPopustu.Naziv}" Header="Namestaj"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Popust}" Header="Popust"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>

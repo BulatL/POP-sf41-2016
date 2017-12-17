@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace POP_sf_41_2016_GUI.UI
 {
@@ -31,6 +32,7 @@ namespace POP_sf_41_2016_GUI.UI
         private Akcija akcija;
         private int index;
         private Operacija operacija;
+        private ICollectionView viewn;
 
         public AkcijaWindow(Akcija akcija, int index , Operacija operacija = Operacija.DODAVANJE)
         {
@@ -39,25 +41,18 @@ namespace POP_sf_41_2016_GUI.UI
             this.akcija = akcija;
             this.index = index;
             this.operacija = operacija;
+            akcija.ListaNamestajaNaPopustuId = new ObservableCollection<int?>();
 
             dpPocetak.DataContext = akcija;
             dpKraj.DataContext = akcija;
             tbPopust.DataContext = akcija;
 
-            var listaNamestaja = new List<Namestaj>();
-
-            foreach (var item in Projekat.Instance.Namestaj)
-            {
-                if (item.Obrisan == false)
-                {
-                   listaNamestaja.Add(item);
-
-                }
-            }
-
-            cbNamestaj.ItemsSource = listaNamestaja;
-            cbNamestaj.DisplayMemberPath = "Naziv";
-            cbNamestaj.DataContext = akcija;
+            dataGridNamestaj.AutoGenerateColumns = false;
+            dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
+            dataGridNamestaj.DataContext = akcija;
+            viewn = CollectionViewSource.GetDefaultView(akcija.ListaNamestajaNaPopustu);
+            viewn.Filter = NamestajFilter;
+            dataGridNamestaj.ItemsSource = viewn;
 
 
             if (akcija.Id == 0)
@@ -78,6 +73,8 @@ namespace POP_sf_41_2016_GUI.UI
         {
             this.Close();
         }
+
+
         
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
@@ -111,6 +108,41 @@ namespace POP_sf_41_2016_GUI.UI
                 Projekat.Instance.Akcija = listaAkcija;
                 GenericSerializer.Serializer("akcija.xml", listaAkcija);
                 this.Close();
+            }
+        }
+
+        private void Dodaj_click(object sender, RoutedEventArgs e)
+        {
+
+            var noviProzor = new StavkaWindow(null, StavkaWindow.Parametar.AKCIJA);
+            if(noviProzor.ShowDialog() == true)
+            {
+                akcija.ListaNamestajaNaPopustu.Add(noviProzor.namestaj);
+                akcija.ListaNamestajaNaPopustuId.Add(noviProzor.namestaj.Id);
+            }
+        }
+
+        private void Obrisi_click(object sender, RoutedEventArgs e)
+        {
+            var izabraniNamestaj = viewn.CurrentItem as Namestaj;
+            var lista = akcija.ListaNamestajaNaPopustu;
+            var listaId = akcija.ListaNamestajaNaPopustuId;
+            foreach (var item in lista)
+            {
+                if (item.Id == izabraniNamestaj.Id)
+                {
+                    lista.Remove(item);
+                    break;
+                }
+            }
+
+            foreach (var item in listaId)
+            {
+                if (item == izabraniNamestaj.Id)
+                {
+                    listaId.Remove(item);
+                    break;
+                }
             }
         }
     }

@@ -1,16 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfProdajaNamestaja xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <ProdajaNamestaja>
-    <DodatnaUslugaId>1</DodatnaUslugaId>
-    <UkupanIznos>11947</UkupanIznos>
-    <Kupac>igro</Kupac>
-    <BrRacuna>R327</BrRacuna>
-    <DatumProdaje>2017-12-04T02:31:26.532+01:00</DatumProdaje>
-    <Id>1</Id>
-    <ListaStavkiProdajeId>
-      <int>3</int>
-      <int>4</int>
-    </ListaStavkiProdajeId>
-    <Obrisan>false</Obrisan>
-  </ProdajaNamestaja>
 </ArrayOfProdajaNamestaja>

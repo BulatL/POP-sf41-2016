@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -15,15 +16,26 @@ namespace POP_sf41_2016.model
         private DateTime datumPocetka;
         private DateTime datumZavrsetka;
         private double popust;
-        private int? namestajNaPopustuId;
-        private Namestaj namestajNaPopustu;
         private bool obrisan;
+        private ObservableCollection<int?> listaNamestajaNaPopustuId;
+        private ObservableCollection<Namestaj> listaNamestajaNaPopustu;
 
         public Akcija()
         {
             DatumPocetka = DateTime.Now;
             DatumZavrsetka = DateTime.Now;
         }
+
+        public ObservableCollection<int?> ListaNamestajaNaPopustuId
+        {
+            get { return listaNamestajaNaPopustuId; }
+            set
+            {
+                listaNamestajaNaPopustuId = value;
+                OnPropertyChanged("ListaNamestajaNaPopustuId");
+            }
+        }
+        
         public bool Obrisan
         {
             get { return obrisan; }
@@ -33,18 +45,6 @@ namespace POP_sf41_2016.model
                 OnPropertyChanged("Obrisan");
             }
         }
-
-
-        public int? NamestajNaPopustuId
-        {
-            get { return namestajNaPopustuId; }
-            set
-            {
-                namestajNaPopustuId = value;
-                OnPropertyChanged("NamestajNaPopustuId");
-            }
-        }
-
 
         public double Popust
         {
@@ -90,21 +90,31 @@ namespace POP_sf41_2016.model
         }
 
         [XmlIgnore]
-        public Namestaj NamestajNaPopustu
+        public ObservableCollection<Namestaj> ListaNamestajaNaPopustu
         {
             get
             {
-                if (namestajNaPopustu == null)
+                if(listaNamestajaNaPopustu == null)
                 {
-                    namestajNaPopustu = Namestaj.NadjiNamestaj(namestajNaPopustuId);
+                    listaNamestajaNaPopustu = Namestaj.NadjiListuNamestaja(listaNamestajaNaPopustuId);
                 }
-                return namestajNaPopustu;
+
+                return listaNamestajaNaPopustu;
             }
             set
             {
-                namestajNaPopustu = value;
-                NamestajNaPopustuId = namestajNaPopustu.Id;
-                OnPropertyChanged("NamestajNaPopustu");
+                listaNamestajaNaPopustu = value;
+
+                var lista = new ObservableCollection<int?>();
+                if (listaNamestajaNaPopustu != null)
+                {
+                    foreach (var item in listaNamestajaNaPopustu)
+                    {
+                        lista.Add(item.Id);
+                    }
+                    listaNamestajaNaPopustuId = lista;
+                    OnPropertyChanged("ListaNamestajaNaPopustu");
+                }
             }
         }
 
@@ -126,6 +136,8 @@ namespace POP_sf41_2016.model
             kopija.DatumZavrsetka = datumZavrsetka;
             kopija.Popust = popust;
             kopija.Obrisan = obrisan;
+            kopija.ListaNamestajaNaPopustu = listaNamestajaNaPopustu;
+            kopija.ListaNamestajaNaPopustuId = listaNamestajaNaPopustuId;
 
             return kopija;
         }

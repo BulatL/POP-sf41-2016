@@ -23,13 +23,52 @@ namespace POP_sf41_2016.model
         private string brRacuna;
         private string kupac;
         private double ukupanIznos;
-        private int? dodatnaUslugaId;
-        private DodatnaUsluga dodatnaUsluga;
         private const double pdv =0.02;
         private ObservableCollection<StavkaProdaje> listaStavkiProdaje;
+        private ObservableCollection<int?> listaDodatnihUslugaId;
+        private ObservableCollection<DodatnaUsluga> listaDodatnihUsluga;
 
 
-         [XmlIgnore]
+        public ObservableCollection<int?> ListaDodatnihUslugaId
+        {
+            get { return listaDodatnihUslugaId; }
+            set
+            {
+                listaDodatnihUslugaId = value;
+                OnPropertyChanged("ListaDodatnihUslugaId");
+            }
+        }
+
+        [XmlIgnore]
+        public ObservableCollection<DodatnaUsluga> ListaDodatnihUsluga
+        {
+            get
+            {
+                if(listaDodatnihUsluga == null)
+                {
+                    listaDodatnihUsluga = DodatnaUsluga.NadjiListuDodatnihUsluga(listaDodatnihUslugaId);
+                }
+                return listaDodatnihUsluga;
+            }
+            set
+            {
+                listaDodatnihUsluga = value;
+
+                var lista = new ObservableCollection<int?>();
+                if (listaDodatnihUsluga != null)
+                {
+                    foreach (var item in listaDodatnihUsluga)
+                    {
+                        lista.Add(item.Id);
+                    }
+                    ListaDodatnihUslugaId = lista;
+                    OnPropertyChanged("ListaDodatnihUsluga");
+                }
+            }
+        }
+
+
+        [XmlIgnore]
          public ObservableCollection<StavkaProdaje> ListaStavkiProdaje
          {
              get
@@ -56,37 +95,6 @@ namespace POP_sf41_2016.model
                 
             }
          }
-
-
-        [XmlIgnore]
-        public DodatnaUsluga DodatnaUsluga
-        {
-            get
-            {
-                if (dodatnaUsluga == null)
-                {
-                    dodatnaUsluga = DodatnaUsluga.NadjiDodatnuUslugu(dodatnaUslugaId);
-                }
-                return dodatnaUsluga;
-            }
-            set
-            {
-                dodatnaUsluga = value;
-                DodatnaUslugaId = DodatnaUsluga.Id;
-                OnPropertyChanged("DodatnaUsluga");
-            }
-        }
-
-        public int? DodatnaUslugaId
-        {
-            get { return dodatnaUslugaId; }
-            set
-            {
-                dodatnaUslugaId = value;
-                OnPropertyChanged("DodatnaUslugaId");
-            }
-        }
-
 
         public double UkupanIznos
         {
@@ -180,8 +188,6 @@ namespace POP_sf41_2016.model
             kopija.Id = id;
             kopija.BrRacuna = brRacuna;
             kopija.DatumProdaje = datumProdaje;
-            kopija.DodatnaUslugaId = DodatnaUslugaId;
-            kopija.DodatnaUsluga = dodatnaUsluga;
             kopija.Kupac = kupac;
             kopija.ListaStavkiProdaje = listaStavkiProdaje;
             kopija.ListaStavkiProdajeId = listaStavkiProdajeId;

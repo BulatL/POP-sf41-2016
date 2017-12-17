@@ -24,25 +24,62 @@ namespace POP_sf_41_2016_GUI.UI
     public partial class StavkaWindow : Window
     {
 
+        public enum Parametar
+        {
+            PRODAJA,
+            AKCIJA,
+            DODATNAUSLUGA
+        };
+
         public Namestaj namestaj;
-        public StavkaProdaje stavkaProdaje = new StavkaProdaje();
-        public int kolicina;
+        public StavkaProdaje stavka;
+        public DodatnaUsluga dodatnaUsluga;
         private ICollectionView viewn;
-        public StavkaWindow()
+        private ICollectionView viewd;
+        private Parametar parametar;
+        public StavkaWindow(StavkaProdaje stavka, Parametar parametar)
         {
             InitializeComponent();
 
-            dataGridNamestaj.AutoGenerateColumns = false;
-            dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
-            dataGridNamestaj.DataContext = this;
-            viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
-            viewn.Filter = NamestajFilter;
-            dataGridNamestaj.ItemsSource = viewn;
-            dataGridNamestaj.Visibility = Visibility.Visible;
-            tbKolicina.DataContext = kolicina;
+            this.stavka = stavka;
+            this.parametar = parametar;
+
+            if (parametar == Parametar.DODATNAUSLUGA)
+            {
+                dataGridNamestaj.Visibility = Visibility.Hidden;
+                dgDodatnaUsluga.AutoGenerateColumns = false;
+                dgDodatnaUsluga.IsSynchronizedWithCurrentItem = true;
+                viewd = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatnaUsluga);
+                viewd.Filter = DodatnaUslugaFilter;
+                dgDodatnaUsluga.ItemsSource = viewd;
+
+                tbKolicina.Visibility = Visibility.Hidden;
+                lbKolicina.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                dgDodatnaUsluga.Visibility = Visibility.Hidden;
+                dataGridNamestaj.AutoGenerateColumns = false;
+                dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
+                dataGridNamestaj.DataContext = stavka;
+                viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
+                viewn.Filter = NamestajFilter;
+                dataGridNamestaj.ItemsSource = viewn;
+                tbKolicina.DataContext = stavka;
+                if (parametar == Parametar.AKCIJA)
+                {
+                    tbKolicina.Visibility = Visibility.Hidden;
+                    lbKolicina.Visibility = Visibility.Hidden;
+                }
+            }
         }
 
-        private bool NamestajFilter(object obj) //Prima namestaj i ukoliko je obrisan true ne vraca ga nazad
+        private bool DodatnaUslugaFilter(object obj)
+        {
+            return !((DodatnaUsluga)obj).Obrisan;
+        }
+
+        private bool NamestajFilter(object obj)
         {
             return !((Namestaj)obj).Obrisan;
         }
@@ -50,58 +87,71 @@ namespace POP_sf_41_2016_GUI.UI
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             var listaStavki = Projekat.Instance.StavkeProdaje;
-            namestaj = viewn.CurrentItem as Namestaj;
-            kolicina = int.Parse(tbKolicina.Text);
+            var listaAkcija = Projekat.Instance.Akcija;
 
-
-            if (kolicina > namestaj.KolicinaUMagacinu)
-            {
-                MessageBox.Show("Dostupna kolicina je manja od unete", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else if (kolicina <= namestaj.KolicinaUMagacinu)
+            if(parametar == Parametar.DODATNAUSLUGA)
             {
                 this.DialogResult = true;
-                /*int id = Projekat.Instance.StavkeProdaje.Count + 1;
-                stavkaProdaje.Id = id;
-                stavkaProdaje.Kolicina = int.Parse(tbKolicina.Text);
-                stavkaProdaje.NamestajId = namestaj.Id;*/
-
-
-
-                var listaNamestaja = Projekat.Instance.Namestaj;
-                foreach (var item in listaNamestaja)
-                {
-                    if (item.Id == namestaj.Id)
-                    {
-                        item.KolicinaUMagacinu -= kolicina;
-                    }
-                }
-                /* var cenaSaAkcijom = 0.0;
-                 foreach (var item in Projekat.Instance.Akcija)
-                 {
-                     if(item.NamestajNaPopustuId == namestaj.Id)
-                     {
-                         cenaSaAkcijom = (namestaj.JedinicnaCena * item.Popust) / 100;
-                     }
-                 }*/
-
-                StavkaProdaje novaStavkaProdaje = new StavkaProdaje()
-                {
-                    Id = listaStavki.Count + 1,
-                    Kolicina = kolicina,
-                    NamestajId = namestaj.Id,
-                    UkupnaCena = namestaj.JedinicnaCena * kolicina,
-                };
-
-                stavkaProdaje = novaStavkaProdaje;
-
-                listaStavki.Add(stavkaProdaje);
-                Projekat.Instance.StavkeProdaje = listaStavki;
-                Projekat.Instance.Namestaj = listaNamestaja;
-                GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
-                GenericSerializer.Serializer("stavkaProdaje.xml", listaStavki);
-
+                dodatnaUsluga = viewd.CurrentItem as DodatnaUsluga;
                 this.Close();
+            }
+
+            else if (parametar == Parametar.AKCIJA)
+            {
+                this.DialogResult = true;
+                namestaj = viewn.CurrentItem as Namestaj;
+                this.Close();
+            }
+            else if (parametar == Parametar.PRODAJA)
+            {
+                namestaj = viewn.CurrentItem as Namestaj;
+
+                if (stavka.Kolicina > namestaj.KolicinaUMagacinu)
+                {
+                    MessageBox.Show("Dostupna kolicina je manja od unete", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (stavka.Kolicina <= namestaj.KolicinaUMagacinu)
+                {
+
+                    this.DialogResult = true;
+                    foreach (var akcija in listaAkcija)
+                    {
+                        if (akcija.Obrisan == false)
+                        {
+                            foreach (var item in akcija.ListaNamestajaNaPopustuId)
+                            {
+                                if (namestaj.Id == item)
+                                {
+                                    stavka.UkupnaCena = (namestaj.JedinicnaCena - namestaj.JedinicnaCena * akcija.Popust / 100) * stavka.Kolicina;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            stavka.UkupnaCena = namestaj.JedinicnaCena * stavka.Kolicina;
+                        }
+                    }   
+                    
+                    stavka.Id = listaStavki.Count + 1;
+                    listaStavki.Add(stavka);
+
+                    var listaNamestaja = Projekat.Instance.Namestaj;
+                    foreach (var item in listaNamestaja)
+                    {
+                        if (item.Id == namestaj.Id)
+                        {
+                            item.KolicinaUMagacinu -= stavka.Kolicina;
+                        }
+                    }
+
+                    Projekat.Instance.StavkeProdaje = listaStavki;
+                    Projekat.Instance.Namestaj = listaNamestaja;
+                    GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
+                    GenericSerializer.Serializer("stavkaProdaje.xml", listaStavki);
+
+                    this.Close();
+                } 
             }
         }
 

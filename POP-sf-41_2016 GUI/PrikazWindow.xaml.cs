@@ -278,14 +278,8 @@ namespace POP_sf_41_2016_GUI
                         int index = listaNamestaja.IndexOf(izabraniNamestaj);
                         NamestajWindow namestajWindow = new NamestajWindow(kopija, index, NamestajWindow.Operacija.IZMENA);
                         namestajWindow.ShowDialog();
-                        
 
-                        /*if (namestajWindow.ShowDialog() == true)
-                        {
-                            int index = listaNamestaja.IndexOf(izabraniNamestaj); // pronalazi index proslednjenog namestaja
-                            listaNamestaja[index] = izabraniNamestaj; // vraca listu namestaj na prvobitno stanje pre izmene
-                            GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
-                        }*/
+                        viewn.Refresh();
                     }
                     break;
 
@@ -304,6 +298,8 @@ namespace POP_sf_41_2016_GUI
                             int index = Projekat.Instance.TipNamestaja.IndexOf(izabraniTipNamestaja);
                             TipNamestajaWindow tipNamestajWindow = new TipNamestajaWindow(kopija, index, TipNamestajaWindow.Operacija.IZMENA);
                             tipNamestajWindow.ShowDialog();
+
+                            viewt.Refresh();
                         }
                     }
                     break;
@@ -317,6 +313,8 @@ namespace POP_sf_41_2016_GUI
                         int index = Projekat.Instance.Akcija.IndexOf(izabranaAkcija);
                         AkcijaWindow akcijaWindow = new AkcijaWindow(kopija, index , AkcijaWindow.Operacija.IZMENA);
                         akcijaWindow.ShowDialog();
+
+                        viewa.Refresh();
                     }
                     break;
                     
@@ -330,6 +328,7 @@ namespace POP_sf_41_2016_GUI
                         DodatnaUslugaWindow dodatnaUslugaWindow = new DodatnaUslugaWindow(kopija, index, DodatnaUslugaWindow.Operacija.IZMENA);
                         dodatnaUslugaWindow.ShowDialog();
 
+                        viewd.Refresh();
                     }
                     break;
                     
@@ -341,6 +340,8 @@ namespace POP_sf_41_2016_GUI
                         int index = Projekat.Instance.Korisnik.IndexOf(izabraniKorisnik);
                         KorisnikWindow korisnikWindow = new KorisnikWindow(kopija, index , KorisnikWindow.Operacija.IZMENA);
                         korisnikWindow.ShowDialog();
+
+                        viewk.Refresh();
                     }
                     break;
 
@@ -352,6 +353,8 @@ namespace POP_sf_41_2016_GUI
                         int index = Projekat.Instance.Salon.IndexOf(izabraniSalon); 
                         SalonWindow salonWindow = new SalonWindow(kopija, index, SalonWindow.Operacija.IZMENA);
                         salonWindow.ShowDialog();
+
+                        views.Refresh();
                     }
                     break;
 
@@ -363,6 +366,8 @@ namespace POP_sf_41_2016_GUI
                              int index = Projekat.Instance.ProdajaNamestaja.IndexOf(izabranaProdaja);
                              ProdajaWindow prodajaWindow = new ProdajaWindow(kopija, index, ProdajaWindow.Operacija.IZMENA);
                              prodajaWindow.ShowDialog();
+
+                             viewp.Refresh();
                          }
                          break;
             }
@@ -681,10 +686,10 @@ namespace POP_sf_41_2016_GUI
                     {
                         sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.DatumZavrsetka).ToList();
                     }
-                    else if (cbSortiraj.SelectedIndex == 3)
+                   /* else if (cbSortiraj.SelectedIndex == 3)
                     {
                         sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.NamestajNaPopustu.Naziv).ToList();
-                    }
+                    }*/
                     else if (cbSortiraj.SelectedIndex == 4)
                     {
                         sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.Popust).ToList();

@@ -50,4 +50,9 @@
     <Naziv>Polica</Naziv>
     <Obrisan>false</Obrisan>
   </TipNamestaja>
+  <TipNamestaja>
+    <Id>11</Id>
+    <Naziv>novo123</Naziv>
+    <Obrisan>false</Obrisan>
+  </TipNamestaja>
 </ArrayOfTipNamestaja>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -91,6 +92,26 @@ namespace POP_sf41_2016.model
 
             }
             return null;
+        }
+
+        public static ObservableCollection<DodatnaUsluga> NadjiListuDodatnihUsluga(ObservableCollection<int?> listaDodatnihUslugaProsledjeno)
+        {
+            var listaDodatnihUsluga = new ObservableCollection<DodatnaUsluga>();
+            foreach (var du in Projekat.Instance.DodatnaUsluga)
+            {
+                if (listaDodatnihUslugaProsledjeno != null)
+                {
+                    foreach (var item in listaDodatnihUslugaProsledjeno)
+                    {
+                        if (du.Id == item)
+                        {
+                            listaDodatnihUsluga.Add(du);
+
+                        }
+                    }
+                }
+            }
+            return listaDodatnihUsluga;
         }
     }
 }
