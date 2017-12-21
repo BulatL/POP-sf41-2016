@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -92,6 +93,20 @@ namespace POP_sf41_2016.model
             kopija.Obrisan = obrisan;
 
             return kopija;
+        }
+
+        public static ObservableCollection<TipNamestaja> Update(TipNamestaja primljeniTipNamestaja)
+        {
+            var lista = Projekat.Instance.TipNamestaja;
+            foreach (var item in lista)
+            {
+                if (item.Id == primljeniTipNamestaja.Id)
+                {
+                    item.Naziv = primljeniTipNamestaja.Naziv;
+                    break;
+                }
+            }
+            return lista;
         }
     }
 

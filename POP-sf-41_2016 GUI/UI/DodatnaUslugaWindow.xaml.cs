@@ -27,14 +27,12 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private DodatnaUsluga dodatnaUsluga;
-        private int index;
         private Operacija operacija;
-        public DodatnaUslugaWindow(DodatnaUsluga dodatnaUsluga, int index, Operacija operacija = Operacija.DODAVANJE)
+        public DodatnaUslugaWindow(DodatnaUsluga dodatnaUsluga, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
             this.dodatnaUsluga = dodatnaUsluga;
-            this.index = index;
             this.operacija = operacija;
 
             tbNaziv.DataContext = dodatnaUsluga;
@@ -59,7 +57,7 @@ namespace POP_sf_41_2016_GUI.UI
             }
             else if( operacija == Operacija.IZMENA)
             {
-                listaDodatnihUsluga[index] = dodatnaUsluga;
+                listaDodatnihUsluga = DodatnaUsluga.Update(dodatnaUsluga);
             }
             Projekat.Instance.DodatnaUsluga = listaDodatnihUsluga;
             GenericSerializer.Serializer("dodatnaUsluga.xml", listaDodatnihUsluga);

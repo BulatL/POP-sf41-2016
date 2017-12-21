@@ -19,6 +19,16 @@ namespace POP_sf_41_2016_GUI.model
         private Namestaj namestaj;
         private bool obrisan;
 
+        [XmlIgnore]
+        public string Naziv
+        {
+            get
+            {
+                return Namestaj.Naziv;
+            }
+        }
+
+
         public bool Obrisan
         {
             get { return obrisan; }

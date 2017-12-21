@@ -113,5 +113,20 @@ namespace POP_sf41_2016.model
             }
             return listaDodatnihUsluga;
         }
+
+        public static ObservableCollection<DodatnaUsluga> Update(DodatnaUsluga primljenaDodatnaUsluga)
+        {
+            var lista = Projekat.Instance.DodatnaUsluga;
+            foreach (var item in lista)
+            {
+                if (item.Id == primljenaDodatnaUsluga.Id)
+                {
+                    item.Naziv = primljenaDodatnaUsluga.Naziv;
+                    item.Cena = primljenaDodatnaUsluga.Cena;
+                    break;
+                }
+            }
+            return lista;
+        }
     }
 }

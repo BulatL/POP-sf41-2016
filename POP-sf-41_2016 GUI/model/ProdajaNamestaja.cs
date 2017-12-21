@@ -196,6 +196,26 @@ namespace POP_sf41_2016.model
 
             return kopija;
         }
-        
+
+        public static ObservableCollection<ProdajaNamestaja> Update(ProdajaNamestaja primljenaProdajaNamestaja)
+        {
+            var lista = Projekat.Instance.ProdajaNamestaja;
+            foreach (var item in lista)
+            {
+                if (item.Id == primljenaProdajaNamestaja.Id)
+                {
+                    item.BrRacuna = primljenaProdajaNamestaja.BrRacuna;
+                    item.DatumProdaje = primljenaProdajaNamestaja.DatumProdaje;
+                    item.Kupac = primljenaProdajaNamestaja.Kupac;
+                    item.ListaDodatnihUsluga = primljenaProdajaNamestaja.ListaDodatnihUsluga;
+                    item.ListaDodatnihUslugaId = primljenaProdajaNamestaja.ListaDodatnihUslugaId;
+                    item.ListaDodatnihUslugaId = primljenaProdajaNamestaja.ListaDodatnihUslugaId;
+                    item.ListaDodatnihUsluga = primljenaProdajaNamestaja.ListaDodatnihUsluga;
+                    break;
+                }
+            }
+            return lista;
+        }
+
     }
 }

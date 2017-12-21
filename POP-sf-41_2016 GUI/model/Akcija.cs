@@ -19,6 +19,18 @@ namespace POP_sf41_2016.model
         private bool obrisan;
         private ObservableCollection<int?> listaNamestajaNaPopustuId;
         private ObservableCollection<Namestaj> listaNamestajaNaPopustu;
+        private string naziv;
+
+        public string Naziv
+        {
+            get { return naziv; }
+            set
+            {
+                naziv = value;
+                OnPropertyChanged("Naziv");
+            }
+        }
+
 
         public Akcija()
         {
@@ -138,8 +150,28 @@ namespace POP_sf41_2016.model
             kopija.Obrisan = obrisan;
             kopija.ListaNamestajaNaPopustu = listaNamestajaNaPopustu;
             kopija.ListaNamestajaNaPopustuId = listaNamestajaNaPopustuId;
+            kopija.Naziv = naziv;
 
             return kopija;
+        }
+
+        public static ObservableCollection<Akcija> Update(Akcija primljenaAkcija)
+        {
+            var lista = Projekat.Instance.Akcija;
+            foreach (var item in lista)
+            {
+                if (item.Id == primljenaAkcija.Id)
+                {
+                    item.DatumPocetka = primljenaAkcija.DatumPocetka;
+                    item.DatumZavrsetka = primljenaAkcija.DatumZavrsetka;
+                    item.ListaNamestajaNaPopustu = primljenaAkcija.ListaNamestajaNaPopustu;
+                    item.ListaNamestajaNaPopustuId = primljenaAkcija.ListaNamestajaNaPopustuId;
+                    item.Popust = primljenaAkcija.Popust;
+                    item.Naziv = primljenaAkcija.Naziv;
+                    break;
+                }
+            }
+            return lista;
         }
     }
 }

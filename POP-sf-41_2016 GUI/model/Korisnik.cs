@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -121,6 +122,24 @@ namespace POP_sf41_2016.model
             kopija.Obrisan = obrisan;
 
             return kopija;
+        }
+
+        public static ObservableCollection<Korisnik> Update(Korisnik primljeniKorisnik)
+        {
+            var lista = Projekat.Instance.Korisnik;
+            foreach (var item in lista)
+            {
+                if (item.Id == primljeniKorisnik.Id)
+                {
+                    item.Ime = primljeniKorisnik.Ime;
+                    item.KorisnickoIme = primljeniKorisnik.KorisnickoIme;
+                    item.Lozinka = primljeniKorisnik.Lozinka;
+                    item.Prezime = primljeniKorisnik.Prezime;
+                    item.TipKorisnika = primljeniKorisnik.TipKorisnika;
+                    break;
+                }
+            }
+            return lista;
         }
     }
 }

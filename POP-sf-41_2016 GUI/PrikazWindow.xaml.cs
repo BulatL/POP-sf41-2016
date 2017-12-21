@@ -65,8 +65,19 @@ namespace POP_sf_41_2016_GUI
             dataGridProdaja.Visibility = Visibility.Hidden;
 
 
+            this.korisnik = korisnik;
+            this.parametar = parametar;
+
+            if (korisnik.TipKorisnika == TipKorisnika.Prodavac)
+            {
+                Dodajbtn.IsEnabled = false;
+                btnIzmeni.IsEnabled = false;
+                Obrisibtn.IsEnabled = false;
+            }
+
             switch (parametar)
             {
+                #region Namestaj punjenje dg
                 case Parametar.Namestaj:
                     Uri namestaj = new Uri(System.IO.Path.GetFullPath($"../../image/namestaj.png"));
                     Icon = BitmapFrame.Create(namestaj);
@@ -92,6 +103,9 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Tipu namestaja");
                     cbSortiraj.SelectedIndex = 0;
                     break;
+#endregion
+
+                #region Tip namestaja punjenje dg
                 case Parametar.TipNamestaja:
                     Uri tipNamestaja = new Uri(System.IO.Path.GetFullPath($"../../image/namestaj.png"));
                     Icon = BitmapFrame.Create(tipNamestaja);
@@ -111,6 +125,9 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Nazivu");
                     cbSortiraj.SelectedIndex = 0;
                     break;
+#endregion
+
+                #region Akcija punjenje dg
                 case Parametar.Akcija:
                     Uri akcija = new Uri(System.IO.Path.GetFullPath($"../../image/akcija-small.jpg"));
                     Icon = BitmapFrame.Create(akcija);
@@ -135,6 +152,9 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Popustu");
                     cbSortiraj.SelectedIndex = 0;
                     break;
+#endregion
+
+                #region Dodatna usluga punjenje dg
                 case Parametar.DodatnaUsluga:
                     Uri dodatnaUsluga = new Uri(System.IO.Path.GetFullPath($"../../image/namestaj.png"));
                     Icon = BitmapFrame.Create(dodatnaUsluga);
@@ -152,6 +172,9 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Ceni");
                     cbSortiraj.SelectedIndex = 0;
                     break;
+#endregion
+
+                #region Korisnik punjenje dg
                 case Parametar.Korisnik:
                     Uri korisnici = new Uri(System.IO.Path.GetFullPath($"../../image/user3.jpg"));
                     Icon = BitmapFrame.Create(korisnici);
@@ -177,6 +200,9 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Tipu korisnika");
                     cbSortiraj.SelectedIndex = 0;
                     break;
+#endregion
+
+                #region Salon punjenje dg
                 case Parametar.Salon:
                     /*Uri salon = new Uri(System.IO.Path.GetFullPath($"../../image/home.jpg"));
                     Icon = BitmapFrame.Create(salon);*/
@@ -200,6 +226,9 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Ziro racunu");
                     cbSortiraj.SelectedIndex = 0;
                     break;
+                #endregion
+
+                #region Prodaja punjenje dg
                 case Parametar.Prodaja:
                     dataGridProdaja.AutoGenerateColumns = false;
                     dataGridProdaja.IsSynchronizedWithCurrentItem = true;
@@ -208,23 +237,18 @@ namespace POP_sf_41_2016_GUI
                     viewp.Filter = ProdajaFilter;
                     dataGridProdaja.ItemsSource = viewp;
                     dataGridProdaja.Visibility = Visibility.Visible;
+
+                    if (korisnik.TipKorisnika == TipKorisnika.Prodavac)
+                    {
+                        Dodajbtn.IsEnabled = true;
+                        btnIzmeni.IsEnabled = true;
+                    }
                     break;
-                
-            }
-
-            this.korisnik = korisnik;
-            this.parametar = parametar;
-
-            if(korisnik.TipKorisnika == TipKorisnika.Prodavac) // Proverava da li je ulogovani korisnik i na osnovu toga enejbluje dugmad
-            {
-                Dodajbtn.IsEnabled  = false;
-                btnIzmeni.IsEnabled = false;
-                Obrisibtn.IsEnabled = false;
-                
-            }
-            
+#endregion
+            }           
         }
 
+        #region Filteri Dg
         private bool NamestajFilter(object obj) //Prima namestaj i ukoliko je obrisan true ne vraca ga nazad
         {
             return !((Namestaj)obj).Obrisan;
@@ -263,7 +287,9 @@ namespace POP_sf_41_2016_GUI
         {
             return !((ProdajaNamestaja)obj).Obrisan;
         }
+        #endregion
 
+        #region Izmeni
         private void Izmeni_Click(object sender, RoutedEventArgs e)
         {
             
@@ -275,11 +301,9 @@ namespace POP_sf_41_2016_GUI
                     if(izabraniNamestaj != null)
                     {
                         Namestaj kopija = (Namestaj)izabraniNamestaj.Clone();
-                        int index = listaNamestaja.IndexOf(izabraniNamestaj);
-                        NamestajWindow namestajWindow = new NamestajWindow(kopija, index, NamestajWindow.Operacija.IZMENA);
-                        namestajWindow.ShowDialog();
 
-                        viewn.Refresh();
+                        NamestajWindow namestajWindow = new NamestajWindow(kopija, NamestajWindow.Operacija.IZMENA);
+                        namestajWindow.ShowDialog();
                     }
                     break;
 
@@ -295,11 +319,9 @@ namespace POP_sf_41_2016_GUI
                         if (izabraniTipNamestaja != null)
                         {
                             TipNamestaja kopija = (TipNamestaja)izabraniTipNamestaja.Clone();
-                            int index = Projekat.Instance.TipNamestaja.IndexOf(izabraniTipNamestaja);
-                            TipNamestajaWindow tipNamestajWindow = new TipNamestajaWindow(kopija, index, TipNamestajaWindow.Operacija.IZMENA);
-                            tipNamestajWindow.ShowDialog();
 
-                            viewt.Refresh();
+                            TipNamestajaWindow tipNamestajWindow = new TipNamestajaWindow(kopija, TipNamestajaWindow.Operacija.IZMENA);
+                            tipNamestajWindow.ShowDialog();
                         }
                     }
                     break;
@@ -310,11 +332,9 @@ namespace POP_sf_41_2016_GUI
                     if (izabranaAkcija != null)
                     {
                         Akcija kopija = (Akcija)izabranaAkcija.Clone();
-                        int index = Projekat.Instance.Akcija.IndexOf(izabranaAkcija);
-                        AkcijaWindow akcijaWindow = new AkcijaWindow(kopija, index , AkcijaWindow.Operacija.IZMENA);
-                        akcijaWindow.ShowDialog();
 
-                        viewa.Refresh();
+                        AkcijaWindow akcijaWindow = new AkcijaWindow(kopija, AkcijaWindow.Operacija.IZMENA);
+                        akcijaWindow.ShowDialog();
                     }
                     break;
                     
@@ -324,11 +344,9 @@ namespace POP_sf_41_2016_GUI
                     if (izabranaDodatnaUsluga != null)
                     {
                         DodatnaUsluga kopija = (DodatnaUsluga)izabranaDodatnaUsluga.Clone();
-                        int index = Projekat.Instance.DodatnaUsluga.IndexOf(izabranaDodatnaUsluga);
-                        DodatnaUslugaWindow dodatnaUslugaWindow = new DodatnaUslugaWindow(kopija, index, DodatnaUslugaWindow.Operacija.IZMENA);
-                        dodatnaUslugaWindow.ShowDialog();
 
-                        viewd.Refresh();
+                        DodatnaUslugaWindow dodatnaUslugaWindow = new DodatnaUslugaWindow(kopija, DodatnaUslugaWindow.Operacija.IZMENA);
+                        dodatnaUslugaWindow.ShowDialog();
                     }
                     break;
                     
@@ -337,11 +355,9 @@ namespace POP_sf_41_2016_GUI
                     if (izabraniKorisnik != null)
                     {
                         Korisnik kopija = (Korisnik)izabraniKorisnik.Clone();
-                        int index = Projekat.Instance.Korisnik.IndexOf(izabraniKorisnik);
-                        KorisnikWindow korisnikWindow = new KorisnikWindow(kopija, index , KorisnikWindow.Operacija.IZMENA);
-                        korisnikWindow.ShowDialog();
 
-                        viewk.Refresh();
+                        KorisnikWindow korisnikWindow = new KorisnikWindow(kopija, KorisnikWindow.Operacija.IZMENA);
+                        korisnikWindow.ShowDialog();
                     }
                     break;
 
@@ -350,11 +366,9 @@ namespace POP_sf_41_2016_GUI
                     if (izabraniSalon != null)
                     {
                         Salon kopija = (Salon)izabraniSalon.Clone();
-                        int index = Projekat.Instance.Salon.IndexOf(izabraniSalon); 
-                        SalonWindow salonWindow = new SalonWindow(kopija, index, SalonWindow.Operacija.IZMENA);
-                        salonWindow.ShowDialog();
 
-                        views.Refresh();
+                        SalonWindow salonWindow = new SalonWindow(kopija, SalonWindow.Operacija.IZMENA);
+                        salonWindow.ShowDialog();
                     }
                     break;
 
@@ -363,33 +377,18 @@ namespace POP_sf_41_2016_GUI
                          if (izabranaProdaja != null)
                          {
                              ProdajaNamestaja kopija = (ProdajaNamestaja)izabranaProdaja.Clone();
-                             int index = Projekat.Instance.ProdajaNamestaja.IndexOf(izabranaProdaja);
-                             ProdajaWindow prodajaWindow = new ProdajaWindow(kopija, index, ProdajaWindow.Operacija.IZMENA);
+
+                             ProdajaWindow prodajaWindow = new ProdajaWindow(kopija, ProdajaWindow.Operacija.IZMENA);
                              prodajaWindow.ShowDialog();
 
                              viewp.Refresh();
                          }
                          break;
             }
-
-
         }
+        #endregion
 
-        private void Nazad_click(object sender, RoutedEventArgs e)
-        {
-            var mainWindow = new MainWindow(korisnik);
-            mainWindow.Show();
-
-            this.Close();
-        }
-
-        private void Logout_click(object sender, RoutedEventArgs e)
-        {
-            var login = new LoginWindow();
-            login.Show();
-            this.Close();
-        }
-
+        #region Dodaj
         private void Dodaj_click(object sender, RoutedEventArgs e)
         {
 
@@ -397,22 +396,22 @@ namespace POP_sf_41_2016_GUI
             {
                 case Parametar.Namestaj:
                     var noviNamestaj = new Namestaj();
-                    var namestajWindow = new NamestajWindow(noviNamestaj, 0 ,NamestajWindow.Operacija.DODAVANJE);
+                    var namestajWindow = new NamestajWindow(noviNamestaj ,NamestajWindow.Operacija.DODAVANJE);
                     namestajWindow.ShowDialog();
                     
                     break;
 
                 case Parametar.TipNamestaja:
                     var noviTipNamestaja = new TipNamestaja();
-                    var tipNamestajaWindow = new TipNamestajaWindow(noviTipNamestaja, 0 , TipNamestajaWindow.Operacija.DODAVANJE);
+                    var tipNamestajaWindow = new TipNamestajaWindow(noviTipNamestaja , TipNamestajaWindow.Operacija.DODAVANJE);
                     tipNamestajaWindow.ShowDialog();
-                    
+                    viewn.Refresh();
                     break;
 
 
                 case Parametar.Akcija:
                     var novaAkcija = new Akcija();
-                    var akcijaWindow = new AkcijaWindow(novaAkcija, 0 , AkcijaWindow.Operacija.DODAVANJE);
+                    var akcijaWindow = new AkcijaWindow(novaAkcija , AkcijaWindow.Operacija.DODAVANJE);
                     akcijaWindow.ShowDialog();
                     
                     break;
@@ -420,7 +419,7 @@ namespace POP_sf_41_2016_GUI
 
                 case Parametar.DodatnaUsluga:
                     var novaDodatnaUsluga = new DodatnaUsluga();
-                    var dodatnaUslugaWindow = new DodatnaUslugaWindow(novaDodatnaUsluga, 0 , DodatnaUslugaWindow.Operacija.DODAVANJE);
+                    var dodatnaUslugaWindow = new DodatnaUslugaWindow(novaDodatnaUsluga , DodatnaUslugaWindow.Operacija.DODAVANJE);
                     dodatnaUslugaWindow.ShowDialog();
                     
                     break;
@@ -428,27 +427,29 @@ namespace POP_sf_41_2016_GUI
 
                 case Parametar.Korisnik:
                     var noviKorisnik = new Korisnik();
-                    var korisnikWindow = new KorisnikWindow(noviKorisnik, 0 , KorisnikWindow.Operacija.DODAVANJE);
+                    var korisnikWindow = new KorisnikWindow(noviKorisnik , KorisnikWindow.Operacija.DODAVANJE);
                     korisnikWindow.ShowDialog();
                     
                     break;
 
                 case Parametar.Salon:
                     var noviSalon = new Salon();
-                    var salonWindow = new SalonWindow(noviSalon, 0 , SalonWindow.Operacija.DODAVANJE);
+                    var salonWindow = new SalonWindow(noviSalon , SalonWindow.Operacija.DODAVANJE);
                     salonWindow.ShowDialog();
                     
                     break;
 
                 case Parametar.Prodaja:
                     var novaProdaja = new ProdajaNamestaja();
-                    var prodajaWindow = new ProdajaWindow(novaProdaja, 0 , ProdajaWindow.Operacija.DODAVANJE);
+                    var prodajaWindow = new ProdajaWindow(novaProdaja , ProdajaWindow.Operacija.DODAVANJE);
                     prodajaWindow.ShowDialog();
 
                     break;
             }
         }
+        #endregion
 
+        #region Obrisi
         private void Obrisi_click(object sender, RoutedEventArgs e)
         {
             switch (parametar)
@@ -609,11 +610,16 @@ namespace POP_sf_41_2016_GUI
                     break;
             }
         }
+        #endregion
 
+        #region Pretrazi
         private void Pretrazi_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        #endregion
+
+        #region Sort
 
         private void cbSortiraj_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -804,5 +810,58 @@ namespace POP_sf_41_2016_GUI
                     break;
             }
         }
+        #endregion
+
+
+        #region Dg row nummber
+        void dataGridNamestaj_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+
+        void dataGridTipNamestaja_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+
+        void dataGridAkcija_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+
+        void dataGridDodatnaUsluga_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+
+        void dataGridKorisnik_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+
+        void dataGridProdaja_LoadingRow(object sender, DataGridRowEventArgs e)
+        {
+            e.Row.Header = (e.Row.GetIndex() + 1).ToString();
+        }
+        #endregion
+
+        #region Nazad click
+        private void Nazad_click(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = new MainWindow(korisnik);
+            mainWindow.Show();
+
+            this.Close();
+        }
+        #endregion
+
+        #region Logout
+        private void Logout_click(object sender, RoutedEventArgs e)
+        {
+            var login = new LoginWindow();
+            login.Show();
+            this.Close();
+        }
+#endregion
     }
 }

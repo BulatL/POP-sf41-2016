@@ -27,15 +27,13 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private TipNamestaja tipNamestaja;
-        private int index;
         private Operacija operacija;
 
-        public TipNamestajaWindow(TipNamestaja tipNamestaja, int index, Operacija operacija = Operacija.DODAVANJE)
+        public TipNamestajaWindow(TipNamestaja tipNamestaja, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
             this.tipNamestaja = tipNamestaja;
-            this.index = index;
             this.operacija = operacija;
 
             tbNaziv.DataContext = tipNamestaja;
@@ -57,7 +55,7 @@ namespace POP_sf_41_2016_GUI.UI
             }
             else if (operacija == Operacija.IZMENA)
             {
-                listaTipNamestaj[index] = tipNamestaja;
+                listaTipNamestaj = TipNamestaja.Update(tipNamestaja);
             }
 
             Projekat.Instance.TipNamestaja = listaTipNamestaj;

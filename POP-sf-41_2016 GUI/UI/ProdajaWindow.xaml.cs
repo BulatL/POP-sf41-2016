@@ -31,18 +31,16 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private ProdajaNamestaja prodaja;
-        private int index;
         private Operacija operacija;
         private ICollectionView view;
         private ICollectionView viewDU;
         private double cenaBezPdva;
         private ObservableCollection<int?> listaStavkiProdajeId = new ObservableCollection<int?>();
-        public ProdajaWindow(ProdajaNamestaja prodaja, int index, Operacija operacija)
+        public ProdajaWindow(ProdajaNamestaja prodaja, Operacija operacija)
         {
             InitializeComponent();
 
             this.prodaja = prodaja;
-            this.index = index;
             this.operacija = operacija;
 
             listaStavkiProdajeId = new ObservableCollection<int?>();
@@ -54,13 +52,13 @@ namespace POP_sf_41_2016_GUI.UI
             prodaja.UkupanIznos = prodaja.UkupanIznos + (prodaja.UkupanIznos * 0.02);
             dgNamestaj.AutoGenerateColumns = false;
             dgNamestaj.IsSynchronizedWithCurrentItem = true;
-            dgNamestaj.DataContext = prodaja.ListaStavkiProdaje;
+            dgNamestaj.DataContext = prodaja;
             view = CollectionViewSource.GetDefaultView(prodaja.ListaStavkiProdaje);
             dgNamestaj.ItemsSource = view;
 
             dgDodatnaUsluga.AutoGenerateColumns = false;
             dgDodatnaUsluga.IsSynchronizedWithCurrentItem = true;
-            dgDodatnaUsluga.DataContext = prodaja.ListaDodatnihUsluga;
+            dgDodatnaUsluga.DataContext = prodaja;
             viewDU = CollectionViewSource.GetDefaultView(prodaja.ListaDodatnihUsluga);
             dgDodatnaUsluga.ItemsSource = viewDU;
 
@@ -87,8 +85,8 @@ namespace POP_sf_41_2016_GUI.UI
 
             if(operacija == Operacija.IZMENA)
             {
-                listaProdaje[index] = prodaja;
                 prodaja.UkupanIznos = prodaja.UkupanIznos + (prodaja.UkupanIznos * 0.02);
+                listaProdaje = ProdajaNamestaja.Update(prodaja);
             }
 
             Projekat.Instance.ProdajaNamestaja = listaProdaje;
@@ -97,6 +95,20 @@ namespace POP_sf_41_2016_GUI.UI
 
         private void Odustani_click(object sender, RoutedEventArgs e)
         {
+            var listaNamestaja = Projekat.Instance.Namestaj;
+            foreach(var item in listaNamestaja)
+            {
+                foreach(var prodaja in prodaja.ListaStavkiProdaje)
+                {
+                    if(prodaja.NamestajId == item.Id)
+                    {
+                        item.KolicinaUMagacinu = item.KolicinaUMagacinu + prodaja.Kolicina;
+                    }
+                }
+            }
+
+            Projekat.Instance.Namestaj = listaNamestaja;
+            GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
             this.Close();
         }
 
@@ -179,6 +191,25 @@ namespace POP_sf_41_2016_GUI.UI
                     break;
                 }
             }
+        }
+
+        private void ProdajaWindow_Closed(object sender, EventArgs e)
+        {
+            var listaNamestaja = Projekat.Instance.Namestaj;
+            foreach (var item in listaNamestaja)
+            {
+                foreach (var prodaja in prodaja.ListaStavkiProdaje)
+                {
+                    if (prodaja.NamestajId == item.Id)
+                    {
+                        item.KolicinaUMagacinu = item.KolicinaUMagacinu + prodaja.Kolicina;
+                    }
+                }
+            }
+
+            Projekat.Instance.Namestaj = listaNamestaja;
+            GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
+            this.Close();
         }
     }
 }

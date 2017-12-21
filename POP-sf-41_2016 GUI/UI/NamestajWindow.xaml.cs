@@ -30,13 +30,11 @@ namespace POP_sf_41_2016_GUI.UI
         };
         private Namestaj namestaj;
         private Operacija operacija;
-        private int index;
-        public NamestajWindow(Namestaj namestaj, int index , Operacija operacija = Operacija.DODAVANJE)
+        public NamestajWindow(Namestaj namestaj, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
             this.namestaj = namestaj;
-            this.index = index;
             this.operacija = operacija;
 
             var listaTipaNamestaj = new List<TipNamestaja>();
@@ -51,7 +49,6 @@ namespace POP_sf_41_2016_GUI.UI
             }
 
             cbTipNamestaja.ItemsSource = listaTipaNamestaj;
-            cbTipNamestaja.DisplayMemberPath = "Naziv";
 
             tbNaziv.DataContext = namestaj;
             tbCena.DataContext = namestaj;
@@ -74,7 +71,7 @@ namespace POP_sf_41_2016_GUI.UI
             }
             else if( operacija == Operacija.IZMENA)
             {
-                ListaNamestaja[index] = namestaj;
+                ListaNamestaja = Namestaj.Update(namestaj);
             }
 
             Projekat.Instance.Namestaj = ListaNamestaja;

@@ -37,6 +37,7 @@ namespace POP_sf_41_2016_GUI.UI
         private ICollectionView viewn;
         private ICollectionView viewd;
         private Parametar parametar;
+        private double cenaAkcija = 0.0;
         public StavkaWindow(StavkaProdaje stavka, Parametar parametar)
         {
             InitializeComponent();
@@ -110,6 +111,10 @@ namespace POP_sf_41_2016_GUI.UI
                 {
                     MessageBox.Show("Dostupna kolicina je manja od unete", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+                else if (stavka.Kolicina <= 0)
+                {
+                    MessageBox.Show("Kolicina mora biti veca od 0", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
                 else if (stavka.Kolicina <= namestaj.KolicinaUMagacinu)
                 {
 
@@ -122,18 +127,23 @@ namespace POP_sf_41_2016_GUI.UI
                             {
                                 if (namestaj.Id == item)
                                 {
-                                    stavka.UkupnaCena = (namestaj.JedinicnaCena - namestaj.JedinicnaCena * akcija.Popust / 100) * stavka.Kolicina;
+                                    cenaAkcija = (namestaj.JedinicnaCena - namestaj.JedinicnaCena * akcija.Popust / 100) * stavka.Kolicina;
                                     break;
                                 }
                             }
                         }
-                        else
-                        {
-                            stavka.UkupnaCena = namestaj.JedinicnaCena * stavka.Kolicina;
-                        }
                     }   
                     
                     stavka.Id = listaStavki.Count + 1;
+                    stavka.Namestaj = namestaj;
+                    if(cenaAkcija == 0.0)
+                    {
+                        stavka.UkupnaCena = namestaj.JedinicnaCena * stavka.Kolicina;
+                    }
+                    else
+                    {
+                        stavka.UkupnaCena = cenaAkcija;
+                    }
                     listaStavki.Add(stavka);
 
                     var listaNamestaja = Projekat.Instance.Namestaj;

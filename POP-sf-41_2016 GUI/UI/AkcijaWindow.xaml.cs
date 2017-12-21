@@ -30,22 +30,21 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private Akcija akcija;
-        private int index;
         private Operacija operacija;
         private ICollectionView viewn;
 
-        public AkcijaWindow(Akcija akcija, int index , Operacija operacija = Operacija.DODAVANJE)
+        public AkcijaWindow(Akcija akcija, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
             this.akcija = akcija;
-            this.index = index;
             this.operacija = operacija;
             akcija.ListaNamestajaNaPopustuId = new ObservableCollection<int?>();
 
             dpPocetak.DataContext = akcija;
             dpKraj.DataContext = akcija;
             tbPopust.DataContext = akcija;
+            tbNaziv.DataContext = akcija;
 
             dataGridNamestaj.AutoGenerateColumns = false;
             dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
@@ -103,7 +102,7 @@ namespace POP_sf_41_2016_GUI.UI
                 } 
                 else if( operacija == Operacija.IZMENA)
                 {
-                    listaAkcija[index] = akcija;
+                    listaAkcija = Akcija.Update(akcija);
                 }
                 Projekat.Instance.Akcija = listaAkcija;
                 GenericSerializer.Serializer("akcija.xml", listaAkcija);

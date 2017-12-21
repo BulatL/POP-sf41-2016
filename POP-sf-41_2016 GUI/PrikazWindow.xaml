@@ -41,7 +41,7 @@
                 </StackPanel>
             </Button>
         </ToolBar>
-        <DataGrid Name="dataGridNamestaj" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridNamestaj" LoadingRow="dataGridNamestaj_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Sifra}" Header="Sifra"  Width="*"/>
@@ -50,25 +50,26 @@
                 <DataGridTextColumn Binding="{Binding Path=TipNamestaja}" Header="Tip namestaja"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridTipNamestaja" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridTipNamestaja" LoadingRow="dataGridTipNamestaja_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridAkcija" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridAkcija" LoadingRow="dataGridAkcija_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=DatumPocetka}" Header="Pocetak"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=DatumZavrsetka}" Header="Kraj"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Popust}" Header="Popust"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridDodatnaUsluga" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridDodatnaUsluga" LoadingRow="dataGridDodatnaUsluga_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Cena}" Header="Cena"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridKorisnik" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridKorisnik" LoadingRow="dataGridKorisnik_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Ime}" Header="Ime"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Prezime}" Header="Prezime"  Width="*"/>
@@ -89,7 +90,7 @@
                 <DataGridTextColumn Binding="{Binding Path=BrojZiroRacuna}" Header="Ziro racuna"  Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridProdaja" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridProdaja" LoadingRow="dataGridProdaja_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=BrRacuna}" Header="Broj racuna"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=DatumProdaje}" Header="Datum prodaje"  Width="*"/>

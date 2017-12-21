@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
         mc:Ignorable="d"
-        Title="ProdajaWindow" Height="900" Width="600">
+        Title="ProdajaWindow" Height="900" Width="600" Closed="ProdajaWindow_Closed">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="102*"/>

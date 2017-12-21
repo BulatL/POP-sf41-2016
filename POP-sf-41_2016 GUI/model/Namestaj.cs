@@ -158,6 +158,25 @@ namespace POP_sf41_2016.model
             return listaNamestaja;
         }
 
+        public static ObservableCollection<Namestaj> Update(Namestaj primljenNamestaj)
+        {
+            var lista = Projekat.Instance.Namestaj;
+            foreach (var item in lista)
+            {
+                if(item.Id == primljenNamestaj.Id)
+                {
+                    item.Naziv = primljenNamestaj.Naziv;
+                    item.JedinicnaCena = primljenNamestaj.JedinicnaCena;
+                    item.KolicinaUMagacinu = primljenNamestaj.KolicinaUMagacinu;
+                    item.Sifra = primljenNamestaj.Sifra;
+                    item.TipNamestaja = primljenNamestaj.TipNamestaja;
+                    item.TipNamestajaId = primljenNamestaj.TipNamestajaId;
+                    break;
+                }
+            }
+            return lista;
+        }
+
         public object Clone()
         {
             Namestaj kopija = new Namestaj();

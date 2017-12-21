@@ -27,14 +27,12 @@ namespace POP_sf_41_2016_GUI.UI
             IZMENA
         };
         private Salon salon;
-        private int index;
         private Operacija operacija;
-        public SalonWindow(Salon salon, int index, Operacija operacija = Operacija.DODAVANJE)
+        public SalonWindow(Salon salon, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
             this.salon = salon;
-            this.index = index;
             this.operacija = operacija;
 
             tbNaziv.DataContext = salon;
@@ -61,7 +59,7 @@ namespace POP_sf_41_2016_GUI.UI
             }
             else if ( operacija == Operacija.IZMENA)
             {
-                listaSalona[index] = salon;
+                listaSalona = Salon.Update(salon);
             }
             Projekat.Instance.Salon = listaSalona;
             GenericSerializer.Serializer("salon.xml", listaSalona);

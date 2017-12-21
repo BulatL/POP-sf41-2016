@@ -182,3 +182,38 @@ C:\Users\Bula\Desktop\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindo
 C:\Users\Bula\Desktop\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.baml
 C:\Users\Bula\Desktop\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.g.cs
 C:\Users\Bula\Desktop\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe.config
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.pdb
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csprojResolveAssemblyReference.cache
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\App.g.cs
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.cache
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.lref
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.baml
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.g.resources
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP_sf_41_2016_GUI.Properties.Resources.resources
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.GenerateResource.Cache
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.CoreCompileInputs.cache
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.exe
+E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.pdb
