@@ -56,7 +56,7 @@ namespace POP_sf41_2016.model
 
         public static TipNamestaja NadjiTipNamestaj(int? idProsledjen)
         {
-            foreach (var tip in Projekat.Instance.TipNamestaja)
+            foreach (var tip in Projekat.Instance.TipoviNamestaja)
             {
                 if (tip.Id == idProsledjen)
                 {
@@ -69,7 +69,7 @@ namespace POP_sf41_2016.model
 
         public static int? NadjiTipNamestajaString(string naziv)
         {
-            foreach (var tip in Projekat.Instance.TipNamestaja)
+            foreach (var tip in Projekat.Instance.TipoviNamestaja)
             {
                 if (tip.Naziv.ToUpper().Equals(naziv.ToUpper()))
                 {
@@ -97,7 +97,7 @@ namespace POP_sf41_2016.model
 
         public static ObservableCollection<TipNamestaja> Update(TipNamestaja primljeniTipNamestaja)
         {
-            var lista = Projekat.Instance.TipNamestaja;
+            var lista = Projekat.Instance.TipoviNamestaja;
             foreach (var item in lista)
             {
                 if (item.Id == primljeniTipNamestaja.Id)

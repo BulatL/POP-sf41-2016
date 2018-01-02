@@ -1,4 +1,5 @@
-﻿using POP_sf41_2016.model;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
@@ -56,10 +57,12 @@ namespace POP_sf_41_2016_GUI.UI
             if (operacija == Operacija.DODAVANJE)
             {
                 salon.Id = listaSalona.Count + 1;
+                SalonDAO.Create(salon);
             }
             else if ( operacija == Operacija.IZMENA)
             {
                 listaSalona = Salon.Update(salon);
+                SalonDAO.Update(salon);
             }
             Projekat.Instance.Salon = listaSalona;
             GenericSerializer.Serializer("salon.xml", listaSalona);

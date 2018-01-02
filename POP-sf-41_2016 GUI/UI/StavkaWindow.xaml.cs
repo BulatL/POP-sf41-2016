@@ -32,45 +32,52 @@ namespace POP_sf_41_2016_GUI.UI
         };
 
         public Namestaj namestaj;
-        public StavkaProdaje stavka;
+        public NaAkciji naAkciji = new NaAkciji();
+        public ProdajaNamestaj stavka;
         public DodatnaUsluga dodatnaUsluga;
+        public int akcijaId;
         private ICollectionView viewn;
         private ICollectionView viewd;
         private Parametar parametar;
         private double cenaAkcija = 0.0;
-        public StavkaWindow(StavkaProdaje stavka, Parametar parametar)
+        public StavkaWindow(ProdajaNamestaj stavka, int akcijaId, Parametar parametar)
         {
             InitializeComponent();
 
             this.stavka = stavka;
             this.parametar = parametar;
+            this.akcijaId = akcijaId;
 
             if (parametar == Parametar.DODATNAUSLUGA)
             {
-                dataGridNamestaj.Visibility = Visibility.Hidden;
+                dataGridNamestaj.Visibility = Visibility.Collapsed;
                 dgDodatnaUsluga.AutoGenerateColumns = false;
                 dgDodatnaUsluga.IsSynchronizedWithCurrentItem = true;
-                viewd = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatnaUsluga);
+                viewd = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatneUsluge);
                 viewd.Filter = DodatnaUslugaFilter;
                 dgDodatnaUsluga.ItemsSource = viewd;
 
-                tbKolicina.Visibility = Visibility.Hidden;
-                lbKolicina.Visibility = Visibility.Hidden;
+                tbKolicina.Visibility = Visibility.Collapsed;
+                lbKolicina.Visibility = Visibility.Collapsed;
+                tbPopust.Visibility = Visibility.Collapsed;
             }
             else
             {
-                dgDodatnaUsluga.Visibility = Visibility.Hidden;
+                dgDodatnaUsluga.Visibility = Visibility.Collapsed;
                 dataGridNamestaj.AutoGenerateColumns = false;
                 dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
                 dataGridNamestaj.DataContext = stavka;
-                viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
+                viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaji);
                 viewn.Filter = NamestajFilter;
                 dataGridNamestaj.ItemsSource = viewn;
                 tbKolicina.DataContext = stavka;
+                tbPopust.Visibility = Visibility.Collapsed;
                 if (parametar == Parametar.AKCIJA)
                 {
-                    tbKolicina.Visibility = Visibility.Hidden;
-                    lbKolicina.Visibility = Visibility.Hidden;
+                    tbKolicina.Visibility = Visibility.Collapsed;
+                    tbPopust.DataContext = naAkciji;
+                    tbPopust.Visibility = Visibility.Visible;
+                    lbKolicina.Content = "Popust";
                 }
             }
         }
@@ -87,10 +94,10 @@ namespace POP_sf_41_2016_GUI.UI
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
-            var listaStavki = Projekat.Instance.StavkeProdaje;
-            var listaAkcija = Projekat.Instance.Akcija;
+            var listaStavki = Projekat.Instance.ProdajaNamestaj;
+            var listaAkcija = Projekat.Instance.Akcije;
 
-            if(parametar == Parametar.DODATNAUSLUGA)
+            if (parametar == Parametar.DODATNAUSLUGA)
             {
                 this.DialogResult = true;
                 dodatnaUsluga = viewd.CurrentItem as DodatnaUsluga;
@@ -99,9 +106,24 @@ namespace POP_sf_41_2016_GUI.UI
 
             else if (parametar == Parametar.AKCIJA)
             {
-                this.DialogResult = true;
-                namestaj = viewn.CurrentItem as Namestaj;
-                this.Close();
+                if (naAkciji.Popust > 99)
+                {
+                    MessageBox.Show("Popust ne moze biti veci od 99%", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (naAkciji.Popust <= 0)
+                {
+                    MessageBox.Show("Popust ne moze biti manji od 0%", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (naAkciji.Popust > 0 || naAkciji.Popust < 99)
+                {
+                    this.DialogResult = true;
+                    namestaj = viewn.CurrentItem as Namestaj;
+                    naAkciji.NamestajId = namestaj.Id;
+                    naAkciji.AkcijaId = akcijaId;
+                    naAkciji.Id = Projekat.Instance.NaAkciji.Count + 1;
+                    Projekat.Instance.NaAkciji.Add(naAkciji);
+                    this.Close();
+                }   
             }
             else if (parametar == Parametar.PRODAJA)
             {
@@ -119,21 +141,18 @@ namespace POP_sf_41_2016_GUI.UI
                 {
 
                     this.DialogResult = true;
-                    foreach (var akcija in listaAkcija)
+                    foreach (var naAkciji in Projekat.Instance.NaAkciji)
                     {
-                        if (akcija.Obrisan == false)
+                        if(naAkciji.Obrisan == false)
                         {
-                            foreach (var item in akcija.ListaNamestajaNaPopustuId)
+                            if(naAkciji.NamestajId == namestaj.Id)
                             {
-                                if (namestaj.Id == item)
-                                {
-                                    cenaAkcija = (namestaj.JedinicnaCena - namestaj.JedinicnaCena * akcija.Popust / 100) * stavka.Kolicina;
-                                    break;
-                                }
+                                cenaAkcija = (namestaj.JedinicnaCena - (namestaj.JedinicnaCena * naAkciji.Popust) / 100) * stavka.Kolicina;
+                                break;
                             }
                         }
-                    }   
-                    
+                    }
+                                                        
                     stavka.Id = listaStavki.Count + 1;
                     stavka.Namestaj = namestaj;
                     if(cenaAkcija == 0.0)
@@ -146,7 +165,7 @@ namespace POP_sf_41_2016_GUI.UI
                     }
                     listaStavki.Add(stavka);
 
-                    var listaNamestaja = Projekat.Instance.Namestaj;
+                    var listaNamestaja = Projekat.Instance.Namestaji;
                     foreach (var item in listaNamestaja)
                     {
                         if (item.Id == namestaj.Id)
@@ -155,8 +174,7 @@ namespace POP_sf_41_2016_GUI.UI
                         }
                     }
 
-                    Projekat.Instance.StavkeProdaje = listaStavki;
-                    Projekat.Instance.Namestaj = listaNamestaja;
+                    Projekat.Instance.ProdajaNamestaj = listaStavki;
                     GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
                     GenericSerializer.Serializer("stavkaProdaje.xml", listaStavki);
 

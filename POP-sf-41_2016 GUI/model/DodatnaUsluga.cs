@@ -83,7 +83,7 @@ namespace POP_sf41_2016.model
 
         public static DodatnaUsluga NadjiDodatnuUslugu(int? idProsledjen)
         {
-            foreach (var tip in Projekat.Instance.DodatnaUsluga)
+            foreach (var tip in Projekat.Instance.DodatneUsluge)
             {
                 if (tip.Id == idProsledjen)
                 {
@@ -97,7 +97,7 @@ namespace POP_sf41_2016.model
         public static ObservableCollection<DodatnaUsluga> NadjiListuDodatnihUsluga(ObservableCollection<int?> listaDodatnihUslugaProsledjeno)
         {
             var listaDodatnihUsluga = new ObservableCollection<DodatnaUsluga>();
-            foreach (var du in Projekat.Instance.DodatnaUsluga)
+            foreach (var du in Projekat.Instance.DodatneUsluge)
             {
                 if (listaDodatnihUslugaProsledjeno != null)
                 {
@@ -116,7 +116,7 @@ namespace POP_sf41_2016.model
 
         public static ObservableCollection<DodatnaUsluga> Update(DodatnaUsluga primljenaDodatnaUsluga)
         {
-            var lista = Projekat.Instance.DodatnaUsluga;
+            var lista = Projekat.Instance.DodatneUsluge;
             foreach (var item in lista)
             {
                 if (item.Id == primljenaDodatnaUsluga.Id)

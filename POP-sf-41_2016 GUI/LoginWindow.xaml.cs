@@ -30,17 +30,6 @@ namespace POP_sf_41_2016_GUI
 
             InitializeComponent();
 
-            /*StavkaProdaje sp = new StavkaProdaje()
-            {
-                Id = 1,
-                Kolicina = 4,
-                NamestajId = 3,
-                UkupnaCena = 150
-
-            };
-            var lista = new ObservableCollection<StavkaProdaje>();
-            lista.Add(sp);
-            GenericSerializer.Serializer<StavkaProdaje>("stavkaProdaje.xml", lista);*/
         }
 
         private void btnZatvori_Click(object sender, RoutedEventArgs e)
@@ -50,7 +39,7 @@ namespace POP_sf_41_2016_GUI
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
-            var listaKorisnika = Projekat.Instance.Korisnik;
+            var listaKorisnika = Projekat.Instance.Korisnici;
            
             string korisnickoIme = tbKorisnickoIme.Text.Trim();
             string sifra = pbSifra.Password.ToString().Trim();

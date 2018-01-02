@@ -5,16 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_sf_41_2016_GUI"
         mc:Ignorable="d"
-        Title="Prikaz" Height="auto" Width="auto">
-    <Grid>
+        Title="Prikaz" Height="545" Width="868">
+    <Grid Background="#FF303042" Margin="0,0,0,-4">
         <Grid.RowDefinitions>
-            <RowDefinition Height="428*"/>
-            <RowDefinition Height="77*"/>
+            <RowDefinition Height="427"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
-        <ToolBar HorizontalContentAlignment="Stretch" Height="66" Margin="10,10,0,0" VerticalAlignment="Top" Width="auto" >
-            <Button Name="btNazad"  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Nazad_click">
+        <ToolBar HorizontalContentAlignment="Stretch" Height="66" Margin="10,10,0,0" VerticalAlignment="Top" Width="auto" Background="#FF20A8D1" >
+            <Button Name="btNazad"  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Nazad_click" Background="#FF20A8D1">
                 <StackPanel>
-                    <Image Source="image/nazad.jpg" Stretch="Fill" Height="38" Width="38"></Image>
+                    <Image Source="image/nazad.jpg" Stretch="Fill" Height="35" Width="39"></Image>
                 </StackPanel>
             </Button>
             <Button Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Dodajbtn" Click="Dodaj_click">
@@ -24,7 +24,7 @@
             </Button>
             <Button Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Obrisibtn" Click="Obrisi_click">
                 <StackPanel>
-                    <Image Source="image/delete.png" Stretch="Fill" Height="38" Width="42"/>
+                    <Image Source="image/delete.png" Stretch="Fill" Height="35" Width="39"/>
                 </StackPanel>
             </Button>
             <Button  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnIzmeni" Click="Izmeni_Click">
@@ -37,39 +37,38 @@
             </Button>
             <Button Height="auto" HorizontalAlignment="Right" Width="auto" Margin="5" Click="Logout_click">
                 <StackPanel>
-                    <Image Source="image/logout.jpg" Stretch="Fill" Height="45" Width="45"/>
+                    <Image Source="image/logout.jpg" Stretch="Fill" Height="35" Width="39"/>
                 </StackPanel>
             </Button>
         </ToolBar>
-        <DataGrid Name="dataGridNamestaj" LoadingRow="dataGridNamestaj_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridNamestaj" LoadingRow="dataGridNamestaj_LoadingRow" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Sifra}" Header="Sifra"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=JedinicnaCena}" Header="Cena"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=KolicinaUMagacinu}" Header="Kolicina"  Width="*"/>
-                <DataGridTextColumn Binding="{Binding Path=TipNamestaja}" Header="Tip namestaja"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=TipNamestaja.Naziv}" Header="Tip namestaja"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridTipNamestaja" LoadingRow="dataGridTipNamestaja_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridTipNamestaja" LoadingRow="dataGridTipNamestaja_LoadingRow" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridAkcija" LoadingRow="dataGridAkcija_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid RowDetailsVisibilityMode="VisibleWhenSelected" Name="dataGridAkcija" LoadingRow="dataGridAkcija_LoadingRow" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=DatumPocetka}" Header="Pocetak"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=DatumZavrsetka}" Header="Kraj"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
-                <DataGridTextColumn Binding="{Binding Path=Popust}" Header="Popust"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridDodatnaUsluga" LoadingRow="dataGridDodatnaUsluga_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridDodatnaUsluga" LoadingRow="dataGridDodatnaUsluga_LoadingRow" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Cena}" Header="Cena"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridKorisnik" LoadingRow="dataGridKorisnik_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridKorisnik" LoadingRow="dataGridKorisnik_LoadingRow" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Ime}" Header="Ime"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=Prezime}" Header="Prezime"  Width="*"/>
@@ -78,7 +77,7 @@
                 <DataGridTextColumn Binding="{Binding Path=TipKorisnika}" Header="Tip korisnika"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridSalon" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridSalon" CanUserResizeColumns="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="auto" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="auto"/>
                 <DataGridTextColumn Binding="{Binding Path=Adresa}" Header="Adresa"  Width="auto"/>
@@ -90,7 +89,7 @@
                 <DataGridTextColumn Binding="{Binding Path=BrojZiroRacuna}" Header="Ziro racuna"  Width="auto"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Name="dataGridProdaja" LoadingRow="dataGridProdaja_LoadingRow" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserDeleteRows="False" CanUserAddRows="False" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
+        <DataGrid Name="dataGridProdaja" LoadingRow="dataGridProdaja_LoadingRow" CanUserSortColumns="True" HorizontalAlignment="Center" Height="242" Margin="10,30,10,30" VerticalAlignment="Center" Width="697" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=BrRacuna}" Header="Broj racuna"  Width="*"/>
                 <DataGridTextColumn Binding="{Binding Path=DatumProdaje}" Header="Datum prodaje"  Width="*"/>
@@ -98,19 +97,26 @@
                 <DataGridTextColumn Binding="{Binding Path=UkupanIznos}" Header="Cena"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="1" Background="#FF20A8D1" Margin="0,0,0,51">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="84*"/>
-                <ColumnDefinition Width="129*"/>
-                <ColumnDefinition Width="212*"/>
-                <ColumnDefinition Width="103*"/>
-                <ColumnDefinition Width="232*"/>
+                <ColumnDefinition Width="94*"/>
+                <ColumnDefinition Width="146*"/>
+                <ColumnDefinition Width="165*"/>
+                <ColumnDefinition Width="75*"/>
+                <ColumnDefinition Width="117*"/>
+                <ColumnDefinition Width="263*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Content="Pretrazi po" HorizontalAlignment="Right" Margin="0,24,1,0" Width="73" Height="43" VerticalAlignment="Top" RenderTransformOrigin="0.475,0.707"/>
-            <ComboBox Grid.Column="1"  Name="cbPretrazi" HorizontalAlignment="Left" Margin="13,24,0,0" Width="100" Height="27" VerticalAlignment="Top"/>
-            <TextBox Grid.Column="2" BorderBrush="Black"  Height="27" Margin="0,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="168"/>
-            <Label Grid.Column="3" Content="sortiraj po" HorizontalAlignment="Center" Margin="3,24,27,0" Width="73" Height="43" VerticalAlignment="Top" RenderTransformOrigin="0.475,0.707"/>
-            <ComboBox Grid.Column="4"  Name="cbSortiraj" HorizontalAlignment="Left" Margin="18,24,0,0" Width="100" Height="27" VerticalAlignment="Top" SelectionChanged="cbSortiraj_SelectedIndexChanged"/>
+            <Label Grid.Column="0" Name="lbPretrazi" Content="Pretrazi po" HorizontalAlignment="Right" Margin="0,33,6,0" Width="73" Height="43" VerticalAlignment="Top" RenderTransformOrigin="0.475,0.707"/>
+            <ComboBox  Name="cbPretrazi" HorizontalAlignment="Left" Margin="93,35,0,0" Width="140" Height="27" VerticalAlignment="Top" Grid.ColumnSpan="2" SelectionChanged="cbSelectionChanged"/>
+            <TextBox Grid.Column="2" Name="tbPretrazi" BorderBrush="Black"  Height="29" Margin="0,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" FontSize="16"/>
+            <DatePicker Grid.Column="2" Name="dpPretrazi" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="35" Width="147" FontSize="16"/>
+            <Button Grid.Column="3" Name="btnPretrazi" Margin="10,23,10,27" Background="#FF20A8D1" Click="Pretrazi_Click">
+                <StackPanel>
+                    <Image Source="image/search.jpg" Stretch="Fill" Height="35" Width="39"/>
+                </StackPanel>
+            </Button>
+            <Label Grid.Column="4" Name="lblSortiraj" Content="sortiraj po" HorizontalAlignment="Center" Margin="23,33,21,0" Width="73" Height="43" VerticalAlignment="Top" RenderTransformOrigin="0.475,0.707"/>
+            <ComboBox Grid.Column="5"  Name="cbSortiraj" HorizontalAlignment="Left" Margin="19,33,0,0" Width="100" Height="27" VerticalAlignment="Top" SelectionChanged="cbSortiraj_SelectedIndexChanged"/>
         </Grid>
     </Grid>
 </Window>

@@ -10,23 +10,31 @@ using System.Xml.Serialization;
 
 namespace POP_sf41_2016.model
 {
-    public class ProdajaNamestaja : INotifyPropertyChanged, ICloneable
+    public class Prodaja : INotifyPropertyChanged, ICloneable
     {
 
         //public const double PDV = 0.02;
 
         
         private bool obrisan;
-        private ObservableCollection<int?> listaStavkiProdajeId;
+        private ObservableCollection<int?> listaProdajeNamestajaId;
         private int id;
         private DateTime datumProdaje;
         private string brRacuna;
         private string kupac;
         private double ukupanIznos;
-        private const double pdv =0.02;
-        private ObservableCollection<StavkaProdaje> listaStavkiProdaje;
+        public const double pdv =0.2;
+        private ObservableCollection<ProdajaNamestaj> listaProdajeNamestaja;
         private ObservableCollection<int?> listaDodatnihUslugaId;
-        private ObservableCollection<DodatnaUsluga> listaDodatnihUsluga;
+        private ObservableCollection<ProdajaDodatnaUsluga> listaDodatnihUsluga;
+        private string prodavac;
+
+        public string Prodavac
+        {
+            get { return prodavac; }
+            set { prodavac = value; }
+        }
+
 
 
         public ObservableCollection<int?> ListaDodatnihUslugaId
@@ -39,14 +47,13 @@ namespace POP_sf41_2016.model
             }
         }
 
-        [XmlIgnore]
-        public ObservableCollection<DodatnaUsluga> ListaDodatnihUsluga
+        public ObservableCollection<ProdajaDodatnaUsluga> ListaDodatnihUsluga
         {
             get
             {
                 if(listaDodatnihUsluga == null)
                 {
-                    listaDodatnihUsluga = DodatnaUsluga.NadjiListuDodatnihUsluga(listaDodatnihUslugaId);
+                    listaDodatnihUsluga = ProdajaDodatnaUsluga.NadjiDodatnuUsluguProdaje(listaDodatnihUslugaId);
                 }
                 return listaDodatnihUsluga;
             }
@@ -67,29 +74,27 @@ namespace POP_sf41_2016.model
             }
         }
 
-
-        [XmlIgnore]
-         public ObservableCollection<StavkaProdaje> ListaStavkiProdaje
+         public ObservableCollection<ProdajaNamestaj> ListaStavkiProdaje
          {
              get
              {
-                 if(listaStavkiProdaje == null)
+                 if(listaProdajeNamestaja == null)
                  {
-                     listaStavkiProdaje = StavkaProdaje.NadjiStavkuProdaje(listaStavkiProdajeId);
+                     listaProdajeNamestaja = ProdajaNamestaj.NadjiStavkuProdaje(listaProdajeNamestajaId);
                  }
-                 return listaStavkiProdaje; }
+                 return listaProdajeNamestaja; }
              set
             {
-                listaStavkiProdaje = value;
+                listaProdajeNamestaja = value;
 
                 var lista = new ObservableCollection<int?>();
-                if(listaStavkiProdaje != null)
+                if(listaProdajeNamestaja != null)
                 {
-                    foreach (var item in listaStavkiProdaje)
+                    foreach (var item in listaProdajeNamestaja)
                     {
                         lista.Add(item.Id);
                     }
-                    ListaStavkiProdajeId = lista;
+                    ListaProdajeNamestajaId = lista;
                     OnPropertyChanged("ListaStavkiProdaje");
                 }
                 
@@ -150,11 +155,11 @@ namespace POP_sf41_2016.model
         }
 
 
-        public ObservableCollection<int?> ListaStavkiProdajeId
+        public ObservableCollection<int?> ListaProdajeNamestajaId
         {
-            get { return listaStavkiProdajeId; }
+            get { return listaProdajeNamestajaId; }
             set
-            { listaStavkiProdajeId = value;
+            { listaProdajeNamestajaId = value;
                 OnPropertyChanged("ListaStavkiProdajeId");
             }
         }
@@ -184,33 +189,35 @@ namespace POP_sf41_2016.model
         public object Clone()
         {
 
-            ProdajaNamestaja kopija = new ProdajaNamestaja();
+            Prodaja kopija = new Prodaja();
             kopija.Id = id;
             kopija.BrRacuna = brRacuna;
             kopija.DatumProdaje = datumProdaje;
             kopija.Kupac = kupac;
-            kopija.ListaStavkiProdaje = listaStavkiProdaje;
-            kopija.ListaStavkiProdajeId = listaStavkiProdajeId;
+            kopija.Prodavac = prodavac;
+            kopija.ListaStavkiProdaje = listaProdajeNamestaja;
+            kopija.ListaProdajeNamestajaId = listaProdajeNamestajaId;
             kopija.UkupanIznos = ukupanIznos;
             kopija.Obrisan = obrisan;
 
             return kopija;
         }
 
-        public static ObservableCollection<ProdajaNamestaja> Update(ProdajaNamestaja primljenaProdajaNamestaja)
+        public static ObservableCollection<Prodaja> Update(Prodaja primljenaProdaja)
         {
-            var lista = Projekat.Instance.ProdajaNamestaja;
+            var lista = Projekat.Instance.Prodaja;
             foreach (var item in lista)
             {
-                if (item.Id == primljenaProdajaNamestaja.Id)
+                if (item.Id == primljenaProdaja.Id)
                 {
-                    item.BrRacuna = primljenaProdajaNamestaja.BrRacuna;
-                    item.DatumProdaje = primljenaProdajaNamestaja.DatumProdaje;
-                    item.Kupac = primljenaProdajaNamestaja.Kupac;
-                    item.ListaDodatnihUsluga = primljenaProdajaNamestaja.ListaDodatnihUsluga;
-                    item.ListaDodatnihUslugaId = primljenaProdajaNamestaja.ListaDodatnihUslugaId;
-                    item.ListaDodatnihUslugaId = primljenaProdajaNamestaja.ListaDodatnihUslugaId;
-                    item.ListaDodatnihUsluga = primljenaProdajaNamestaja.ListaDodatnihUsluga;
+                    item.BrRacuna = primljenaProdaja.BrRacuna;
+                    item.DatumProdaje = primljenaProdaja.DatumProdaje;
+                    item.Kupac = primljenaProdaja.Kupac;
+                    item.Prodavac = primljenaProdaja.Prodavac;
+                    item.ListaDodatnihUsluga = primljenaProdaja.ListaDodatnihUsluga;
+                    item.ListaDodatnihUslugaId = primljenaProdaja.ListaDodatnihUslugaId;
+                    item.ListaProdajeNamestajaId = primljenaProdaja.ListaProdajeNamestajaId;
+                    item.ListaStavkiProdaje = primljenaProdaja.ListaStavkiProdaje;
                     break;
                 }
             }

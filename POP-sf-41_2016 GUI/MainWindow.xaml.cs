@@ -27,17 +27,21 @@ namespace POP_sf_41_2016_GUI
         public MainWindow(Korisnik korisnik)
         {
             InitializeComponent();
-/*
-            Uri home = new Uri(System.IO.Path.GetFullPath($"../../image/home.jpg"));
-            this.Icon = BitmapFrame.Create(home);*/
+
+            Uri home = new Uri(System.IO.Path.GetFullPath($"../../image/home.png"));
+            this.Icon = BitmapFrame.Create(home);
 
             this.korisnik = korisnik;
 
-            if(korisnik.TipKorisnika == TipKorisnika.Prodavac)
+            if(korisnik.TipKorisnika == Enums.TipKorisnika.Prodavac)
             {
-                btnKorisnici.Visibility = Visibility.Hidden;
-            }
-            
+                btnNamestaj.Visibility = Visibility.Collapsed;
+                btnSalon.Visibility = Visibility.Collapsed;
+                btnTipNamestaja.Visibility = Visibility.Collapsed;
+                btnDodatnaUsluga.Visibility = Visibility.Collapsed;
+                btnAkcija.Visibility = Visibility.Collapsed;
+                btnKorisnici.Visibility = Visibility.Collapsed;
+            }            
         }
 
 

@@ -1,4 +1,5 @@
-﻿using POP_sf41_2016.model;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
@@ -44,22 +45,16 @@ namespace POP_sf_41_2016_GUI.UI
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var listaTipNamestaj = Projekat.Instance.TipNamestaja;
-
             if (operacija == Operacija.DODAVANJE)
             {
-                tipNamestaja.Id = listaTipNamestaj.Count + 1;
-
-
-                listaTipNamestaj.Add(tipNamestaja);
+                TipNamestajaDAO.Create(tipNamestaja);
+                TipNamestaja.Update(tipNamestaja);
             }
             else if (operacija == Operacija.IZMENA)
             {
-                listaTipNamestaj = TipNamestaja.Update(tipNamestaja);
+                TipNamestajaDAO.Update(tipNamestaja);
             }
 
-            Projekat.Instance.TipNamestaja = listaTipNamestaj;
-            GenericSerializer.Serializer("tipNamestaja.xml", listaTipNamestaj);
             this.Close();
         }
 

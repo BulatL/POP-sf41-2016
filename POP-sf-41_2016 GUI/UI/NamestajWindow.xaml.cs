@@ -1,4 +1,5 @@
-﻿using POP_sf41_2016.model;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections;
@@ -37,46 +38,35 @@ namespace POP_sf_41_2016_GUI.UI
             this.namestaj = namestaj;
             this.operacija = operacija;
 
-            var listaTipaNamestaj = new List<TipNamestaja>();
-
-            foreach (var item in Projekat.Instance.TipNamestaja)
-            {
-                if (item.Obrisan == false)
-                {
-                    listaTipaNamestaj.Add(item);
-
-                }
-            }
-
-            cbTipNamestaja.ItemsSource = listaTipaNamestaj;
-
             tbNaziv.DataContext = namestaj;
             tbCena.DataContext = namestaj;
             tbKolicina.DataContext = namestaj;
             tbSifra.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
+            cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
 
         }
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            var ListaNamestaja = Projekat.Instance.Namestaj;
-
-            if (operacija == Operacija.DODAVANJE)
+            if (cbTipNamestaja.SelectedItem == null)
             {
-                namestaj.Id = ListaNamestaja.Count + 1;
-
-                ListaNamestaja.Add(namestaj);
+                MessageBox.Show("Morate izabrati tip namestaja", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            else if( operacija == Operacija.IZMENA)
+            else
             {
-                ListaNamestaja = Namestaj.Update(namestaj);
-            }
+                this.DialogResult = true;
 
-            Projekat.Instance.Namestaj = ListaNamestaja;
-            GenericSerializer.Serializer("namestaj.xml", ListaNamestaja);
-            this.Close();
+                if (operacija == Operacija.DODAVANJE)
+                {
+                    NamestajDAO.Create(namestaj);
+                }
+                else if (operacija == Operacija.IZMENA)
+                {
+                    NamestajDAO.Update(namestaj);
+                }
+                this.Close();
+            }
         }
 
         private void Odustani_click(object sender, RoutedEventArgs e)

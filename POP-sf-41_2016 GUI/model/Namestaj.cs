@@ -21,6 +21,16 @@ namespace POP_sf41_2016.model
         private bool obrisan;
         private TipNamestaja tipNamestaja;
 
+       /* public Namestaj()
+        {
+            naziv = "";
+            sifra = "";
+            jedinicnaCena = 0.0;
+            kolicinaUMagacinu = 0;
+            tipNamestajaId = 0;
+            tipNamestaja = new TipNamestaja();
+        }*/
+
         public int Id
         {
             get { return id; }
@@ -127,7 +137,7 @@ namespace POP_sf41_2016.model
 
         public static Namestaj NadjiNamestaj(int? idProsledjen)
         {
-            foreach (var tip in Projekat.Instance.Namestaj)
+            foreach (var tip in Projekat.Instance.Namestaji)
             {
                 if (tip.Id == idProsledjen)
                 {
@@ -141,7 +151,7 @@ namespace POP_sf41_2016.model
         public static ObservableCollection<Namestaj> NadjiListuNamestaja(ObservableCollection<int?> listaNamestajaProsledjeno)
         {
             var listaNamestaja = new ObservableCollection<Namestaj>();
-            foreach (var n in Projekat.Instance.Namestaj)
+            foreach (var n in Projekat.Instance.Namestaji)
             {
                 if (listaNamestajaProsledjeno != null)
                 {
@@ -158,9 +168,9 @@ namespace POP_sf41_2016.model
             return listaNamestaja;
         }
 
-        public static ObservableCollection<Namestaj> Update(Namestaj primljenNamestaj)
+        public static void Update(Namestaj primljenNamestaj)
         {
-            var lista = Projekat.Instance.Namestaj;
+            var lista = Projekat.Instance.Namestaji;
             foreach (var item in lista)
             {
                 if(item.Id == primljenNamestaj.Id)
@@ -174,7 +184,6 @@ namespace POP_sf41_2016.model
                     break;
                 }
             }
-            return lista;
         }
 
         public object Clone()

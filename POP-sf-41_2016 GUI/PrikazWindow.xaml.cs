@@ -1,4 +1,5 @@
-﻿using POP_sf_41_2016_GUI.UI;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf_41_2016_GUI.UI;
 using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
@@ -56,23 +57,23 @@ namespace POP_sf_41_2016_GUI
         {
             InitializeComponent();
 
-            dataGridNamestaj.Visibility = Visibility.Hidden;
-            dataGridTipNamestaja.Visibility = Visibility.Hidden;
-            dataGridAkcija.Visibility = Visibility.Hidden;
-            dataGridDodatnaUsluga.Visibility = Visibility.Hidden;
-            dataGridKorisnik.Visibility = Visibility.Hidden;
-            dataGridSalon.Visibility = Visibility.Hidden;
-            dataGridProdaja.Visibility = Visibility.Hidden;
+            dataGridNamestaj.Visibility = Visibility.Collapsed;
+            dataGridTipNamestaja.Visibility = Visibility.Collapsed;
+            dataGridAkcija.Visibility = Visibility.Collapsed;
+            dataGridDodatnaUsluga.Visibility = Visibility.Collapsed;
+            dataGridKorisnik.Visibility = Visibility.Collapsed;
+            dataGridSalon.Visibility = Visibility.Collapsed;
+            dataGridProdaja.Visibility = Visibility.Collapsed;
+            dpPretrazi.Visibility = Visibility.Collapsed;
 
 
             this.korisnik = korisnik;
             this.parametar = parametar;
 
-            if (korisnik.TipKorisnika == TipKorisnika.Prodavac)
+            if (korisnik.TipKorisnika == Enums.TipKorisnika.Prodavac)
             {
-                Dodajbtn.IsEnabled = false;
-                btnIzmeni.IsEnabled = false;
-                Obrisibtn.IsEnabled = false;
+                btnIzmeni.Visibility = Visibility.Collapsed;
+                Obrisibtn.Visibility = Visibility.Collapsed;
             }
 
             switch (parametar)
@@ -85,25 +86,31 @@ namespace POP_sf_41_2016_GUI
                     dataGridNamestaj.AutoGenerateColumns = false;
                     dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
                     dataGridNamestaj.DataContext = this;
-                    viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaj);
+                    viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaji);
                     viewn.Filter = NamestajFilter;
                     dataGridNamestaj.ItemsSource = viewn;
                     dataGridNamestaj.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretrazi
-                    cbPretrazi.Items.Add("Nazivu");
-                    cbPretrazi.Items.Add("Tipu namestaja");
-                    cbPretrazi.Items.Add("Sifri");
-                    cbPretrazi.SelectedIndex = 0;
+                    if (cbPretrazi.Items.Count < 1)
+                    {
+                        cbPretrazi.Items.Add("Nazivu");
+                        cbPretrazi.Items.Add("Tipu namestaja");
+                        cbPretrazi.Items.Add("Sifri");
+                        cbPretrazi.SelectedIndex = 0;
+                    }
                     //Punjenje comboboxa za Sortiranje
-                    cbSortiraj.Items.Add("Id-u");
-                    cbSortiraj.Items.Add("Nazivu");
-                    cbSortiraj.Items.Add("Sifri");
-                    cbSortiraj.Items.Add("Ceni");
-                    cbSortiraj.Items.Add("Kolicini");
-                    cbSortiraj.Items.Add("Tipu namestaja");
-                    cbSortiraj.SelectedIndex = 0;
+                    if (cbSortiraj.Items.Count < 1)
+                    {
+                        cbSortiraj.Items.Add("Id-u");
+                        cbSortiraj.Items.Add("Nazivu");
+                        cbSortiraj.Items.Add("Sifri");
+                        cbSortiraj.Items.Add("Ceni");
+                        cbSortiraj.Items.Add("Kolicini");
+                        cbSortiraj.Items.Add("Tipu namestaja");
+                        cbSortiraj.SelectedIndex = 0;
+                    }
                     break;
-#endregion
+                #endregion
 
                 #region Tip namestaja punjenje dg
                 case Parametar.TipNamestaja:
@@ -112,7 +119,7 @@ namespace POP_sf_41_2016_GUI
                     //Punjenje dataGrida
                     dataGridTipNamestaja.AutoGenerateColumns = false;
                     dataGridTipNamestaja.DataContext = this;
-                    viewt = CollectionViewSource.GetDefaultView(Projekat.Instance.TipNamestaja);
+                    viewt = CollectionViewSource.GetDefaultView(Projekat.Instance.TipoviNamestaja);
                     viewt.Filter = TipNamestajaFilter;
                     dataGridTipNamestaja.ItemsSource = viewt;
                     dataGridTipNamestaja.IsSynchronizedWithCurrentItem = true;
@@ -125,7 +132,7 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Nazivu");
                     cbSortiraj.SelectedIndex = 0;
                     break;
-#endregion
+                #endregion
 
                 #region Akcija punjenje dg
                 case Parametar.Akcija:
@@ -135,24 +142,24 @@ namespace POP_sf_41_2016_GUI
                     dataGridAkcija.AutoGenerateColumns = false;
                     dataGridAkcija.IsSynchronizedWithCurrentItem = true;
                     dataGridAkcija.DataContext = this;
-                    viewa = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcija);
+                    viewa = CollectionViewSource.GetDefaultView(Projekat.Instance.Akcije);
                     viewa.Filter = AkcijaFilter;
                     dataGridAkcija.ItemsSource = viewa;
                     dataGridAkcija.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretrazivanje
                     cbPretrazi.Items.Add("Datum pocetka");
                     cbPretrazi.Items.Add("Datum zavrsetka");
-                    cbPretrazi.Items.Add("Namestaj");
+                    cbPretrazi.Items.Add("Naziv akcije");
+                    cbPretrazi.Items.Add("Namestaj na popustu");
                     cbPretrazi.SelectedIndex = 0;
                     //Punjenje comboboxa za Sortiranje
                     cbSortiraj.Items.Add("Id-u");
                     cbSortiraj.Items.Add("Datumu pocetka");
                     cbSortiraj.Items.Add("Datumu zavrsetka");
-                    cbSortiraj.Items.Add("Namestaju");
-                    cbSortiraj.Items.Add("Popustu");
+                    cbSortiraj.Items.Add("Nazivu");
                     cbSortiraj.SelectedIndex = 0;
                     break;
-#endregion
+                #endregion
 
                 #region Dodatna usluga punjenje dg
                 case Parametar.DodatnaUsluga:
@@ -162,7 +169,7 @@ namespace POP_sf_41_2016_GUI
                     dataGridDodatnaUsluga.AutoGenerateColumns = false;
                     dataGridDodatnaUsluga.IsSynchronizedWithCurrentItem = true;
                     dataGridDodatnaUsluga.DataContext = this;
-                    viewd = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatnaUsluga);
+                    viewd = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatneUsluge);
                     viewd.Filter = DodatnaUslugaFilter;
                     dataGridDodatnaUsluga.ItemsSource = viewd;
                     dataGridDodatnaUsluga.Visibility = Visibility.Visible;
@@ -172,7 +179,7 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Ceni");
                     cbSortiraj.SelectedIndex = 0;
                     break;
-#endregion
+                #endregion
 
                 #region Korisnik punjenje dg
                 case Parametar.Korisnik:
@@ -182,7 +189,7 @@ namespace POP_sf_41_2016_GUI
                     dataGridKorisnik.AutoGenerateColumns = false;
                     dataGridKorisnik.IsSynchronizedWithCurrentItem = true;
                     dataGridKorisnik.DataContext = this;
-                    viewk = CollectionViewSource.GetDefaultView(Projekat.Instance.Korisnik);
+                    viewk = CollectionViewSource.GetDefaultView(Projekat.Instance.Korisnici);
                     viewk.Filter = KorisnikFilter;
                     dataGridKorisnik.ItemsSource = viewk;
                     dataGridKorisnik.Visibility = Visibility.Visible;
@@ -200,7 +207,7 @@ namespace POP_sf_41_2016_GUI
                     cbSortiraj.Items.Add("Tipu korisnika");
                     cbSortiraj.SelectedIndex = 0;
                     break;
-#endregion
+                #endregion
 
                 #region Salon punjenje dg
                 case Parametar.Salon:
@@ -213,18 +220,16 @@ namespace POP_sf_41_2016_GUI
                     views = CollectionViewSource.GetDefaultView(Projekat.Instance.Salon);
                     views.Filter = SalonFilter;
                     dataGridSalon.ItemsSource = views;
-                    dataGridSalon.Visibility = Visibility.Visible;
-                    //Punjenje comboboxa za Sortiranje
-                    cbSortiraj.Items.Add("Id-u");
-                    cbSortiraj.Items.Add("Nazivu");
-                    cbSortiraj.Items.Add("Adresi");
-                    cbSortiraj.Items.Add("Telefonu");
-                    cbSortiraj.Items.Add("Emailu");
-                    cbSortiraj.Items.Add("Sajtu");
-                    cbSortiraj.Items.Add("PIB-u");
-                    cbSortiraj.Items.Add("Maticnom broju");
-                    cbSortiraj.Items.Add("Ziro racunu");
-                    cbSortiraj.SelectedIndex = 0;
+                    dataGridSalon.Visibility = Visibility.Collapsed;
+                    cbPretrazi.Visibility = Visibility.Collapsed;
+                    cbSortiraj.Visibility = Visibility.Collapsed;
+                    lblSortiraj.Visibility = Visibility.Collapsed;
+                    lbPretrazi.Visibility = Visibility.Collapsed;
+                    tbPretrazi.Visibility = Visibility.Collapsed;
+                    Dodajbtn.Visibility = Visibility.Collapsed;
+                    Obrisibtn.Visibility = Visibility.Collapsed;
+                    if (korisnik.TipKorisnika == Enums.TipKorisnika.Prodavac)
+                        btnIzmeni.Visibility = Visibility.Collapsed;
                     break;
                 #endregion
 
@@ -233,20 +238,16 @@ namespace POP_sf_41_2016_GUI
                     dataGridProdaja.AutoGenerateColumns = false;
                     dataGridProdaja.IsSynchronizedWithCurrentItem = true;
                     dataGridProdaja.DataContext = this;
-                    viewp = CollectionViewSource.GetDefaultView(Projekat.Instance.ProdajaNamestaja);
+                    viewp = CollectionViewSource.GetDefaultView(Projekat.Instance.Prodaja);
                     viewp.Filter = ProdajaFilter;
                     dataGridProdaja.ItemsSource = viewp;
                     dataGridProdaja.Visibility = Visibility.Visible;
-
-                    if (korisnik.TipKorisnika == TipKorisnika.Prodavac)
-                    {
-                        Dodajbtn.IsEnabled = true;
-                        btnIzmeni.IsEnabled = true;
-                    }
                     break;
-#endregion
-            }           
+                    #endregion
+            }
         }
+
+
 
         #region Filteri Dg
         private bool NamestajFilter(object obj) //Prima namestaj i ukoliko je obrisan true ne vraca ga nazad
@@ -285,7 +286,7 @@ namespace POP_sf_41_2016_GUI
 
         private bool ProdajaFilter(object obj) //Prima prodaju i ukoliko je obrisan true ne vraca ga nazad
         {
-            return !((ProdajaNamestaja)obj).Obrisan;
+            return !((Prodaja)obj).Obrisan;
         }
         #endregion
 
@@ -297,7 +298,7 @@ namespace POP_sf_41_2016_GUI
             {
                 case Parametar.Namestaj:
                     Namestaj izabraniNamestaj = viewn.CurrentItem as Namestaj; // uzima trenutni selektovan red u dataGridu
-                    var listaNamestaja = Projekat.Instance.Namestaj;
+                    var listaNamestaja = Projekat.Instance.Namestaji;
                     if(izabraniNamestaj != null)
                     {
                         Namestaj kopija = (Namestaj)izabraniNamestaj.Clone();
@@ -373,15 +374,13 @@ namespace POP_sf_41_2016_GUI
                     break;
 
                     case Parametar.Prodaja:
-                         ProdajaNamestaja izabranaProdaja = viewp.CurrentItem as ProdajaNamestaja;  // uzima trenutni selektovan red u dataGridu
+                         Prodaja izabranaProdaja = viewp.CurrentItem as Prodaja;  // uzima trenutni selektovan red u dataGridu
                          if (izabranaProdaja != null)
                          {
-                             ProdajaNamestaja kopija = (ProdajaNamestaja)izabranaProdaja.Clone();
+                             Prodaja kopija = (Prodaja)izabranaProdaja.Clone();
 
                              ProdajaWindow prodajaWindow = new ProdajaWindow(kopija, ProdajaWindow.Operacija.IZMENA);
                              prodajaWindow.ShowDialog();
-
-                             viewp.Refresh();
                          }
                          break;
             }
@@ -398,14 +397,12 @@ namespace POP_sf_41_2016_GUI
                     var noviNamestaj = new Namestaj();
                     var namestajWindow = new NamestajWindow(noviNamestaj ,NamestajWindow.Operacija.DODAVANJE);
                     namestajWindow.ShowDialog();
-                    
                     break;
 
                 case Parametar.TipNamestaja:
                     var noviTipNamestaja = new TipNamestaja();
                     var tipNamestajaWindow = new TipNamestajaWindow(noviTipNamestaja , TipNamestajaWindow.Operacija.DODAVANJE);
                     tipNamestajaWindow.ShowDialog();
-                    viewn.Refresh();
                     break;
 
 
@@ -440,7 +437,7 @@ namespace POP_sf_41_2016_GUI
                     break;
 
                 case Parametar.Prodaja:
-                    var novaProdaja = new ProdajaNamestaja();
+                    var novaProdaja = new Prodaja();
                     var prodajaWindow = new ProdajaWindow(novaProdaja , ProdajaWindow.Operacija.DODAVANJE);
                     prodajaWindow.ShowDialog();
 
@@ -457,55 +454,34 @@ namespace POP_sf_41_2016_GUI
             {
                 case Parametar.Namestaj:
                     var izabraniNamestaj = (Namestaj)viewn.CurrentItem;
-                    var listaNamestaja = Projekat.Instance.Namestaj;
-                    if(MessageBox.Show("Da li ste sigurni da zelite da obrisete namestaj", "Obrisi namestaj", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    var listaNamestaja = Projekat.Instance.Namestaji;
+                    if(MessageBox.Show("Da li ste sigurni da zelite da obrisete namestaj: " + izabraniNamestaj.Naziv + " ?", "Obrisi namestaj", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        foreach (var namestaj in listaNamestaja)
-                        {
-                            if(izabraniNamestaj.Id == namestaj.Id)
-                            {
-                                namestaj.Obrisan = true;
-                                break;
-                            }
-                        }
-                        Projekat.Instance.Namestaj = listaNamestaja;
-                        GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
+                        NamestajDAO.Delete(izabraniNamestaj);
                     }
                     viewn.Refresh();
                     break;
 
                 case Parametar.TipNamestaja:
                     var izabraniTipNamestaja = viewt.CurrentItem as TipNamestaja;
-                    var listaTipNamestaja = Projekat.Instance.TipNamestaja;
-                    var listaNamestajaa = Projekat.Instance.Namestaj;
-                    if (izabraniTipNamestaja.Id == 0)
+                    var listaTipNamestaja = Projekat.Instance.TipoviNamestaja;
+                    var listaNamestajaa = Projekat.Instance.Namestaji;
+                    if (izabraniTipNamestaja.Id == 1)
                     {
-                        MessageBox.Show("Ne mozete obrisati ovaj tip namestaja", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Ne mozete obrisati: " + izabraniTipNamestaja.Naziv + " ?", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                     else
                     {
-                        if (MessageBox.Show("Da li ste sigurni da zelite da obrisete tip namestaja", "Obrisi tip namestaja", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                        if (MessageBox.Show("Da li ste sigurni da zelite da obrisete tip namestaja: " + izabraniTipNamestaja.Naziv + " ?", "Obrisi tip namestaja", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                         {
-                            foreach (var tipNamestaja in listaTipNamestaja)
-                            {
-                                if(izabraniTipNamestaja.Id == tipNamestaja.Id)
-                                {
-                                    tipNamestaja.Obrisan = true;
-                                    viewt.Refresh();
-                                    break;
-                                    }
-                            }
+                            TipNamestajaDAO.Delete(izabraniTipNamestaja);
                             foreach(var namestaj in listaNamestajaa)
+                            {
+                                if(namestaj.TipNamestajaId == izabraniTipNamestaja.Id)
                                 {
-                                    if(namestaj.TipNamestajaId == izabraniTipNamestaja.Id)
-                                    {
-                                        namestaj.TipNamestajaId = 0;
-                                    }
+                                    namestaj.TipNamestajaId = 1;
                                 }
-                            Projekat.Instance.Namestaj = listaNamestajaa;
-                            GenericSerializer.Serializer("namestaj.xml", listaNamestajaa);
-                            Projekat.Instance.TipNamestaja = listaTipNamestaja;
-                            GenericSerializer.Serializer("tipNamestaja.xml", listaTipNamestaja);
+                            }
                         }
                     }
                     break;
@@ -513,87 +489,46 @@ namespace POP_sf_41_2016_GUI
 
                 case Parametar.Akcija:
                     var izabranaAkcija = (Akcija) viewa.CurrentItem;
-                    var listaAkcija = Projekat.Instance.Akcija;
-                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete akciju", "Obrisi akciju", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    var listaAkcija = Projekat.Instance.Akcije;
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete akciju: " + izabranaAkcija.Naziv + " ?", "Obrisi akciju", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        foreach (var akcija in listaAkcija)
-                        {
-                            if(izabranaAkcija.Id == akcija.Id)
-                            {
-                                akcija.Obrisan = true;
-                                break;
-                            }
-                        }
-                        Projekat.Instance.Akcija = listaAkcija;
-                        GenericSerializer.Serializer("akcija.xml", listaAkcija);
+                        AkcijaDAO.Delete(izabranaAkcija);
                     }
-                    viewa.Refresh();
                     break;
 
 
                 case Parametar.DodatnaUsluga:
                     var izabranaDodatnaUsluga = (DodatnaUsluga)viewd.CurrentItem;
-                    var listaDodatnihUsluga = Projekat.Instance.DodatnaUsluga;
-                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete dodatnu uslug", "Obrisi dodatnu uslug", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    var listaDodatnihUsluga = Projekat.Instance.DodatneUsluge;
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete dodatn uslugu: " + izabranaDodatnaUsluga.Naziv + " ?", "Obrisi dodatnu uslug", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        foreach (var dodatnaUsluga in listaDodatnihUsluga)
-                        {
-                            if (izabranaDodatnaUsluga.Id == dodatnaUsluga.Id)
-                            {
-                                dodatnaUsluga.Obrisan = true;
-                                break;
-                            }
-                        }
-
-                        Projekat.Instance.DodatnaUsluga = listaDodatnihUsluga;
-                        GenericSerializer.Serializer("didatnaUsluga.xml", listaDodatnihUsluga);
+                        DodatnaUslugaDAO.Delete(izabranaDodatnaUsluga);
                     }
-                    viewd.Refresh();
                     break;
 
 
                 case Parametar.Korisnik:
                     var izabraniKorisnik = (Korisnik)viewk.CurrentItem;
-                    var listaKorisnika = Projekat.Instance.Korisnik;
-                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete korisnika", "Obrisi korisnika", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    var listaKorisnika = Projekat.Instance.Korisnici;
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete korisnika: " + izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime + " ?", "Obrisi korisnika", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        foreach (var korisnik in listaKorisnika)
-                        {
-                            if(izabraniKorisnik.Id == korisnik.Id)
-                            {
-                                korisnik.Obrisan = true;
-                                break;
-                            }
-                        }
-                        Projekat.Instance.Korisnik = listaKorisnika;
-                        GenericSerializer.Serializer("korisnici.xml", listaKorisnika);
+                        KorisnikDAO.Delete(izabraniKorisnik);
                     }
-                    viewk.Refresh();
                     break;
                     
                 case Parametar.Salon:
                     var izabraniSalon = (Salon)views.CurrentItem;
                     var listaSalona = Projekat.Instance.Salon;
-                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete salon", "Obrisi salon", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete salon: " + izabraniSalon.Naziv + " ?", "Obrisi salon", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
-                        foreach(var salon in listaSalona)
-                        {
-                            if(izabraniSalon.Id == salon.Id)
-                            {
-                                salon.Obrisan = true;
-                                break;
-                            }
-                        }
-                    Projekat.Instance.Salon = listaSalona;
-                    GenericSerializer.Serializer("salon.xml", listaSalona);
+                        SalonDAO.Delete(izabraniSalon);
                     }
-                    views.Refresh();
                     break;
 
                 case Parametar.Prodaja:
-                    var izabranaProdaja = (ProdajaNamestaja)viewp.CurrentItem;
-                    var listaProdaja = Projekat.Instance.ProdajaNamestaja;
-                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete prodaju", "Obrisi prodaju", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    var izabranaProdaja = (Prodaja)viewp.CurrentItem;
+                    var listaProdaja = Projekat.Instance.Prodaja;
+                    if (MessageBox.Show("Da li ste sigurni da zelite da obrisete prodaju: " + izabranaProdaja.BrRacuna + " ?", "Obrisi prodaju", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
                         foreach (var prodaja in listaProdaja)
                         {
@@ -603,10 +538,9 @@ namespace POP_sf_41_2016_GUI
                                 break;
                             }
                         }
-                        Projekat.Instance.ProdajaNamestaja = listaProdaja;
+                        Projekat.Instance.Prodaja = listaProdaja;
                         GenericSerializer.Serializer("prodaja.xml", listaProdaja);
                     }
-                    viewp.Refresh();
                     break;
             }
         }
@@ -615,7 +549,69 @@ namespace POP_sf_41_2016_GUI
         #region Pretrazi
         private void Pretrazi_Click(object sender, RoutedEventArgs e)
         {
-
+            switch (parametar)  
+            {
+                case Parametar.Namestaj:
+                    if(cbPretrazi.SelectedIndex == 0)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.Naziv));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }else if(cbPretrazi.SelectedIndex == 1)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.TipNamestaja));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }else if(cbPretrazi.SelectedIndex == 2)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.Sifra));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }
+                    break;
+                case Parametar.TipNamestaja:
+                    viewt = CollectionViewSource.GetDefaultView(TipNamestajaDAO.Find(tbPretrazi.Text));
+                    dataGridTipNamestaja.ItemsSource = viewt;
+                    break;
+                case Parametar.Akcija:
+                    if (cbPretrazi.SelectedIndex == 0)
+                    {
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find("", AkcijaDAO.TipPretrage.DatumPocetka, dpPretrazi.SelectedDate));
+                        dataGridAkcija.ItemsSource = viewa;
+                    }
+                    else if (cbPretrazi.SelectedIndex == 1)
+                    {
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find("", AkcijaDAO.TipPretrage.DatumZavrsetka, dpPretrazi.SelectedDate));
+                        dataGridAkcija.ItemsSource = viewa;
+                    }
+                    else if (cbPretrazi.SelectedIndex == 2)
+                    {
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find(tbPretrazi.Text, AkcijaDAO.TipPretrage.Naziv, null));
+                        dataGridAkcija.ItemsSource = viewa;
+                    }
+                    else if (cbPretrazi.SelectedIndex == 3)
+                    {
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find(tbPretrazi.Text, AkcijaDAO.TipPretrage.Namestaji, null));
+                        dataGridAkcija.ItemsSource = viewa;
+                    }
+                    break;
+                case Parametar.Korisnik:
+                    if (cbPretrazi.SelectedIndex == 0)
+                    {
+                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.Find(tbPretrazi.Text, KorisnikDAO.TipPretrage.Ime));
+                        dataGridKorisnik.ItemsSource = viewk;
+                    }
+                    else if (cbPretrazi.SelectedIndex == 1)
+                    {
+                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.Find(tbPretrazi.Text, KorisnikDAO.TipPretrage.Prezime));
+                        dataGridKorisnik.ItemsSource = viewk;
+                    }
+                    else if (cbPretrazi.SelectedIndex == 2)
+                    {
+                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.Find(tbPretrazi.Text, KorisnikDAO.TipPretrage.KorisnickoIme));
+                        dataGridKorisnik.ItemsSource = viewk;
+                    }
+                    break;
+                case Parametar.Prodaja:
+                    break;
+            }
         }
         #endregion
 
@@ -626,7 +622,8 @@ namespace POP_sf_41_2016_GUI
             switch (parametar)
             {
                 case Parametar.Namestaj:
-                    var pripremiNamestaj = Projekat.Instance.Namestaj;
+                    //NamestajDAO.Load();
+                    var pripremiNamestaj = Projekat.Instance.Namestaji;
                     List<Namestaj> sortiranaListaNamestaj = new List<Namestaj>();
 
                     if (cbSortiraj.SelectedIndex == 0)
@@ -657,10 +654,40 @@ namespace POP_sf_41_2016_GUI
                     viewn = CollectionViewSource.GetDefaultView(sortiranaListaNamestaj);
                     viewn.Filter = NamestajFilter;
                     dataGridNamestaj.ItemsSource = viewn;
+                   /* if (cbSortiraj.SelectedIndex == 0)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.IdN));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }
+                    else if (cbSortiraj.SelectedIndex == 1)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Naziv));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }
+                    else if (cbSortiraj.SelectedIndex == 2)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Sifra));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }
+                    else if (cbSortiraj.SelectedIndex == 3)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Cena));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }
+                    else if (cbSortiraj.SelectedIndex == 4)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Kolicina));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }
+                    else if (cbSortiraj.SelectedIndex == 5)
+                    {
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.TipNamestaja));
+                        dataGridNamestaj.ItemsSource = viewn;
+                    }*/
                     break;
 
                 case Parametar.TipNamestaja:
-                    var pripremiTipNamestaja = Projekat.Instance.TipNamestaja;
+                    var pripremiTipNamestaja = Projekat.Instance.TipoviNamestaja;
                     List<TipNamestaja> sortiranaListaTipNamestaja = new List<TipNamestaja>();
 
                     if (cbSortiraj.SelectedIndex == 1)
@@ -677,7 +704,7 @@ namespace POP_sf_41_2016_GUI
                     break;
 
                 case Parametar.Akcija:
-                    var pripremiAkciju = Projekat.Instance.Akcija;
+                    var pripremiAkciju = Projekat.Instance.Akcije;
                     List<Akcija> sortiranaListaAkcija = new List<Akcija>();
 
                     if (cbSortiraj.SelectedIndex == 0)
@@ -692,14 +719,11 @@ namespace POP_sf_41_2016_GUI
                     {
                         sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.DatumZavrsetka).ToList();
                     }
-                   /* else if (cbSortiraj.SelectedIndex == 3)
+                    else if (cbSortiraj.SelectedIndex == 3)
                     {
-                        sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.NamestajNaPopustu.Naziv).ToList();
-                    }*/
-                    else if (cbSortiraj.SelectedIndex == 4)
-                    {
-                        sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.Popust).ToList();
+                        sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.Naziv).ToList();
                     }
+
 
                     viewa = CollectionViewSource.GetDefaultView(sortiranaListaAkcija);
                     viewa.Filter = AkcijaFilter;
@@ -707,7 +731,7 @@ namespace POP_sf_41_2016_GUI
                     break;
 
                 case Parametar.DodatnaUsluga:
-                    var pripremiDodatnuUslugu = Projekat.Instance.DodatnaUsluga;
+                    var pripremiDodatnuUslugu = Projekat.Instance.DodatneUsluge;
                     List<DodatnaUsluga> sortiranaListaDodatnaUsluga = new List<DodatnaUsluga>();
                     if (cbSortiraj.SelectedIndex == 0)
                     {
@@ -728,7 +752,7 @@ namespace POP_sf_41_2016_GUI
                     break;
 
                 case Parametar.Korisnik:
-                    var pripremiKorisnika = Projekat.Instance.Korisnik;
+                    var pripremiKorisnika = Projekat.Instance.Korisnici;
                     List<Korisnik> sortiranaListaKorisnik = new List<Korisnik>();
 
                     if (cbSortiraj.SelectedIndex == 0)
@@ -812,7 +836,6 @@ namespace POP_sf_41_2016_GUI
         }
         #endregion
 
-
         #region Dg row nummber
         void dataGridNamestaj_LoadingRow(object sender, DataGridRowEventArgs e)
         {
@@ -862,6 +885,23 @@ namespace POP_sf_41_2016_GUI
             login.Show();
             this.Close();
         }
-#endregion
+        #endregion
+
+        private void cbSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(parametar == Parametar.Akcija)
+            {
+                if (cbPretrazi.SelectedIndex == 0 || cbPretrazi.SelectedIndex == 1)
+                {
+                    dpPretrazi.Visibility = Visibility.Visible;
+                    tbPretrazi.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    tbPretrazi.Visibility = Visibility.Visible;
+                    dpPretrazi.Visibility = Visibility.Collapsed;
+                }
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
         mc:Ignorable="d"
-        Title="Akcija " FontSize="16" ResizeMode="NoResize" Height="568.7" Width="543.5">
+        Title="Akcija " FontSize="16" ResizeMode="NoResize" Height="568.7" Width="590.5">
     <Grid Margin="0,0,4,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="33*"/>
@@ -15,31 +15,29 @@
             <RowDefinition Height="66*"/>
             <RowDefinition Height="66*"/>
             <RowDefinition Height="72*"/>
-            <RowDefinition Height="72*"/>
             <RowDefinition Height="60*"/>
             <RowDefinition Height="130*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
         <Label Name="lbNaziv" Content="Naziv" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="15,26,0,0" VerticalAlignment="Top" Width="74" FontSize="18"/>
-        <TextBox Name="tbNaziv" Text="{Binding Path=Naziv}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="32,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="16"/>
+        <TextBox Name="tbNaziv" Text="{Binding Path=Naziv}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="23,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="16"/>
         <Label Name="lblPocetak" Content="Pocetak" Grid.Row="1" HorizontalAlignment="Left" Margin="12,28,0,0" VerticalAlignment="Top" Height="39" Width="78" FontSize="18"/>
-        <DatePicker Name="dpPocetak" SelectedDate="{Binding Path=DatumPocetka}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="32,31,0,0" VerticalAlignment="Top" Width="135" Height="29" FontSize="16"/>
+        <DatePicker Name="dpPocetak" SelectedDate="{Binding Path=DatumPocetka}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="23,31,0,0" VerticalAlignment="Top" Width="135" Height="29" FontSize="16"/>
         <Label Name="lblKraj" Content="Kraj" Grid.Row="2" HorizontalAlignment="Left" Margin="14,29,0,0" VerticalAlignment="Top" Height="34" Width="78" FontSize="18"/>
-        <DatePicker Name="dpKraj" SelectedDate="{Binding Path=DatumZavrsetka}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="32,32,0,0" VerticalAlignment="Top" Width="135" Height="31" FontSize="16"/>
-        <Label Name="lblPopust" Content="Popust" Grid.Row="3" HorizontalAlignment="Left" Margin="10,15,0,0" VerticalAlignment="Top" Height="48" Width="78" FontSize="18"/>
-        <TextBox Name="tbPopust" Text="{Binding Path=Popust}" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="31" Margin="32,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FontSize="16"/>
-        <TextBlock Text="Namestaj" Grid.Row="4" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="9,19,0,0" VerticalAlignment="Top" Width="83" Height="40" FontSize="18"/>
-        <Button Name="btnDodaj" Content="Dodaj" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="58,16,0,0" VerticalAlignment="Top"  Width="94"   Height="37" FontSize="16" Click="Dodaj_click"/>
-        <Button Name="btnObrisi" Content="Obrisi" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" Margin="194,16,0,0" VerticalAlignment="Top" Width="94" Height="37" FontSize="16"  Click="Obrisi_click"/>
-        <TextBlock Text="Namestaj na popustu" Grid.Row="5" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Left" Margin="12,44,0,0" VerticalAlignment="Top" Width="83" Height="76" FontSize="18"/>
-        <DataGrid Name="dataGridNamestaj" Grid.Row="5" Grid.Column="1" SelectionMode="Extended" CanUserSortColumns="True" HorizontalAlignment="Center" Height="130" Margin="15,1,12,6" VerticalAlignment="Center" Width="408" SelectedIndex="0" IsReadOnly="True">
+        <DatePicker Name="dpKraj" SelectedDate="{Binding Path=DatumZavrsetka}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Margin="23,32,0,0" VerticalAlignment="Top" Width="135" Height="31" FontSize="16"/>
+        <TextBlock Text="Namestaj" Grid.Row="3" TextWrapping="WrapWithOverflow" HorizontalAlignment="Left" Margin="9,19,0,0" VerticalAlignment="Top" Width="83" Height="40" FontSize="18"/>
+        <Button Name="btnDodaj" Content="Dodaj" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="89,16,0,0" VerticalAlignment="Top"  Width="94"   Height="37" FontSize="16" Click="Dodaj_click"/>
+        <Button Name="btnObrisi" Content="Obrisi" Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="291,16,0,0" VerticalAlignment="Top" Width="94" Height="37" FontSize="16"  Click="Obrisi_click"/>
+        <TextBlock Text="Namestaj na popustu" Grid.Row="4" TextWrapping="WrapWithOverflow"  HorizontalAlignment="Left" Margin="12,44,0,0" VerticalAlignment="Top" Width="83" Height="76" FontSize="18"/>
+        <DataGrid Name="dataGridNamestaj" Grid.Row="4" Grid.Column="1" SelectionMode="Single" CanUserSortColumns="True" HorizontalAlignment="Center" Height="130" Margin="23,11,19,16" VerticalAlignment="Center" Width="430" SelectedIndex="0" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Naziv}" Header="Naziv"  Width="*"/>
-                <DataGridTextColumn Binding="{Binding Path=Sifra}" Header="Sifra"  Width="*"/>
-                <DataGridTextColumn Binding="{Binding Path=TipNamestaja}" Header="Tip namestaja"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Namestaj.Naziv}" Header="Naziv"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Namestaj.Sifra}" Header="Sifra"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Namestaj.TipNamestaja}" Header="Tip namestaja"  Width="*"/>
+                <DataGridTextColumn Binding="{Binding Path=Popust}" Header="Popust"  Width="*"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Name="btOdustani" Content="Odustani" Grid.Row="6" Grid.Column="1"  HorizontalAlignment="Left" Margin="311,10,0,0" VerticalAlignment="Top" Width="94"  Height="37" FontSize="16" Click="Odustani_click"/>
-        <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Row="6" Grid.Column="1"  HorizontalAlignment="Left" Margin="194,10,0,0" VerticalAlignment="Top" Width="94" Height="37" FontSize="16" Click="Potvrdi_click"/>
+        <Button Name="btOdustani" Content="Odustani" Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" Margin="348,10,0,0" VerticalAlignment="Top" Width="94"  Height="37" FontSize="16" Click="Odustani_click"/>
+        <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" Margin="214,10,0,0" VerticalAlignment="Top" Width="94" Height="37" FontSize="16" Click="Potvrdi_click"/>
     </Grid>
 </Window>

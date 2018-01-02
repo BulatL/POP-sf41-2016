@@ -217,3 +217,111 @@ E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.Generate
 E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.CoreCompileInputs.cache
 E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.exe
 E:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.pdb
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe.config
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.pdb
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csprojResolveAssemblyReference.cache
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\App.g.cs
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.cache
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.lref
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.baml
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.g.resources
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP_sf_41_2016_GUI.Properties.Resources.resources
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.GenerateResource.Cache
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.CoreCompileInputs.cache
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.exe
+C:\Users\Bulatovic\Documents\GitHub\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.pdb
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe.config
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.pdb
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csprojResolveAssemblyReference.cache
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\App.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_Content.g.cs
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.cache
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.lref
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.baml
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.g.resources
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP_sf_41_2016_GUI.Properties.Resources.resources
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.GenerateResource.Cache
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.CoreCompileInputs.cache
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.exe
+H:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.pdb
+C:\Users\Bula\Desktop\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_Content.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe.config
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.exe
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\bin\Debug\POP-sf-41_2016 GUI.pdb
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csprojResolveAssemblyReference.cache
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\App.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_Content.g.cs
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.cache
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI_MarkupCompile.lref
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\LoginWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\MainWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\PrikazWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\AkcijaWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\DodatnaUslugaWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\KorisnikWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\NamestajWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\ProdajaWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\SalonWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\StavkaWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\UI\TipNamestajaWindow.baml
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.g.resources
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP_sf_41_2016_GUI.Properties.Resources.resources
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.GenerateResource.Cache
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.csproj.CoreCompileInputs.cache
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.exe
+D:\POP-sf41-2016\POP-sf-41_2016 GUI\obj\Debug\POP-sf-41_2016 GUI.pdb

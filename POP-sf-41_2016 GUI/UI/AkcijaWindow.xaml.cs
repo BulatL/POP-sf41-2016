@@ -16,6 +16,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using POP_sf_41_2016_GUI.DAO;
+using POP_sf_41_2016_GUI.model;
 
 namespace POP_sf_41_2016_GUI.UI
 {
@@ -39,18 +41,16 @@ namespace POP_sf_41_2016_GUI.UI
 
             this.akcija = akcija;
             this.operacija = operacija;
-            akcija.ListaNamestajaNaPopustuId = new ObservableCollection<int?>();
 
             dpPocetak.DataContext = akcija;
             dpKraj.DataContext = akcija;
-            tbPopust.DataContext = akcija;
             tbNaziv.DataContext = akcija;
 
             dataGridNamestaj.AutoGenerateColumns = false;
             dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
             dataGridNamestaj.DataContext = akcija;
-            viewn = CollectionViewSource.GetDefaultView(akcija.ListaNamestajaNaPopustu);
-            viewn.Filter = NamestajFilter;
+            viewn = CollectionViewSource.GetDefaultView(akcija.ListaNaAkciji);
+            viewn.Filter = NaAkcijiFilter;
             dataGridNamestaj.ItemsSource = viewn;
 
 
@@ -62,9 +62,9 @@ namespace POP_sf_41_2016_GUI.UI
             }
 
         }
-        private bool NamestajFilter(object obj)
+        private bool NaAkcijiFilter(object obj)
         {
-            return !((Namestaj)obj).Obrisan;
+            return !((NaAkciji)obj).Obrisan;
         }
 
 
@@ -78,8 +78,7 @@ namespace POP_sf_41_2016_GUI.UI
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var listaAkcija = Projekat.Instance.Akcija;
-            int idAkcije = listaAkcija.Count + 1;
+            var listaAkcija = Projekat.Instance.Akcije;
             
             if (operacija == Operacija.DODAVANJE)
             {
@@ -96,48 +95,101 @@ namespace POP_sf_41_2016_GUI.UI
             {
                 if (operacija == Operacija.DODAVANJE)
                 {
-                    akcija.Id = idAkcije;
-                    listaAkcija.Add(akcija);
+
+                    AkcijaDAO.Create(akcija);
+                    foreach (var naAkciji in akcija.ListaNaAkciji)
+                    {
+                        NaAkcijiDAO.Create(naAkciji);
+                    }
 
                 } 
                 else if( operacija == Operacija.IZMENA)
                 {
+                    var listaProvera = NaAkcijiDAO.LoadByAkcijaId(akcija.Id);
+                    foreach (var naAkciji in akcija.ListaNaAkciji.ToList())
+                    {
+                        bool postojiNaAkciji = false;
+                        foreach (var item in listaProvera.ToList())
+                        {
+                            if(item.Id == naAkciji.Id)
+                            {
+                                postojiNaAkciji = true;
+                                item.Obrisan = false;
+                                Console.WriteLine("Postojeci namestaj id: " + item.NamestajId.ToString() + " " + item.Obrisan);
+                                listaProvera.Remove(item);
+                                break;
+                            }
+                            if(item.NamestajId == naAkciji.NamestajId)
+                            {
+                                if (item.Popust != naAkciji.Popust)
+                                {
+                                    item.Obrisan = false;
+                                    Console.WriteLine("Postojeci namestaj id promenjen popust: " + item.NamestajId.ToString()+" "+ item.Obrisan);
+                                    NaAkcijiDAO.Update(item);
+                                    break;
+                                }
+                            }
+                        }
+                        if(postojiNaAkciji == false)
+                        {
+                            Console.WriteLine("novi namestaj id: " + naAkciji.NamestajId.ToString() + " " + naAkciji.Obrisan);
+                            NaAkcijiDAO.Create(naAkciji);
+                        }
+                    }
+                    foreach (var item in listaProvera.ToList())
+                    {
+                        Console.WriteLine("Namestaj id za brisanje: " + item.NamestajId.ToString() + " " + item.Obrisan);
+                        NaAkcijiDAO.Delete(item, TipBrisanja.PoNaAkciji);
+                    }                       
+                    AkcijaDAO.Update(akcija);
+                    
                     listaAkcija = Akcija.Update(akcija);
+                    foreach (var item in akcija.ListaNaAkciji)
+                    {
+                        Console.WriteLine("Sacuvano: " + item.Namestaj.Naziv + item.NamestajId.ToString() + " " + item.Obrisan);
+                    }
                 }
-                Projekat.Instance.Akcija = listaAkcija;
-                GenericSerializer.Serializer("akcija.xml", listaAkcija);
+                Projekat.Instance.Akcije = listaAkcija;
                 this.Close();
             }
         }
 
         private void Dodaj_click(object sender, RoutedEventArgs e)
         {
-
-            var noviProzor = new StavkaWindow(null, StavkaWindow.Parametar.AKCIJA);
-            if(noviProzor.ShowDialog() == true)
+            var akcijaId = 0;
+            if (akcija.Id == 0)
             {
-                akcija.ListaNamestajaNaPopustu.Add(noviProzor.namestaj);
-                akcija.ListaNamestajaNaPopustuId.Add(noviProzor.namestaj.Id);
+                akcijaId = Projekat.Instance.Akcije.Count + 1;
+            }
+            else
+            {
+                akcijaId = akcija.Id;
+            }
+            var noviProzor = new StavkaWindow(null, akcijaId, StavkaWindow.Parametar.AKCIJA);
+            if (noviProzor.ShowDialog() == true)
+            {
+                akcija.ListaNaAkciji.Add(noviProzor.naAkciji);
+                akcija.ListaNaAkcijiId.Add(noviProzor.naAkciji.Id);
             }
         }
 
         private void Obrisi_click(object sender, RoutedEventArgs e)
         {
-            var izabraniNamestaj = viewn.CurrentItem as Namestaj;
-            var lista = akcija.ListaNamestajaNaPopustu;
-            var listaId = akcija.ListaNamestajaNaPopustuId;
-            foreach (var item in lista)
+            var izabraniNamestajNaAkciji = viewn.CurrentItem as NaAkciji;
+            var lista = akcija.ListaNaAkciji;
+            var listaId = akcija.ListaNaAkcijiId;
+
+            foreach (var item in lista.ToList())
             {
-                if (item.Id == izabraniNamestaj.Id)
+                if (item.Id == izabraniNamestajNaAkciji.Id)
                 {
                     lista.Remove(item);
                     break;
                 }
             }
-
-            foreach (var item in listaId)
+            foreach (var item in listaId.ToList())
             {
-                if (item == izabraniNamestaj.Id)
+                if (item == izabraniNamestajNaAkciji.Id)
                 {
                     listaId.Remove(item);
                     break;

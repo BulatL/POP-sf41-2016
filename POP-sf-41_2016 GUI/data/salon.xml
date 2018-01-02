@@ -12,40 +12,4 @@
     <Naziv>Super salon</Naziv>
     <Id>1</Id>
   </Salon>
-  <Salon>
-    <Obrisan>false</Obrisan>
-    <BrojZiroRacuna>13421</BrojZiroRacuna>
-    <MaticniBroj>11324</MaticniBroj>
-    <PIB>132512</PIB>
-    <AdresaInternetSajta>https://www.lepSalon.com</AdresaInternetSajta>
-    <Email>lepsalon@gmail.com</Email>
-    <Telefon>021-554-721</Telefon>
-    <Adresa>Trg Dositeja Obradovica 21</Adresa>
-    <Naziv>Lep salon</Naziv>
-    <Id>2</Id>
-  </Salon>
-  <Salon>
-    <Obrisan>true</Obrisan>
-    <BrojZiroRacuna>7997870</BrojZiroRacuna>
-    <MaticniBroj>78879789</MaticniBroj>
-    <PIB>413214</PIB>
-    <AdresaInternetSajta>https://www. dada.rs</AdresaInternetSajta>
-    <Email>adada@gmail.com</Email>
-    <Telefon>da</Telefon>
-    <Adresa>da</Adresa>
-    <Naziv>adasdas</Naziv>
-    <Id>3</Id>
-  </Salon>
-  <Salon>
-    <Obrisan>true</Obrisan>
-    <BrojZiroRacuna>1223</BrojZiroRacuna>
-    <MaticniBroj>312</MaticniBroj>
-    <PIB>213</PIB>
-    <AdresaInternetSajta>https://www.dsad.rs</AdresaInternetSajta>
-    <Email>das@gmail.com</Email>
-    <Telefon>da</Telefon>
-    <Adresa>da</Adresa>
-    <Naziv>da</Naziv>
-    <Id>4</Id>
-  </Salon>
 </ArrayOfSalon>

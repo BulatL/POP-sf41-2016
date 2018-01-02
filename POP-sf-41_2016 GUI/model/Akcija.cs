@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_sf_41_2016_GUI.model;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -15,11 +16,23 @@ namespace POP_sf41_2016.model
         private int id;
         private DateTime datumPocetka;
         private DateTime datumZavrsetka;
-        private double popust;
         private bool obrisan;
-        private ObservableCollection<int?> listaNamestajaNaPopustuId;
-        private ObservableCollection<Namestaj> listaNamestajaNaPopustu;
+        private ObservableCollection<int?> listaNaAkcijiId;
+        private ObservableCollection<NaAkciji> listaNaAkciji;
         private string naziv;
+        public string Details
+        {
+            get
+            {
+                var lista = new List<String>();
+                foreach (var item in ListaNaAkciji)
+                {
+                    lista.Add(item.Namestaj.Naziv);
+                }
+
+                return String.Format("Namestaj na popustu: " + lista);
+            }
+        }
 
         public string Naziv
         {
@@ -31,19 +44,20 @@ namespace POP_sf41_2016.model
             }
         }
 
-
         public Akcija()
         {
+            ListaNaAkcijiId = new ObservableCollection<int?>();
+            ListaNaAkciji = new ObservableCollection<NaAkciji>();
             DatumPocetka = DateTime.Now;
             DatumZavrsetka = DateTime.Now;
         }
 
-        public ObservableCollection<int?> ListaNamestajaNaPopustuId
+        public ObservableCollection<int?> ListaNaAkcijiId
         {
-            get { return listaNamestajaNaPopustuId; }
+            get { return listaNaAkcijiId; }
             set
             {
-                listaNamestajaNaPopustuId = value;
+                listaNaAkcijiId = value;
                 OnPropertyChanged("ListaNamestajaNaPopustuId");
             }
         }
@@ -57,17 +71,6 @@ namespace POP_sf41_2016.model
                 OnPropertyChanged("Obrisan");
             }
         }
-
-        public double Popust
-        {
-            get { return popust; }
-            set
-            {
-                popust = value;
-                OnPropertyChanged("Popust");
-            }
-        }
-
 
         public DateTime DatumZavrsetka
         {
@@ -102,30 +105,30 @@ namespace POP_sf41_2016.model
         }
 
         [XmlIgnore]
-        public ObservableCollection<Namestaj> ListaNamestajaNaPopustu
+        public ObservableCollection<NaAkciji> ListaNaAkciji
         {
             get
             {
-                if(listaNamestajaNaPopustu == null)
+                if(listaNaAkciji.Count == 0)
                 {
-                    listaNamestajaNaPopustu = Namestaj.NadjiListuNamestaja(listaNamestajaNaPopustuId);
+                    listaNaAkciji = NaAkciji.NadjiNaAkciji(listaNaAkcijiId);
                 }
 
-                return listaNamestajaNaPopustu;
+                return listaNaAkciji;
             }
             set
             {
-                listaNamestajaNaPopustu = value;
+                listaNaAkciji = value;
 
                 var lista = new ObservableCollection<int?>();
-                if (listaNamestajaNaPopustu != null)
+                if (listaNaAkciji != null)
                 {
-                    foreach (var item in listaNamestajaNaPopustu)
+                    foreach (var item in listaNaAkciji)
                     {
                         lista.Add(item.Id);
                     }
-                    listaNamestajaNaPopustuId = lista;
-                    OnPropertyChanged("ListaNamestajaNaPopustu");
+                    listaNaAkcijiId = lista;
+                    OnPropertyChanged("ListaNaAkciji");
                 }
             }
         }
@@ -146,10 +149,9 @@ namespace POP_sf41_2016.model
             kopija.Id = id;
             kopija.DatumPocetka = datumPocetka;
             kopija.DatumZavrsetka = datumZavrsetka;
-            kopija.Popust = popust;
             kopija.Obrisan = obrisan;
-            kopija.ListaNamestajaNaPopustu = listaNamestajaNaPopustu;
-            kopija.ListaNamestajaNaPopustuId = listaNamestajaNaPopustuId;
+            kopija.ListaNaAkciji = listaNaAkciji;
+            kopija.ListaNaAkcijiId = listaNaAkcijiId;
             kopija.Naziv = naziv;
 
             return kopija;
@@ -157,16 +159,15 @@ namespace POP_sf41_2016.model
 
         public static ObservableCollection<Akcija> Update(Akcija primljenaAkcija)
         {
-            var lista = Projekat.Instance.Akcija;
+            var lista = Projekat.Instance.Akcije;
             foreach (var item in lista)
             {
                 if (item.Id == primljenaAkcija.Id)
                 {
                     item.DatumPocetka = primljenaAkcija.DatumPocetka;
                     item.DatumZavrsetka = primljenaAkcija.DatumZavrsetka;
-                    item.ListaNamestajaNaPopustu = primljenaAkcija.ListaNamestajaNaPopustu;
-                    item.ListaNamestajaNaPopustuId = primljenaAkcija.ListaNamestajaNaPopustuId;
-                    item.Popust = primljenaAkcija.Popust;
+                    item.ListaNaAkciji = primljenaAkcija.ListaNaAkciji;
+                    item.ListaNaAkcijiId = primljenaAkcija.ListaNaAkcijiId;
                     item.Naziv = primljenaAkcija.Naziv;
                     break;
                 }

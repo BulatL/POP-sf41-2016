@@ -2,38 +2,32 @@
 <ArrayOfDodatnaUsluga xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DodatnaUsluga>
     <Obrisan>false</Obrisan>
-    <Cena>4267</Cena>
+    <Cena>541</Cena>
     <Naziv>Prevoz</Naziv>
     <Id>1</Id>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Obrisan>false</Obrisan>
-    <Cena>1523</Cena>
+    <Cena>2541</Cena>
     <Naziv>Montiranje</Naziv>
     <Id>2</Id>
   </DodatnaUsluga>
   <DodatnaUsluga>
-    <Obrisan>true</Obrisan>
-    <Cena>0</Cena>
-    <Naziv>Pakovanje</Naziv>
+    <Obrisan>false</Obrisan>
+    <Cena>1342</Cena>
+    <Naziv>Presvlacenje</Naziv>
     <Id>3</Id>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Obrisan>false</Obrisan>
-    <Cena>4310</Cena>
-    <Naziv>Presvlacenje</Naziv>
+    <Cena>1515</Cena>
+    <Naziv>dasd</Naziv>
     <Id>4</Id>
   </DodatnaUsluga>
   <DodatnaUsluga>
     <Obrisan>false</Obrisan>
-    <Cena>3462</Cena>
-    <Naziv>Transport</Naziv>
-    <Id>5</Id>
-  </DodatnaUsluga>
-  <DodatnaUsluga>
-    <Obrisan>false</Obrisan>
-    <Cena>230</Cena>
-    <Naziv>garancija</Naziv>
-    <Id>6</Id>
+    <Cena>1515</Cena>
+    <Naziv>dasd</Naziv>
+    <Id>4</Id>
   </DodatnaUsluga>
 </ArrayOfDodatnaUsluga>

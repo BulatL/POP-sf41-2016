@@ -2,101 +2,83 @@
 <ArrayOfNamestaj xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Namestaj>
     <Id>1</Id>
-    <Naziv>Super sofa</Naziv>
-    <Sifra>sifra za sofe</Sifra>
-    <JedinicnaCena>4735</JedinicnaCena>
-    <KolicinaUMagacinu>5091</KolicinaUMagacinu>
-    <TipNamestajaId>2</TipNamestajaId>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
-  <Namestaj>
-    <Id>2</Id>
-    <Naziv>Regal</Naziv>
-    <Sifra>r44</Sifra>
-    <JedinicnaCena>2112.3</JedinicnaCena>
-    <KolicinaUMagacinu>2</KolicinaUMagacinu>
+    <Naziv>Polica</Naziv>
+    <Sifra>P1</Sifra>
+    <JedinicnaCena>1564.2</JedinicnaCena>
+    <KolicinaUMagacinu>21</KolicinaUMagacinu>
     <TipNamestajaId>1</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
+    <Id>2</Id>
+    <Naziv>Super kauc</Naziv>
+    <Sifra>SK41</Sifra>
+    <JedinicnaCena>512</JedinicnaCena>
+    <KolicinaUMagacinu>41</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
     <Id>3</Id>
-    <Naziv>Super sto</Naziv>
-    <Sifra>s412</Sifra>
-    <JedinicnaCena>421</JedinicnaCena>
-    <KolicinaUMagacinu>290</KolicinaUMagacinu>
-    <TipNamestajaId>7</TipNamestajaId>
+    <Naziv>Regal</Naziv>
+    <Sifra>R41</Sifra>
+    <JedinicnaCena>512</JedinicnaCena>
+    <KolicinaUMagacinu>43</KolicinaUMagacinu>
+    <TipNamestajaId>3</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
     <Id>4</Id>
-    <Naziv>Lampa</Naziv>
-    <Sifra>s41235</Sifra>
-    <JedinicnaCena>213.2</JedinicnaCena>
-    <KolicinaUMagacinu>312088</KolicinaUMagacinu>
+    <Naziv>Socijalna fotelja</Naziv>
+    <Sifra>SF41</Sifra>
+    <JedinicnaCena>123</JedinicnaCena>
+    <KolicinaUMagacinu>46</KolicinaUMagacinu>
     <TipNamestajaId>4</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
     <Id>5</Id>
-    <Naziv>Stolna Lampa</Naziv>
-    <Sifra>s41235</Sifra>
-    <JedinicnaCena>231</JedinicnaCena>
-    <KolicinaUMagacinu>145</KolicinaUMagacinu>
-    <TipNamestajaId>4</TipNamestajaId>
+    <Naziv>Ugaona garnitura</Naziv>
+    <Sifra>UG41</Sifra>
+    <JedinicnaCena>141</JedinicnaCena>
+    <KolicinaUMagacinu>41</KolicinaUMagacinu>
+    <TipNamestajaId>5</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
     <Id>6</Id>
-    <Naziv>Lamperija</Naziv>
-    <Sifra>s41235</Sifra>
-    <JedinicnaCena>4</JedinicnaCena>
-    <KolicinaUMagacinu>2</KolicinaUMagacinu>
-    <TipNamestajaId>5</TipNamestajaId>
-    <Obrisan>true</Obrisan>
-  </Namestaj>
-  <Namestaj>
-    <Id>7</Id>
-    <Naziv>Sto</Naziv>
-    <Sifra>s412</Sifra>
-    <JedinicnaCena>541</JedinicnaCena>
-    <KolicinaUMagacinu>1383</KolicinaUMagacinu>
-    <TipNamestajaId>5</TipNamestajaId>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
-  <Namestaj>
-    <Id>8</Id>
-    <Naziv>Kauc</Naziv>
-    <Sifra>k41</Sifra>
-    <JedinicnaCena>512</JedinicnaCena>
-    <KolicinaUMagacinu>511451</KolicinaUMagacinu>
-    <TipNamestajaId>6</TipNamestajaId>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
-  <Namestaj>
-    <Id>9</Id>
     <Naziv>Socijalni kauc</Naziv>
-    <Sifra>ka4</Sifra>
-    <JedinicnaCena>156</JedinicnaCena>
-    <KolicinaUMagacinu>274</KolicinaUMagacinu>
-    <TipNamestajaId>1</TipNamestajaId>
-    <Obrisan>false</Obrisan>
-  </Namestaj>
-  <Namestaj>
-    <Id>10</Id>
-    <Naziv>Novo333</Naziv>
-    <Sifra>n41</Sifra>
-    <JedinicnaCena>213</JedinicnaCena>
-    <KolicinaUMagacinu>10</KolicinaUMagacinu>
+    <Sifra>SK51</Sifra>
+    <JedinicnaCena>36</JedinicnaCena>
+    <KolicinaUMagacinu>15</KolicinaUMagacinu>
     <TipNamestajaId>2</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
   <Namestaj>
-    <Id>3</Id>
-    <Naziv>Super sto</Naziv>
-    <Sifra>s412</Sifra>
-    <JedinicnaCena>421</JedinicnaCena>
-    <KolicinaUMagacinu>290</KolicinaUMagacinu>
-    <TipNamestajaId>7</TipNamestajaId>
+    <Id>7</Id>
+    <Naziv>dasd</Naziv>
+    <Sifra>da</Sifra>
+    <JedinicnaCena>41</JedinicnaCena>
+    <KolicinaUMagacinu>41</KolicinaUMagacinu>
+    <TipNamestajaId>3</TipNamestajaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>8</Id>
+    <Naziv>asgas</Naziv>
+    <Sifra>gasg</Sifra>
+    <JedinicnaCena>31</JedinicnaCena>
+    <KolicinaUMagacinu>31</KolicinaUMagacinu>
+    <TipNamestajaId>4</TipNamestajaId>
+    <Obrisan>false</Obrisan>
+  </Namestaj>
+  <Namestaj>
+    <Id>9</Id>
+    <Naziv>ga</Naziv>
+    <Sifra>aga</Sifra>
+    <JedinicnaCena>14</JedinicnaCena>
+    <KolicinaUMagacinu>14</KolicinaUMagacinu>
+    <TipNamestajaId>2</TipNamestajaId>
     <Obrisan>false</Obrisan>
   </Namestaj>
 </ArrayOfNamestaj>

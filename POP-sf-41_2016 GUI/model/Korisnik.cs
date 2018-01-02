@@ -8,10 +8,21 @@ using System.Threading.Tasks;
 
 namespace POP_sf41_2016.model
 {
-    public enum TipKorisnika
+    public class Enums
     {
-        Administrator,
-        Prodavac
+        public enum TipKorisnika
+        {
+            Administrator,
+            Prodavac
+        }
+
+        public static TipKorisnika GetValue(String k)
+        {
+            if (TipKorisnika.Administrator.ToString().Equals(k))
+                return TipKorisnika.Administrator;
+            else
+                return TipKorisnika.Prodavac;
+        }
     }
 
     public class Korisnik : INotifyPropertyChanged, ICloneable
@@ -22,7 +33,7 @@ namespace POP_sf41_2016.model
         private String prezime;
         private String korisnickoIme;
         private String lozinka;
-        private TipKorisnika tipKorisnika;
+        Enums.TipKorisnika tipKorisnika;
         private bool obrisan;
 
         public bool Obrisan
@@ -36,7 +47,7 @@ namespace POP_sf41_2016.model
         }
 
 
-        public TipKorisnika TipKorisnika
+        public Enums.TipKorisnika TipKorisnika
         {
             get { return tipKorisnika; }
             set
@@ -126,7 +137,7 @@ namespace POP_sf41_2016.model
 
         public static ObservableCollection<Korisnik> Update(Korisnik primljeniKorisnik)
         {
-            var lista = Projekat.Instance.Korisnik;
+            var lista = Projekat.Instance.Korisnici;
             foreach (var item in lista)
             {
                 if (item.Id == primljeniKorisnik.Id)

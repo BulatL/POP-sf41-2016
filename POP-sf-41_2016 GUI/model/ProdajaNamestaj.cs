@@ -10,7 +10,7 @@ using System.Xml.Serialization;
 
 namespace POP_sf_41_2016_GUI.model
 {
-    public class StavkaProdaje : INotifyPropertyChanged
+    public class ProdajaNamestaj : INotifyPropertyChanged
     {
         private int id;
         private int namestajId;
@@ -18,8 +18,18 @@ namespace POP_sf_41_2016_GUI.model
         private double ukupnaCena;
         private Namestaj namestaj;
         private bool obrisan;
+        private int prodajaId;
 
-        [XmlIgnore]
+        public int ProdajaId
+        {
+            get { return prodajaId; }
+            set
+            {
+                prodajaId = value;
+                OnPropertyChanged("ProdajaId");
+            }
+        }
+
         public string Naziv
         {
             get
@@ -76,7 +86,6 @@ namespace POP_sf_41_2016_GUI.model
             }
         }
 
-        [XmlIgnore]
         public Namestaj Namestaj
         {
             get
@@ -91,7 +100,7 @@ namespace POP_sf_41_2016_GUI.model
             {
                 namestaj = value;
                 NamestajId = namestaj.Id;
-                OnPropertyChanged("Namestaj");
+                OnPropertyChanged("Namestaji");
             }
         }
 
@@ -110,10 +119,10 @@ namespace POP_sf_41_2016_GUI.model
             }
         }
 
-        public static ObservableCollection<StavkaProdaje> NadjiStavkuProdaje(ObservableCollection<int?> listaStavkiProsledjeno)
+        public static ObservableCollection<ProdajaNamestaj> NadjiStavkuProdaje(ObservableCollection<int?> listaStavkiProsledjeno)
         {
-            var listaStavki = new ObservableCollection<StavkaProdaje>();
-            foreach (var tip in Projekat.Instance.StavkeProdaje)
+            var listaStavki = new ObservableCollection<ProdajaNamestaj>();
+            foreach (var tip in Projekat.Instance.ProdajaNamestaj)
             {
                 if(listaStavkiProsledjeno != null)
                 {

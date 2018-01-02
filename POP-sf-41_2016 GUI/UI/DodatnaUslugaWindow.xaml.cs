@@ -1,4 +1,5 @@
-﻿using POP_sf41_2016.model;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
@@ -47,19 +48,21 @@ namespace POP_sf_41_2016_GUI.UI
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var listaDodatnihUsluga = Projekat.Instance.DodatnaUsluga;
+            var listaDodatnihUsluga = Projekat.Instance.DodatneUsluge;
 
             if (operacija == Operacija.DODAVANJE)
             {
                 dodatnaUsluga.Id = listaDodatnihUsluga.Count + 1;
 
                 listaDodatnihUsluga.Add(dodatnaUsluga);
+                DodatnaUslugaDAO.Create(dodatnaUsluga);
             }
             else if( operacija == Operacija.IZMENA)
             {
                 listaDodatnihUsluga = DodatnaUsluga.Update(dodatnaUsluga);
+                DodatnaUslugaDAO.Update(dodatnaUsluga);
             }
-            Projekat.Instance.DodatnaUsluga = listaDodatnihUsluga;
+            Projekat.Instance.DodatneUsluge = listaDodatnihUsluga;
             GenericSerializer.Serializer("dodatnaUsluga.xml", listaDodatnihUsluga);
             this.Close();
         }

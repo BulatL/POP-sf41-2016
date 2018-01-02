@@ -1,4 +1,5 @@
-﻿using POP_sf41_2016.model;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
@@ -39,7 +40,7 @@ namespace POP_sf_41_2016_GUI.UI
             tbPrezime.DataContext = korisnik;
             tbKorisnickoIme.DataContext = korisnik;
             tbPassword.DataContext = korisnik;
-            cbTipKorisnika.ItemsSource = Enum.GetValues(typeof(TipKorisnika)).Cast<TipKorisnika>();
+            cbTipKorisnika.ItemsSource = Enum.GetValues(typeof(Enums.TipKorisnika)).Cast<Enums.TipKorisnika>();
             cbTipKorisnika.DataContext = korisnik;
 
             if (operacija == Operacija.IZMENA)
@@ -53,17 +54,19 @@ namespace POP_sf_41_2016_GUI.UI
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var listaKorisnika = Projekat.Instance.Korisnik;
+            var listaKorisnika = Projekat.Instance.Korisnici;
 
             if (operacija == Operacija.DODAVANJE)
             {
                 korisnik.Id = listaKorisnika.Count + 1;
+                KorisnikDAO.Create(korisnik);
             }
             else if ( operacija == Operacija.IZMENA)
             {
                 listaKorisnika = Korisnik.Update(korisnik);
+                KorisnikDAO.Update(korisnik);
             }
-            Projekat.Instance.Korisnik = listaKorisnika;
+            Projekat.Instance.Korisnici = listaKorisnika;
             GenericSerializer.Serializer("korisnici.xml", listaKorisnika);
             this.Close();
         }

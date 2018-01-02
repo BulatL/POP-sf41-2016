@@ -1,4 +1,5 @@
-﻿using POP_sf_41_2016_GUI.model;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf_41_2016_GUI.model;
 using POP_sf41_2016.util;
 using System;
 using System.Collections.Generic;
@@ -13,31 +14,49 @@ namespace POP_sf41_2016.model
     {
         public static Projekat Instance { get; private set; } = new Projekat();
 
-        public ObservableCollection<Namestaj> Namestaj { get; set; }
+        public ObservableCollection<Namestaj> Namestaji { get; set; }
 
-        public ObservableCollection<TipNamestaja> TipNamestaja { get; set; }
+        public ObservableCollection<TipNamestaja> TipoviNamestaja { get; set; }
 
-        public ObservableCollection<Akcija> Akcija { get; set; }
+        public ObservableCollection<Akcija> Akcije { get; set; }
 
-        public ObservableCollection<DodatnaUsluga> DodatnaUsluga { get; set; }
+        public ObservableCollection<NaAkciji> NaAkciji { get; set; }
 
-        public ObservableCollection<Korisnik> Korisnik { get; set; }
+        public ObservableCollection<DodatnaUsluga> DodatneUsluge { get; set; }
+
+        public ObservableCollection<Korisnik> Korisnici { get; set; }
 
         public ObservableCollection<Salon> Salon { get; set; }
 
-        public ObservableCollection<ProdajaNamestaja> ProdajaNamestaja { get; set; }
-        public ObservableCollection<StavkaProdaje> StavkeProdaje { get; set; }
+        public ObservableCollection<Prodaja> Prodaja { get; set; }
+
+        public ObservableCollection<ProdajaNamestaj> ProdajaNamestaj { get; set; }
+
+        public ObservableCollection<ProdajaDodatnaUsluga> ProdajaDodatneUsluge { get; set; }
 
         private Projekat()
         {
-            Namestaj = GenericSerializer.Deserializer<Namestaj>("namestaj.xml");
-            TipNamestaja = GenericSerializer.Deserializer<TipNamestaja>("tipNamestaja.xml");
-            Akcija = GenericSerializer.Deserializer<Akcija>("akcija.xml");
-            DodatnaUsluga = GenericSerializer.Deserializer<DodatnaUsluga>("dodatnaUsluga.xml");
-            Korisnik = GenericSerializer.Deserializer<Korisnik>("korisnici.xml");
-            Salon = GenericSerializer.Deserializer<Salon>("salon.xml");
-            ProdajaNamestaja = GenericSerializer.Deserializer<ProdajaNamestaja>("prodajaNamestaja.xml");
-            StavkeProdaje = GenericSerializer.Deserializer<StavkaProdaje>("stavkaProdaje.xml");
+            Namestaji = new ObservableCollection<Namestaj>();
+            TipoviNamestaja = new ObservableCollection<TipNamestaja>();
+            Akcije = new ObservableCollection<Akcija>();
+            NaAkciji = new ObservableCollection<NaAkciji>();
+            DodatneUsluge = new ObservableCollection<DodatnaUsluga>();
+            Korisnici = new ObservableCollection<Korisnik>();
+            Salon = new ObservableCollection<Salon>();
+            Prodaja = new ObservableCollection<Prodaja>();
+            ProdajaNamestaj = new ObservableCollection<ProdajaNamestaj>();
+            ProdajaDodatneUsluge = new ObservableCollection<ProdajaDodatnaUsluga>();
+        }
+
+        public void LoadTestData()
+        {
+            TipNamestajaDAO.Load();
+            NaAkcijiDAO.Load();
+            AkcijaDAO.Load();
+            DodatnaUslugaDAO.Load();
+            KorisnikDAO.Load();
+            NamestajDAO.Load();
+            SalonDAO.Load();
         }
     }
 }

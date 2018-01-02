@@ -1,4 +1,5 @@
-﻿using System;
+﻿using POP_sf41_2016.model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,9 @@ namespace POP_sf_41_2016_GUI
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Projekat.Instance.LoadTestData();
+        }
     }
 }
