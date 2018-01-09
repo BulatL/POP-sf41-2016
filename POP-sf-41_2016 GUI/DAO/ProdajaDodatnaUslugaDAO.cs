@@ -40,7 +40,7 @@ namespace POP_sf_41_2016_GUI.DAO
                 foreach (DataRow row in dsA.Tables["ProdajaDodatnaUsluga"].Rows)
                 {
                     ProdajaDodatnaUsluga prodajaDodatnaUsluga = new ProdajaDodatnaUsluga();
-                    prodajaDodatnaUsluga.Id = int.Parse(row["IdPDN"].ToString());
+                    prodajaDodatnaUsluga.Id = int.Parse(row["IdPDU"].ToString());
                     prodajaDodatnaUsluga.DodatnaUslugaId = int.Parse(row["DodatnaUslugaId"].ToString());
                     prodajaDodatnaUsluga.ProdajaId = int.Parse(row["ProdajaId"].ToString());
                     prodajaDodatnaUsluga.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
@@ -88,7 +88,7 @@ namespace POP_sf_41_2016_GUI.DAO
                 foreach (DataRow row in dsA.Tables["ProdajaDodatnaUsluga"].Rows)
                 {
                     ProdajaDodatnaUsluga prodajaDodatnaUsluga = new ProdajaDodatnaUsluga();
-                    prodajaDodatnaUsluga.Id = int.Parse(row["IdPDN"].ToString());
+                    prodajaDodatnaUsluga.Id = int.Parse(row["IdPDU"].ToString());
                     prodajaDodatnaUsluga.DodatnaUslugaId = int.Parse(row["DodatnaUslugaId"].ToString());
                     prodajaDodatnaUsluga.ProdajaId = int.Parse(row["ProdajaId"].ToString());
                     prodajaDodatnaUsluga.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
@@ -153,7 +153,7 @@ namespace POP_sf_41_2016_GUI.DAO
             Projekat.Instance.ProdajaDodatneUsluge.Add(prodajaDodatnaUsluga);
         }
 
-        public static void Delete(ProdajaDodatnaUsluga prodajaDodatnaUsluga, TipBrisanja tipBrisanja)
+        public static void Delete(ProdajaDodatnaUsluga prodajaDodatnaUsluga, TipBrisanja tipBrisanja, int prodajaId)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
@@ -165,7 +165,7 @@ namespace POP_sf_41_2016_GUI.DAO
                         cmd.CommandText = @"UPDATE ProdajaDodatnaUsluga SET Obrisan = 1 WHERE ProdajaId=@ProdajaId";
 
                         cmd.Parameters.Add(new SqlParameter("@Obrisan", prodajaDodatnaUsluga.Obrisan));
-                        cmd.Parameters.Add(new SqlParameter("@ProdajaId", prodajaDodatnaUsluga.ProdajaId));
+                        cmd.Parameters.Add(new SqlParameter("@ProdajaId", prodajaId));
                         var i = cmd.ExecuteNonQuery();
 
                         break;

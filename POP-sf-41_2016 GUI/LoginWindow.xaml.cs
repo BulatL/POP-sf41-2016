@@ -32,11 +32,6 @@ namespace POP_sf_41_2016_GUI
 
         }
 
-        private void btnZatvori_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             var listaKorisnika = Projekat.Instance.Korisnici;

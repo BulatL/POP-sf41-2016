@@ -26,7 +26,7 @@ namespace POP_sf41_2016.model
 
         public ObservableCollection<Korisnik> Korisnici { get; set; }
 
-        public ObservableCollection<Salon> Salon { get; set; }
+        public ObservableCollection<Salon>  Salon { get; set; }
 
         public ObservableCollection<Prodaja> Prodaja { get; set; }
 
@@ -50,13 +50,16 @@ namespace POP_sf41_2016.model
 
         public void LoadTestData()
         {
+            SalonDAO.Load();
             TipNamestajaDAO.Load();
-            NaAkcijiDAO.Load();
             AkcijaDAO.Load();
+            NaAkcijiDAO.Load();
             DodatnaUslugaDAO.Load();
             KorisnikDAO.Load();
             NamestajDAO.Load();
-            SalonDAO.Load();
+            ProdajaDAO.Load();
+            ProdajaDodatnaUslugaDAO.Load();
+            ProdajaNamestajDAO.Load();
         }
     }
 }

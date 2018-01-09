@@ -158,7 +158,7 @@ namespace POP_sf_41_2016_GUI.DAO
             Projekat.Instance.ProdajaNamestaj.Add(prodajaNamestaj);
         }
 
-        public static void Delete(ProdajaNamestaj prodajaNamestaj, TipBrisanja tipBrisanja)
+        public static void Delete(ProdajaNamestaj prodajaNamestaj, TipBrisanja tipBrisanja, int prodajaId)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
@@ -170,7 +170,7 @@ namespace POP_sf_41_2016_GUI.DAO
                         cmd.CommandText = @"UPDATE ProdajaNamestaj SET Obrisan = 1 WHERE ProdajaId=@ProdajaId";
 
                         cmd.Parameters.Add(new SqlParameter("@Obrisan", prodajaNamestaj.Obrisan));
-                        cmd.Parameters.Add(new SqlParameter("@ProdajaId", prodajaNamestaj.ProdajaId));
+                        cmd.Parameters.Add(new SqlParameter("@ProdajaId", prodajaId));
                         var i = cmd.ExecuteNonQuery();
 
                         break;

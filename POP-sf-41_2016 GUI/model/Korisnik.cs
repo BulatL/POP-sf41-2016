@@ -152,5 +152,18 @@ namespace POP_sf41_2016.model
             }
             return lista;
         }
+
+        public static Korisnik NadjiKorisnika(int prosledjenId)
+        {
+            var korisnik = new Korisnik();
+            foreach (var tip in Projekat.Instance.Korisnici)
+            {
+                if (tip.Id == prosledjenId)
+                {
+                    korisnik = tip;
+                }
+            }
+            return korisnik;
+        }
     }
 }

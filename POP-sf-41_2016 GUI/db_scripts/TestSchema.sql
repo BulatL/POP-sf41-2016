@@ -1,13 +1,13 @@
 ﻿CREATE TABLE TipNamestaj(
 	IdTN int primary key  identity(1, 1),
-	Naziv varchar (80) not null,
+	Naziv varchar (60) not null,
 	Obrisan bit 
 );
 
 CREATE TABLE Namestaj(
 	IdN int primary key  identity(1, 1),
 	TipNamestajaId int,
-	Naziv varchar (100) not null,
+	Naziv varchar (60) not null,
 	Sifra varchar (20) not null,
 	Cena money not null, 
 	Kolicina smallint,
@@ -18,7 +18,7 @@ CREATE TABLE Namestaj(
 
 CREATE TABLE DodatnaUsluga(
 	IdDU int primary key  identity(1, 1),
-	Naziv varchar(60) not null,
+	Naziv varchar(30) not null,
 	Cena decimal(9, 2),
 	Obrisan bit,
 );
@@ -44,10 +44,10 @@ CREATE TABLE NaAkciji(
 
 CREATE TABLE Korisnik(
 	IdK int primary key  identity(1, 1),
-	Ime varchar(30) not null,
-	Prezime varchar(60) not null,
-	KorisnickoIme varchar(20) not null,
-	Lozinka varchar(20) not null,
+	Ime varchar(20) not null,
+	Prezime varchar(30) not null,
+	KorisnickoIme varchar(25) not null,
+	Lozinka varchar(25) not null,
 	TipKorisnika varchar(13) not null,
 	Obrisan bit,
 );
@@ -57,22 +57,24 @@ CREATE TABLE Salon(
 	Naziv varchar(40) not null,
 	Adresa varchar(60) not null,
 	Telefon varchar(30) not null,
-	Email varchar(30) not null,
+	Email varchar(40) not null,
 	Sajt varchar(60) not null,
-	PIB smallint not null,
-	MaticniBroj smallint not null,
-	BrojZiroRacuna smallint not null,
+	PIB int not null,
+	MaticniBroj int not null,
+	BrojZiroRacuna int not null,
 	Obrisan bit,
 );
 
 CREATE TABLE Prodaja(
 	IdP int primary key  identity(1, 1),
 	DatumProdaje date not null,
-	BrojRacuna varchar(30) not null,
-	Kupac varchar(60) not null,
-	Prodavac varchar(30) not null,
+	BrojRacuna varchar(10) not null,
+	Kupac varchar(20) not null,
+	ProdavacId int not null,
 	UkupanIznos money not null,
 	Obrisan bit,
+
+	FOREIGN KEY (ProdavacId) references Korisnik(IdK),
 );
 
 CREATE TABLE ProdajaNamestaj(

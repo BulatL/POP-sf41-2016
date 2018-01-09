@@ -37,6 +37,7 @@ namespace POP_sf_41_2016_GUI.UI
             this.operacija = operacija;
 
             tbNaziv.DataContext = dodatnaUsluga;
+            tbNaziv.MaxLength = 30;
             tbCena.DataContext = dodatnaUsluga;
         }
 

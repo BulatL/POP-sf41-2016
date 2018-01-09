@@ -20,19 +20,6 @@ namespace POP_sf41_2016.model
         private ObservableCollection<int?> listaNaAkcijiId;
         private ObservableCollection<NaAkciji> listaNaAkciji;
         private string naziv;
-        public string Details
-        {
-            get
-            {
-                var lista = new List<String>();
-                foreach (var item in ListaNaAkciji)
-                {
-                    lista.Add(item.Namestaj.Naziv);
-                }
-
-                return String.Format("Namestaj na popustu: " + lista);
-            }
-        }
 
         public string Naziv
         {
@@ -47,7 +34,6 @@ namespace POP_sf41_2016.model
         public Akcija()
         {
             ListaNaAkcijiId = new ObservableCollection<int?>();
-            ListaNaAkciji = new ObservableCollection<NaAkciji>();
             DatumPocetka = DateTime.Now;
             DatumZavrsetka = DateTime.Now;
         }
@@ -109,7 +95,7 @@ namespace POP_sf41_2016.model
         {
             get
             {
-                if(listaNaAkciji.Count == 0)
+                if(listaNaAkciji == null)
                 {
                     listaNaAkciji = NaAkciji.NadjiNaAkciji(listaNaAkcijiId);
                 }

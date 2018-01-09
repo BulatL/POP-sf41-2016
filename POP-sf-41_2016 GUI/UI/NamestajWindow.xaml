@@ -3,35 +3,111 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
+        xmlns:local="clr-namespace:POP_sf_41_2016_GUI"
         mc:Ignorable="d"
-        Title="NamestajWindow" Height="408.064" Width="445.749">
+        Title="NamestajWindow" Height="568.664" Width="464.916">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationError">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="16" DockPanel.Dock="Right" HorizontalAlignment="Center">!!!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder/>
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidatorConverter x:Key="converter"/>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="53*"/>
-            <ColumnDefinition Width="167*"/>
+            <ColumnDefinition Width="104*"/>
+            <ColumnDefinition Width="353*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="80*"/>
+            <RowDefinition Height="82*"/>
+            <RowDefinition Height="82*"/>
+            <RowDefinition Height="82*"/>
+            <RowDefinition Height="82*"/>
+            <RowDefinition Height="114*"/>
+            <RowDefinition Height="98*"/>
         </Grid.RowDefinitions>
-        <Label Content="Naziv" HorizontalAlignment="Left" Margin="15,12,0,0" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="Sifra" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="1" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="Cena" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="2" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="Kolicina" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="3" VerticalAlignment="Top" Width="138" Grid.ColumnSpan="2" Height="26"/>
-        <Label Content="Tip namestaja" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="4" VerticalAlignment="Top" Width="143" Grid.ColumnSpan="2" Height="26"/>
+        <Label Content="Naziv" HorizontalAlignment="Left" Margin="15,12,0,0" VerticalAlignment="Top" Width="81" Height="39" FontSize="18"/>
+        <Label Content="Sifra" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="1" VerticalAlignment="Top" Width="81" Height="39" FontSize="18"/>
+        <Label Content="Cena" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="2" VerticalAlignment="Top" Width="81" Height="39" FontSize="18"/>
+        <Label Content="Kolicina" HorizontalAlignment="Left" Margin="15,12,0,0" Grid.Row="3" VerticalAlignment="Top" Width="81" Height="39" FontSize="18"/>
+        <TextBlock Text="Tip namestaja" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Width="91" Height="60" TextWrapping="WrapWithOverflow" FontSize="18"/>
 
-        <TextBox Text="{Binding Path=Naziv}" Name="tbNaziv" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <TextBox Text="{Binding Path=Sifra}" Name="tbSifra" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <TextBox Text="{Binding Path=JedinicnaCena}" Name="tbCena" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <TextBox Text="{Binding Path=KolicinaUMagacinu}" Name="tbKolicina" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,12,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="213"/>
-        <ComboBox SelectedItem="{Binding Path=TipNamestaja}" Name="cbTipNamestaja" Grid.Column="1" HorizontalAlignment="Left" Margin="103,12,0,0" Grid.Row="4" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Odustani" Name="bnOdustani" Grid.Column="1" HorizontalAlignment="Left" Margin="247,46,0,0" Grid.Row="5" VerticalAlignment="Top" Width="75" Click="Odustani_click"/>
-        <Button Content="Potvrdi" Name="btnPotvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="140,46,0,0" Grid.Row="5" VerticalAlignment="Top" Width="74" Click="Potvrdi_click"/>
+        <TextBox Name="tbNaziv" Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="10,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidationString/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="1" Margin="10,51,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbNaziv, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="333" Height="23" VerticalAlignment="Top" />
+        
+        <TextBox Name="tbSifra" Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}"  Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="10,13,0,0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="Sifra" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidationString/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="1" Margin="10,52,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbSifra, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="333" Height="23" VerticalAlignment="Top" Grid.Row="1" />
+        
+        <TextBox Name="tbCena" Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}"  Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="10,12,0,0" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="JedinicnaCena" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:ValidationDouble/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="1" Margin="10,52,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbCena, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="333" Height="23" VerticalAlignment="Top" Grid.Row="2" />
+        
+        <TextBox Name="tbKolicina" Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}"  Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="10,12,0,0" Grid.Row="3" TextWrapping="Wrap" VerticalAlignment="Top" Width="213" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="KolicinaUMagacinu" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidationDouble/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="1" Margin="10,52,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbKolicina, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="333" Height="23" VerticalAlignment="Top" Grid.Row="3" />
+        
+        <ComboBox SelectedItem="{Binding Path=TipNamestaja}" Name="cbTipNamestaja" Grid.Column="1" HorizontalAlignment="Left" Margin="21,23,0,0" Grid.Row="4" VerticalAlignment="Top" Width="178" Height="34" FontSize="16"/>
+        <Button Content="Odustani" Name="bnOdustani" Grid.Column="1" HorizontalAlignment="Left" Margin="203,23,0,0" Grid.Row="5" VerticalAlignment="Top" Width="76" Click="Odustani_click" Height="36" FontSize="16"/>
+        <Button Content="Potvrdi" Name="btnPotvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="77,23,0,0" Grid.Row="5" VerticalAlignment="Top" Width="76" Click="Potvrdi_click" Height="36" FontSize="16">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNaziv}" Value="false"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbSifra}" Value="false"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbCena}" Value="false"/>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbKolicina}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
 
     </Grid>
 </Window>

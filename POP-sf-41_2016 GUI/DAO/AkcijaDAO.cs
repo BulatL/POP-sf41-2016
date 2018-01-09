@@ -22,6 +22,32 @@ namespace POP_sf_41_2016_GUI.DAO
             Namestaji
         }
 
+        public static int GetLastId()
+        {
+            int lastId = 0;
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = @"SELECT TOP(1) IdA " +
+                                   "FROM Akcija " +
+                                   "ORDER BY IdA DESC; ";
+
+                SqlDataAdapter sqlDA = new SqlDataAdapter();
+                sqlDA.SelectCommand = cmd;
+
+                DataSet dsA = new DataSet(); // izvrsavanje upita
+                sqlDA.Fill(dsA, "Akcija");
+
+                foreach (DataRow row in dsA.Tables["Akcija"].Rows)
+                {
+                    lastId = int.Parse(row["IdA"].ToString());
+                }
+            }
+            return lastId;
+        }
+
         public static void Load()
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
@@ -55,7 +81,7 @@ namespace POP_sf_41_2016_GUI.DAO
                         {
                             AkcijaId = akcija.Id
                         };
-                        NaAkcijiDAO.Delete(na, TipBrisanja.PoAkcijaId);
+                        NaAkcijiDAO.Delete(na, TipBrisanja.PoAkcijaId, akcija.Id, 0);
                         Delete(akcija);
                     }
                     else
@@ -122,7 +148,29 @@ namespace POP_sf_41_2016_GUI.DAO
             Projekat.Instance.Akcije.Add(akcija);
         }
 
-        public static ObservableCollection<Akcija> Find(String parametarZaPretragu, TipPretrage tipPretrage, DateTime? dateTime)
+        public static string SortBy(int sort)
+        {
+            String sortBy = "";
+            if (sort == 0)
+            {
+                sortBy = @"ORDER BY IdA;";
+            }
+            else if (sort == 1)
+            {
+                sortBy = @"ORDER BY DatumPocetka;";
+            }
+            else if (sort == 2)
+            {
+                sortBy = @"ORDER BY DatumZavrsetka;";
+            }
+            else if (sort == 3)
+            {
+                sortBy = @"ORDER BY Naziv;";
+            }
+            return sortBy;
+        }
+
+        public static ObservableCollection<Akcija> FindSort(String parametarZaPretragu, TipPretrage tipPretrage, DateTime? dateTime, int sort)
         {
             var listaPretraga = new ObservableCollection<Akcija>();
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
@@ -135,25 +183,33 @@ namespace POP_sf_41_2016_GUI.DAO
                     case TipPretrage.DatumPocetka:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Akcija " +
-                                           "WHERE Obrisan = 0 and DatumPocetka >= @dateTime;";
+                                           "WHERE Obrisan = 0 and DatumPocetka >= @dateTime ";
+
+                        cmd.CommandText += SortBy(sort);
                         cmd.Parameters.Add(new SqlParameter("@dateTime", dateTime));
                         break;
                     case TipPretrage.DatumZavrsetka:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Akcija " +
-                                           "WHERE Obrisan = 0 and DatumPocetka <= @dateTime;";
+                                           "WHERE Obrisan = 0 and DatumZavrsetka <= @dateTime ";
+
+                        cmd.CommandText += SortBy(sort);
                         cmd.Parameters.Add(new SqlParameter("@dateTime", dateTime));
                         break;
                     case TipPretrage.Naziv:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Akcija " +
-                                           "WHERE Obrisan = 0 and Naziv like @ParametarNaziv;";
+                                           "WHERE Obrisan = 0 and Naziv like @ParametarNaziv ";
+
+                        cmd.CommandText += SortBy(sort);
                         cmd.Parameters.Add(new SqlParameter("@ParametarNaziv", "%" + parametarZaPretragu + "%"));
                         break;
                     case TipPretrage.Namestaji:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Akcija a inner join NaAkciji na on a.IdA = na.AkcijaId inner join Namestaj n on n.IdN = na.NamestajId  " +
-                                           "WHERE a.Obrisan = 0 and na.Obrisan = 0 and n.Naziv like @ParametarNaziv;";
+                                           "WHERE a.Obrisan = 0 and na.Obrisan = 0 and n.Naziv like @ParametarNaziv ";
+
+                        cmd.CommandText += SortBy(sort);
                         cmd.Parameters.Add(new SqlParameter("@ParametarNaziv", "%" + parametarZaPretragu + "%"));
                         break;
                 }
@@ -202,6 +258,7 @@ namespace POP_sf_41_2016_GUI.DAO
                         ak.Obrisan = true;
                     }
                 }
+                NaAkcijiDAO.Delete(null, TipBrisanja.PoAkcijaId, akcija.Id, 0);
             }
         }
     }

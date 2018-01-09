@@ -76,6 +76,12 @@ namespace POP_sf_41_2016_GUI
                 Obrisibtn.Visibility = Visibility.Collapsed;
             }
 
+            PopuniDataGrid(parametar);
+        }
+
+        #region PopuniDataGrid
+        public void PopuniDataGrid(Parametar parametar)
+        {
             switch (parametar)
             {
                 #region Namestaj punjenje dg
@@ -97,10 +103,7 @@ namespace POP_sf_41_2016_GUI
                         cbPretrazi.Items.Add("Tipu namestaja");
                         cbPretrazi.Items.Add("Sifri");
                         cbPretrazi.SelectedIndex = 0;
-                    }
                     //Punjenje comboboxa za Sortiranje
-                    if (cbSortiraj.Items.Count < 1)
-                    {
                         cbSortiraj.Items.Add("Id-u");
                         cbSortiraj.Items.Add("Nazivu");
                         cbSortiraj.Items.Add("Sifri");
@@ -125,12 +128,16 @@ namespace POP_sf_41_2016_GUI
                     dataGridTipNamestaja.IsSynchronizedWithCurrentItem = true;
                     dataGridTipNamestaja.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretrazi
-                    cbPretrazi.Items.Add("Nazivu");
-                    cbPretrazi.SelectedIndex = 0;
+                    if (cbPretrazi.Items.Count < 1)
+                    {
+                        cbPretrazi.Items.Add("Nazivu");
+                        cbPretrazi.SelectedIndex = 0;
                     //Punjenje comboboxa za Sortiranje
-                    cbSortiraj.Items.Add("Id-u");
-                    cbSortiraj.Items.Add("Nazivu");
-                    cbSortiraj.SelectedIndex = 0;
+                        cbSortiraj.Items.Add("Id-u");
+                        cbSortiraj.Items.Add("Nazivu");
+                        cbSortiraj.SelectedIndex = 0;
+                    }
+
                     break;
                 #endregion
 
@@ -147,17 +154,20 @@ namespace POP_sf_41_2016_GUI
                     dataGridAkcija.ItemsSource = viewa;
                     dataGridAkcija.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretrazivanje
-                    cbPretrazi.Items.Add("Datum pocetka");
-                    cbPretrazi.Items.Add("Datum zavrsetka");
-                    cbPretrazi.Items.Add("Naziv akcije");
-                    cbPretrazi.Items.Add("Namestaj na popustu");
-                    cbPretrazi.SelectedIndex = 0;
+                    if (cbPretrazi.Items.Count < 1)
+                    {
+                        cbPretrazi.Items.Add("Datum pocetka");
+                        cbPretrazi.Items.Add("Datum zavrsetka");
+                        cbPretrazi.Items.Add("Naziv akcije");
+                        cbPretrazi.Items.Add("Namestaj na popustu");
+                        cbPretrazi.SelectedIndex = 0;
                     //Punjenje comboboxa za Sortiranje
-                    cbSortiraj.Items.Add("Id-u");
-                    cbSortiraj.Items.Add("Datumu pocetka");
-                    cbSortiraj.Items.Add("Datumu zavrsetka");
-                    cbSortiraj.Items.Add("Nazivu");
-                    cbSortiraj.SelectedIndex = 0;
+                        cbSortiraj.Items.Add("Id-u");
+                        cbSortiraj.Items.Add("Datumu pocetka");
+                        cbSortiraj.Items.Add("Datumu zavrsetka");
+                        cbSortiraj.Items.Add("Nazivu");
+                        cbSortiraj.SelectedIndex = 0;
+                    }
                     break;
                 #endregion
 
@@ -173,11 +183,17 @@ namespace POP_sf_41_2016_GUI
                     viewd.Filter = DodatnaUslugaFilter;
                     dataGridDodatnaUsluga.ItemsSource = viewd;
                     dataGridDodatnaUsluga.Visibility = Visibility.Visible;
-                    //Punjenje comboboxa za Sortiranje
-                    cbSortiraj.Items.Add("Id-u");
-                    cbSortiraj.Items.Add("Nazivu");
-                    cbSortiraj.Items.Add("Ceni");
-                    cbSortiraj.SelectedIndex = 0;
+                    //Punjenje comboboxa za Pretrazivanje
+                    if (cbPretrazi.Items.Count < 1)
+                    {
+                        cbPretrazi.Items.Add("Nazivu");
+                        cbPretrazi.SelectedIndex = 0;
+                        //Punjenje comboboxa za Sortiranje
+                        cbSortiraj.Items.Add("Id-u");
+                        cbSortiraj.Items.Add("Nazivu");
+                        cbSortiraj.Items.Add("Ceni");
+                        cbSortiraj.SelectedIndex = 0;
+                    }
                     break;
                 #endregion
 
@@ -194,18 +210,21 @@ namespace POP_sf_41_2016_GUI
                     dataGridKorisnik.ItemsSource = viewk;
                     dataGridKorisnik.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretragu
-                    cbPretrazi.Items.Add("Imenu");
-                    cbPretrazi.Items.Add("Prezimenu");
-                    cbPretrazi.Items.Add("Korisnickom imenu");
-                    cbPretrazi.SelectedIndex = 0;
-                    //Punjenje comboboxa za Sortiranje
-                    cbSortiraj.Items.Add("Id-u");
-                    cbSortiraj.Items.Add("Imenu");
-                    cbSortiraj.Items.Add("Prezimenu");
-                    cbSortiraj.Items.Add("Korisnickom imenu");
-                    cbSortiraj.Items.Add("Lozinci");
-                    cbSortiraj.Items.Add("Tipu korisnika");
-                    cbSortiraj.SelectedIndex = 0;
+                    if (cbPretrazi.Items.Count < 1)
+                    {
+                        cbPretrazi.Items.Add("Imenu");
+                        cbPretrazi.Items.Add("Prezimenu");
+                        cbPretrazi.Items.Add("Korisnickom imenu");
+                        cbPretrazi.SelectedIndex = 0;
+                        //Punjenje comboboxa za Sortiranje
+                        cbSortiraj.Items.Add("Id-u");
+                        cbSortiraj.Items.Add("Imenu");
+                        cbSortiraj.Items.Add("Prezimenu");
+                        cbSortiraj.Items.Add("Korisnickom imenu");
+                        cbSortiraj.Items.Add("Lozinci");
+                        cbSortiraj.Items.Add("Tipu korisnika");
+                        cbSortiraj.SelectedIndex = 0;
+                    }
                     break;
                 #endregion
 
@@ -220,7 +239,7 @@ namespace POP_sf_41_2016_GUI
                     views = CollectionViewSource.GetDefaultView(Projekat.Instance.Salon);
                     views.Filter = SalonFilter;
                     dataGridSalon.ItemsSource = views;
-                    dataGridSalon.Visibility = Visibility.Collapsed;
+                    dataGridSalon.Visibility = Visibility.Visible;
                     cbPretrazi.Visibility = Visibility.Collapsed;
                     cbSortiraj.Visibility = Visibility.Collapsed;
                     lblSortiraj.Visibility = Visibility.Collapsed;
@@ -228,6 +247,12 @@ namespace POP_sf_41_2016_GUI
                     tbPretrazi.Visibility = Visibility.Collapsed;
                     Dodajbtn.Visibility = Visibility.Collapsed;
                     Obrisibtn.Visibility = Visibility.Collapsed;
+                    lbPretrazi.Visibility = Visibility.Collapsed;
+                    tbPretrazi.Visibility = Visibility.Collapsed;
+                    dpPretrazi.Visibility = Visibility.Collapsed;
+                    lblSortiraj.Visibility = Visibility.Collapsed;
+                    cbSortiraj.Visibility = Visibility.Collapsed;
+                    btnPretrazi.Visibility = Visibility.Collapsed;
                     if (korisnik.TipKorisnika == Enums.TipKorisnika.Prodavac)
                         btnIzmeni.Visibility = Visibility.Collapsed;
                     break;
@@ -242,12 +267,29 @@ namespace POP_sf_41_2016_GUI
                     viewp.Filter = ProdajaFilter;
                     dataGridProdaja.ItemsSource = viewp;
                     dataGridProdaja.Visibility = Visibility.Visible;
+                    //Punjenje comboboxa za Pretragu
+                    if (cbPretrazi.Items.Count < 1)
+                    {
+                        cbPretrazi.Items.Add("Kupcu");
+                        cbPretrazi.Items.Add("Prodavcu");
+                        cbPretrazi.Items.Add("Broju racuna");
+                        cbPretrazi.Items.Add("Prodatom namestaju");
+                        cbPretrazi.Items.Add("Datumu prodaje");
+                        cbPretrazi.SelectedIndex = 0;
+                        //Punjenje comboboxa za Sortiranje
+                        cbSortiraj.Items.Add("Id-u");
+                        cbSortiraj.Items.Add("Kupcu");
+                        cbSortiraj.Items.Add("Broju racuna");
+                        cbSortiraj.Items.Add("Prodatom namestaju");
+                        cbSortiraj.Items.Add("Ukupnom iznosu");
+                        cbSortiraj.SelectedIndex = 0;
+                    }
                     break;
                     #endregion
             }
         }
 
-
+#endregion
 
         #region Filteri Dg
         private bool NamestajFilter(object obj) //Prima namestaj i ukoliko je obrisan true ne vraca ga nazad
@@ -379,11 +421,12 @@ namespace POP_sf_41_2016_GUI
                          {
                              Prodaja kopija = (Prodaja)izabranaProdaja.Clone();
 
-                             ProdajaWindow prodajaWindow = new ProdajaWindow(kopija, ProdajaWindow.Operacija.IZMENA);
+                             ProdajaWindow prodajaWindow = new ProdajaWindow(korisnik ,kopija, ProdajaWindow.Operacija.IZMENA);
                              prodajaWindow.ShowDialog();
                          }
                          break;
             }
+            PopuniDataGrid(parametar);
         }
         #endregion
 
@@ -410,7 +453,6 @@ namespace POP_sf_41_2016_GUI
                     var novaAkcija = new Akcija();
                     var akcijaWindow = new AkcijaWindow(novaAkcija , AkcijaWindow.Operacija.DODAVANJE);
                     akcijaWindow.ShowDialog();
-                    
                     break;
 
 
@@ -418,7 +460,6 @@ namespace POP_sf_41_2016_GUI
                     var novaDodatnaUsluga = new DodatnaUsluga();
                     var dodatnaUslugaWindow = new DodatnaUslugaWindow(novaDodatnaUsluga , DodatnaUslugaWindow.Operacija.DODAVANJE);
                     dodatnaUslugaWindow.ShowDialog();
-                    
                     break;
 
 
@@ -426,23 +467,21 @@ namespace POP_sf_41_2016_GUI
                     var noviKorisnik = new Korisnik();
                     var korisnikWindow = new KorisnikWindow(noviKorisnik , KorisnikWindow.Operacija.DODAVANJE);
                     korisnikWindow.ShowDialog();
-                    
                     break;
 
                 case Parametar.Salon:
                     var noviSalon = new Salon();
                     var salonWindow = new SalonWindow(noviSalon , SalonWindow.Operacija.DODAVANJE);
                     salonWindow.ShowDialog();
-                    
                     break;
 
                 case Parametar.Prodaja:
                     var novaProdaja = new Prodaja();
-                    var prodajaWindow = new ProdajaWindow(novaProdaja , ProdajaWindow.Operacija.DODAVANJE);
+                    var prodajaWindow = new ProdajaWindow(korisnik ,novaProdaja , ProdajaWindow.Operacija.DODAVANJE);
                     prodajaWindow.ShowDialog();
-
                     break;
             }
+            PopuniDataGrid(parametar);
         }
         #endregion
 
@@ -458,8 +497,8 @@ namespace POP_sf_41_2016_GUI
                     if(MessageBox.Show("Da li ste sigurni da zelite da obrisete namestaj: " + izabraniNamestaj.Naziv + " ?", "Obrisi namestaj", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
                         NamestajDAO.Delete(izabraniNamestaj);
+                        NaAkcijiDAO.Delete(null, TipBrisanja.PoNamestajId, 0, izabraniNamestaj.Id);
                     }
-                    viewn.Refresh();
                     break;
 
                 case Parametar.TipNamestaja:
@@ -538,11 +577,11 @@ namespace POP_sf_41_2016_GUI
                                 break;
                             }
                         }
-                        Projekat.Instance.Prodaja = listaProdaja;
-                        GenericSerializer.Serializer("prodaja.xml", listaProdaja);
                     }
                     break;
             }
+
+            PopuniDataGrid(parametar);
         }
         #endregion
 
@@ -554,283 +593,92 @@ namespace POP_sf_41_2016_GUI
                 case Parametar.Namestaj:
                     if(cbPretrazi.SelectedIndex == 0)
                     {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.Naziv));
+                        var sort = cbSortiraj.SelectedItem;
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.Naziv, cbSortiraj.SelectedIndex));
                         dataGridNamestaj.ItemsSource = viewn;
                     }else if(cbPretrazi.SelectedIndex == 1)
                     {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.TipNamestaja));
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.TipNamestaja, cbSortiraj.SelectedIndex));
                         dataGridNamestaj.ItemsSource = viewn;
                     }else if(cbPretrazi.SelectedIndex == 2)
                     {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.Sifra));
+                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort(tbPretrazi.Text, NamestajDAO.TipPretrage.Sifra, cbSortiraj.SelectedIndex));
                         dataGridNamestaj.ItemsSource = viewn;
                     }
                     break;
                 case Parametar.TipNamestaja:
-                    viewt = CollectionViewSource.GetDefaultView(TipNamestajaDAO.Find(tbPretrazi.Text));
+                    viewt = CollectionViewSource.GetDefaultView(TipNamestajaDAO.FindSort(tbPretrazi.Text, cbSortiraj.SelectedIndex));
                     dataGridTipNamestaja.ItemsSource = viewt;
+                    break;
+                case Parametar.DodatnaUsluga:
+                    viewd = CollectionViewSource.GetDefaultView(DodatnaUslugaDAO.FindSort(tbPretrazi.Text, cbSortiraj.SelectedIndex));
+                    dataGridDodatnaUsluga.ItemsSource = viewd;
                     break;
                 case Parametar.Akcija:
                     if (cbPretrazi.SelectedIndex == 0)
                     {
-                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find("", AkcijaDAO.TipPretrage.DatumPocetka, dpPretrazi.SelectedDate));
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.FindSort("", AkcijaDAO.TipPretrage.DatumPocetka, dpPretrazi.SelectedDate, cbSortiraj.SelectedIndex));
                         dataGridAkcija.ItemsSource = viewa;
                     }
                     else if (cbPretrazi.SelectedIndex == 1)
                     {
-                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find("", AkcijaDAO.TipPretrage.DatumZavrsetka, dpPretrazi.SelectedDate));
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.FindSort("", AkcijaDAO.TipPretrage.DatumZavrsetka, dpPretrazi.SelectedDate, cbSortiraj.SelectedIndex));
                         dataGridAkcija.ItemsSource = viewa;
                     }
                     else if (cbPretrazi.SelectedIndex == 2)
                     {
-                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find(tbPretrazi.Text, AkcijaDAO.TipPretrage.Naziv, null));
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.FindSort(tbPretrazi.Text, AkcijaDAO.TipPretrage.Naziv, null, cbSortiraj.SelectedIndex));
                         dataGridAkcija.ItemsSource = viewa;
                     }
                     else if (cbPretrazi.SelectedIndex == 3)
                     {
-                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.Find(tbPretrazi.Text, AkcijaDAO.TipPretrage.Namestaji, null));
+                        viewa = CollectionViewSource.GetDefaultView(AkcijaDAO.FindSort(tbPretrazi.Text, AkcijaDAO.TipPretrage.Namestaji, null, cbSortiraj.SelectedIndex));
                         dataGridAkcija.ItemsSource = viewa;
                     }
                     break;
                 case Parametar.Korisnik:
                     if (cbPretrazi.SelectedIndex == 0)
                     {
-                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.Find(tbPretrazi.Text, KorisnikDAO.TipPretrage.Ime));
+                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.FindSort(tbPretrazi.Text, KorisnikDAO.TipPretrage.Ime, cbSortiraj.SelectedIndex));
                         dataGridKorisnik.ItemsSource = viewk;
                     }
                     else if (cbPretrazi.SelectedIndex == 1)
                     {
-                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.Find(tbPretrazi.Text, KorisnikDAO.TipPretrage.Prezime));
+                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.FindSort(tbPretrazi.Text, KorisnikDAO.TipPretrage.Prezime, cbSortiraj.SelectedIndex));
                         dataGridKorisnik.ItemsSource = viewk;
                     }
                     else if (cbPretrazi.SelectedIndex == 2)
                     {
-                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.Find(tbPretrazi.Text, KorisnikDAO.TipPretrage.KorisnickoIme));
+                        viewk = CollectionViewSource.GetDefaultView(KorisnikDAO.FindSort(tbPretrazi.Text, KorisnikDAO.TipPretrage.KorisnickoIme, cbSortiraj.SelectedIndex));
                         dataGridKorisnik.ItemsSource = viewk;
                     }
                     break;
                 case Parametar.Prodaja:
-                    break;
-            }
-        }
-        #endregion
-
-        #region Sort
-
-        private void cbSortiraj_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (parametar)
-            {
-                case Parametar.Namestaj:
-                    //NamestajDAO.Load();
-                    var pripremiNamestaj = Projekat.Instance.Namestaji;
-                    List<Namestaj> sortiranaListaNamestaj = new List<Namestaj>();
-
-                    if (cbSortiraj.SelectedIndex == 0)
+                    if (cbPretrazi.SelectedIndex == 0)
                     {
-                        sortiranaListaNamestaj = pripremiNamestaj.OrderBy(o => o.Id).ToList();
+                        viewp = CollectionViewSource.GetDefaultView(ProdajaDAO.FindSort("", ProdajaDAO.TipPretrage.Kupac, null, cbSortiraj.SelectedIndex));
+                        dataGridProdaja.ItemsSource = viewp;
                     }
-                    else if (cbSortiraj.SelectedIndex == 1)
+                    else if (cbPretrazi.SelectedIndex == 1)
                     {
-                        sortiranaListaNamestaj = pripremiNamestaj.OrderBy(o => o.Naziv).ToList();
+                        viewp = CollectionViewSource.GetDefaultView(ProdajaDAO.FindSort("", ProdajaDAO.TipPretrage.Prodavac, null, cbSortiraj.SelectedIndex));
+                        dataGridProdaja.ItemsSource = viewp;
                     }
-                    else if (cbSortiraj.SelectedIndex == 2)
+                    else if (cbPretrazi.SelectedIndex == 2)
                     {
-                        sortiranaListaNamestaj = pripremiNamestaj.OrderBy(o => o.Sifra).ToList();
+                        viewp = CollectionViewSource.GetDefaultView(ProdajaDAO.FindSort(tbPretrazi.Text, ProdajaDAO.TipPretrage.BrRacuna, null, cbSortiraj.SelectedIndex));
+                        dataGridProdaja.ItemsSource = viewp;
                     }
-                    else if (cbSortiraj.SelectedIndex == 3)
+                    else if (cbPretrazi.SelectedIndex == 3)
                     {
-                        sortiranaListaNamestaj = pripremiNamestaj.OrderBy(o => o.JedinicnaCena).ToList();
+                        viewa = CollectionViewSource.GetDefaultView(ProdajaDAO.FindSort(tbPretrazi.Text, ProdajaDAO.TipPretrage.ProdatiNamestaj, null, cbSortiraj.SelectedIndex));
+                        dataGridProdaja.ItemsSource = viewp;
                     }
-                    else if (cbSortiraj.SelectedIndex == 4)
+                    else if (cbPretrazi.SelectedIndex == 4)
                     {
-                        sortiranaListaNamestaj = pripremiNamestaj.OrderBy(o => o.KolicinaUMagacinu).ToList();
+                        viewa = CollectionViewSource.GetDefaultView(ProdajaDAO.FindSort(tbPretrazi.Text, ProdajaDAO.TipPretrage.DatumProdaje, dpPretrazi.SelectedDate, cbSortiraj.SelectedIndex));
+                        dataGridProdaja.ItemsSource = viewp;
                     }
-                    else if (cbSortiraj.SelectedIndex == 5)
-                    {
-                        sortiranaListaNamestaj = pripremiNamestaj.OrderBy(o => o.TipNamestaja.Naziv).ToList();
-                    }
-
-                    viewn = CollectionViewSource.GetDefaultView(sortiranaListaNamestaj);
-                    viewn.Filter = NamestajFilter;
-                    dataGridNamestaj.ItemsSource = viewn;
-                   /* if (cbSortiraj.SelectedIndex == 0)
-                    {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.IdN));
-                        dataGridNamestaj.ItemsSource = viewn;
-                    }
-                    else if (cbSortiraj.SelectedIndex == 1)
-                    {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Naziv));
-                        dataGridNamestaj.ItemsSource = viewn;
-                    }
-                    else if (cbSortiraj.SelectedIndex == 2)
-                    {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Sifra));
-                        dataGridNamestaj.ItemsSource = viewn;
-                    }
-                    else if (cbSortiraj.SelectedIndex == 3)
-                    {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Cena));
-                        dataGridNamestaj.ItemsSource = viewn;
-                    }
-                    else if (cbSortiraj.SelectedIndex == 4)
-                    {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.Kolicina));
-                        dataGridNamestaj.ItemsSource = viewn;
-                    }
-                    else if (cbSortiraj.SelectedIndex == 5)
-                    {
-                        viewn = CollectionViewSource.GetDefaultView(NamestajDAO.FindSort("", NamestajDAO.TipPretrage.SamoSort, NamestajDAO.Sort.TipNamestaja));
-                        dataGridNamestaj.ItemsSource = viewn;
-                    }*/
-                    break;
-
-                case Parametar.TipNamestaja:
-                    var pripremiTipNamestaja = Projekat.Instance.TipoviNamestaja;
-                    List<TipNamestaja> sortiranaListaTipNamestaja = new List<TipNamestaja>();
-
-                    if (cbSortiraj.SelectedIndex == 1)
-                    {
-                        sortiranaListaTipNamestaja = pripremiTipNamestaja.OrderBy(o => o.Naziv).ToList();
-                    }
-                    else if(cbSortiraj.SelectedIndex == 0)
-                    {
-                        sortiranaListaTipNamestaja = pripremiTipNamestaja.OrderBy(o => o.Id).ToList();
-                    }
-                    viewt = CollectionViewSource.GetDefaultView(sortiranaListaTipNamestaja);
-                    viewt.Filter = TipNamestajaFilter;
-                    dataGridTipNamestaja.ItemsSource = viewt;
-                    break;
-
-                case Parametar.Akcija:
-                    var pripremiAkciju = Projekat.Instance.Akcije;
-                    List<Akcija> sortiranaListaAkcija = new List<Akcija>();
-
-                    if (cbSortiraj.SelectedIndex == 0)
-                    {
-                        sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.Id).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 1)
-                    {
-                        sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.DatumPocetka).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 2)
-                    {
-                        sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.DatumZavrsetka).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 3)
-                    {
-                        sortiranaListaAkcija = pripremiAkciju.OrderBy(o => o.Naziv).ToList();
-                    }
-
-
-                    viewa = CollectionViewSource.GetDefaultView(sortiranaListaAkcija);
-                    viewa.Filter = AkcijaFilter;
-                    dataGridAkcija.ItemsSource = viewa;
-                    break;
-
-                case Parametar.DodatnaUsluga:
-                    var pripremiDodatnuUslugu = Projekat.Instance.DodatneUsluge;
-                    List<DodatnaUsluga> sortiranaListaDodatnaUsluga = new List<DodatnaUsluga>();
-                    if (cbSortiraj.SelectedIndex == 0)
-                    {
-                        sortiranaListaDodatnaUsluga = pripremiDodatnuUslugu.OrderBy(o => o.Id).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 1)
-                    {
-                        sortiranaListaDodatnaUsluga = pripremiDodatnuUslugu.OrderBy(o => o.Naziv).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 2)
-                    {
-                        sortiranaListaDodatnaUsluga = pripremiDodatnuUslugu.OrderBy(o => o.Cena).ToList();
-                    }
-
-                    viewd = CollectionViewSource.GetDefaultView(sortiranaListaDodatnaUsluga);
-                    viewd.Filter = DodatnaUslugaFilter;
-                    dataGridDodatnaUsluga.ItemsSource = viewd;
-                    break;
-
-                case Parametar.Korisnik:
-                    var pripremiKorisnika = Projekat.Instance.Korisnici;
-                    List<Korisnik> sortiranaListaKorisnik = new List<Korisnik>();
-
-                    if (cbSortiraj.SelectedIndex == 0)
-                    {
-                        sortiranaListaKorisnik = pripremiKorisnika.OrderBy(o => o.Id).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 1)
-                    {
-                        sortiranaListaKorisnik = pripremiKorisnika.OrderBy(o => o.Ime).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 2)
-                    {
-                        sortiranaListaKorisnik = pripremiKorisnika.OrderBy(o => o.Prezime).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 3)
-                    {
-                        sortiranaListaKorisnik = pripremiKorisnika.OrderBy(o => o.KorisnickoIme).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 4)
-                    {
-                        sortiranaListaKorisnik = pripremiKorisnika.OrderBy(o => o.Lozinka).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 5)
-                    {
-                        sortiranaListaKorisnik = pripremiKorisnika.OrderBy(o => o.TipKorisnika).ToList();
-                    }
-
-                    viewk = CollectionViewSource.GetDefaultView(sortiranaListaKorisnik);
-                    viewk.Filter = KorisnikFilter;
-                    dataGridKorisnik.ItemsSource = viewk;
-                    break;
-
-                case Parametar.Salon:
-                    var pripremiSalon = Projekat.Instance.Salon;
-                    List<Salon> sortiranaListaSalon = new List<Salon>();
-                    if (cbSortiraj.SelectedIndex == 0)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.Id).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 1)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.Naziv).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 2)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.Adresa).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 3)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.Telefon).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 4)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.Email).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 5)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.AdresaInternetSajta).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 6)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.PIB).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 7)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.MaticniBroj).ToList();
-                    }
-                    else if (cbSortiraj.SelectedIndex == 8)
-                    {
-                        sortiranaListaSalon = pripremiSalon.OrderBy(o => o.BrojZiroRacuna).ToList();
-                    }
-
-                    views = CollectionViewSource.GetDefaultView(sortiranaListaSalon);
-                    views.Filter = SalonFilter;
-                    dataGridSalon.ItemsSource = views;
-                    break;
-
-                case Parametar.Prodaja:
                     break;
             }
         }
@@ -900,6 +748,14 @@ namespace POP_sf_41_2016_GUI
                 {
                     tbPretrazi.Visibility = Visibility.Visible;
                     dpPretrazi.Visibility = Visibility.Collapsed;
+                }
+            }
+            if (parametar == Parametar.Prodaja)
+            {
+                if (cbPretrazi.SelectedIndex == 4 )
+                {
+                    dpPretrazi.Visibility = Visibility.Visible;
+                    tbPretrazi.Visibility = Visibility.Collapsed;
                 }
             }
         }

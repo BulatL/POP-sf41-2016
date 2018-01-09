@@ -13,9 +13,6 @@ namespace POP_sf41_2016.model
     public class Prodaja : INotifyPropertyChanged, ICloneable
     {
 
-        //public const double PDV = 0.02;
-
-        
         private bool obrisan;
         private ObservableCollection<int?> listaProdajeNamestajaId;
         private int id;
@@ -23,16 +20,53 @@ namespace POP_sf41_2016.model
         private string brRacuna;
         private string kupac;
         private double ukupanIznos;
-        public const double pdv =0.2;
+        public const double PDV = 0.2;
         private ObservableCollection<ProdajaNamestaj> listaProdajeNamestaja;
         private ObservableCollection<int?> listaDodatnihUslugaId;
         private ObservableCollection<ProdajaDodatnaUsluga> listaDodatnihUsluga;
-        private string prodavac;
+        private int prodavacId;
+        private Korisnik prodavac;
 
-        public string Prodavac
+        public Prodaja()
         {
-            get { return prodavac; }
-            set { prodavac = value; }
+            ListaDodatnihUslugaId = new ObservableCollection<int?>();
+            ListaProdajeNamestajaId = new ObservableCollection<int?>();
+        }
+        public Korisnik Prodavac
+        {
+            get
+            {
+                if(prodavac == null)
+                {
+                    prodavac = Korisnik.NadjiKorisnika(prodavacId);
+                }
+                return prodavac;
+
+            }
+            set
+            {
+                prodavac = value;
+                ProdavacId = prodavac.Id;
+                OnPropertyChanged("Prodavac");
+            }
+        }
+
+        public string ProdavacKorisnickoIme
+        {
+            get
+            {
+                return Prodavac.KorisnickoIme;
+            }
+        }
+
+        public int ProdavacId
+        {
+            get { return prodavacId; }
+            set
+            {
+                prodavacId = value;
+                OnPropertyChanged("ProdavacId");
+            }
         }
 
 
@@ -74,8 +108,8 @@ namespace POP_sf41_2016.model
             }
         }
 
-         public ObservableCollection<ProdajaNamestaj> ListaStavkiProdaje
-         {
+         public ObservableCollection<ProdajaNamestaj> ListaProdajeNamestaja
+        {
              get
              {
                  if(listaProdajeNamestaja == null)
@@ -95,7 +129,7 @@ namespace POP_sf41_2016.model
                         lista.Add(item.Id);
                     }
                     ListaProdajeNamestajaId = lista;
-                    OnPropertyChanged("ListaStavkiProdaje");
+                    OnPropertyChanged("ListaProdajeNamestaja");
                 }
                 
             }
@@ -160,7 +194,7 @@ namespace POP_sf41_2016.model
             get { return listaProdajeNamestajaId; }
             set
             { listaProdajeNamestajaId = value;
-                OnPropertyChanged("ListaStavkiProdajeId");
+                OnPropertyChanged("ListaProdajeNamestajaId");
             }
         }
 
@@ -194,8 +228,8 @@ namespace POP_sf41_2016.model
             kopija.BrRacuna = brRacuna;
             kopija.DatumProdaje = datumProdaje;
             kopija.Kupac = kupac;
-            kopija.Prodavac = prodavac;
-            kopija.ListaStavkiProdaje = listaProdajeNamestaja;
+            kopija.ProdavacId = prodavacId;
+            kopija.ListaProdajeNamestaja = listaProdajeNamestaja;
             kopija.ListaProdajeNamestajaId = listaProdajeNamestajaId;
             kopija.UkupanIznos = ukupanIznos;
             kopija.Obrisan = obrisan;
@@ -213,11 +247,11 @@ namespace POP_sf41_2016.model
                     item.BrRacuna = primljenaProdaja.BrRacuna;
                     item.DatumProdaje = primljenaProdaja.DatumProdaje;
                     item.Kupac = primljenaProdaja.Kupac;
-                    item.Prodavac = primljenaProdaja.Prodavac;
+                    item.ProdavacId = primljenaProdaja.ProdavacId;
                     item.ListaDodatnihUsluga = primljenaProdaja.ListaDodatnihUsluga;
                     item.ListaDodatnihUslugaId = primljenaProdaja.ListaDodatnihUslugaId;
                     item.ListaProdajeNamestajaId = primljenaProdaja.ListaProdajeNamestajaId;
-                    item.ListaStavkiProdaje = primljenaProdaja.ListaStavkiProdaje;
+                    item.ListaProdajeNamestaja = primljenaProdaja.ListaProdajeNamestaja;
                     break;
                 }
             }

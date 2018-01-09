@@ -42,6 +42,10 @@ namespace POP_sf_41_2016_GUI.UI
             tbPassword.DataContext = korisnik;
             cbTipKorisnika.ItemsSource = Enum.GetValues(typeof(Enums.TipKorisnika)).Cast<Enums.TipKorisnika>();
             cbTipKorisnika.DataContext = korisnik;
+            tbIme.MaxLength = 20;
+            tbPrezime.MaxLength = 30;
+            tbKorisnickoIme.MaxLength = 25;
+            tbPassword.MaxLength = 25;
 
             if (operacija == Operacija.IZMENA)
             {

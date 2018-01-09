@@ -21,8 +21,8 @@ Insert into Akcija (DatumPocetka, DatumZavrsetka, Naziv, Obrisan) values ('12.24
 Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (1, 2, 35, 0);
 Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (1, 3, 25, 0);
 Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (1, 1, 15, 0);
-Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (2, 1, 35, 0);
-Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (2, 3, 20, 0);
+Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (2, 5, 35, 0);
+Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (2, 6, 20, 0);
 Insert into NaAkciji (AkcijaId, NamestajId, Popust, Obrisan) values (2, 4, 35, 0);
 
 Insert into Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, TipKorisnika, Obrisan) values ('Marko', 'Markovic', 'marko', '123', 'Administrator', 0);
@@ -32,7 +32,7 @@ Insert into Korisnik (Ime, Prezime, KorisnickoIme, Lozinka, TipKorisnika, Obrisa
 Insert into Salon (Naziv, Adresa, Sajt, Email, BrojZiroRacuna, MaticniBroj, PIB, Telefon, Obrisan) 
 values ('Socijalni salon', 'Bulervar oslobodjenja 14', 'www.SocijalniSalon.com' , 'SocijalniSalon@hotmail.com', 1421313123, 5123512, 151235, '022-553-124', 0);
 
-Insert into Prodaja (BrojRacuna, Kupac, Prodavac, DatumProdaje, UkupanIznos, Obrisan) values ('R412', 'Milos', 'marko', '12.24.2017', 3286.44, 0);
+Insert into Prodaja (BrojRacuna, Kupac, ProdavacId, DatumProdaje, UkupanIznos, Obrisan) values ('R412', 'Milos', 3, '12.24.2017', 3286.44, 0);
 
 Insert into ProdajaNamestaj (ProdajaId, NamestajId, Kolicina, Cena, Obrisan) values (1, 5, 4, 564, 0);
 Insert into ProdajaNamestaj (ProdajaId, NamestajId, Kolicina, Cena, Obrisan) values (1, 6, 4, 144, 0);

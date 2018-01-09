@@ -19,21 +19,6 @@ namespace POP_sf_41_2016_GUI.DAO
             Sifra,
             TipNamestaja,
         }
-        public enum Sort
-        {
-            IdN,
-            Naziv,
-            Sifra,
-            Cena,
-            Kolicina,
-            TipNamestaja
-        }
-
-        public enum TypeSort
-        {
-            asc,
-            desc
-        }
         public static void Load()
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
@@ -65,6 +50,43 @@ namespace POP_sf_41_2016_GUI.DAO
                     Projekat.Instance.Namestaji.Add(n);
                 }
             }
+        }
+
+        public static ObservableCollection<Namestaj> LoadNamestajNotInAkcija()
+        {
+            var lista = new ObservableCollection<Namestaj>();
+            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            {
+                conn.Open();
+
+                SqlCommand cmd = conn.CreateCommand();
+                cmd.CommandText = @"SELECT * " +
+                                    "FROM Namestaj " +
+                                    "WHERE Obrisan = 0 and IdN not in (SELECT NamestajId " +
+                                                                   "FROM NaAkciji " +
+                                                                   "WHERE Obrisan = 0);";
+
+                SqlDataAdapter sqlDA = new SqlDataAdapter();
+                sqlDA.SelectCommand = cmd;
+
+                DataSet ds = new DataSet(); // izvrsavanje upita
+                sqlDA.Fill(ds, "Namestaj");
+
+                foreach (DataRow row in ds.Tables["Namestaj"].Rows)
+                {
+                    Namestaj n = new Namestaj();
+                    n.Id = int.Parse(row["IdN"].ToString());
+                    n.Naziv = row["Naziv"].ToString();
+                    n.Sifra = row["Sifra"].ToString();
+                    n.JedinicnaCena = Double.Parse(row["Cena"].ToString());
+                    n.KolicinaUMagacinu = int.Parse(row["Kolicina"].ToString());
+                    n.TipNamestajaId = int.Parse(row["TipNamestajaId"].ToString());
+                    n.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
+
+                    lista.Add(n);
+                }
+            }
+            return lista;
         }
 
         public static void Update(Namestaj n)
@@ -138,7 +160,37 @@ namespace POP_sf_41_2016_GUI.DAO
             }
         }
 
-        public static ObservableCollection<Namestaj> FindSort(String parametarZaPretragu, TipPretrage tipPretrage, Sort sort = Sort.IdN)
+        public static string SortBy (int sort)
+        {
+            String sortBy = "";
+            if (sort == 0)
+            {
+                sortBy = @"ORDER BY n.IdN; ";
+            }
+            else if (sort == 1)
+            {
+                sortBy = @"ORDER BY n.Naziv; ";
+            }
+            else if (sort == 2)
+            {
+                sortBy = @"ORDER BY n.Sifra; ";
+            }
+            else if (sort == 3)
+            {
+                sortBy = @"ORDER BY n.Cena; ";
+            }
+            else if (sort == 4)
+            {
+                sortBy = @"ORDER BY n.Kolicina; ";
+            }
+            else if (sort == 5)
+            {
+                sortBy = @"ORDER BY tn.Naziv; ";
+            }
+            return sortBy;
+        }
+
+        public static ObservableCollection<Namestaj> FindSort(String parametarZaPretragu, TipPretrage tipPretrage, int sort)
         {
             var listaPretraga = new ObservableCollection<Namestaj>();
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
@@ -151,43 +203,24 @@ namespace POP_sf_41_2016_GUI.DAO
                     case TipPretrage.Naziv:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Namestaj n inner join TipNamestaj tn on n.TipNamestajaId = tn.IdTN " +
-                                           "WHERE n.Naziv like @Parametar and n.Obrisan =0 "; /*+
-                                           "ORDER BY CASE @sort WHEN 'IdN' THEN n.IdN " +
-                                                               "WHEN 'Naziv' THEN n.Naziv " +
-                                                               "WHEN 'Cena' THEN n.Cena " +
-                                                               "WHEN 'Sifra' THEN n.Sifra " +
-                                                               "WHEN 'Kolicina' THEN n.Kolicina " +
-                                                               "WHEN 'TipNamestaja' THEN tn.Naziv " +
-                                                               "END asc;";*/
+                                           "WHERE n.Naziv like @Parametar and n.Obrisan =0 ";
+                        cmd.CommandText += SortBy(sort);
                         break;
                     case TipPretrage.Sifra:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Namestaj n inner join TipNamestaj tn on n.TipNamestajaId = tn.IdTN " +
-                                           "WHERE n.Sifra like @Parametar and n.Obrisan =0 "; /*+
-                                           "ORDER BY CASE @sort WHEN 'IdN' THEN n.IdN " +
-                                                               "WHEN 'Naziv' THEN n.Naziv " +
-                                                               "WHEN 'Cena' THEN n.Cena " +
-                                                               "WHEN 'Sifra' THEN n.Sifra " +
-                                                               "WHEN 'Kolicina' THEN n.Kolicina " +
-                                                               "WHEN 'TipNamestaja' THEN tn.Naziv " +
-                                                               "END asc;";*/
+                                           "WHERE n.Sifra like @Parametar and n.Obrisan =0 ";
+                        cmd.CommandText += SortBy(sort);
                         break;
                     case TipPretrage.TipNamestaja:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Namestaj n inner join TipNamestaj tn on n.TipNamestajaId = tn.IdTN  " +
-                                           "WHERE tn.Naziv like @Parametar and n.Obrisan = 0 "; /*+
-                                           "ORDER BY CASE @sort WHEN 'IdN' THEN n.IdN " +
-                                                               "WHEN 'Naziv' THEN n.Naziv " +
-                                                               "WHEN 'Cena' THEN n.Cena " +
-                                                               "WHEN 'Sifra' THEN n.Sifra " +
-                                                               "WHEN 'Kolicina' THEN n.Kolicina " +
-                                                               "WHEN 'TipNamestaja' THEN tn.Naziv " +
-                                                               "END asc;";*/
-                        break;
+                                           "WHERE tn.Naziv like @Parametar and n.Obrisan = 0 ";
+                        cmd.CommandText += SortBy(sort);
+                        break;                      
                 }
+
                 cmd.Parameters.Add(new SqlParameter("@Parametar", "%" + parametarZaPretragu + "%"));
-                //cmd.Parameters.Add(new SqlParameter("@sort", sort.ToString()));
-                //cmd.Parameters.Add(new SqlParameter("@typeSort", typeSort));
 
                 SqlDataAdapter sqlDA = new SqlDataAdapter();
                 sqlDA.SelectCommand = cmd;

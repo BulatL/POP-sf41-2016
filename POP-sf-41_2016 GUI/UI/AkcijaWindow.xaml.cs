@@ -45,12 +45,12 @@ namespace POP_sf_41_2016_GUI.UI
             dpPocetak.DataContext = akcija;
             dpKraj.DataContext = akcija;
             tbNaziv.DataContext = akcija;
+            tbNaziv.MaxLength = 60;
 
             dataGridNamestaj.AutoGenerateColumns = false;
             dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
             dataGridNamestaj.DataContext = akcija;
             viewn = CollectionViewSource.GetDefaultView(akcija.ListaNaAkciji);
-            viewn.Filter = NaAkcijiFilter;
             dataGridNamestaj.ItemsSource = viewn;
 
 
@@ -62,95 +62,85 @@ namespace POP_sf_41_2016_GUI.UI
             }
 
         }
-        private bool NaAkcijiFilter(object obj)
-        {
-            return !((NaAkciji)obj).Obrisan;
-        }
-
-
         private void Odustani_click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
 
-        
+
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            var listaAkcija = Projekat.Instance.Akcije;
             
-            if (operacija == Operacija.DODAVANJE)
+            var listaAkcija = Projekat.Instance.Akcije;
+
+            if (akcija.ListaNaAkciji.Count < 1)
             {
-                if (akcija.DatumPocetka.Date < DateTime.Today)
-                {
-                    MessageBox.Show("Datum pocetka akcije ne moze biti manji od danasnjeg dana", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
+                MessageBox.Show("Barem jedan namestaj mora biti na akciji", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            if (akcija.DatumZavrsetka.Date < akcija.DatumPocetka.Date)
-            {
-                MessageBox.Show("Datum zavrsetka akcije mora biti veci od datuma pocetka akcije", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            else if(akcija.DatumPocetka.Date >= DateTime.Today || akcija.DatumZavrsetka.Date > akcija.DatumPocetka.Date)
+            else
             {
                 if (operacija == Operacija.DODAVANJE)
                 {
-
-                    AkcijaDAO.Create(akcija);
-                    foreach (var naAkciji in akcija.ListaNaAkciji)
+                    if (akcija.DatumPocetka.Date < DateTime.Today)
                     {
-                        NaAkcijiDAO.Create(naAkciji);
-                    }
-
-                } 
-                else if( operacija == Operacija.IZMENA)
-                {
-                    var listaProvera = NaAkcijiDAO.LoadByAkcijaId(akcija.Id);
-                    foreach (var naAkciji in akcija.ListaNaAkciji.ToList())
-                    {
-                        bool postojiNaAkciji = false;
-                        foreach (var item in listaProvera.ToList())
-                        {
-                            if(item.Id == naAkciji.Id)
-                            {
-                                postojiNaAkciji = true;
-                                item.Obrisan = false;
-                                Console.WriteLine("Postojeci namestaj id: " + item.NamestajId.ToString() + " " + item.Obrisan);
-                                listaProvera.Remove(item);
-                                break;
-                            }
-                            if(item.NamestajId == naAkciji.NamestajId)
-                            {
-                                if (item.Popust != naAkciji.Popust)
-                                {
-                                    item.Obrisan = false;
-                                    Console.WriteLine("Postojeci namestaj id promenjen popust: " + item.NamestajId.ToString()+" "+ item.Obrisan);
-                                    NaAkcijiDAO.Update(item);
-                                    break;
-                                }
-                            }
-                        }
-                        if(postojiNaAkciji == false)
-                        {
-                            Console.WriteLine("novi namestaj id: " + naAkciji.NamestajId.ToString() + " " + naAkciji.Obrisan);
-                            NaAkcijiDAO.Create(naAkciji);
-                        }
-                    }
-                    foreach (var item in listaProvera.ToList())
-                    {
-                        Console.WriteLine("Namestaj id za brisanje: " + item.NamestajId.ToString() + " " + item.Obrisan);
-                        NaAkcijiDAO.Delete(item, TipBrisanja.PoNaAkciji);
-                    }                       
-                    AkcijaDAO.Update(akcija);
-                    
-                    listaAkcija = Akcija.Update(akcija);
-                    foreach (var item in akcija.ListaNaAkciji)
-                    {
-                        Console.WriteLine("Sacuvano: " + item.Namestaj.Naziv + item.NamestajId.ToString() + " " + item.Obrisan);
+                        MessageBox.Show("Datum pocetka akcije ne moze biti manji od danasnjeg dana", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
-                Projekat.Instance.Akcije = listaAkcija;
-                this.Close();
+                if (akcija.DatumZavrsetka.Date < akcija.DatumPocetka.Date)
+                {
+                    MessageBox.Show("Datum zavrsetka akcije mora biti veci od datuma pocetka akcije", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                else if (akcija.DatumPocetka.Date >= DateTime.Today || akcija.DatumZavrsetka.Date > akcija.DatumPocetka.Date)
+                {
+                    if (operacija == Operacija.DODAVANJE)
+                    {
+
+                        AkcijaDAO.Create(akcija);
+                        foreach (var naAkciji in akcija.ListaNaAkciji)
+                        {
+                            NaAkcijiDAO.Create(naAkciji);
+                        }
+                        DialogResult = true;
+
+                    }
+                    else if (operacija == Operacija.IZMENA)
+                    {
+                        var listaProvera = NaAkcijiDAO.LoadByAkcijaId(akcija.Id);
+                        foreach (var naAkciji in akcija.ListaNaAkciji.ToList())
+                        {
+                            bool postojiNaAkciji = false;
+                            foreach (var item in listaProvera.ToList())
+                            {
+                                if (item.Id == naAkciji.Id)
+                                {
+                                    postojiNaAkciji = true;
+                                    listaProvera.Remove(item);
+                                    break;
+                                }
+                                if (item.NamestajId == naAkciji.NamestajId)
+                                {
+                                    if (item.Popust != naAkciji.Popust)
+                                    {
+                                        NaAkcijiDAO.Update(item);
+                                        break;
+                                    }
+                                }
+                            }
+                            if (postojiNaAkciji == false)
+                            {
+                                NaAkcijiDAO.Create(naAkciji);
+                            }
+                        }
+                        foreach (var item in listaProvera.ToList())
+                        {
+                            NaAkcijiDAO.Delete(item, TipBrisanja.PoNaAkciji, 0, 0);
+                        }
+                        AkcijaDAO.Update(akcija);
+                        DialogResult = true;
+                    }
+                    this.Close();
+                }
             }
         }
 
@@ -159,7 +149,7 @@ namespace POP_sf_41_2016_GUI.UI
             var akcijaId = 0;
             if (akcija.Id == 0)
             {
-                akcijaId = Projekat.Instance.Akcije.Count + 1;
+                akcijaId = AkcijaDAO.GetLastId()+1;
             }
             else
             {

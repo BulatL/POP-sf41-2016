@@ -111,7 +111,37 @@ namespace POP_sf_41_2016_GUI.DAO
             Projekat.Instance.Korisnici.Add(k);
         }
 
-        public static ObservableCollection<Korisnik> Find(String parametarZaPretragu, TipPretrage tipPretrage)
+        public static string SortBy(int sort)
+        {
+            String sortBy = "";
+            if (sort == 0)
+            {
+                sortBy = @"ORDER BY IdK;";
+            }
+            else if (sort == 1)
+            {
+                sortBy = @"ORDER BY Ime;";
+            }
+            else if (sort == 2)
+            {
+                sortBy = @"ORDER BY Prezime;";
+            }
+            else if (sort == 3)
+            {
+                sortBy = @"ORDER BY KorisnickoIme;";
+            }
+            else if (sort == 4)
+            {
+                sortBy = @"ORDER BY Lozinka;";
+            }
+            else if (sort == 5)
+            {
+                sortBy = @"ORDER BY TipKorisnika;";
+            }
+            return sortBy;
+        }
+
+        public static ObservableCollection<Korisnik> FindSort(String parametarZaPretragu, TipPretrage tipPretrage, int sort)
         {
             var listaPretraga = new ObservableCollection<Korisnik>();
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
@@ -124,18 +154,23 @@ namespace POP_sf_41_2016_GUI.DAO
                     case TipPretrage.Ime:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Korisnik " +
-                                           "WHERE Obrisan = 0 and Ime like @Parametar;";
+                                           "WHERE Obrisan = 0 and Ime like @Parametar ";
+
+                        cmd.CommandText += SortBy(sort);
                         break;
                     case TipPretrage.Prezime:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Korisnik " +
-                                           "WHERE Obrisan = 0 and Prezime like @Parametar;";
+                                           "WHERE Obrisan = 0 and Prezime like @Parametar ";
+
+                        cmd.CommandText += SortBy(sort);
                         break;
                     case TipPretrage.KorisnickoIme:
                         cmd.CommandText = @"SELECT * " +
                                            "FROM Korisnik " +
-                                           "WHERE Obrisan = 0 and KorisnickoIme like @Parametar;";
-                        
+                                           "WHERE Obrisan = 0 and KorisnickoIme like @Parametar ";
+
+                        cmd.CommandText += SortBy(sort);
                         break;
                 }
 

@@ -38,6 +38,7 @@ namespace POP_sf_41_2016_GUI.UI
             this.operacija = operacija;
 
             tbNaziv.DataContext = tipNamestaja;
+            tbNaziv.MaxLength = 60;
 
         }
 

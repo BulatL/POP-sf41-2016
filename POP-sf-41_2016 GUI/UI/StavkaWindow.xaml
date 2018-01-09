@@ -3,9 +3,19 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
+        xmlns:local="clr-namespace:POP_sf_41_2016_GUI"
         mc:Ignorable="d"
         Title="StavkaWindow" Height="450" Width="450">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationError">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="16" DockPanel.Dock="Right" HorizontalAlignment="Center">!!!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder/>
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="150*"/>
@@ -30,7 +40,23 @@
         <Button Name="btOdustani" Content="Odustani" HorizontalAlignment="Left" Margin="319,22,0,0" Grid.Row="2" VerticalAlignment="Top" Width="94"  Height="37" FontSize="16" Click="Odustani_click"/>
         <Button Name="Potvrdi" Content="Potvrdi" HorizontalAlignment="Left" Margin="197,22,0,0" Grid.Row="2" VerticalAlignment="Top" Width="94" Height="37" FontSize="16" Click="Potvrdi_click" RenderTransformOrigin="0.532,0.919"/>
         <Label Name="lbKolicina" Content="Kolicina" HorizontalAlignment="Left" Margin="19,33,0,0" Grid.Row="1" VerticalAlignment="Top" FontSize="16"/>
-        <TextBox Name="tbKolicina" Text="{Binding Path=Kolicina}" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Margin="115,33,0,0" Grid.Row="1" FontSize="16"/>
-        <TextBox Name="tbPopust" Text="{Binding Path=Popust}" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Margin="115,33,0,0" Grid.Row="1" FontSize="16"/>
+        <TextBox Name="tbKolicina" Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Margin="115,33,0,0" Grid.Row="1" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="Kolicina" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidationDouble/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox Name="tbPopust" Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}" HorizontalAlignment="Left" Height="33" TextWrapping="Wrap" VerticalAlignment="Top" Width="165" Margin="115,33,0,0" Grid.Row="1" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="Popust" UpdateSourceTrigger="LostFocus">
+                    <Binding.ValidationRules>
+                        <local:ValidationPopust/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
     </Grid>
 </Window>

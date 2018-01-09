@@ -93,7 +93,21 @@ namespace POP_sf_41_2016_GUI.DAO
             Projekat.Instance.TipoviNamestaja.Add(tn);
         }
 
-        public static ObservableCollection<TipNamestaja> Find (String parametar)
+        public static string SortBy(int sort)
+        {
+            String sortBy = "";
+            if (sort == 0)
+            {
+                sortBy = @"ORDER BY IdTN;";
+            }
+            else if (sort == 1)
+            {
+                sortBy = @"ORDER BY Naziv;";
+            }
+            return sortBy;
+        }
+
+        public static ObservableCollection<TipNamestaja> FindSort (String parametar, int sort)
         {
             var lista = new ObservableCollection<TipNamestaja>();
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
@@ -103,7 +117,9 @@ namespace POP_sf_41_2016_GUI.DAO
 
                 cmd.CommandText = @"SELECT * " +
                                    "FROM TipNamestaj "+
-                                   "WHERE Naziv like @Parametar and Obrisan = 0;";
+                                   "WHERE Naziv like @Parametar and Obrisan = 0 ";
+
+                cmd.CommandText += SortBy(sort);
 
                 cmd.Parameters.Add(new SqlParameter("@Parametar","%" + parametar + "%" ));
 

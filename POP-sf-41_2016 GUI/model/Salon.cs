@@ -152,6 +152,7 @@ namespace POP_sf41_2016.model
         {
             Salon kopija = new Salon();
             kopija.Id = id;
+            kopija.Naziv = naziv;
             kopija.Adresa = adresa;
             kopija.Telefon = telefon;
             kopija.AdresaInternetSajta = adresaInternetSajta;
@@ -164,7 +165,7 @@ namespace POP_sf41_2016.model
             return kopija;
         }
 
-        public static ObservableCollection<Salon> Update(Salon primljeniSalon)
+        /* static ObservableCollection<Salon> Update(Salon primljeniSalon)
         {
             var lista = Projekat.Instance.Salon;
             foreach (var item in lista)
@@ -182,6 +183,13 @@ namespace POP_sf41_2016.model
                 }
             }
             return lista;
+        }*/
+
+        public override string ToString()
+        {
+            return ($"Naziv: {Naziv}"+"\n"+ $", Adresa: {Adresa}" + "\n" + $", Sajt: {AdresaInternetSajta}" + "\n" + 
+                $", Email: {Email}" + "\n" + $", Broj ziro racuna: {BrojZiroRacuna}" + "\n" +
+                $", Maticni broj: {MaticniBroj}" + "\n" + $", PIB: {PIB} ");
         }
     }
 }

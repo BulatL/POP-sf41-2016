@@ -3,22 +3,57 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
+        xmlns:local="clr-namespace:POP_sf_41_2016_GUI"
         mc:Ignorable="d"
-        Title="Tip Namestaja" Height="138.136" Width="321.272">
+        Title="Tip Namestaja" Height="156.895" Width="321.272">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationError">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="16" DockPanel.Dock="Right" HorizontalAlignment="Center">!!!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder/>
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidatorConverter x:Key="converter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="39*"/>
-            <RowDefinition Height="29*"/>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="48*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="78*"/>
             <ColumnDefinition Width="181*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Naziv" HorizontalAlignment="Left" Margin="18,10,0,0" VerticalAlignment="Top" Height="30" Width="60"/>
-        <Button Content="Nazad" Grid.Column="1" HorizontalAlignment="Left" Margin="149,6,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="60" RenderTransformOrigin="0.633,0.5" Click="Nazad_click"/>
-        <Button Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="75,6,0,0" VerticalAlignment="Top" Width="60"  Grid.Row="1" Click="Potvrdi_click" Height="30"/>
-        <TextBox Text="{Binding Path=Naziv}" Grid.Column="1" Name="tbNaziv" HorizontalAlignment="Left" Height="23" Margin="7,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="184"/>
-
+        <Label Content="Naziv" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="30" Width="60" FontSize="14"/>
+        <Button Content="Nazad" Grid.Column="1" HorizontalAlignment="Left" Margin="136,6,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="60" RenderTransformOrigin="0.633,0.5" Click="Nazad_click"/>
+        <Button Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="38,6,0,0" VerticalAlignment="Top" Width="60"  Grid.Row="1" Click="Potvrdi_click" Height="30">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="IsEnabled" Value="False"/>
+                    <Style.Triggers>
+                        <MultiDataTrigger>
+                            <MultiDataTrigger.Conditions>
+                                <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNaziv}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </MultiDataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <TextBox Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}" Grid.Column="1" Name="tbNaziv" HorizontalAlignment="Left" Height="29" Margin="7,12,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="189" FontSize="14">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidationString/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="1" Margin="7,46,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbNaziv, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="202" Height="23" VerticalAlignment="Top"/>
     </Grid>
 </Window>

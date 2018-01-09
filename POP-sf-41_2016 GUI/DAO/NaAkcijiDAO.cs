@@ -15,7 +15,8 @@ namespace POP_sf_41_2016_GUI.DAO
 
     public enum TipBrisanja {
         PoAkcijaId,
-        PoNaAkciji
+        PoNaAkciji,
+        PoNamestajId
     }
     class NaAkcijiDAO
     {
@@ -152,7 +153,7 @@ namespace POP_sf_41_2016_GUI.DAO
             }
             Projekat.Instance.NaAkciji.Add(naAkciji);
         }
-        public static void Delete(NaAkciji naAkciji, TipBrisanja tipBrisanja)
+        public static void Delete(NaAkciji naAkciji, TipBrisanja tipBrisanja, int akcijaId, int namestajId)
         {
             using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
             {
@@ -164,7 +165,7 @@ namespace POP_sf_41_2016_GUI.DAO
                         cmd.CommandText = @"UPDATE NaAkciji SET Obrisan = 1 WHERE AkcijaId=@AkcijaId";
 
                         cmd.Parameters.Add(new SqlParameter("@Obrisan", naAkciji.Obrisan));
-                        cmd.Parameters.Add(new SqlParameter("@AkcijaId", naAkciji.AkcijaId));
+                        cmd.Parameters.Add(new SqlParameter("@AkcijaId", akcijaId));
                         var i = cmd.ExecuteNonQuery();
 
                         break;
@@ -176,7 +177,13 @@ namespace POP_sf_41_2016_GUI.DAO
                         cmd.Parameters.Add(new SqlParameter("@Popust", naAkciji.Popust));
                         var ii = cmd.ExecuteNonQuery();
                         break;
-                    default:
+                    case TipBrisanja.PoNamestajId:
+                        cmd.CommandText = @"UPDATE NaAkciji SET Obrisan = 1 WHERE NamestajId=@NamestajId";
+
+                        cmd.Parameters.Add(new SqlParameter("@Obrisan", naAkciji.Obrisan));
+                        cmd.Parameters.Add(new SqlParameter("@NamestajId", namestajId));
+                        var iii = cmd.ExecuteNonQuery();
+
                         break;
                 }
 

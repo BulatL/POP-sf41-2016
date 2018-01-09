@@ -1,4 +1,5 @@
-﻿using POP_sf_41_2016_GUI.model;
+﻿using POP_sf_41_2016_GUI.DAO;
+using POP_sf_41_2016_GUI.model;
 using POP_sf41_2016.model;
 using POP_sf41_2016.util;
 using System;
@@ -34,7 +35,7 @@ namespace POP_sf_41_2016_GUI.UI
         public Namestaj namestaj;
         public NaAkciji naAkciji = new NaAkciji();
         public ProdajaNamestaj stavka;
-        public DodatnaUsluga dodatnaUsluga;
+        public ProdajaDodatnaUsluga dodatnaUsluga = new ProdajaDodatnaUsluga();
         public int akcijaId;
         private ICollectionView viewn;
         private ICollectionView viewd;
@@ -53,6 +54,7 @@ namespace POP_sf_41_2016_GUI.UI
                 dataGridNamestaj.Visibility = Visibility.Collapsed;
                 dgDodatnaUsluga.AutoGenerateColumns = false;
                 dgDodatnaUsluga.IsSynchronizedWithCurrentItem = true;
+                dgDodatnaUsluga.DataContext = this;
                 viewd = CollectionViewSource.GetDefaultView(Projekat.Instance.DodatneUsluge);
                 viewd.Filter = DodatnaUslugaFilter;
                 dgDodatnaUsluga.ItemsSource = viewd;
@@ -66,14 +68,19 @@ namespace POP_sf_41_2016_GUI.UI
                 dgDodatnaUsluga.Visibility = Visibility.Collapsed;
                 dataGridNamestaj.AutoGenerateColumns = false;
                 dataGridNamestaj.IsSynchronizedWithCurrentItem = true;
-                dataGridNamestaj.DataContext = stavka;
-                viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaji);
-                viewn.Filter = NamestajFilter;
-                dataGridNamestaj.ItemsSource = viewn;
-                tbKolicina.DataContext = stavka;
-                tbPopust.Visibility = Visibility.Collapsed;
-                if (parametar == Parametar.AKCIJA)
+                dataGridNamestaj.DataContext = this;
+                if (parametar == Parametar.PRODAJA)
                 {
+                    viewn = CollectionViewSource.GetDefaultView(Projekat.Instance.Namestaji);
+                    viewn.Filter = NamestajFilter;
+                    dataGridNamestaj.ItemsSource = viewn;
+                    tbKolicina.DataContext = stavka;
+                    tbPopust.Visibility = Visibility.Collapsed;
+                }
+                else if (parametar == Parametar.AKCIJA)
+                {
+                    viewn = CollectionViewSource.GetDefaultView(NamestajDAO.LoadNamestajNotInAkcija());
+                    dataGridNamestaj.ItemsSource = viewn;
                     tbKolicina.Visibility = Visibility.Collapsed;
                     tbPopust.DataContext = naAkciji;
                     tbPopust.Visibility = Visibility.Visible;
@@ -100,7 +107,10 @@ namespace POP_sf_41_2016_GUI.UI
             if (parametar == Parametar.DODATNAUSLUGA)
             {
                 this.DialogResult = true;
-                dodatnaUsluga = viewd.CurrentItem as DodatnaUsluga;
+                var du = viewd.CurrentItem as DodatnaUsluga;
+                dodatnaUsluga.Cena = du.Cena;
+                dodatnaUsluga.DodatnaUsluga = du;
+                dodatnaUsluga.DodatnaUslugaId = du.Id;
                 this.Close();
             }
 
@@ -120,7 +130,6 @@ namespace POP_sf_41_2016_GUI.UI
                     namestaj = viewn.CurrentItem as Namestaj;
                     naAkciji.NamestajId = namestaj.Id;
                     naAkciji.AkcijaId = akcijaId;
-                    naAkciji.Id = Projekat.Instance.NaAkciji.Count + 1;
                     Projekat.Instance.NaAkciji.Add(naAkciji);
                     this.Close();
                 }   
@@ -153,7 +162,6 @@ namespace POP_sf_41_2016_GUI.UI
                         }
                     }
                                                         
-                    stavka.Id = listaStavki.Count + 1;
                     stavka.Namestaj = namestaj;
                     if(cenaAkcija == 0.0)
                     {
@@ -163,7 +171,6 @@ namespace POP_sf_41_2016_GUI.UI
                     {
                         stavka.UkupnaCena = cenaAkcija;
                     }
-                    listaStavki.Add(stavka);
 
                     var listaNamestaja = Projekat.Instance.Namestaji;
                     foreach (var item in listaNamestaja)
@@ -173,11 +180,6 @@ namespace POP_sf_41_2016_GUI.UI
                             item.KolicinaUMagacinu -= stavka.Kolicina;
                         }
                     }
-
-                    Projekat.Instance.ProdajaNamestaj = listaStavki;
-                    GenericSerializer.Serializer("namestaj.xml", listaNamestaja);
-                    GenericSerializer.Serializer("stavkaProdaje.xml", listaStavki);
-
                     this.Close();
                 } 
             }

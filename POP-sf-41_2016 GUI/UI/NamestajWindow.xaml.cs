@@ -44,6 +44,8 @@ namespace POP_sf_41_2016_GUI.UI
             tbSifra.DataContext = namestaj;
             cbTipNamestaja.DataContext = namestaj;
             cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
+            tbNaziv.MaxLength = 60;
+            tbSifra.MaxLength = 20;
 
         }
 
@@ -53,6 +55,7 @@ namespace POP_sf_41_2016_GUI.UI
             {
                 MessageBox.Show("Morate izabrati tip namestaja", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            
             else
             {
                 this.DialogResult = true;

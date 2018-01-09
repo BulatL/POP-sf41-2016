@@ -45,6 +45,14 @@ namespace POP_sf_41_2016_GUI.UI
             tbZiroRacun.DataContext = salon;
             tbMaticniBr.DataContext = salon;
 
+            tbNaziv.MaxLength = 40;
+            tbAdresa.MaxLength = 60;
+            tbEmail.MaxLength = 40;
+            tbSajt.MaxLength = 60;
+            tbTelefon.MaxLength = 30;
+            tbPIB.MaxLength = 255;
+            tbZiroRacun.MaxLength = 255;
+            tbMaticniBr.MaxLength = 255;
 
         }
 
@@ -52,20 +60,15 @@ namespace POP_sf_41_2016_GUI.UI
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = true;
-            var listaSalona = Projekat.Instance.Salon;
 
             if (operacija == Operacija.DODAVANJE)
             {
-                salon.Id = listaSalona.Count + 1;
                 SalonDAO.Create(salon);
             }
-            else if ( operacija == Operacija.IZMENA)
+            if ( operacija == Operacija.IZMENA)
             {
-                listaSalona = Salon.Update(salon);
                 SalonDAO.Update(salon);
             }
-            Projekat.Instance.Salon = listaSalona;
-            GenericSerializer.Serializer("salon.xml", listaSalona);
             this.Close();
         }
 

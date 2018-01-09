@@ -102,21 +102,21 @@
                 <ColumnDefinition Width="94*"/>
                 <ColumnDefinition Width="146*"/>
                 <ColumnDefinition Width="165*"/>
-                <ColumnDefinition Width="75*"/>
-                <ColumnDefinition Width="117*"/>
-                <ColumnDefinition Width="263*"/>
+                <ColumnDefinition Width="81*"/>
+                <ColumnDefinition Width="110*"/>
+                <ColumnDefinition Width="264*"/>
             </Grid.ColumnDefinitions>
-            <Label Grid.Column="0" Name="lbPretrazi" Content="Pretrazi po" HorizontalAlignment="Right" Margin="0,33,6,0" Width="73" Height="43" VerticalAlignment="Top" RenderTransformOrigin="0.475,0.707"/>
+            <Label Grid.Column="0" Name="lbPretrazi" Content="Pretrazi po" HorizontalAlignment="Right" Margin="0,33,6,0" Width="73" Height="43" VerticalAlignment="Top"/>
             <ComboBox  Name="cbPretrazi" HorizontalAlignment="Left" Margin="93,35,0,0" Width="140" Height="27" VerticalAlignment="Top" Grid.ColumnSpan="2" SelectionChanged="cbSelectionChanged"/>
             <TextBox Grid.Column="2" Name="tbPretrazi" BorderBrush="Black"  Height="29" Margin="0,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" FontSize="16"/>
             <DatePicker Grid.Column="2" Name="dpPretrazi" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="35" Width="147" FontSize="16"/>
-            <Button Grid.Column="3" Name="btnPretrazi" Margin="10,23,10,27" Background="#FF20A8D1" Click="Pretrazi_Click">
+            <Button Grid.Column="5" Name="btnPretrazi" Margin="0,23,163,27" Background="#FF20A8D1" Click="Pretrazi_Click" HorizontalAlignment="Right" Width="56">
                 <StackPanel>
-                    <Image Source="image/search.jpg" Stretch="Fill" Height="35" Width="39"/>
+                    <Image Source="image/search.jpg" Stretch="Fill" Height="38" Width="43"/>
                 </StackPanel>
             </Button>
-            <Label Grid.Column="4" Name="lblSortiraj" Content="sortiraj po" HorizontalAlignment="Center" Margin="23,33,21,0" Width="73" Height="43" VerticalAlignment="Top" RenderTransformOrigin="0.475,0.707"/>
-            <ComboBox Grid.Column="5"  Name="cbSortiraj" HorizontalAlignment="Left" Margin="19,33,0,0" Width="100" Height="27" VerticalAlignment="Top" SelectionChanged="cbSortiraj_SelectedIndexChanged"/>
+            <Label Grid.Column="3" Name="lblSortiraj" Content="sortiraj po" HorizontalAlignment="Center" Margin="7,33,0,0" Width="74" Height="43" VerticalAlignment="Top"/>
+            <ComboBox Grid.Column="4"  Name="cbSortiraj" HorizontalAlignment="Right" Margin="0,35,0,0" Width="100" Height="27" VerticalAlignment="Top"/>
         </Grid>
     </Grid>
 </Window>

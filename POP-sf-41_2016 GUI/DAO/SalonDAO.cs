@@ -73,21 +73,6 @@ namespace POP_sf_41_2016_GUI.DAO
                 cmd.Parameters.Add(new SqlParameter("@IdS", salon.Id));
 
                 var uu = cmd.ExecuteNonQuery();
-
-                foreach (var sa in Projekat.Instance.Salon)
-                {
-                    if (salon.Id == sa.Id)
-                    {
-                        sa.Naziv = salon.Naziv;
-                        sa.Adresa = salon.Adresa;
-                        sa.Telefon = salon.Telefon;
-                        sa.AdresaInternetSajta = salon.AdresaInternetSajta;
-                        sa.Email = salon.Email;
-                        sa.PIB = salon.PIB;
-                        sa.MaticniBroj = salon.MaticniBroj;
-                        sa.BrojZiroRacuna = salon.BrojZiroRacuna;
-                    }
-                }
             }
         }
 

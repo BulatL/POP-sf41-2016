@@ -3,9 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:POP_sf_41_2016_GUI.UI"
+        xmlns:local="clr-namespace:POP_sf_41_2016_GUI"
         mc:Ignorable="d"
         Title="Akcija " FontSize="16" ResizeMode="NoResize" Height="568.7" Width="590.5">
+    <Window.Resources>
+        <ControlTemplate x:Key="ValidationError">
+            <DockPanel>
+                <TextBlock Foreground="Red" FontSize="16" DockPanel.Dock="Right" HorizontalAlignment="Center">!!!</TextBlock>
+                <Border BorderBrush="Red" BorderThickness="1">
+                    <AdornedElementPlaceholder/>
+                </Border>
+            </DockPanel>
+        </ControlTemplate>
+        <local:ValidatorConverter x:Key="converter"/>
+    </Window.Resources>
     <Grid Margin="0,0,4,4">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="33*"/>
@@ -19,8 +30,19 @@
             <RowDefinition Height="130*"/>
             <RowDefinition Height="50*"/>
         </Grid.RowDefinitions>
-        <Label Name="lbNaziv" Content="Naziv" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="15,26,0,0" VerticalAlignment="Top" Width="74" FontSize="18"/>
-        <TextBox Name="tbNaziv" Text="{Binding Path=Naziv}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="23,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="373" FontSize="16"/>
+        <Label Name="lbNaziv" Content="Naziv" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="14,17,0,0" VerticalAlignment="Top" Width="74" FontSize="18"/>
+        <TextBox Name="tbNaziv" Validation.ErrorTemplate="{StaticResource ResourceKey=ValidationError}" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Height="34" Margin="10,17,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" FontSize="16">
+            <TextBox.Text>
+                <Binding Path="Naziv" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <local:ValidationString/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock Grid.Column="1" Margin="10,51,0,0" Foreground="Red" FontWeight="Bold" 
+                           Text="{Binding ElementName=tbNaziv, Path=(Validation.Errors), Converter={StaticResource ResourceKey=converter}}" 
+                           HorizontalAlignment="Left" Width="333" Height="23" VerticalAlignment="Top" />
         <Label Name="lblPocetak" Content="Pocetak" Grid.Row="1" HorizontalAlignment="Left" Margin="12,28,0,0" VerticalAlignment="Top" Height="39" Width="78" FontSize="18"/>
         <DatePicker Name="dpPocetak" SelectedDate="{Binding Path=DatumPocetka}" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="23,31,0,0" VerticalAlignment="Top" Width="135" Height="29" FontSize="16"/>
         <Label Name="lblKraj" Content="Kraj" Grid.Row="2" HorizontalAlignment="Left" Margin="14,29,0,0" VerticalAlignment="Top" Height="34" Width="78" FontSize="18"/>
@@ -38,6 +60,20 @@
             </DataGrid.Columns>
         </DataGrid>
         <Button Name="btOdustani" Content="Odustani" Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" Margin="348,10,0,0" VerticalAlignment="Top" Width="94"  Height="37" FontSize="16" Click="Odustani_click"/>
-        <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" Margin="214,10,0,0" VerticalAlignment="Top" Width="94" Height="37" FontSize="16" Click="Potvrdi_click"/>
+        <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Row="5" Grid.Column="1"  HorizontalAlignment="Left" Margin="214,10,0,0" VerticalAlignment="Top" Width="94" Height="37" FontSize="16" Click="Potvrdi_click">
+        <Button.Style>
+            <Style TargetType="Button">
+                <Setter Property="IsEnabled" Value="False"/>
+                <Style.Triggers>
+                    <MultiDataTrigger>
+                        <MultiDataTrigger.Conditions>
+                            <Condition Binding="{Binding Path=(Validation.HasError), ElementName=tbNaziv}" Value="false"/>
+                            </MultiDataTrigger.Conditions>
+                        <Setter Property="IsEnabled" Value="True"/>
+                    </MultiDataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Button.Style>
+        </Button>
     </Grid>
 </Window>

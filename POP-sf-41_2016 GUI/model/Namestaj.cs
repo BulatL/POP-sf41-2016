@@ -21,16 +21,6 @@ namespace POP_sf41_2016.model
         private bool obrisan;
         private TipNamestaja tipNamestaja;
 
-       /* public Namestaj()
-        {
-            naziv = "";
-            sifra = "";
-            jedinicnaCena = 0.0;
-            kolicinaUMagacinu = 0;
-            tipNamestajaId = 0;
-            tipNamestaja = new TipNamestaja();
-        }*/
-
         public int Id
         {
             get { return id; }
