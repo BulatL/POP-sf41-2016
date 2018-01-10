@@ -1,20 +1,8 @@
 ﻿using POP_sf_41_2016_GUI.DAO;
 using POP_sf41_2016.model;
-using POP_sf41_2016.util;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace POP_sf_41_2016_GUI.UI
 {
@@ -55,6 +43,10 @@ namespace POP_sf_41_2016_GUI.UI
             {
                 MessageBox.Show("Morate izabrati tip namestaja", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+            if(ForceValidation() == true)
+            {
+                return;
+            }
             
             else
             {
@@ -75,6 +67,23 @@ namespace POP_sf_41_2016_GUI.UI
         private void Odustani_click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be2 = tbSifra.GetBindingExpression(TextBox.TextProperty);
+            be2.UpdateSource();
+            BindingExpression be3 = tbKolicina.GetBindingExpression(TextBox.TextProperty);
+            be3.UpdateSource();
+            BindingExpression be4 = tbCena.GetBindingExpression(TextBox.TextProperty);
+            be4.UpdateSource();
+            if (Validation.GetHasError(tbNaziv) == true || Validation.GetHasError(tbSifra) == true || Validation.GetHasError(tbKolicina) == true || Validation.GetHasError(tbCena) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

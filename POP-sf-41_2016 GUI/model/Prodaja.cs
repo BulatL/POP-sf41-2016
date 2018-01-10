@@ -231,6 +231,8 @@ namespace POP_sf41_2016.model
             kopija.ProdavacId = prodavacId;
             kopija.ListaProdajeNamestaja = listaProdajeNamestaja;
             kopija.ListaProdajeNamestajaId = listaProdajeNamestajaId;
+            kopija.ListaDodatnihUsluga = listaDodatnihUsluga;
+            kopija.ListaDodatnihUslugaId = listaDodatnihUslugaId;
             kopija.UkupanIznos = ukupanIznos;
             kopija.Obrisan = obrisan;
 

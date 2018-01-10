@@ -1,19 +1,10 @@
 ﻿using POP_sf_41_2016_GUI.DAO;
 using POP_sf41_2016.model;
-using POP_sf41_2016.util;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace POP_sf_41_2016_GUI.UI
 {
@@ -57,27 +48,47 @@ namespace POP_sf_41_2016_GUI.UI
         
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
-            var listaKorisnika = Projekat.Instance.Korisnici;
+            if (ForceValidation() == true)
+            {
+                return;
+            }
+            else
+            {
+                this.DialogResult = true;
+                switch (operacija)
+                {
+                    case Operacija.DODAVANJE:
+                        KorisnikDAO.Create(korisnik);
+                        break;
+                    case Operacija.IZMENA:
+                        KorisnikDAO.Update(korisnik);
+                        break;
 
-            if (operacija == Operacija.DODAVANJE)
-            {
-                korisnik.Id = listaKorisnika.Count + 1;
-                KorisnikDAO.Create(korisnik);
+                }
+                this.Close();
             }
-            else if ( operacija == Operacija.IZMENA)
-            {
-                listaKorisnika = Korisnik.Update(korisnik);
-                KorisnikDAO.Update(korisnik);
-            }
-            Projekat.Instance.Korisnici = listaKorisnika;
-            GenericSerializer.Serializer("korisnici.xml", listaKorisnika);
-            this.Close();
         }
 
         private void Odustani_click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbIme.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            BindingExpression be2 = tbPrezime.GetBindingExpression(TextBox.TextProperty);
+            be2.UpdateSource();
+            BindingExpression be3 = tbKorisnickoIme.GetBindingExpression(TextBox.TextProperty);
+            be3.UpdateSource();
+            BindingExpression be4 = tbPassword.GetBindingExpression(TextBox.TextProperty);
+            be4.UpdateSource();
+            if (Validation.GetHasError(tbIme) == true || Validation.GetHasError(tbPrezime) == true || Validation.GetHasError(tbKorisnickoIme) == true || Validation.GetHasError(tbPassword) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

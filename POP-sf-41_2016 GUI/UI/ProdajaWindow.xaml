@@ -19,7 +19,7 @@
     </Window.Resources>
     <Grid Margin="0,0,0,-6">
         <Grid.RowDefinitions>
-            <RowDefinition Height="130*"/>
+            <RowDefinition Height="150*"/>
             <RowDefinition Height="255*"/>
             <RowDefinition Height="218*"/>
             <RowDefinition Height="104*"/>
@@ -79,10 +79,12 @@
                 </Style>
             </Button.Style>
         </Button>
-        <Label Content="Prodavac" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblImeProdavaca" Content="{Binding Path=ProdavacKorisnickoIme}" HorizontalAlignment="Left" Margin="566,10,0,0" VerticalAlignment="Top" Width="94"/>
-        <Label Content="Datum" HorizontalAlignment="Left" Margin="490,68,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDatumProdaje" Content="" HorizontalAlignment="Left" Margin="566,68,0,0" VerticalAlignment="Top" Width="94"/>
+        <Label Content="Prodavac" HorizontalAlignment="Left" Margin="490,10,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblImeProdavaca" Content="{Binding Path=ProdavacKorisnickoIme}" HorizontalAlignment="Left" Margin="581,10,0,0" VerticalAlignment="Top" Width="79" Height="26" FontSize="14"/>
+        <Label Content="Datum" HorizontalAlignment="Left" Margin="490,50,0,0" VerticalAlignment="Top" FontSize="14"/>
+        <Label x:Name="lblDatumProdaje" Content="" HorizontalAlignment="Left" Margin="581,50,0,0" VerticalAlignment="Top" Width="79" FontSize="14"/>
+        <Label Content="Broj racuna" HorizontalAlignment="Left" Margin="490,94,0,0" VerticalAlignment="Top" Width="83" FontSize="14"/>
+        <Label Name="lblBrRacuna" Content="{Binding Path=BrRacuna}" HorizontalAlignment="Left" Margin="581,96,0,0" VerticalAlignment="Top" Width="79" FontSize="14"/>
 
     </Grid>
 </Window>

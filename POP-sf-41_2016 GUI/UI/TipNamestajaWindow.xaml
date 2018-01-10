@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <Label Content="Naziv" HorizontalAlignment="Left" Margin="10,12,0,0" VerticalAlignment="Top" Height="30" Width="60" FontSize="14"/>
         <Button Content="Nazad" Grid.Column="1" HorizontalAlignment="Left" Margin="136,6,0,0" Grid.Row="1" VerticalAlignment="Top" Height="30" Width="60" RenderTransformOrigin="0.633,0.5" Click="Nazad_click"/>
-        <Button Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="38,6,0,0" VerticalAlignment="Top" Width="60"  Grid.Row="1" Click="Potvrdi_click" Height="30">
+        <Button Name="btnPotvrdi" Content="Potvrdi" Grid.Column="1" HorizontalAlignment="Left" Margin="38,6,0,0" VerticalAlignment="Top" Width="60"  Grid.Row="1" Click="Potvrdi_click" Height="30">
             <Button.Style>
                 <Style TargetType="Button">
                     <Setter Property="IsEnabled" Value="False"/>

@@ -12,32 +12,34 @@
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
         <ToolBar HorizontalContentAlignment="Stretch" Height="66" Margin="10,10,0,0" VerticalAlignment="Top" Width="auto" Background="#FF20A8D1" >
-            <Button Name="btNazad"  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Nazad_click" Background="#FF20A8D1">
+            <Button Name="btNazad"  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Click="Nazad_click">
                 <StackPanel>
-                    <Image Source="image/nazad.jpg" Stretch="Fill" Height="35" Width="39"></Image>
+                    <Image Source="image/undo.png" Stretch="Fill" Height="35" Width="39"></Image>
                 </StackPanel>
             </Button>
             <Button Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Dodajbtn" Click="Dodaj_click">
                 <StackPanel>
-                    <Image Source="image/add.jpg" Stretch="Fill" Height="35" Width="39"/>
-                </StackPanel>
-            </Button>
-            <Button Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Obrisibtn" Click="Obrisi_click">
-                <StackPanel>
-                    <Image Source="image/delete.png" Stretch="Fill" Height="35" Width="39"/>
+                    <Image Source="image/add.png" Stretch="Fill" Height="35" Width="39"/>
                 </StackPanel>
             </Button>
             <Button  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnIzmeni" Click="Izmeni_Click">
                 <StackPanel>
-                    <Image Source="image/edit.jpg" Stretch="Fill" Height="35" Width="39"/>
+                    <Image Source="image/edit2.png" Stretch="Fill" Height="35" Width="39"/>
                 </StackPanel>
             </Button>
-            <Button  Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="btnSort">
-                <StackPanel/>
+            <Button Height="auto" HorizontalAlignment="Center" Width="auto" Margin="5" Name="Obrisibtn" Click="Obrisi_click">
+                <StackPanel>
+                    <Image Source="image/delete2.png" Stretch="Fill" Height="35" Width="39"/>
+                </StackPanel>
+            </Button>
+            <Button Height="auto" Name="btnInfo" HorizontalAlignment="Right" Width="auto" Margin="5" Click="info_click">
+                <StackPanel>
+                    <Image Source="image/info2.png" Stretch="Fill" Height="35" Width="39"/>
+                </StackPanel>
             </Button>
             <Button Height="auto" HorizontalAlignment="Right" Width="auto" Margin="5" Click="Logout_click">
                 <StackPanel>
-                    <Image Source="image/logout.jpg" Stretch="Fill" Height="35" Width="39"/>
+                    <Image Source="image/logout2.png" Stretch="Fill" Height="41" Width="42"/>
                 </StackPanel>
             </Button>
         </ToolBar>
@@ -110,9 +112,9 @@
             <ComboBox  Name="cbPretrazi" HorizontalAlignment="Left" Margin="93,35,0,0" Width="140" Height="27" VerticalAlignment="Top" Grid.ColumnSpan="2" SelectionChanged="cbSelectionChanged"/>
             <TextBox Grid.Column="2" Name="tbPretrazi" BorderBrush="Black"  Height="29" Margin="0,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Width="147" FontSize="16"/>
             <DatePicker Grid.Column="2" Name="dpPretrazi" HorizontalAlignment="Left" Margin="0,30,0,0" VerticalAlignment="Top" Height="35" Width="147" FontSize="16"/>
-            <Button Grid.Column="5" Name="btnPretrazi" Margin="0,23,163,27" Background="#FF20A8D1" Click="Pretrazi_Click" HorizontalAlignment="Right" Width="56">
+            <Button Grid.Column="5" Background="#FF20A8D1" Name="btnPretrazi" Margin="0,23,163,27" Click="Pretrazi_Click" HorizontalAlignment="Right" Width="56" BorderBrush="#FF20A8D1">
                 <StackPanel>
-                    <Image Source="image/search.jpg" Stretch="Fill" Height="38" Width="43"/>
+                    <Image Source="image/search.png" Stretch="Fill" Height="38" Width="43"/>
                 </StackPanel>
             </Button>
             <Label Grid.Column="3" Name="lblSortiraj" Content="sortiraj po" HorizontalAlignment="Center" Margin="7,33,0,0" Width="74" Height="43" VerticalAlignment="Top"/>

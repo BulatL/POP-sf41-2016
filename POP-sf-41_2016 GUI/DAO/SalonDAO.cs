@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_sf_41_2016_GUI.DAO
 {
@@ -15,116 +16,144 @@ namespace POP_sf_41_2016_GUI.DAO
 
         public static void Load()
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = @"SELECT IdS, Naziv, Adresa, Telefon, Sajt, Email, PIB, MaticniBroj, BrojZiroRacuna, Obrisan " +
-                                   "FROM Salon " +
-                                   "WHERE Obrisan = 0;";
-
-                SqlDataAdapter sqlDA = new SqlDataAdapter();
-                sqlDA.SelectCommand = cmd;
-
-                DataSet ds = new DataSet(); // izvrsavanje upita
-                sqlDA.Fill(ds, "Salon");
-
-                foreach (DataRow row in ds.Tables["Salon"].Rows)
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    Salon salon = new Salon();
-                    salon.Id = int.Parse(row["IdS"].ToString());
-                    salon.Naziv = row["Naziv"].ToString();
-                    salon.Adresa = row["Adresa"].ToString();
-                    salon.Telefon = row["Telefon"].ToString();
-                    salon.AdresaInternetSajta = row["Sajt"].ToString();
-                    salon.Email = row["Email"].ToString();
-                    salon.PIB = int.Parse(row["PIB"].ToString());
-                    salon.MaticniBroj = int.Parse(row["MaticniBroj"].ToString());
-                    salon.BrojZiroRacuna = int.Parse(row["BrojZiroRacuna"].ToString());
-                    salon.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
+                    conn.Open();
+
+                    SqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"SELECT IdS, Naziv, Adresa, Telefon, Sajt, Email, PIB, MaticniBroj, BrojZiroRacuna, Obrisan " +
+                                       "FROM Salon " +
+                                       "WHERE Obrisan = 0;";
+
+                    SqlDataAdapter sqlDA = new SqlDataAdapter();
+                    sqlDA.SelectCommand = cmd;
+
+                    DataSet ds = new DataSet(); // izvrsavanje upita
+                    sqlDA.Fill(ds, "Salon");
+
+                    foreach (DataRow row in ds.Tables["Salon"].Rows)
+                    {
+                        Salon salon = new Salon();
+                        salon.Id = int.Parse(row["IdS"].ToString());
+                        salon.Naziv = row["Naziv"].ToString();
+                        salon.Adresa = row["Adresa"].ToString();
+                        salon.Telefon = row["Telefon"].ToString();
+                        salon.AdresaInternetSajta = row["Sajt"].ToString();
+                        salon.Email = row["Email"].ToString();
+                        salon.PIB = int.Parse(row["PIB"].ToString());
+                        salon.MaticniBroj = int.Parse(row["MaticniBroj"].ToString());
+                        salon.BrojZiroRacuna = int.Parse(row["BrojZiroRacuna"].ToString());
+                        salon.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
 
 
-                    Projekat.Instance.Salon.Add(salon);
+                        Projekat.Instance.Salon.Add(salon);
 
+                    }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom ucitavanje iz baze, Molimo vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         public static void Update(Salon salon)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    conn.Open();
 
-                SqlCommand cmd = conn.CreateCommand();
+                    SqlCommand cmd = conn.CreateCommand();
 
-                cmd.CommandText = @"UPDATE Salon SET Naziv=@Naziv, Adresa=@Adresa, Telefon=@Telefon, Sajt=@Sajt, Email=@Email, " +
-                                   "PIB=@PIB, MaticniBroj=@MaticniBroj, BrojZiroRacuna=@BrojZiroRacuna " +
-                                   "WHERE IdS=@IdS;";
-                cmd.Parameters.Add(new SqlParameter("@Naziv", salon.Naziv));
-                cmd.Parameters.Add(new SqlParameter("@Adresa", salon.Adresa));
-                cmd.Parameters.Add(new SqlParameter("@Telefon", salon.Telefon));
-                cmd.Parameters.Add(new SqlParameter("@Sajt", salon.AdresaInternetSajta));
-                cmd.Parameters.Add(new SqlParameter("@Email", salon.Email));
-                cmd.Parameters.Add(new SqlParameter("@PIB", salon.PIB));
-                cmd.Parameters.Add(new SqlParameter("@MaticniBroj", salon.MaticniBroj));
-                cmd.Parameters.Add(new SqlParameter("@BrojZiroRacuna", salon.BrojZiroRacuna));
-                cmd.Parameters.Add(new SqlParameter("@IdS", salon.Id));
+                    cmd.CommandText = @"UPDATE Salon SET Naziv=@Naziv, Adresa=@Adresa, Telefon=@Telefon, Sajt=@Sajt, Email=@Email, " +
+                                       "PIB=@PIB, MaticniBroj=@MaticniBroj, BrojZiroRacuna=@BrojZiroRacuna " +
+                                       "WHERE IdS=@IdS;";
+                    cmd.Parameters.Add(new SqlParameter("@Naziv", salon.Naziv));
+                    cmd.Parameters.Add(new SqlParameter("@Adresa", salon.Adresa));
+                    cmd.Parameters.Add(new SqlParameter("@Telefon", salon.Telefon));
+                    cmd.Parameters.Add(new SqlParameter("@Sajt", salon.AdresaInternetSajta));
+                    cmd.Parameters.Add(new SqlParameter("@Email", salon.Email));
+                    cmd.Parameters.Add(new SqlParameter("@PIB", salon.PIB));
+                    cmd.Parameters.Add(new SqlParameter("@MaticniBroj", salon.MaticniBroj));
+                    cmd.Parameters.Add(new SqlParameter("@BrojZiroRacuna", salon.BrojZiroRacuna));
+                    cmd.Parameters.Add(new SqlParameter("@IdS", salon.Id));
 
-                var uu = cmd.ExecuteNonQuery();
+                    var uu = cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom snimanja u bazu, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         public static void Create(Salon salon)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = conn.CreateCommand();
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = conn.CreateCommand();
 
 
-                cmd.CommandText = @"INSERT INTO Salon (Naziv, Adresa, Telefon, Sajt, Email, PIB, MaticniBroj, BrojZiroRacuna, Obrisan) " +
-                                   "VALUES (@Naziv, @Adresa, @Telefon, @Sajt, @Email, @PIB, @MaticniBroj, @BrojZiroRacuna, @Obrisan);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.CommandText = @"INSERT INTO Salon (Naziv, Adresa, Telefon, Sajt, Email, PIB, MaticniBroj, BrojZiroRacuna, Obrisan) " +
+                                       "VALUES (@Naziv, @Adresa, @Telefon, @Sajt, @Email, @PIB, @MaticniBroj, @BrojZiroRacuna, @Obrisan);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.Add(new SqlParameter("@Naziv", salon.Naziv));
-                cmd.Parameters.Add(new SqlParameter("@Adresa", salon.Adresa));
-                cmd.Parameters.Add(new SqlParameter("@Telefon", salon.Telefon));
-                cmd.Parameters.Add(new SqlParameter("@Sajt", salon.AdresaInternetSajta));
-                cmd.Parameters.Add(new SqlParameter("@Email", salon.Email));
-                cmd.Parameters.Add(new SqlParameter("@PIB", salon.PIB));
-                cmd.Parameters.Add(new SqlParameter("@MaticniBroj", salon.MaticniBroj));
-                cmd.Parameters.Add(new SqlParameter("@BrojZiroRacuna", salon.BrojZiroRacuna));
-                cmd.Parameters.Add(new SqlParameter("@Obrisan", salon.Obrisan));
+                    cmd.Parameters.Add(new SqlParameter("@Naziv", salon.Naziv));
+                    cmd.Parameters.Add(new SqlParameter("@Adresa", salon.Adresa));
+                    cmd.Parameters.Add(new SqlParameter("@Telefon", salon.Telefon));
+                    cmd.Parameters.Add(new SqlParameter("@Sajt", salon.AdresaInternetSajta));
+                    cmd.Parameters.Add(new SqlParameter("@Email", salon.Email));
+                    cmd.Parameters.Add(new SqlParameter("@PIB", salon.PIB));
+                    cmd.Parameters.Add(new SqlParameter("@MaticniBroj", salon.MaticniBroj));
+                    cmd.Parameters.Add(new SqlParameter("@BrojZiroRacuna", salon.BrojZiroRacuna));
+                    cmd.Parameters.Add(new SqlParameter("@Obrisan", salon.Obrisan));
 
-                //cmd.ExecuteNonQuery();
-                salon.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    //cmd.ExecuteNonQuery();
+                    salon.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+                Projekat.Instance.Salon.Add(salon);
             }
-            Projekat.Instance.Salon.Add(salon);
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom snimanja u bazu, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
         public static void Delete(Salon salon)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-
-
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = @"UPDATE Salon SET Obrisan = 1 WHERE IdS=@IdS";
-
-                cmd.Parameters.Add(new SqlParameter("@Obrisan", salon.Obrisan));
-                cmd.Parameters.Add(new SqlParameter("@IdS", salon.Id));
-
-                var i = cmd.ExecuteNonQuery();
-
-                foreach (var sa in Projekat.Instance.Salon)
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if (sa.Id == salon.Id)
+                    conn.Open();
+
+
+                    SqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"UPDATE Salon SET Obrisan = 1 WHERE IdS=@IdS";
+
+                    cmd.Parameters.Add(new SqlParameter("@Obrisan", salon.Obrisan));
+                    cmd.Parameters.Add(new SqlParameter("@IdS", salon.Id));
+
+                    var i = cmd.ExecuteNonQuery();
+
+                    foreach (var sa in Projekat.Instance.Salon)
                     {
-                        salon.Obrisan = true;
+                        if (sa.Id == salon.Id)
+                        {
+                            salon.Obrisan = true;
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom snimanja u bazu, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }

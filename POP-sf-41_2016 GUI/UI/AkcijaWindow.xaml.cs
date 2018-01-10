@@ -1,21 +1,10 @@
 ﻿using POP_sf41_2016.model;
-using POP_sf41_2016.util;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.ComponentModel;
-using System.Collections.ObjectModel;
 using POP_sf_41_2016_GUI.DAO;
 using POP_sf_41_2016_GUI.model;
 
@@ -29,7 +18,8 @@ namespace POP_sf_41_2016_GUI.UI
         public enum Operacija
         {
             DODAVANJE,
-            IZMENA
+            IZMENA,
+            INFO
         };
         private Akcija akcija;
         private Operacija operacija;
@@ -60,6 +50,15 @@ namespace POP_sf_41_2016_GUI.UI
                 dpKraj.DisplayDateStart = dpPocetak.SelectedDate;
                 dpKraj.DisplayDateStart = DateTime.Now;
             }
+            if(operacija == Operacija.INFO)
+            {
+                dpPocetak.IsEnabled = false;
+                dpKraj.IsEnabled = false;
+                tbNaziv.IsReadOnly = true;
+                tbNaziv.IsReadOnly = true;
+                btnDodaj.IsEnabled = false;
+                btnObrisi.IsEnabled = false;
+            }
 
         }
         private void Odustani_click(object sender, RoutedEventArgs e)
@@ -70,74 +69,78 @@ namespace POP_sf_41_2016_GUI.UI
 
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
-        {
-            
-            var listaAkcija = Projekat.Instance.Akcije;
-
+        {            
+            if(operacija == Operacija.INFO)
+            {
+                this.Close();
+            }
+            if(ForceValidation() == true)
+            {
+                return;
+            }
             if (akcija.ListaNaAkciji.Count < 1)
             {
                 MessageBox.Show("Barem jedan namestaj mora biti na akciji", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                if (operacija == Operacija.DODAVANJE)
-                {
-                    if (akcija.DatumPocetka.Date < DateTime.Today)
-                    {
-                        MessageBox.Show("Datum pocetka akcije ne moze biti manji od danasnjeg dana", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
-                    }
-                }
                 if (akcija.DatumZavrsetka.Date < akcija.DatumPocetka.Date)
                 {
                     MessageBox.Show("Datum zavrsetka akcije mora biti veci od datuma pocetka akcije", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-                else if (akcija.DatumPocetka.Date >= DateTime.Today || akcija.DatumZavrsetka.Date > akcija.DatumPocetka.Date)
+                else
                 {
-                    if (operacija == Operacija.DODAVANJE)
+                    switch (operacija)
                     {
-
-                        AkcijaDAO.Create(akcija);
-                        foreach (var naAkciji in akcija.ListaNaAkciji)
-                        {
-                            NaAkcijiDAO.Create(naAkciji);
-                        }
-                        DialogResult = true;
-
-                    }
-                    else if (operacija == Operacija.IZMENA)
-                    {
-                        var listaProvera = NaAkcijiDAO.LoadByAkcijaId(akcija.Id);
-                        foreach (var naAkciji in akcija.ListaNaAkciji.ToList())
-                        {
-                            bool postojiNaAkciji = false;
-                            foreach (var item in listaProvera.ToList())
+                        case Operacija.DODAVANJE:
+                            if (akcija.DatumPocetka.Date < DateTime.Today)
                             {
-                                if (item.Id == naAkciji.Id)
+                                MessageBox.Show("Datum pocetka akcije ne moze biti manji od danasnjeg dana", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                            }
+                            else
+                            {
+                                AkcijaDAO.Create(akcija);
+                                foreach (var naAkciji in akcija.ListaNaAkciji)
                                 {
-                                    postojiNaAkciji = true;
-                                    listaProvera.Remove(item);
-                                    break;
+                                    NaAkcijiDAO.Create(naAkciji);
                                 }
-                                if (item.NamestajId == naAkciji.NamestajId)
+                                DialogResult = true;
+                            }
+                            break;
+                        case Operacija.IZMENA:
+                            var listaProvera = NaAkcijiDAO.LoadByAkcijaId(akcija.Id);
+                            foreach (var naAkciji in akcija.ListaNaAkciji.ToList())
+                            {
+                                bool postojiNaAkciji = false;
+                                foreach (var item in listaProvera.ToList())
                                 {
-                                    if (item.Popust != naAkciji.Popust)
+                                    if (item.Id == naAkciji.Id)
                                     {
-                                        NaAkcijiDAO.Update(item);
+                                        postojiNaAkciji = true;
+                                        listaProvera.Remove(item);
                                         break;
                                     }
+                                    if (item.NamestajId == naAkciji.NamestajId)
+                                    {
+                                        if (item.Popust != naAkciji.Popust)
+                                        {
+                                            NaAkcijiDAO.Update(item);
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (postojiNaAkciji == false)
+                                {
+                                    NaAkcijiDAO.Create(naAkciji);
                                 }
                             }
-                            if (postojiNaAkciji == false)
+                            foreach (var item in listaProvera.ToList())
                             {
-                                NaAkcijiDAO.Create(naAkciji);
+                                NaAkcijiDAO.Delete(item, TipBrisanja.PoNaAkciji, 0, 0);
                             }
-                        }
-                        foreach (var item in listaProvera.ToList())
-                        {
-                            NaAkcijiDAO.Delete(item, TipBrisanja.PoNaAkciji, 0, 0);
-                        }
-                        AkcijaDAO.Update(akcija);
-                        DialogResult = true;
+                            AkcijaDAO.Update(akcija);
+                            DialogResult = true;
+                            break;
                     }
                     this.Close();
                 }
@@ -158,8 +161,21 @@ namespace POP_sf_41_2016_GUI.UI
             var noviProzor = new StavkaWindow(null, akcijaId, StavkaWindow.Parametar.AKCIJA);
             if (noviProzor.ShowDialog() == true)
             {
-                akcija.ListaNaAkciji.Add(noviProzor.naAkciji);
-                akcija.ListaNaAkcijiId.Add(noviProzor.naAkciji.Id);
+                var novoNaAkciji = noviProzor.naAkciji;
+                bool postojiNamestaj = false;
+                foreach (var item in akcija.ListaNaAkciji)
+                {
+                    if(noviProzor.naAkciji.NamestajId == item.NamestajId)
+                    {
+                        MessageBox.Show("Ovaj namestaj je vec dodat na akciju", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                        postojiNamestaj = true;
+                    }
+                }
+                if(postojiNamestaj == false)
+                {
+                    akcija.ListaNaAkciji.Add(novoNaAkciji);
+                    akcija.ListaNaAkcijiId.Add(novoNaAkciji.Id);
+                }
             }
         }
 
@@ -185,6 +201,17 @@ namespace POP_sf_41_2016_GUI.UI
                     break;
                 }
             }
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbNaziv.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            if (Validation.GetHasError(tbNaziv) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -1,22 +1,12 @@
 ﻿using POP_sf_41_2016_GUI.DAO;
 using POP_sf_41_2016_GUI.model;
 using POP_sf41_2016.model;
-using POP_sf41_2016.util;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace POP_sf_41_2016_GUI.UI
 {
@@ -29,7 +19,8 @@ namespace POP_sf_41_2016_GUI.UI
         public enum Operacija
         {
             DODAVANJE,
-            IZMENA
+            IZMENA,
+            INFO
         };
         private Korisnik korisnik;
         private Prodaja prodaja;
@@ -46,6 +37,10 @@ namespace POP_sf_41_2016_GUI.UI
 
             if(prodaja.Id == 0)
             {
+                Random rn = new Random();
+                int num = rn.Next(0, 26);
+                char let = (char)('a' + num);
+                prodaja.BrRacuna = "R" + (ProdajaDAO.GetLastId()+ 1).ToString() + let;
                 lblImeProdavaca.Content = korisnik.KorisnickoIme;
                 lblDatumProdaje.Content = DateTime.Now.Date;
             }
@@ -55,6 +50,7 @@ namespace POP_sf_41_2016_GUI.UI
                 lblDatumProdaje.Content = prodaja.DatumProdaje;
             }
             tbKupac.MaxLength = 20;
+            lblBrRacuna.DataContext = prodaja;
             prodaja.DatumProdaje = DateTime.Now.Date;
             tbKupac.DataContext = prodaja;
             tbCenaPDV.DataContext = prodaja;
@@ -70,12 +66,25 @@ namespace POP_sf_41_2016_GUI.UI
             viewDU = CollectionViewSource.GetDefaultView(prodaja.ListaDodatnihUsluga);
             dgDodatnaUsluga.ItemsSource = viewDU;
 
+            if(operacija == Operacija.INFO)
+            {
+                tbKupac.IsReadOnly = true;
+                btnDodajDU.IsEnabled = false;
+                btnObrisiDU.IsEnabled = false;
+                btnDodajN.IsEnabled = false;
+                btnObrisiN.IsEnabled = false;
+            }
+
         }
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
             var listaStavki = ProdajaNamestaj.NadjiStavkuProdaje(prodaja.ListaProdajeNamestajaId);
+
+            if(ForceValidation() == true)
+            {
+                return;
+            }
 
             if (prodaja.ListaProdajeNamestaja.Count < 1)
             {
@@ -83,86 +92,83 @@ namespace POP_sf_41_2016_GUI.UI
             }
             else
             {
-                Random rn = new Random();
-
-                if (operacija == Operacija.DODAVANJE)
+                switch (operacija)
                 {
-                    int num = rn.Next(0, 26);
-                    char let = (char)('a' + num);
-                    prodaja.BrRacuna = "R" + rn.Next(1, 1000).ToString() + let;
-                    prodaja.ProdavacId = korisnik.Id;
+                    case Operacija.DODAVANJE:
+                        this.DialogResult = true;
+                        prodaja.ProdavacId = korisnik.Id;
 
-                    ProdajaDAO.Create(prodaja);
-                    foreach (var item in prodaja.ListaProdajeNamestaja)
-                    {
-                        item.ProdajaId = ProdajaDAO.GetLastId();
-                        ProdajaNamestajDAO.Create(item);
-                    }
-                    foreach (var item in prodaja.ListaDodatnihUsluga)
-                    {
-                        item.ProdajaId = ProdajaDAO.GetLastId();
-                        ProdajaDodatnaUslugaDAO.Create(item);
-                    }
-                }
-
-                if (operacija == Operacija.IZMENA)
-                {
-                    var listaProvera = ProdajaNamestajDAO.LoadByProdajaId(prodaja.Id);
-                    foreach (var prodajaNamestaj in prodaja.ListaProdajeNamestaja.ToList())
-                    {
-                        bool postojiProdajaNamestaj = false;
+                        ProdajaDAO.Create(prodaja);
+                        foreach (var item in prodaja.ListaProdajeNamestaja)
+                        {
+                            item.ProdajaId = ProdajaDAO.GetLastId();
+                            ProdajaNamestajDAO.Create(item);
+                        }
+                        foreach (var item in prodaja.ListaDodatnihUsluga)
+                        {
+                            item.ProdajaId = ProdajaDAO.GetLastId();
+                            ProdajaDodatnaUslugaDAO.Create(item);
+                        }
+                        break;
+                    case Operacija.IZMENA:
+                        this.DialogResult = true;
+                        var listaProvera = ProdajaNamestajDAO.LoadByProdajaId(prodaja.Id);
+                        foreach (var prodajaNamestaj in prodaja.ListaProdajeNamestaja.ToList())
+                        {
+                            bool postojiProdajaNamestaj = false;
+                            foreach (var item in listaProvera.ToList())
+                            {
+                                if (item.Id == prodajaNamestaj.Id)
+                                {
+                                    postojiProdajaNamestaj = true;
+                                    listaProvera.Remove(item);
+                                    break;
+                                }
+                                if (item.NamestajId == prodajaNamestaj.NamestajId)
+                                {
+                                    if (item.Kolicina != prodajaNamestaj.Kolicina)
+                                    {
+                                        ProdajaNamestajDAO.Update(item);
+                                        break;
+                                    }
+                                }
+                            }
+                            if (postojiProdajaNamestaj == false)
+                            {
+                                prodajaNamestaj.ProdajaId = prodaja.Id;
+                                ProdajaNamestajDAO.Create(prodajaNamestaj);
+                            }
+                        }
                         foreach (var item in listaProvera.ToList())
                         {
-                            if (item.Id == prodajaNamestaj.Id)
+                            ProdajaNamestajDAO.Delete(item, ProdajaNamestajDAO.TipBrisanja.ProdajaNamestaj, 0);
+                        }
+                        //Provera za Dodatnu uslugu
+                        var listaProveraDU = ProdajaDodatnaUslugaDAO.LoadByProdajaId(prodaja.Id);
+                        foreach (var prodajaDodatnaUsluga in prodaja.ListaDodatnihUsluga.ToList())
+                        {
+                            bool postojiProdajaDU = false;
+                            foreach (var item in listaProveraDU.ToList())
                             {
-                                postojiProdajaNamestaj = true;
-                                listaProvera.Remove(item);
-                                break;
-                            }
-                            if (item.NamestajId == prodajaNamestaj.NamestajId)
-                            {
-                                if (item.Kolicina != prodajaNamestaj.Kolicina)
+                                if (item.Id == prodajaDodatnaUsluga.Id)
                                 {
-                                    ProdajaNamestajDAO.Update(item);
+                                    postojiProdajaDU = true;
+                                    listaProveraDU.Remove(item);
                                     break;
                                 }
                             }
-                        }
-                        if (postojiProdajaNamestaj == false)
-                        {
-                            prodajaNamestaj.ProdajaId = prodaja.Id;
-                            ProdajaNamestajDAO.Create(prodajaNamestaj);
-                        }
-                    }
-                    foreach (var item in listaProvera.ToList())
-                    {
-                        ProdajaNamestajDAO.Delete(item, ProdajaNamestajDAO.TipBrisanja.ProdajaNamestaj, 0);
-                    }
-                    //Provera za Dodatnu uslugu
-                    var listaProveraDU = ProdajaDodatnaUslugaDAO.LoadByProdajaId(prodaja.Id);
-                    foreach (var prodajaDodatnaUsluga in prodaja.ListaDodatnihUsluga.ToList())
-                    {
-                        bool postojiProdajaDU = false;
-                        foreach (var item in listaProveraDU.ToList())
-                        {
-                            if (item.Id == prodajaDodatnaUsluga.Id)
+                            if (postojiProdajaDU == false)
                             {
-                                postojiProdajaDU = true;
-                                listaProveraDU.Remove(item);
-                                break;
+                                prodajaDodatnaUsluga.ProdajaId = prodaja.Id;
+                                ProdajaDodatnaUslugaDAO.Create(prodajaDodatnaUsluga);
                             }
                         }
-                        if (postojiProdajaDU == false)
+                        foreach (var item in listaProveraDU.ToList())
                         {
-                            prodajaDodatnaUsluga.ProdajaId = prodaja.Id;
-                            ProdajaDodatnaUslugaDAO.Create(prodajaDodatnaUsluga);
+                            ProdajaDodatnaUslugaDAO.Delete(item, ProdajaDodatnaUslugaDAO.TipBrisanja.ProdajaDodatnaUsluga, 0);
                         }
-                    }
-                    foreach (var item in listaProveraDU.ToList())
-                    {
-                        ProdajaDodatnaUslugaDAO.Delete(item, ProdajaDodatnaUslugaDAO.TipBrisanja.ProdajaDodatnaUsluga, 0);
-                    }
-                    ProdajaDAO.Update(prodaja);
+                        ProdajaDAO.Update(prodaja);
+                        break;
                 }
             }
         }
@@ -181,8 +187,20 @@ namespace POP_sf_41_2016_GUI.UI
             if(stavkaWindow.ShowDialog() == true)
             {
                 var novaStavka = stavkaWindow.stavka;
-                prodaja.ListaProdajeNamestaja.Add(novaStavka);
-                prodaja.UkupanIznos += novaStavka.UkupnaCena * Prodaja.PDV;
+                bool postojiProdajaNamestaj = false;
+                foreach (var item in prodaja.ListaProdajeNamestaja)
+                {
+                    if(item.NamestajId == novaStavka.NamestajId)
+                    {
+                        item.Kolicina += novaStavka.Kolicina;
+                        postojiProdajaNamestaj = true;
+                    }
+                }
+                if(postojiProdajaNamestaj == false)
+                {
+                    prodaja.ListaProdajeNamestaja.Add(novaStavka);
+                }
+                prodaja.UkupanIznos += (novaStavka.UkupnaCena * Prodaja.PDV + novaStavka.UkupnaCena);
             }
 
         }
@@ -193,8 +211,20 @@ namespace POP_sf_41_2016_GUI.UI
             if (stavkaWindow.ShowDialog() == true)
             {
                 var novaDodatnaUsluga = stavkaWindow.dodatnaUsluga;
-                prodaja.ListaDodatnihUsluga.Add(novaDodatnaUsluga);
-                prodaja.UkupanIznos += novaDodatnaUsluga.Cena * Prodaja.PDV;
+                bool postojiDodatnaUsluga = false;
+                foreach (var item in prodaja.ListaDodatnihUsluga)
+                {
+                    if (item.DodatnaUslugaId == novaDodatnaUsluga.DodatnaUslugaId)
+                    {
+                        MessageBox.Show(novaDodatnaUsluga.Naziv + " Je vec dodato u prodaju", "Greska", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        postojiDodatnaUsluga = true;
+                    }
+                }
+                if (postojiDodatnaUsluga == false)
+                {
+                    prodaja.ListaDodatnihUsluga.Add(novaDodatnaUsluga);
+                    prodaja.UkupanIznos += (novaDodatnaUsluga.Cena * Prodaja.PDV + novaDodatnaUsluga.Cena);
+                }
             }
 
         }
@@ -204,7 +234,7 @@ namespace POP_sf_41_2016_GUI.UI
             var izabranaStavka = view.CurrentItem as ProdajaNamestaj;
             var lista = prodaja.ListaProdajeNamestaja;
             var listaId = prodaja.ListaProdajeNamestajaId;
-            prodaja.UkupanIznos -= (izabranaStavka.UkupnaCena * 100/120);
+            prodaja.UkupanIznos -= (izabranaStavka.UkupnaCena * Prodaja.PDV + izabranaStavka.UkupnaCena);
             if(izabranaStavka.Id == 0)
             {
                 foreach (var item in lista)
@@ -252,7 +282,7 @@ namespace POP_sf_41_2016_GUI.UI
         private void ObrisiDU_click(object sender, RoutedEventArgs e)
         {
             var izabranaDodatnaUsluga = viewDU.CurrentItem as ProdajaDodatnaUsluga;
-            prodaja.UkupanIznos -= (izabranaDodatnaUsluga.Cena * 100 / 120);
+            prodaja.UkupanIznos -= (izabranaDodatnaUsluga.Cena * Prodaja.PDV + izabranaDodatnaUsluga.Cena);
 
             foreach (var item in prodaja.ListaDodatnihUsluga)
             {
@@ -270,6 +300,17 @@ namespace POP_sf_41_2016_GUI.UI
             Projekat.Instance.Namestaji.Clear();
             NamestajDAO.Load();
             this.Close();
+        }
+
+        private bool ForceValidation()
+        {
+            BindingExpression be1 = tbKupac.GetBindingExpression(TextBox.TextProperty);
+            be1.UpdateSource();
+            if (Validation.GetHasError(tbKupac) == true)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

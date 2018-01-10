@@ -1,7 +1,6 @@
 ﻿using POP_sf_41_2016_GUI.DAO;
 using POP_sf_41_2016_GUI.UI;
 using POP_sf41_2016.model;
-using POP_sf41_2016.util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,6 +64,7 @@ namespace POP_sf_41_2016_GUI
             dataGridSalon.Visibility = Visibility.Collapsed;
             dataGridProdaja.Visibility = Visibility.Collapsed;
             dpPretrazi.Visibility = Visibility.Collapsed;
+            btnInfo.Visibility = Visibility.Collapsed;
 
 
             this.korisnik = korisnik;
@@ -153,6 +153,7 @@ namespace POP_sf_41_2016_GUI
                     viewa.Filter = AkcijaFilter;
                     dataGridAkcija.ItemsSource = viewa;
                     dataGridAkcija.Visibility = Visibility.Visible;
+                    btnInfo.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretrazivanje
                     if (cbPretrazi.Items.Count < 1)
                     {
@@ -267,6 +268,7 @@ namespace POP_sf_41_2016_GUI
                     viewp.Filter = ProdajaFilter;
                     dataGridProdaja.ItemsSource = viewp;
                     dataGridProdaja.Visibility = Visibility.Visible;
+                    btnInfo.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretragu
                     if (cbPretrazi.Items.Count < 1)
                     {
@@ -514,13 +516,6 @@ namespace POP_sf_41_2016_GUI
                         if (MessageBox.Show("Da li ste sigurni da zelite da obrisete tip namestaja: " + izabraniTipNamestaja.Naziv + " ?", "Obrisi tip namestaja", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                         {
                             TipNamestajaDAO.Delete(izabraniTipNamestaja);
-                            foreach(var namestaj in listaNamestajaa)
-                            {
-                                if(namestaj.TipNamestajaId == izabraniTipNamestaja.Id)
-                                {
-                                    namestaj.TipNamestajaId = 1;
-                                }
-                            }
                         }
                     }
                     break;
@@ -684,6 +679,25 @@ namespace POP_sf_41_2016_GUI
         }
         #endregion
 
+        #region Info
+        private void info_click(object sender, RoutedEventArgs e)
+        {
+            switch (parametar)
+            {
+                case Parametar.Akcija:
+                    Akcija izabranaAkcija = viewa.CurrentItem as Akcija; 
+                    AkcijaWindow akcijaWindow = new AkcijaWindow(izabranaAkcija, AkcijaWindow.Operacija.INFO);
+                    akcijaWindow.ShowDialog();
+                    break;
+                case Parametar.Prodaja:
+                    Prodaja izabranaProdaja = viewp.CurrentItem as Prodaja;
+                    ProdajaWindow prodajaWindow = new ProdajaWindow(korisnik,izabranaProdaja, ProdajaWindow.Operacija.INFO);
+                    prodajaWindow.ShowDialog();
+                    break;
+            }
+        }
+#endregion
+
         #region Dg row nummber
         void dataGridNamestaj_LoadingRow(object sender, DataGridRowEventArgs e)
         {
@@ -759,5 +773,6 @@ namespace POP_sf_41_2016_GUI
                 }
             }
         }
+
     }
 }

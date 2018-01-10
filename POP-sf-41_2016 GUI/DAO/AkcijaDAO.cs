@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace POP_sf_41_2016_GUI.DAO
 {
@@ -24,128 +25,157 @@ namespace POP_sf_41_2016_GUI.DAO
 
         public static int GetLastId()
         {
-            int lastId = 0;
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = @"SELECT TOP(1) IdA " +
-                                   "FROM Akcija " +
-                                   "ORDER BY IdA DESC; ";
-
-                SqlDataAdapter sqlDA = new SqlDataAdapter();
-                sqlDA.SelectCommand = cmd;
-
-                DataSet dsA = new DataSet(); // izvrsavanje upita
-                sqlDA.Fill(dsA, "Akcija");
-
-                foreach (DataRow row in dsA.Tables["Akcija"].Rows)
+                int lastId = 0;
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    lastId = int.Parse(row["IdA"].ToString());
+                    conn.Open();
+
+                    SqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"SELECT TOP(1) IdA " +
+                                       "FROM Akcija " +
+                                       "ORDER BY IdA DESC; ";
+
+                    SqlDataAdapter sqlDA = new SqlDataAdapter();
+                    sqlDA.SelectCommand = cmd;
+
+                    DataSet dsA = new DataSet(); // izvrsavanje upita
+                    sqlDA.Fill(dsA, "Akcija");
+
+                    foreach (DataRow row in dsA.Tables["Akcija"].Rows)
+                    {
+                        lastId = int.Parse(row["IdA"].ToString());
+                    }
                 }
+                return lastId;
             }
-            return lastId;
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom ucitavanje iz baze, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                return 0;
+            }
         }
 
         public static void Load()
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = @"SELECT * " +
-                                   "FROM Akcija " +
-                                   "WHERE Obrisan = 0; ";
-
-                SqlDataAdapter sqlDA = new SqlDataAdapter();
-                sqlDA.SelectCommand = cmd;
-
-                DataSet dsA = new DataSet(); // izvrsavanje upita
-                sqlDA.Fill(dsA, "Akcija");
-
-
-                foreach (DataRow row in dsA.Tables["Akcija"].Rows)
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    Akcija akcija = new Akcija();
-                    akcija.Id = int.Parse(row["IdA"].ToString());
-                    akcija.Naziv = row["Naziv"].ToString();
-                    akcija.DatumPocetka = DateTime.Parse(row["DatumPocetka"].ToString());
-                    akcija.DatumZavrsetka = DateTime.Parse(row["DatumZavrsetka"].ToString());
-                    akcija.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
+                    conn.Open();
 
-                    if(akcija.DatumZavrsetka < DateTime.Now.Date)
+                    SqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"SELECT * " +
+                                       "FROM Akcija " +
+                                       "WHERE Obrisan = 0; ";
+
+                    SqlDataAdapter sqlDA = new SqlDataAdapter();
+                    sqlDA.SelectCommand = cmd;
+
+                    DataSet dsA = new DataSet(); // izvrsavanje upita
+                    sqlDA.Fill(dsA, "Akcija");
+
+
+                    foreach (DataRow row in dsA.Tables["Akcija"].Rows)
                     {
-                        NaAkciji na = new NaAkciji()
+                        Akcija akcija = new Akcija();
+                        akcija.Id = int.Parse(row["IdA"].ToString());
+                        akcija.Naziv = row["Naziv"].ToString();
+                        akcija.DatumPocetka = DateTime.Parse(row["DatumPocetka"].ToString());
+                        akcija.DatumZavrsetka = DateTime.Parse(row["DatumZavrsetka"].ToString());
+                        akcija.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
+
+                        if (akcija.DatumZavrsetka < DateTime.Now.Date)
                         {
-                            AkcijaId = akcija.Id
-                        };
-                        NaAkcijiDAO.Delete(na, TipBrisanja.PoAkcijaId, akcija.Id, 0);
-                        Delete(akcija);
-                    }
-                    else
-                    {
-                        Projekat.Instance.Akcije.Add(akcija);
+                            NaAkciji na = new NaAkciji()
+                            {
+                                AkcijaId = akcija.Id
+                            };
+                            NaAkcijiDAO.Delete(na, TipBrisanja.PoAkcijaId, akcija.Id, 0);
+                            Delete(akcija);
+                        }
+                        else
+                        {
+                            Projekat.Instance.Akcije.Add(akcija);
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom ucitavanje iz baze, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         public static void Update(Akcija akcija)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmdA = conn.CreateCommand();
-
-
-                cmdA.CommandText = @"UPDATE Akcija SET Naziv=@Naziv, DatumPocetka=@DatumPocetka, DatumZavrsetka=@DatumZavrsetka, Obrisan=@Obrisan " +
-                                    "WHERE IdA=@IdA;";
-
-                cmdA.Parameters.Add(new SqlParameter("@Naziv", akcija.Naziv));
-                cmdA.Parameters.Add(new SqlParameter("@DatumPocetka", akcija.DatumPocetka));
-                cmdA.Parameters.Add(new SqlParameter("@DatumZavrsetka", akcija.DatumZavrsetka));
-                cmdA.Parameters.Add(new SqlParameter("@Obrisan", akcija.Obrisan));
-                cmdA.Parameters.Add(new SqlParameter("@IdA", akcija.Id));
-
-                var uuA = cmdA.ExecuteNonQuery();
-
-                foreach (var ak in Projekat.Instance.Akcije)
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if (akcija.Id == ak.Id)
+                    conn.Open();
+
+                    SqlCommand cmdA = conn.CreateCommand();
+
+
+                    cmdA.CommandText = @"UPDATE Akcija SET Naziv=@Naziv, DatumPocetka=@DatumPocetka, DatumZavrsetka=@DatumZavrsetka, Obrisan=@Obrisan " +
+                                        "WHERE IdA=@IdA;";
+
+                    cmdA.Parameters.Add(new SqlParameter("@Naziv", akcija.Naziv));
+                    cmdA.Parameters.Add(new SqlParameter("@DatumPocetka", akcija.DatumPocetka));
+                    cmdA.Parameters.Add(new SqlParameter("@DatumZavrsetka", akcija.DatumZavrsetka));
+                    cmdA.Parameters.Add(new SqlParameter("@Obrisan", akcija.Obrisan));
+                    cmdA.Parameters.Add(new SqlParameter("@IdA", akcija.Id));
+
+                    var uuA = cmdA.ExecuteNonQuery();
+
+                    foreach (var ak in Projekat.Instance.Akcije)
                     {
-                        ak.Naziv = akcija.Naziv;
-                        ak.DatumZavrsetka = akcija.DatumZavrsetka;
-                        ak.Obrisan = akcija.Obrisan;
-                        ak.DatumPocetka = akcija.DatumPocetka;
+                        if (akcija.Id == ak.Id)
+                        {
+                            ak.Naziv = akcija.Naziv;
+                            ak.DatumZavrsetka = akcija.DatumZavrsetka;
+                            ak.Obrisan = akcija.Obrisan;
+                            ak.DatumPocetka = akcija.DatumPocetka;
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom snimanja u bazu, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         public static void Create(Akcija akcija)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-                SqlCommand cmd = conn.CreateCommand();
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = conn.CreateCommand();
 
 
-                cmd.CommandText = @"INSERT INTO Akcija (DatumPocetka, DatumZavrsetka, Naziv, Obrisan) " +
-                                   "VALUES (@DatumPocetka, @DatumZavrsetka, @Naziv, @Obrisan);";
-                cmd.CommandText += "SELECT SCOPE_IDENTITY();";
+                    cmd.CommandText = @"INSERT INTO Akcija (DatumPocetka, DatumZavrsetka, Naziv, Obrisan) " +
+                                       "VALUES (@DatumPocetka, @DatumZavrsetka, @Naziv, @Obrisan);";
+                    cmd.CommandText += "SELECT SCOPE_IDENTITY();";
 
-                cmd.Parameters.Add(new SqlParameter("@Naziv", akcija.Naziv));
-                cmd.Parameters.Add(new SqlParameter("@DatumPocetka", akcija.DatumPocetka));
-                cmd.Parameters.Add(new SqlParameter("@DatumZavrsetka", akcija.DatumZavrsetka));
-                cmd.Parameters.Add(new SqlParameter("@Obrisan", akcija.Obrisan));
+                    cmd.Parameters.Add(new SqlParameter("@Naziv", akcija.Naziv));
+                    cmd.Parameters.Add(new SqlParameter("@DatumPocetka", akcija.DatumPocetka));
+                    cmd.Parameters.Add(new SqlParameter("@DatumZavrsetka", akcija.DatumZavrsetka));
+                    cmd.Parameters.Add(new SqlParameter("@Obrisan", akcija.Obrisan));
 
-                //cmd.ExecuteNonQuery();
-                akcija.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                    //cmd.ExecuteNonQuery();
+                    akcija.Id = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+                Projekat.Instance.Akcije.Add(akcija);
             }
-            Projekat.Instance.Akcije.Add(akcija);
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom snimanja u bazu, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         public static string SortBy(int sort)
@@ -172,93 +202,108 @@ namespace POP_sf_41_2016_GUI.DAO
 
         public static ObservableCollection<Akcija> FindSort(String parametarZaPretragu, TipPretrage tipPretrage, DateTime? dateTime, int sort)
         {
-            var listaPretraga = new ObservableCollection<Akcija>();
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-
-                SqlCommand cmd = conn.CreateCommand();
-                switch (tipPretrage)
+                var listaPretraga = new ObservableCollection<Akcija>();
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    case TipPretrage.DatumPocetka:
-                        cmd.CommandText = @"SELECT * " +
-                                           "FROM Akcija " +
-                                           "WHERE Obrisan = 0 and DatumPocetka >= @dateTime ";
+                    conn.Open();
 
-                        cmd.CommandText += SortBy(sort);
-                        cmd.Parameters.Add(new SqlParameter("@dateTime", dateTime));
-                        break;
-                    case TipPretrage.DatumZavrsetka:
-                        cmd.CommandText = @"SELECT * " +
-                                           "FROM Akcija " +
-                                           "WHERE Obrisan = 0 and DatumZavrsetka <= @dateTime ";
+                    SqlCommand cmd = conn.CreateCommand();
+                    switch (tipPretrage)
+                    {
+                        case TipPretrage.DatumPocetka:
+                            cmd.CommandText = @"SELECT * " +
+                                               "FROM Akcija " +
+                                               "WHERE Obrisan = 0 and DatumPocetka >= @dateTime ";
 
-                        cmd.CommandText += SortBy(sort);
-                        cmd.Parameters.Add(new SqlParameter("@dateTime", dateTime));
-                        break;
-                    case TipPretrage.Naziv:
-                        cmd.CommandText = @"SELECT * " +
-                                           "FROM Akcija " +
-                                           "WHERE Obrisan = 0 and Naziv like @ParametarNaziv ";
+                            cmd.CommandText += SortBy(sort);
+                            cmd.Parameters.Add(new SqlParameter("@dateTime", dateTime));
+                            break;
+                        case TipPretrage.DatumZavrsetka:
+                            cmd.CommandText = @"SELECT * " +
+                                               "FROM Akcija " +
+                                               "WHERE Obrisan = 0 and DatumZavrsetka <= @dateTime ";
 
-                        cmd.CommandText += SortBy(sort);
-                        cmd.Parameters.Add(new SqlParameter("@ParametarNaziv", "%" + parametarZaPretragu + "%"));
-                        break;
-                    case TipPretrage.Namestaji:
-                        cmd.CommandText = @"SELECT * " +
-                                           "FROM Akcija a inner join NaAkciji na on a.IdA = na.AkcijaId inner join Namestaj n on n.IdN = na.NamestajId  " +
-                                           "WHERE a.Obrisan = 0 and na.Obrisan = 0 and n.Naziv like @ParametarNaziv ";
+                            cmd.CommandText += SortBy(sort);
+                            cmd.Parameters.Add(new SqlParameter("@dateTime", dateTime));
+                            break;
+                        case TipPretrage.Naziv:
+                            cmd.CommandText = @"SELECT * " +
+                                               "FROM Akcija " +
+                                               "WHERE Obrisan = 0 and Naziv like @ParametarNaziv ";
 
-                        cmd.CommandText += SortBy(sort);
-                        cmd.Parameters.Add(new SqlParameter("@ParametarNaziv", "%" + parametarZaPretragu + "%"));
-                        break;
+                            cmd.CommandText += SortBy(sort);
+                            cmd.Parameters.Add(new SqlParameter("@ParametarNaziv", "%" + parametarZaPretragu + "%"));
+                            break;
+                        case TipPretrage.Namestaji:
+                            cmd.CommandText = @"SELECT * " +
+                                               "FROM Akcija a inner join NaAkciji na on a.IdA = na.AkcijaId inner join Namestaj n on n.IdN = na.NamestajId  " +
+                                               "WHERE a.Obrisan = 0 and na.Obrisan = 0 and n.Naziv like @ParametarNaziv ";
+
+                            cmd.CommandText += SortBy(sort);
+                            cmd.Parameters.Add(new SqlParameter("@ParametarNaziv", "%" + parametarZaPretragu + "%"));
+                            break;
+                    }
+
+                    SqlDataAdapter sqlDA = new SqlDataAdapter();
+                    sqlDA.SelectCommand = cmd;
+
+                    DataSet dsA = new DataSet(); // izvrsavanje upita
+                    sqlDA.Fill(dsA, "Akcija");
+
+
+                    foreach (DataRow row in dsA.Tables["Akcija"].Rows)
+                    {
+                        Akcija akcija = new Akcija();
+                        akcija.Id = int.Parse(row["IdA"].ToString());
+                        akcija.Naziv = row["Naziv"].ToString();
+                        akcija.DatumPocetka = DateTime.Parse(row["DatumPocetka"].ToString());
+                        akcija.DatumZavrsetka = DateTime.Parse(row["DatumZavrsetka"].ToString());
+                        akcija.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
+
+                        listaPretraga.Add(akcija);
+                    }
                 }
-
-                SqlDataAdapter sqlDA = new SqlDataAdapter();
-                sqlDA.SelectCommand = cmd;
-
-                DataSet dsA = new DataSet(); // izvrsavanje upita
-                sqlDA.Fill(dsA, "Akcija");
-
-
-                foreach (DataRow row in dsA.Tables["Akcija"].Rows)
-                {
-                    Akcija akcija = new Akcija();
-                    akcija.Id = int.Parse(row["IdA"].ToString());
-                    akcija.Naziv = row["Naziv"].ToString();
-                    akcija.DatumPocetka = DateTime.Parse(row["DatumPocetka"].ToString());
-                    akcija.DatumZavrsetka = DateTime.Parse(row["DatumZavrsetka"].ToString());
-                    akcija.Obrisan = Boolean.Parse(row["Obrisan"].ToString());
-
-                    listaPretraga.Add(akcija);
-                }
+                return listaPretraga;
             }
-            return listaPretraga;
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom ucitavanje iz baze, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                return null;
+            }
         }
 
     public static void Delete(Akcija akcija)
         {
-            using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
+            try
             {
-                conn.Open();
-
-
-                SqlCommand cmd = conn.CreateCommand();
-                cmd.CommandText = @"UPDATE Akcija SET Obrisan = 1 WHERE IdA=@IdA";
-
-                cmd.Parameters.Add(new SqlParameter("@Obrisan", akcija.Obrisan));
-                cmd.Parameters.Add(new SqlParameter("@IdA", akcija.Id));
-
-                var i = cmd.ExecuteNonQuery();
-
-                foreach (var ak in Projekat.Instance.Akcije)
+                using (SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["POP"].ConnectionString))
                 {
-                    if (ak.Id == akcija.Id)
+                    conn.Open();
+
+
+                    SqlCommand cmd = conn.CreateCommand();
+                    cmd.CommandText = @"UPDATE Akcija SET Obrisan = 1 WHERE IdA=@IdA";
+
+                    cmd.Parameters.Add(new SqlParameter("@Obrisan", akcija.Obrisan));
+                    cmd.Parameters.Add(new SqlParameter("@IdA", akcija.Id));
+
+                    var i = cmd.ExecuteNonQuery();
+
+                    foreach (var ak in Projekat.Instance.Akcije)
                     {
-                        ak.Obrisan = true;
+                        if (ak.Id == akcija.Id)
+                        {
+                            ak.Obrisan = true;
+                        }
                     }
+                    NaAkcijiDAO.Delete(null, TipBrisanja.PoAkcijaId, akcija.Id, 0);
                 }
-                NaAkcijiDAO.Delete(null, TipBrisanja.PoAkcijaId, akcija.Id, 0);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Doslo je do greske prilikom snimanja u bazu, Molimo Vas pokusajte ponovo", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
     }
