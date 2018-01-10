@@ -69,6 +69,10 @@ namespace POP_sf_41_2016_GUI.UI
                 }
                 else if (parametar == Parametar.AKCIJA)
                 {
+                    if (namestajNotInAkcija.Count == 0)
+                    {
+                        MessageBox.Show("Nema dostupnih namestaja za akciju", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
                     namestajNotInAkcija = NamestajDAO.LoadNamestajNotInAkcija();
                     viewn = CollectionViewSource.GetDefaultView(namestajNotInAkcija);
                     dataGridNamestaj.ItemsSource = viewn;
@@ -77,10 +81,6 @@ namespace POP_sf_41_2016_GUI.UI
                     tbPopust.Visibility = Visibility.Visible;
                     lbKolicina.Content = "Popust";
                 }
-            }
-            if (namestajNotInAkcija.Count == 0)
-            {
-                MessageBox.Show("Nema dostupnih namestaja za akciju", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 

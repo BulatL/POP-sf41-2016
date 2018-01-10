@@ -35,11 +35,6 @@ namespace POP_sf_41_2016_GUI
 
             if(korisnik.TipKorisnika == Enums.TipKorisnika.Prodavac)
             {
-                btnNamestaj.Visibility = Visibility.Collapsed;
-                btnSalon.Visibility = Visibility.Collapsed;
-                btnTipNamestaja.Visibility = Visibility.Collapsed;
-                btnDodatnaUsluga.Visibility = Visibility.Collapsed;
-                btnAkcija.Visibility = Visibility.Collapsed;
                 btnKorisnici.Visibility = Visibility.Collapsed;
             }            
         }

@@ -90,7 +90,6 @@ namespace POP_sf41_2016.model
             }
         }
 
-        [XmlIgnore]
         public ObservableCollection<NaAkciji> ListaNaAkciji
         {
             get

@@ -195,6 +195,7 @@ namespace POP_sf_41_2016_GUI.DAO
                         if (tn.Id == tipNamestaja.Id)
                         {
                             tipNamestaja.Obrisan = true;
+                            break;
                         }
                     }
 

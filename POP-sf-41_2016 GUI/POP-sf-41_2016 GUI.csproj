@@ -68,7 +68,6 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="model\Enums.cs" />
     <Compile Include="model\NaAkciji.cs" />
     <Compile Include="model\Prodaja.cs" />
     <Compile Include="model\ProdajaDodatnaUsluga.cs" />

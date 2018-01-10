@@ -91,7 +91,6 @@ namespace POP_sf41_2016.model
             }
         }
 
-        [XmlIgnore]
         public TipNamestaja TipNamestaja
         {
             get

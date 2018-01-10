@@ -72,6 +72,7 @@ namespace POP_sf_41_2016_GUI
 
             if (korisnik.TipKorisnika == Enums.TipKorisnika.Prodavac)
             {
+                Dodajbtn.Visibility = Visibility.Collapsed;
                 btnIzmeni.Visibility = Visibility.Collapsed;
                 Obrisibtn.Visibility = Visibility.Collapsed;
             }
@@ -269,6 +270,7 @@ namespace POP_sf_41_2016_GUI
                     dataGridProdaja.ItemsSource = viewp;
                     dataGridProdaja.Visibility = Visibility.Visible;
                     btnInfo.Visibility = Visibility.Visible;
+                    Dodajbtn.Visibility = Visibility.Visible;
                     //Punjenje comboboxa za Pretragu
                     if (cbPretrazi.Items.Count < 1)
                     {
@@ -401,7 +403,7 @@ namespace POP_sf_41_2016_GUI
                     {
                         Korisnik kopija = (Korisnik)izabraniKorisnik.Clone();
 
-                        KorisnikWindow korisnikWindow = new KorisnikWindow(kopija, KorisnikWindow.Operacija.IZMENA);
+                        KorisnikWindow korisnikWindow = new KorisnikWindow(kopija, izabraniKorisnik.KorisnickoIme, KorisnikWindow.Operacija.IZMENA);
                         korisnikWindow.ShowDialog();
                     }
                     break;
@@ -467,7 +469,7 @@ namespace POP_sf_41_2016_GUI
 
                 case Parametar.Korisnik:
                     var noviKorisnik = new Korisnik();
-                    var korisnikWindow = new KorisnikWindow(noviKorisnik , KorisnikWindow.Operacija.DODAVANJE);
+                    var korisnikWindow = new KorisnikWindow(noviKorisnik, "", KorisnikWindow.Operacija.DODAVANJE);
                     korisnikWindow.ShowDialog();
                     break;
 
@@ -544,6 +546,14 @@ namespace POP_sf_41_2016_GUI
                 case Parametar.Korisnik:
                     var izabraniKorisnik = (Korisnik)viewk.CurrentItem;
                     var listaKorisnika = Projekat.Instance.Korisnici;
+                    if(izabraniKorisnik.Id == korisnik.Id)
+                    {
+                        if(MessageBox.Show("Da li ste sigurni da zelite da obrisete svoj nalog?", "Obrisi korisnika", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                        {
+                            KorisnikDAO.Delete(izabraniKorisnik);
+                            this.Close();
+                        }
+                    }
                     if (MessageBox.Show("Da li ste sigurni da zelite da obrisete korisnika: " + izabraniKorisnik.Ime + " " + izabraniKorisnik.Prezime + " ?", "Obrisi korisnika", MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
                         KorisnikDAO.Delete(izabraniKorisnik);

@@ -20,10 +20,12 @@ namespace POP_sf_41_2016_GUI.UI
         };
         private Korisnik korisnik;
         private Operacija operacija;
-        public KorisnikWindow(Korisnik korisnik, Operacija operacija = Operacija.DODAVANJE)
+        private string korisnickoIme;
+        public KorisnikWindow(Korisnik korisnik, string korisnickoIme, Operacija operacija = Operacija.DODAVANJE)
         {
             InitializeComponent();
 
+            this.korisnickoIme = korisnickoIme;
             this.korisnik = korisnik;
             this.operacija = operacija;
 
@@ -54,18 +56,33 @@ namespace POP_sf_41_2016_GUI.UI
             }
             else
             {
-                this.DialogResult = true;
                 switch (operacija)
                 {
                     case Operacija.DODAVANJE:
                         KorisnikDAO.Create(korisnik);
+                        this.DialogResult = true;
+                        this.Close();
                         break;
                     case Operacija.IZMENA:
-                        KorisnikDAO.Update(korisnik);
+                        bool provera = false;
+                        foreach (var item in Projekat.Instance.Korisnici)
+                        {
+                            if(item.KorisnickoIme == korisnik.KorisnickoIme && korisnik.KorisnickoIme != korisnickoIme)
+                            {
+                                MessageBox.Show("Korisnicko ime je vec zauzeto", "Upozorenje", MessageBoxButton.OK, MessageBoxImage.Information);
+                                provera = true;
+                                break;
+                            }
+                        }
+                        if (provera == false)
+                        {
+                            KorisnikDAO.Update(korisnik);
+                            this.DialogResult = true;
+                            this.Close();
+                        }
                         break;
 
                 }
-                this.Close();
             }
         }
 

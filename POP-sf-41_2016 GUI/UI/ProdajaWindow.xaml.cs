@@ -193,6 +193,7 @@ namespace POP_sf_41_2016_GUI.UI
                     if(item.NamestajId == novaStavka.NamestajId)
                     {
                         item.Kolicina += novaStavka.Kolicina;
+                        item.UkupnaCena += novaStavka.UkupnaCena;
                         postojiProdajaNamestaj = true;
                     }
                 }
@@ -234,7 +235,8 @@ namespace POP_sf_41_2016_GUI.UI
             var izabranaStavka = view.CurrentItem as ProdajaNamestaj;
             var lista = prodaja.ListaProdajeNamestaja;
             var listaId = prodaja.ListaProdajeNamestajaId;
-            prodaja.UkupanIznos -= (izabranaStavka.UkupnaCena * Prodaja.PDV + izabranaStavka.UkupnaCena);
+            prodaja.UkupanIznos = prodaja.UkupanIznos - (izabranaStavka.UkupnaCena * Prodaja.PDV + izabranaStavka.UkupnaCena);
+            if (prodaja.UkupanIznos < 0) prodaja.UkupanIznos = 0;
             if(izabranaStavka.Id == 0)
             {
                 foreach (var item in lista)
@@ -282,7 +284,8 @@ namespace POP_sf_41_2016_GUI.UI
         private void ObrisiDU_click(object sender, RoutedEventArgs e)
         {
             var izabranaDodatnaUsluga = viewDU.CurrentItem as ProdajaDodatnaUsluga;
-            prodaja.UkupanIznos -= (izabranaDodatnaUsluga.Cena * Prodaja.PDV + izabranaDodatnaUsluga.Cena);
+            prodaja.UkupanIznos = -(izabranaDodatnaUsluga.Cena * Prodaja.PDV + izabranaDodatnaUsluga.Cena);
+            if (prodaja.UkupanIznos < 0) prodaja.UkupanIznos = 0;
 
             foreach (var item in prodaja.ListaDodatnihUsluga)
             {
