@@ -74,7 +74,6 @@ namespace POP_sf_41_2016_GUI.UI
                 btnDodajN.IsEnabled = false;
                 btnObrisiN.IsEnabled = false;
             }
-
         }
 
         private void Potvrdi_click(object sender, RoutedEventArgs e)
@@ -201,7 +200,10 @@ namespace POP_sf_41_2016_GUI.UI
                 {
                     prodaja.ListaProdajeNamestaja.Add(novaStavka);
                 }
-                prodaja.UkupanIznos += (novaStavka.UkupnaCena * Prodaja.PDV + novaStavka.UkupnaCena);
+                var cenaPdv = novaStavka.UkupnaCena * Prodaja.PDV + novaStavka.UkupnaCena;
+                cenaPdv = Math.Round(cenaPdv, 2);
+                var ukupnaCena = prodaja.UkupanIznos + cenaPdv;
+                prodaja.UkupanIznos = Math.Round(ukupnaCena, 2);
             }
 
         }
@@ -224,7 +226,10 @@ namespace POP_sf_41_2016_GUI.UI
                 if (postojiDodatnaUsluga == false)
                 {
                     prodaja.ListaDodatnihUsluga.Add(novaDodatnaUsluga);
-                    prodaja.UkupanIznos += (novaDodatnaUsluga.Cena * Prodaja.PDV + novaDodatnaUsluga.Cena);
+                    var cenaPdv = novaDodatnaUsluga.Cena * Prodaja.PDV + novaDodatnaUsluga.Cena;
+                    cenaPdv = Math.Round(cenaPdv, 2);
+                    var ukupnaCena = prodaja.UkupanIznos + cenaPdv;
+                    prodaja.UkupanIznos = Math.Round(ukupnaCena, 2);
                 }
             }
 
@@ -233,49 +238,59 @@ namespace POP_sf_41_2016_GUI.UI
         private void ObrisiN_click(object sender, RoutedEventArgs e)
         {
             var izabranaStavka = view.CurrentItem as ProdajaNamestaj;
-            var lista = prodaja.ListaProdajeNamestaja;
-            var listaId = prodaja.ListaProdajeNamestajaId;
-            prodaja.UkupanIznos = prodaja.UkupanIznos - izabranaStavka.UkupnaCena * Prodaja.PDV + izabranaStavka.UkupnaCena;
-            if (izabranaStavka.Id == 0)
+            if (izabranaStavka == null)
             {
-                foreach (var item in lista)
-                {
-                    if (item.NamestajId == izabranaStavka.NamestajId && item.Kolicina == izabranaStavka.Kolicina)
-                    {
-                        lista.Remove(item);
-                        break;
-                    }
-                }
+                MessageBox.Show("Niste izabrali namestaj", "Greska", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             }
             else
             {
-                if (listaId.Count != 0)
+                var lista = prodaja.ListaProdajeNamestaja;
+                var listaId = prodaja.ListaProdajeNamestajaId;
+                var cenaPdv = izabranaStavka.UkupnaCena * Prodaja.PDV + izabranaStavka.UkupnaCena;
+                cenaPdv = Math.Round(cenaPdv, 2);
+                prodaja.UkupanIznos = Math.Round(prodaja.UkupanIznos, 2);
+                prodaja.UkupanIznos =prodaja.UkupanIznos - cenaPdv;
+                if (izabranaStavka.Id == 0)
                 {
-                    foreach (var item in listaId)
+                    foreach (var item in lista)
                     {
-                        if (item == izabranaStavka.Id)
+                        if (item.NamestajId == izabranaStavka.NamestajId && item.Kolicina == izabranaStavka.Kolicina)
                         {
-                            listaId.Remove(item);
+                            lista.Remove(item);
                             break;
                         }
                     }
                 }
-
-                foreach (var item in lista)
+                else
                 {
-                    if (item.Id == izabranaStavka.Id)
+                    if (listaId.Count != 0)
                     {
-                        lista.Remove(item);
-                        break;
+                        foreach (var item in listaId)
+                        {
+                            if (item == izabranaStavka.Id)
+                            {
+                                listaId.Remove(item);
+                                break;
+                            }
+                        }
+                    }
+
+                    foreach (var item in lista)
+                    {
+                        if (item.Id == izabranaStavka.Id)
+                        {
+                            lista.Remove(item);
+                            break;
+                        }
                     }
                 }
-            }
-            foreach(var item in Projekat.Instance.Namestaji)
-            {
-                if(item.Id == izabranaStavka.NamestajId)
+                foreach (var item in Projekat.Instance.Namestaji)
                 {
-                    item.KolicinaUMagacinu = item.KolicinaUMagacinu + izabranaStavka.Kolicina;
-                    break;
+                    if (item.Id == izabranaStavka.NamestajId)
+                    {
+                        item.KolicinaUMagacinu = item.KolicinaUMagacinu + izabranaStavka.Kolicina;
+                        break;
+                    }
                 }
             }
         }
@@ -283,14 +298,25 @@ namespace POP_sf_41_2016_GUI.UI
         private void ObrisiDU_click(object sender, RoutedEventArgs e)
         {
             var izabranaDodatnaUsluga = viewDU.CurrentItem as ProdajaDodatnaUsluga;
-            prodaja.UkupanIznos = -(izabranaDodatnaUsluga.Cena * Prodaja.PDV + izabranaDodatnaUsluga.Cena);
-
-            foreach (var item in prodaja.ListaDodatnihUsluga)
+            if (izabranaDodatnaUsluga == null)
             {
-                if (izabranaDodatnaUsluga.Naziv == item.Naziv && izabranaDodatnaUsluga.Cena == item.Cena)
+                MessageBox.Show("Niste izabrali dodatnu uslugu", "Greska", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            }
+            else
+            {
+
+                var cenaPdv = izabranaDodatnaUsluga.Cena * Prodaja.PDV + izabranaDodatnaUsluga.Cena;
+                cenaPdv = Math.Round(cenaPdv, 2);
+                prodaja.UkupanIznos = Math.Round(prodaja.UkupanIznos, 2);
+                prodaja.UkupanIznos = prodaja.UkupanIznos - cenaPdv;
+
+                foreach (var item in prodaja.ListaDodatnihUsluga)
                 {
-                    prodaja.ListaDodatnihUsluga.Remove(item);
-                    break;
+                    if (izabranaDodatnaUsluga.Naziv == item.Naziv && izabranaDodatnaUsluga.Cena == item.Cena)
+                    {
+                        prodaja.ListaDodatnihUsluga.Remove(item);
+                        break;
+                    }
                 }
             }
         }
