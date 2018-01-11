@@ -9,7 +9,7 @@ CREATE TABLE Namestaj(
 	TipNamestajaId int,
 	Naziv varchar (60) not null,
 	Sifra varchar (20) not null,
-	Cena money not null, 
+	Cena numeric(15 , 2) not null, 
 	Kolicina smallint,
 	Obrisan bit,
 
@@ -19,7 +19,7 @@ CREATE TABLE Namestaj(
 CREATE TABLE DodatnaUsluga(
 	IdDU int primary key  identity(1, 1),
 	Naziv varchar(30) not null,
-	Cena decimal(9, 2),
+	Cena numeric(15, 2),
 	Obrisan bit,
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE Prodaja(
 	BrojRacuna varchar(10) not null,
 	Kupac varchar(20) not null,
 	ProdavacId int not null,
-	UkupanIznos money not null,
+	UkupanIznos numeric(15 , 2) not null,
 	Obrisan bit,
 
 	FOREIGN KEY (ProdavacId) references Korisnik(IdK),
@@ -82,7 +82,7 @@ CREATE TABLE ProdajaNamestaj(
 	ProdajaId int not null,
 	NamestajId int not null,
 	Kolicina smallint not null,
-	Cena money not null,
+	Cena numeric(15 , 2) not null,
 	Obrisan bit,
 
 	FOREIGN KEY (ProdajaId) references Prodaja(IdP),
@@ -93,7 +93,7 @@ CREATE TABLE ProdajaDodatnaUsluga(
 	IdPDU int primary key  identity(1, 1),
 	ProdajaId int not null,
 	DodatnaUslugaId int not null,
-	Cena money not null,
+	Cena numeric(15 , 2) not null,
 	Obrisan bit,
 
 	FOREIGN KEY (ProdajaId) references Prodaja(IdP),

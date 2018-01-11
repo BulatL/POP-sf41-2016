@@ -34,6 +34,8 @@ namespace POP_sf_41_2016_GUI.UI
             cbTipNamestaja.ItemsSource = Projekat.Instance.TipoviNamestaja;
             tbNaziv.MaxLength = 60;
             tbSifra.MaxLength = 20;
+            tbCena.MaxLength = 16;
+            tbKolicina.MaxLength = 32767;
 
         }
 
