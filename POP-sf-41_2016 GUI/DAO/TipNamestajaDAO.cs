@@ -204,6 +204,7 @@ namespace POP_sf_41_2016_GUI.DAO
                         if (namestaj.TipNamestajaId == tn.Id)
                         {
                             namestaj.TipNamestajaId = 1;
+                            namestaj.TipNamestaja.Naziv = "Ostalo";
                         }
                     }
                 }
